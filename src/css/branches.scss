@@ -1,0 +1,62 @@
+.branches-body{
+    background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.scroll-area{
+    width: 100%;
+    height: 100%;
+}
+
+.instagram { 
+    color: #d6249f;
+    color: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+}
+
+.iframe {
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+}
+
+#branch_row_one:hover > .q-focus-helper{
+    background-color: $primary;
+}
+#branch_row_two:hover > .q-focus-helper{
+    background-color: $secondary;
+}
+#branch_row_three:hover > .q-focus-helper{
+    background-color: $dark;
+}
+
+#schedule_expansion_item > div > div.q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable.text-black.text-bold > div.q-item__section.column.q-item__section--side.justify-center.q-item__section--avatar > i {
+    color: $accent;
+}
+
+#schedule_expansion_item > div > div.q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable.text-black.text-bold > div.q-focus-helper{
+    background-color: $accent;
+}
+
+#schedule_expansion_item > div > div.q-expansion-item__content.relative-position {
+    background-color: $lightAccent;
+}
+
+.social-media-btns{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+.social-media-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50vw;
+    height: 8vh;
+}

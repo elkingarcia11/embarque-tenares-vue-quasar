@@ -1,0 +1,58 @@
+// app global css in SCSS form
+#toolbar{
+    width: 100vw;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 7.5vh;
+    border-style: hidden;
+}
+#toolbar > button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--rectangle.q-btn--rounded.q-btn--actionable.q-focusable.q-hoverable.q-btn--active {
+    background-color: $primary;
+}
+
+#logo{
+    width: 60%;
+}
+
+.bs-hrs{
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    .title{
+        font-weight: bold;
+        font-size: larger;
+    }
+}
+
+.text-h5{
+    font-weight: bold;
+}
+
+.text-center{
+    padding-top: .75vw;
+}
+
+.labels{
+    font-size: smaller;
+}
+
+#title{
+    margin-top: -3vh;
+}
+
+.title:link {
+    color: white;
+    text-decoration: none;
+}
+  
+  /* visited link */
+.title:visited {
+    color: white;
+    text-decoration: none;
+}
+  
+.title:hover {
+    color: $lightAccent;
+    text-decoration: none;
+  }

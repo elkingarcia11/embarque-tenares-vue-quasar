@@ -1,0 +1,32 @@
+#home-body {
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#logoDiv {
+  margin-top: 7.7vh;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+}
+
+.home-bg-div {
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+}
+
+.home-button-group {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  width: 90vw;
+  margin-left: 5vw;
+}
