@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 7.5vh;
   border-style: hidden;
 }
 #toolbar
@@ -43,10 +42,6 @@
 
 .labels {
   font-size: smaller;
-}
-
-#title {
-  margin-top: -3vh;
 }
 
 .title:link {
