@@ -6,8 +6,8 @@ export default {
   rates: 'Rates',
   branch: 'Branches',
   branchLabel: 'Branch',
-  nyb: 'New York Branch',
-  drb: 'Dominican Republic Branch',
+  nyb: 'New York',
+  drb: 'Dominican Republic',
   hours: 'Hours',
   faqs: 'FAQS',
   aboutUs: 'About us',
@@ -21,5 +21,6 @@ export default {
   ny: 'New York',
   dr: 'Dominican Republic',
   website: 'Website',
-  inv_img_src: '../assets/trackEN.png'
-}
+  home: 'Home',
+  inv_img_src: '../assets/trackEN.png',
+};

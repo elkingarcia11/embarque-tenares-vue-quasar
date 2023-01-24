@@ -15,13 +15,20 @@
             title
           }}</a></q-toolbar-title
         >
-        <q-btn-dropdown :ripple="false" flat round dense icon="language">
+        <q-btn-dropdown
+          :ripple="false"
+          flat
+          round
+          dense
+          icon="language"
+          :label="label"
+        >
           <q-list>
             <q-item
               class="text-h6 text-black"
               clickable
               v-close-popup
-              @click="$i18n.locale = 'en-US'"
+              @click="changeLanguage(0)"
             >
               <q-item-section>
                 <q-item-label>English</q-item-label>
@@ -31,7 +38,7 @@
               class="text-h6 text-black"
               clickable
               v-close-popup
-              @click="$i18n.locale = 'es-US'"
+              @click="changeLanguage(1)"
             >
               <q-item-section>
                 <q-item-label>Español</q-item-label>
@@ -105,84 +112,94 @@
 </template>
 
 <script>
+const label = 'Español';
 const drawer = false;
-const menuList = [
-  {
-    icon: 'home',
-    label: 'Home',
-    route: '/',
-    separator: false,
-  },
-  {
-    icon: 'search',
-    label: 'Track',
-    route: 'track',
-    separator: false,
-  },
-  {
-    icon: 'local_atm',
-    label: 'Rates',
-    route: 'rates',
-    separator: false,
-  },
-  {
-    icon: 'quiz',
-    label: 'FAQs',
-    route: 'faqs',
-    separator: false,
-  },
-  {
-    icon: 'map',
-    label: 'Locations',
-    separator: false,
-  },
-];
-
-const subMenuList = [
-  {
-    icon: 'pin_drop',
-    label: 'New York',
-    route: 'ny-branch',
-    separator: false,
-  },
-  {
-    icon: 'pin_drop',
-    label: 'Dominican Republic',
-    route: 'dr-branch',
-    separator: false,
-  },
-];
 
 export default {
   data() {
     return {
       drawer,
-      menuList,
-      subMenuList,
+      subMenuList: [
+        {
+          icon: 'pin_drop',
+          label: this.$t('nyb'),
+          route: 'ny-branch',
+          separator: false,
+        },
+        {
+          icon: 'pin_drop',
+          label: this.$t('drb'),
+          route: 'dr-branch',
+          separator: false,
+        },
+      ],
+      label,
       title: 'Embarque Tenares',
+      menuList: [
+        {
+          icon: 'home',
+          label: this.$t('home'),
+          route: '/',
+          separator: false,
+        },
+        {
+          icon: 'search',
+          label: this.$t('track'),
+          route: 'track',
+          separator: false,
+        },
+        {
+          icon: 'local_atm',
+          label: this.$t('rates'),
+          route: 'rates',
+          separator: false,
+        },
+        {
+          icon: 'quiz',
+          label: this.$t('faqs'),
+          route: 'faqs',
+          separator: false,
+        },
+        {
+          icon: 'map',
+          label: this.$t('branch'),
+          separator: false,
+        },
+      ],
     };
+  },
+  methods: {
+    changeLanguage(i) {
+      if (i === 0) {
+        this.$i18n.locale = 'en-US';
+        this.label = 'English';
+      } else {
+        this.$i18n.locale = 'es-US';
+        this.label = 'Español';
+      }
+    },
   },
   watch: {
     $route(to) {
       switch (to.name) {
         case 'track': {
-          this.title = 'Track';
+          this.title = this.$t('track');
           break;
         }
         case 'rates': {
-          this.title = 'Rates';
+          this.title = this.$t('rates');
           break;
         }
         case 'nyb': {
-          this.title = 'New York';
+          this.title = this.$t('nyb');
           break;
         }
         case 'drb': {
-          this.title = 'Dominican Republic';
+          this.title = this.$t('drb');
           break;
         }
         case 'faqs': {
-          this.title = 'FAQs';
+          this.title = this.$t('faqs');
           break;
         }
         default: {

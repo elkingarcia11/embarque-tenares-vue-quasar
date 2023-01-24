@@ -6,8 +6,8 @@ export default {
   rates: 'Tarifas',
   branch: 'Surcursales',
   branchLabel: 'Surcursal',
-  nyb: 'Surcursal Nueva York',
-  drb: 'Surcursal República Dominicana',
+  nyb: 'Nueva York',
+  drb: 'República Dominicana',
   hours: 'Horario',
   faqs: 'Preguntas',
   aboutUs: 'Acerca de nosotros',
@@ -21,5 +21,6 @@ export default {
   ny: 'Nueva York',
   dr: 'República Dominicana',
   website: 'Pagina web',
-  inv_img_src: '../assets/trackES.png'
-}
+  home: 'Inicio',
+  inv_img_src: '../assets/trackES.png',
+};
