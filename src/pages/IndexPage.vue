@@ -26,8 +26,8 @@
     <div id="logoDiv">
       <q-img id="logo" src="../assets/logo.png" fit="contain" />
     </div>
-    <q-page-sticky position="bottom" :offset="[0, 18]">
-      <q-card>
+    <q-page-sticky position="bottom" class="window-width" :offset="[18, 18]">
+      <q-card class="q-mx-md q-py-sm">
         <q-btn-toggle
           spread
           :ripple="false"
