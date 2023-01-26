@@ -106,7 +106,7 @@
                 <q-icon :name="menuItem.icon" />
               </q-item-section>
               <q-item-section>
-                {{ menuItem.label }}
+                {{ $t(menuItem.label) }}
               </q-item-section>
             </q-item>
             <q-expansion-item
@@ -115,7 +115,7 @@
               clickable
               :icon="menuItem.icon"
               expand-icon-class="text-black"
-              :label="menuItem.label"
+              :label="$t(menuItem.label)"
               header-class="q-py-lg q-px-lg text-black"
               default-closed
             >
@@ -131,7 +131,7 @@
                   <q-icon :name="subMenuItem.icon" />
                 </q-item-section>
                 <q-item-section>
-                  {{ subMenuItem.label }}
+                  {{ $t(subMenuItem.label) }}
                 </q-item-section>
               </q-item>
             </q-expansion-item>
@@ -192,13 +192,13 @@ export default {
       subMenuList: [
         {
           icon: 'pin_drop',
-          label: this.$t('nyb'),
+          label: 'nyb',
           route: 'ny-branch',
           separator: false,
         },
         {
           icon: 'pin_drop',
-          label: this.$t('drb'),
+          label: 'drb',
           route: 'dr-branch',
           separator: false,
         },
@@ -206,31 +206,31 @@ export default {
       menuList: [
         {
           icon: 'home',
-          label: this.$t('home'),
+          label: 'home',
           route: '/',
           separator: false,
         },
         {
           icon: 'search',
-          label: this.$t('track'),
+          label: 'track',
           route: 'track',
           separator: false,
         },
         {
           icon: 'local_atm',
-          label: this.$t('rates'),
+          label: 'rates',
           route: 'rates',
           separator: false,
         },
         {
           icon: 'quiz',
-          label: this.$t('faqs'),
+          label: 'faqs',
           route: 'faqs',
           separator: false,
         },
         {
           icon: 'map',
-          label: this.$t('branch'),
+          label: 'branch',
           separator: false,
         },
       ],
