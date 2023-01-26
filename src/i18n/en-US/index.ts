@@ -23,4 +23,13 @@ export default {
   website: 'Website',
   home: 'Home',
   inv_img_src: '../assets/trackEN.png',
+  copy0: 'Copy address',
+  copy1: 'Copy phone numer',
+  copy2: 'Copy email',
+  tooltip0: 'Get directions',
+  tooltip1: 'Call phone number',
+  tooltip2: 'Send email',
+  tooltipRes0: 'Copied address to clipboard!',
+  tooltipRes1: 'Copied phone number to clipboard!',
+  tooltipRes2: 'Copied email to clipboard!',
 };

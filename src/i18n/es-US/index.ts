@@ -23,4 +23,13 @@ export default {
   website: 'Pagina web',
   home: 'Inicio',
   inv_img_src: '../assets/trackES.png',
+  copy0: 'Copiar dirección',
+  copy1: 'Copiar teléfono',
+  copy2: 'Copiar correo electrónico',
+  tooltip0: 'Obtener direcciones',
+  tooltip1: 'Llamar número de teléfono',
+  tooltip2: 'Enviar correo electrónico',
+  tooltipRes0: '¡Dirección copiada!',
+  tooltipRes1: '¡Número de teléfono copiado!',
+  tooltipRes2: '¡Correo electrónico copiado!',
 };

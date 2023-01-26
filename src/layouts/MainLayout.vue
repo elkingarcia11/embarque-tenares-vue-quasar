@@ -107,18 +107,53 @@
     </q-drawer>
     <q-page-container>
       <router-view />
+      <TabBar
+        ref="tabBarRef"
+        @tabOne="goToTabOne"
+        @tabTwo="goToTabTwo"
+        @tabThree="goToTabThree"
+        @tabFour="goToTabFour"
+      />
+      <q-dialog v-model="dialog" @hide="dialogClosed">
+        <q-card style="width: 300px" class="q-px-sm q-pb-md">
+          <q-card-section>
+            <div class="text-h6">{{ $t('branch') }}</div>
+          </q-card-section>
+
+          <q-item clickable v-ripple:primary @click="$router.push('ny-branch')">
+            <q-item-section avatar>
+              <q-avatar color="accent" text-color="white" icon="pin_drop" />
+            </q-item-section>
+
+            <q-item-section>{{ $t('ny') }}</q-item-section>
+          </q-item>
+          <q-item clickable v-ripple:primary @click="$router.push('dr-branch')">
+            <q-item-section avatar>
+              <q-avatar color="dark" text-color="white" icon="pin_drop" />
+            </q-item-section>
+
+            <q-item-section>{{ $t('dr') }}</q-item-section>
+          </q-item>
+        </q-card>
+      </q-dialog>
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-const label = 'Español';
-const drawer = false;
+<script lang="ts">
+import { ref } from 'vue';
+import TabBar from '../components/TabBar.vue';
 
 export default {
+  components: {
+    TabBar,
+  },
   data() {
     return {
-      drawer,
+      dialog: ref(false),
+      drawer: ref(false),
+      label: 'Español',
+      title: 'Embarque Tenares',
       subMenuList: [
         {
           icon: 'pin_drop',
@@ -133,8 +168,6 @@ export default {
           separator: false,
         },
       ],
-      label,
-      title: 'Embarque Tenares',
       menuList: [
         {
           icon: 'home',
@@ -169,7 +202,7 @@ export default {
     };
   },
   methods: {
-    changeLanguage(i) {
+    changeLanguage(i: number) {
       if (i === 0) {
         this.$i18n.locale = 'en-US';
         this.label = 'English';
@@ -177,6 +210,21 @@ export default {
         this.$i18n.locale = 'es-US';
         this.label = 'Español';
       }
+    },
+    goToTabOne() {
+      this.$router.push('track');
+    },
+    goToTabTwo() {
+      this.$router.push('rates');
+    },
+    goToTabThree() {
+      this.dialog = true;
+    },
+    goToTabFour() {
+      this.$router.push('faqs');
+    },
+    dialogClosed() {
+      this.dialog = false;
     },
   },
   watch: {
