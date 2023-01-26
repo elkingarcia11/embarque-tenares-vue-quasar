@@ -52,29 +52,6 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-
-    <q-dialog v-model="dialog" @hide="dialogClosed">
-      <q-card style="width: 300px" class="q-px-sm q-pb-md">
-        <q-card-section>
-          <div class="text-h6">{{ $t('branch') }}</div>
-        </q-card-section>
-
-        <q-item clickable v-ripple:primary @click="$router.push('ny-branch')">
-          <q-item-section avatar>
-            <q-avatar color="accent" text-color="white" icon="pin_drop" />
-          </q-item-section>
-
-          <q-item-section>{{ $t('ny') }}</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple:primary @click="$router.push('dr-branch')">
-          <q-item-section avatar>
-            <q-avatar color="dark" text-color="white" icon="pin_drop" />
-          </q-item-section>
-
-          <q-item-section>{{ $t('dr') }}</q-item-section>
-        </q-item>
-      </q-card>
-    </q-dialog>
   </q-page-container>
 </template>
 
