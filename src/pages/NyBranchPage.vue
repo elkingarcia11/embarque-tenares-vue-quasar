@@ -6,7 +6,7 @@
       loading="lazy"
       allowfullscreen
       class="iframe window-width"
-      src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=AIzaSyB0kKuIKDbsDYz_vbDTdFF2jomVUjcVKdY"
+      :src="iframeSource"
     ></iframe>
     <div class="window-width">
       <div class="text-h5 q-pa-md">Embarque Tenares Corp.</div>
@@ -181,7 +181,9 @@ import { ref } from 'vue';
 import { openURL } from 'quasar';
 import '../css/branches.scss';
 import { copyToClipboard } from 'quasar';
-
+const src =
+  'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=' +
+  process.env.GOOGLE_MAPS_API_KEY;
 export default {
   setup() {
     return {
@@ -189,6 +191,7 @@ export default {
       expanded: ref(false),
       dialog: ref(false),
       tooltipResponse: ref(''),
+      iframeSource: src,
     };
   },
   methods: {

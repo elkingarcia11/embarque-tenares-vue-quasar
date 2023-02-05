@@ -24,7 +24,7 @@ export default {
   home: 'Home',
   inv_img_src: '../assets/trackEN.png',
   copy0: 'Copy address',
-  copy1: 'Copy phone numer',
+  copy1: 'Copy phone number',
   copy2: 'Copy email',
   tooltip0: 'Get directions',
   tooltip1: 'Call phone number',

@@ -13,6 +13,7 @@ const path = require('path');
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+  require('dotenv').config();
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -52,6 +53,9 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      env: {
+        GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+      },
       chainWebpack: (chain) => {
         chain.module
           .rule('i18n-resource')
@@ -68,6 +72,8 @@ module.exports = configure(function (ctx) {
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
       },
+
+      env: require('dotenv').config().parsed,
 
       // transpile: false,
       // publicPath: '/',

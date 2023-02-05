@@ -1,8 +1,3 @@
-.scroll-area {
-  width: 100%;
-  height: 100%;
-}
-
 .instagram {
   color: #d6249f;
   color: radial-gradient(
@@ -18,16 +13,6 @@
 .iframe {
   margin-top: 0vh;
   margin-bottom: 0vh;
-}
-
-#branch_row_one:hover > .q-focus-helper {
-  background-color: $primary;
-}
-#branch_row_two:hover > .q-focus-helper {
-  background-color: $primary;
-}
-#branch_row_three:hover > .q-focus-helper {
-  background-color: $primary;
 }
 
 #schedule_expansion_item
@@ -49,8 +34,4 @@
   > div
   > div.q-expansion-item__content.relative-position {
   background-color: #e0f6fe;
-}
-
-.button-group-button {
-  width: 30%;
 }

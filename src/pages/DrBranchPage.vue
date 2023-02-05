@@ -1,10 +1,6 @@
 <template>
   <div class="body">
-    <iframe
-      class="iframe window-width"
-      src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=AIzaSyB0kKuIKDbsDYz_vbDTdFF2jomVUjcVKdY"
-      height="250"
-    />
+    <iframe class="iframe window-width" :src="iframeSource" height="250" />
 
     <div class="window-width">
       <div class="text-h5 q-pa-md">Tenares Shipping Corp.</div>
@@ -193,7 +189,9 @@ import { ref } from 'vue';
 import { openURL } from 'quasar';
 import { copyToClipboard } from 'quasar';
 import '../css/branches.scss';
-
+const src =
+  'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
+  process.env.GOOGLE_MAPS_API_KEY;
 export default {
   setup() {
     return {
@@ -201,6 +199,7 @@ export default {
       expanded: ref(false),
       dialog: ref(false),
       tooltipResponse: ref(''),
+      iframeSource: src,
     };
   },
   methods: {

@@ -10,7 +10,7 @@
 
         <q-item-section class="text-h5"> Category </q-item-section>
       </template>
-      <div class="rates-row">
+      <div class="rates_row">
         <q-item-section class="text-subtitle1 q-pl-lg q-py-sm">
           Item description description description description description
           description description description description description
