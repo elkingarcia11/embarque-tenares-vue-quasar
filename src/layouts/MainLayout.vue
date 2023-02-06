@@ -96,7 +96,7 @@
         <q-list>
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item
-              class="text-h6 q-py-lg q-px-lg text-black"
+              class="text-h6 q-py-lg q-px-lg text-accent"
               v-if="index < 4"
               clickable
               @click="$router.push(menuItem.route)"
@@ -110,17 +110,17 @@
               </q-item-section>
             </q-item>
             <q-expansion-item
-              class="text-h6 text-black"
+              class="text-h6"
               v-if="index > 3"
               clickable
               :icon="menuItem.icon"
-              expand-icon-class="text-black"
+              expand-icon-class="text-accent"
               :label="$t(menuItem.label)"
-              header-class="q-py-lg q-px-lg text-black"
+              header-class="q-py-lg q-px-lg text-accent"
               default-closed
             >
               <q-item
-                class="text-subtitle1 q-py-md q-px-xl text-black"
+                class="text-subtitle1 q-py-md q-px-xl text-accent"
                 v-for="(subMenuItem, index) in subMenuList"
                 :key="index"
                 clickable

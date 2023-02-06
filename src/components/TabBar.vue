@@ -1,6 +1,6 @@
 <template>
   <q-page-sticky position="bottom" class="window-width" :offset="[18, 18]">
-    <q-card class="q-py-sm tab-bar">
+    <q-card class="tab-bar">
       <q-btn-toggle
         spread
         :ripple="false"
@@ -17,7 +17,7 @@
         ]"
       >
         <template v-slot:one>
-          <div class="column items-center no-wrap btn-tgle">
+          <div class="q-py-md column items-center no-wrap btn-tgle">
             <q-icon center name="search" />
             <div class="text-center labels">
               {{ $t('track') }}
@@ -25,7 +25,7 @@
           </div>
         </template>
         <template v-slot:two>
-          <div class="column items-center no-wrap btn-tgle">
+          <div class="q-py-md column items-center no-wrap btn-tgle">
             <q-icon center name="local_atm" />
             <div class="text-center labels">
               {{ $t('rates') }}
@@ -34,7 +34,7 @@
         </template>
 
         <template v-slot:three>
-          <div class="column items-center no-wrap btn-tgle">
+          <div class="q-py-md column items-center no-wrap btn-tgle">
             <q-icon center name="domain" />
             <div class="text-center labels">
               {{ $t('branch') }}
@@ -43,7 +43,7 @@
         </template>
 
         <template v-slot:four>
-          <div class="column items-center no-wrap btn-tgle">
+          <div class="q-py-md column items-center no-wrap btn-tgle">
             <q-icon center name="quiz" />
             <div class="text-center labels">
               {{ $t('faqs') }}
