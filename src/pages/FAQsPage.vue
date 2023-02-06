@@ -29,12 +29,13 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import '../css/faqs.scss';
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
 
 let fL: DocumentData[] = [];
-export default {
+export default defineComponent({
   data: function () {
     return {
       faqsList: fL,
@@ -55,5 +56,5 @@ export default {
     const fL = faqsSnapshot.docs.map((doc) => doc.data());
     this.faqsList = fL;
   },
-};
+});
 </script>

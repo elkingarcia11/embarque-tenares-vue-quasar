@@ -56,9 +56,9 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   setup() {
     return {
       buttonGroup: ref(0),
@@ -81,5 +81,5 @@ export default {
       }
     },
   },
-};
+});
 </script>

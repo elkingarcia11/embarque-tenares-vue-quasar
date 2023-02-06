@@ -176,10 +176,10 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 import TabBar from '../components/TabBar.vue';
 
-export default {
+export default defineComponent({
   components: {
     TabBar,
   },
@@ -277,5 +277,5 @@ export default {
       }
     },
   },
-};
+});
 </script>

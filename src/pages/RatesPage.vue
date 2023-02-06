@@ -48,13 +48,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import '../css/rates.scss';
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
 
 let rL: DocumentData[] = [];
 let arrayOfiL: DocumentData[][] = [];
-export default {
+export default defineComponent({
   data: function () {
     return {
       ratesList: rL,
@@ -88,5 +89,5 @@ export default {
     arrayOfiL.push(iL);
     this.listOfLists = arrayOfiL;
   },
-};
+});
 </script>
