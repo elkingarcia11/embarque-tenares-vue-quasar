@@ -32,7 +32,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-quasar.config.js
-
 .env
 src/boot/firebase.ts
