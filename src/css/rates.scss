@@ -1,32 +1,5 @@
-div
-  > div
-  > div
-  > div.q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable:hover {
-  background-color: $lightPrimary;
-  opacity: 100;
-  border-left-style: solid;
-  border-left-width: 2px;
-  border-left-color: $primary;
-  i {
-    color: $primary;
-  }
-}
-
-div
-  > div.q-expansion-item.q-item-type.q-expansion-item--expanded.q-expansion-item--standard {
-  div
-    > div.q-item.q-item-type.row.no-wrap.q-item--clickable.q-link.cursor-pointer.q-focusable.q-hoverable {
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-left-color: $primary;
-  }
-  i {
-    color: $primary;
-  }
-}
-
-#rates_row {
+.rates_row {
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
