@@ -35,3 +35,4 @@ yarn-error.log*
 quasar.config.js
 
 .env
+src/boot/firebase.ts
