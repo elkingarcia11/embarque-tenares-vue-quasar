@@ -32,4 +32,8 @@ export default {
   tooltipRes0: 'Copied address to clipboard!',
   tooltipRes1: 'Copied phone number to clipboard!',
   tooltipRes2: 'Copied email to clipboard!',
+  etod: 'Estimated time of delivery',
+  daysLeft: 'days left',
+  etaDisclaimer:
+    'Delivery dates provided are an estimate and subject to change',
 };

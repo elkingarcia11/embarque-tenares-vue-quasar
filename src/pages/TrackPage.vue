@@ -1,5 +1,10 @@
 <template>
-  <CircularProg ref="circularProgRef" :percent="percent" :daysLeft="daysLeft" />
+  <CircularProg
+    ref="circularProgRef"
+    :percent="percent"
+    :daysLeft="daysLeft"
+    :eta="eta"
+  />
 </template>
 
 <script lang="ts">
@@ -14,6 +19,7 @@ export default defineComponent({
     return {
       percent: 20,
       daysLeft: 25,
+      eta: 'December 20, 2023',
     };
   },
 });

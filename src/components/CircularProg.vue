@@ -2,7 +2,10 @@
   <div class="q-py-xl q-px-lg flex flex-center">
     <q-card>
       <q-card-section>
-        <div class="text-h6 text-center">Estimated Time of Delivery</div>
+        <div class="text-h5 text-center">{{ $t('etod') }}</div>
+        <div class="text-h6 text-center text-accent text-bold">
+          {{ eta }}
+        </div>
       </q-card-section>
       <q-card-section class="text-center">
         <q-circular-progress
@@ -16,23 +19,22 @@
           track-color="grey-3"
           class="q-ma-md"
         >
-          <div class="flex column text-center">
-            <q-item-section>
-              <q-avatar
-                size="75px"
-                font-size="52px"
-                text-color="primary"
-                icon="local_shipping"
-              />
-              <q-item-label>{{ daysLeft }}</q-item-label>
-              <q-item-label caption>days left</q-item-label>
-            </q-item-section>
-          </div>
+          <q-item-section class="flex-center">
+            <q-avatar
+              class=""
+              size="75px"
+              font-size="52px"
+              text-color="accent"
+              icon="local_shipping"
+            />
+            <q-item-label class="text-black">{{ daysLeft }}</q-item-label>
+            <q-item-label caption>{{ $t('daysLeft') }}</q-item-label>
+          </q-item-section>
         </q-circular-progress>
       </q-card-section>
       <q-card-section class="text-italic text-bold text-center">
-        Delivery dates provided are an estimate and subject to change
-      </q-card-section>
+        {{ $t('etaDisclaimer') }}</q-card-section
+      >
     </q-card>
   </div>
 </template>
@@ -44,6 +46,7 @@ export default defineComponent({
   props: {
     percent: Number,
     daysLeft: Number,
+    eta: String,
   },
 });
 </script>

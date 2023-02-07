@@ -32,4 +32,8 @@ export default {
   tooltipRes0: '¡Dirección copiada!',
   tooltipRes1: '¡Número de teléfono copiado!',
   tooltipRes2: '¡Correo electrónico copiado!',
+  etod: 'Tiempo estimado de entrega',
+  daysLeft: 'días restantes',
+  etaDisclaimer:
+    'Las fechas de entrega proporcionadas son una estimación y están sujetas a cambios',
 };
