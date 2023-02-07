@@ -7,7 +7,7 @@
       <q-card-section class="text-center">
         <q-circular-progress
           :angle="180"
-          :value="value"
+          :value="percent"
           show-value
           font-size="25px"
           size="250px"
@@ -41,11 +41,9 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  setup() {
-    return {
-      value: 25,
-      daysLeft: 25 / 4,
-    };
+  props: {
+    percent: Number,
+    daysLeft: Number,
   },
 });
 </script>
