@@ -83,6 +83,9 @@ import { defineComponent, ref } from 'vue';
 import CircularProg from 'src/components/CircularProg.vue';
 import TabBar from 'src/components/TabBar.vue';
 
+import db from '../boot/firebase';
+import { getDoc, updateDoc, doc } from '@firebase/firestore/lite';
+
 export default defineComponent({
   components: {
     CircularProg,
@@ -97,6 +100,7 @@ export default defineComponent({
       invoiceDialog: ref(false),
       invoiceText: '',
       successfullyRetrieved: false,
+      etaDays: -1,
     };
   },
   methods: {
@@ -117,6 +121,18 @@ export default defineComponent({
         (this.$refs['invoiceInputRef'] as any).blur();
         this.successfullyRetrieved = true;
         console.log('SUBMITTED');
+        this.retrieveEtaDays();
+      }
+    },
+    async retrieveEtaDays() {
+      const docRef = doc(db, 'eta/eta_days');
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const d = docSnap.data();
+        this.etaDays = d.days;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No such document!');
       }
     },
   },

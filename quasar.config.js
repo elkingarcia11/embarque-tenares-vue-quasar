@@ -31,7 +31,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
-    boot: ['i18n', 'axios', 'firebase'],
+    boot: ['i18n', 'axios', 'firebase', 'hector'],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: ['app.scss'],
@@ -55,6 +55,20 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       env: {
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+
+        HECTOR_APP_ID: process.env.HECTOR_APP_ID,
+        HECTOR_API_KEY: process.env.HECTOR_API_KEY,
+        HECTOR_USERNAME: process.env.HECTOR_USERNAME,
+        HECTOR_TYPE: process.env.HECTOR_TYPE,
+
+        FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+        FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+        FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
+        FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+        FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
+        FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+        FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
       },
       chainWebpack: (chain) => {
         chain.module
