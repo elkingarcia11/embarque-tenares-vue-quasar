@@ -1,5 +1,5 @@
 <template>
-  <div class="q-py-xl q-px-lg flex flex-center">
+  <div class="q-py-xl q-px-lg flex flex-center circularProg">
     <q-card>
       <q-card-section>
         <div class="text-h5 text-center">{{ $t('etod') }}</div>
@@ -21,14 +21,13 @@
         >
           <q-item-section class="flex-center">
             <q-avatar
-              class=""
               size="75px"
               font-size="52px"
               text-color="accent"
               icon="local_shipping"
             />
-            <q-item-label class="text-black">{{ daysLeft }}</q-item-label>
-            <q-item-label caption>{{ $t('daysLeft') }}</q-item-label>
+            <q-item-label caption>{{ $t('invoice') }}</q-item-label>
+            <q-item-label class="text-black">{{ invoice }}</q-item-label>
           </q-item-section>
         </q-circular-progress>
       </q-card-section>
@@ -41,11 +40,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import '../css/track.scss';
 
 export default defineComponent({
   props: {
     percent: Number,
-    daysLeft: Number,
+    invoice: Number,
     eta: String,
   },
 });

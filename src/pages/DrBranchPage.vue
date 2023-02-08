@@ -182,17 +182,22 @@
       </q-card>
     </q-dialog>
   </div>
+
+  <TabBar ref="tabBarRef" :buttonNumber="3" />
 </template>
 
 <script>
-import { ref } from 'vue';
-import { openURL } from 'quasar';
-import { copyToClipboard } from 'quasar';
+import { ref, defineComponent } from 'vue';
+import { openURL, copyToClipboard } from 'quasar';
+import TabBar from 'src/components/TabBar.vue';
 import '../css/branches.scss';
 const src =
   'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
   process.env.GOOGLE_MAPS_API_KEY;
-export default {
+export default defineComponent({
+  components: {
+    TabBar,
+  },
   setup() {
     return {
       active: ref(true),
@@ -254,5 +259,5 @@ export default {
         });
     },
   },
-};
+});
 </script>

@@ -2,11 +2,11 @@
   <q-page-container id="home-body">
     <q-page-sticky position="top" :offset="[0, 0]">
       <q-input
-        ref="invoiceInput"
+        ref="invoiceInputRef"
         square
         class="window-width overflow-hidden"
         outlined
-        v-model="invoice_text"
+        v-model="invoiceText"
         :label="$t('trackPack')"
         mask="############"
         unmasked-value
@@ -19,7 +19,7 @@
             icon="quiz"
             @click="invoiceDialog = true"
           />
-          <q-btn flat round color="primary" icon="search" @click="inputFocus" />
+          <q-btn flat round color="primary" icon="search" />
         </template>
       </q-input>
     </q-page-sticky>
@@ -52,19 +52,34 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <TabBar
+      ref="tabBarRef"
+      :buttonNumber="0"
+      @focus-input="$refs['invoiceInputRef'].focus()"
+    />
   </q-page-container>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { defineComponent, ref } from 'vue';
+import TabBar from 'src/components/TabBar.vue';
 import '../css/home.scss';
 
-export default {
+export default defineComponent({
+  components: {
+    TabBar,
+  },
   setup() {
     return {
       invoiceDialog: ref(false),
-      invoice_text: ref(''),
+      invoiceText: ref(''),
     };
   },
-};
+  methods: {
+    focusInput() {
+      console.log(this.$refs);
+    },
+  },
+});
 </script>

@@ -142,50 +142,16 @@
     </q-drawer>
     <q-page-container>
       <router-view />
-      <TabBar
-        ref="tabBarRef"
-        @tabOne="goToTabOne"
-        @tabTwo="goToTabTwo"
-        @tabThree="goToTabThree"
-        @tabFour="goToTabFour"
-      />
-      <q-dialog v-model="dialog">
-        <q-card style="width: 300px" class="q-px-sm q-pb-md">
-          <q-card-section>
-            <div class="text-h6">{{ $t('branch') }}</div>
-          </q-card-section>
-
-          <q-item clickable v-ripple:primary @click="$router.push('ny-branch')">
-            <q-item-section avatar>
-              <q-avatar color="accent" text-color="white" icon="pin_drop" />
-            </q-item-section>
-
-            <q-item-section>{{ $t('ny') }}</q-item-section>
-          </q-item>
-          <q-item clickable v-ripple:primary @click="$router.push('dr-branch')">
-            <q-item-section avatar>
-              <q-avatar color="dark" text-color="white" icon="pin_drop" />
-            </q-item-section>
-
-            <q-item-section>{{ $t('dr') }}</q-item-section>
-          </q-item>
-        </q-card>
-      </q-dialog>
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
-import TabBar from '../components/TabBar.vue';
 
 export default defineComponent({
-  components: {
-    TabBar,
-  },
   data() {
     return {
-      dialog: ref(false),
       drawer: ref(false),
       label: 'Español',
       title: 'Embarque Tenares',
@@ -245,18 +211,6 @@ export default defineComponent({
         this.$i18n.locale = 'es-US';
         this.label = 'Español';
       }
-    },
-    goToTabOne() {
-      this.$router.push('track');
-    },
-    goToTabTwo() {
-      this.$router.push('rates');
-    },
-    goToTabThree() {
-      this.dialog = true;
-    },
-    goToTabFour() {
-      this.$router.push('faqs');
     },
     returnRoute() {
       switch (this.$route.name) {

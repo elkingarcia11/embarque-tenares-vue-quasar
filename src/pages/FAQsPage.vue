@@ -26,6 +26,8 @@
       </q-expansion-item>
     </q-list>
   </q-scroll-area>
+
+  <TabBar ref="tabBarRef" :buttonNumber="4" />
 </template>
 
 <script lang="ts">
@@ -33,9 +35,13 @@ import { defineComponent } from 'vue';
 import '../css/faqs.scss';
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
+import TabBar from 'src/components/TabBar.vue';
 
 let fL: DocumentData[] = [];
 export default defineComponent({
+  components: {
+    TabBar,
+  },
   data: function () {
     return {
       faqsList: fL,

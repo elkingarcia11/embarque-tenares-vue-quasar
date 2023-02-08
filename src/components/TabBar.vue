@@ -53,31 +53,58 @@
       </q-btn-toggle>
     </q-card>
   </q-page-sticky>
+
+  <q-dialog v-model="dialog">
+    <q-card style="width: 300px" class="q-px-sm q-pb-md">
+      <q-card-section>
+        <div class="text-h6">{{ $t('branch') }}</div>
+      </q-card-section>
+
+      <q-item clickable v-ripple:primary @click="$router.push('ny-branch')">
+        <q-item-section avatar>
+          <q-avatar color="accent" text-color="white" icon="pin_drop" />
+        </q-item-section>
+
+        <q-item-section>{{ $t('ny') }}</q-item-section>
+      </q-item>
+      <q-item clickable v-ripple:primary @click="$router.push('dr-branch')">
+        <q-item-section avatar>
+          <q-avatar color="dark" text-color="white" icon="pin_drop" />
+        </q-item-section>
+
+        <q-item-section>{{ $t('dr') }}</q-item-section>
+      </q-item>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 
 export default defineComponent({
-  setup() {
+  props: {
+    buttonNumber: Number,
+  },
+  data() {
     return {
-      buttonGroup: ref(0),
+      dialog: ref(false),
+      buttonGroup: this.buttonNumber,
     };
   },
   methods: {
     open() {
       if (this.buttonGroup === 1) {
-        this.buttonGroup = 1;
-        this.$emit('tabOne');
+        if (this.$props.buttonNumber == 1 || this.$props.buttonNumber == 0) {
+          this.$emit('focusInput');
+        } else {
+          this.$router.push('track');
+        }
       } else if (this.buttonGroup === 2) {
-        this.buttonGroup = 2;
-        this.$emit('tabTwo');
+        this.$router.push('rates');
       } else if (this.buttonGroup === 3) {
-        this.buttonGroup = 3;
-        this.$emit('tabThree');
+        this.dialog = true;
       } else {
-        this.buttonGroup = 4;
-        this.$emit('tabFour');
+        this.$router.push('faqs');
       }
     },
   },

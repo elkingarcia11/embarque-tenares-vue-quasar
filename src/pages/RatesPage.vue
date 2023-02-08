@@ -45,17 +45,25 @@
       </q-expansion-item>
     </q-list>
   </q-scroll-area>
+  <TabBar ref="tabBarRef" :buttonNumber="2" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import '../css/rates.scss';
+import TabBar from 'src/components/TabBar.vue';
+
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
 
+import '../css/rates.scss';
+
 let rL: DocumentData[] = [];
 let arrayOfiL: DocumentData[][] = [];
+
 export default defineComponent({
+  components: {
+    TabBar,
+  },
   data: function () {
     return {
       ratesList: rL,

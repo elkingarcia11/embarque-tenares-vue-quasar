@@ -36,4 +36,5 @@ export default {
   daysLeft: 'days left',
   etaDisclaimer:
     'Delivery dates provided are an estimate and subject to change',
+  invoice: 'Invoice',
 };
