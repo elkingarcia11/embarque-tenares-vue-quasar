@@ -1,7 +1,7 @@
 <template>
   <q-page-container id="home-body">
     <q-page-sticky position="top" :offset="[0, 0]">
-      <q-form @submit="searchOrSubmit">
+      <q-form @submit="submit">
         <q-input
           ref="invoiceInputRef"
           square
@@ -21,13 +21,7 @@
               icon="quiz"
               @click="invoiceDialog = true"
             />
-            <q-btn
-              flat
-              round
-              color="primary"
-              icon="search"
-              @click="searchOrSubmit"
-            />
+            <q-btn flat round color="primary" icon="search" @click="submit" />
           </template>
         </q-input>
       </q-form>
@@ -78,18 +72,23 @@ export default defineComponent({
     return {
       invoiceDialog: ref(false),
       invoiceText: '',
+      successfullyRetrieved: false,
     };
   },
   methods: {
     focusInput() {
       console.log(this.$refs);
     },
-    searchOrSubmit() {
+    submit() {
+      // Submit
       if (this.invoiceText === '') {
         (this.$refs['invoiceInputRef'] as any).focus();
       } else {
-        // Submit
+        (this.$refs['invoiceInputRef'] as any).blur();
+        this.successfullyRetrieved = true;
         console.log('SUBMITTED');
+
+        // if this.successfullyRetrieved == true, go to track page with all the info
       }
     },
   },
