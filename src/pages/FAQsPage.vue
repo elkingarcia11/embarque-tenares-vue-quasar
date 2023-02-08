@@ -1,30 +1,25 @@
 <template>
-  <q-scroll-area style="height: 85vh">
-    <q-list>
-      <q-expansion-item
-        v-for="faq in faqsList"
-        :key="faq.id"
-        expand-separator
-        expanded-icon="arrow_drop_down"
-        expand-icon="arrow_right"
-        :label="printQuestion(faq)"
-        header-style="font-size: 18px; font-weight: bold;"
-        header-class="q-py-lg"
-        active-class="expansion_active"
-      >
-        <q-card>
-          <q-card-section
-            v-if="$i18n.locale == 'en-US'"
-            style="font-size: 16px"
-          >
-            {{ faq.a_en }}
-          </q-card-section>
-          <q-card-section v-else style="font-size: 16px">
-            {{ faq.a_es }}
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-    </q-list>
+  <q-scroll-area class="scrollArea">
+    <q-expansion-item
+      v-for="faq in faqsList"
+      :key="faq.id"
+      expand-separator
+      expanded-icon="arrow_drop_down"
+      expand-icon="arrow_right"
+      :label="printQuestion(faq)"
+      header-style="font-size: 18px; font-weight: bold;"
+      header-class="q-py-lg"
+      active-class="expansion_active"
+    >
+      <q-card>
+        <q-card-section v-if="$i18n.locale == 'en-US'" style="font-size: 16px">
+          {{ faq.a_en }}
+        </q-card-section>
+        <q-card-section v-else style="font-size: 16px">
+          {{ faq.a_es }}
+        </q-card-section>
+      </q-card>
+    </q-expansion-item>
   </q-scroll-area>
 
   <TabBar ref="tabBarRef" :buttonNumber="4" />

@@ -1,5 +1,10 @@
 <template>
-  <q-page-sticky position="bottom" class="window-width" :offset="[18, 18]">
+  <q-page-sticky
+    v-if="isNotMobile()"
+    position="bottom"
+    class="window-width"
+    :offset="[18, 18]"
+  >
     <q-card class="tab-bar">
       <q-btn-toggle
         spread
@@ -54,20 +59,20 @@
     </q-card>
   </q-page-sticky>
 
-  <q-dialog v-model="dialog">
+  <q-dialog v-if="isNotMobile()" v-model="dialog">
     <q-card style="width: 300px" class="q-px-sm q-pb-md">
       <q-card-section>
         <div class="text-h6">{{ $t('branch') }}</div>
       </q-card-section>
 
-      <q-item clickable v-ripple:primary @click="$router.push('ny-branch')">
+      <q-item clickable v-ripple:grey @click="$router.push('ny-branch')">
         <q-item-section avatar>
           <q-avatar color="accent" text-color="white" icon="pin_drop" />
         </q-item-section>
 
         <q-item-section>{{ $t('ny') }}</q-item-section>
       </q-item>
-      <q-item clickable v-ripple:primary @click="$router.push('dr-branch')">
+      <q-item clickable v-ripple:grey @click="$router.push('dr-branch')">
         <q-item-section avatar>
           <q-avatar color="dark" text-color="white" icon="pin_drop" />
         </q-item-section>
@@ -92,6 +97,15 @@ export default defineComponent({
     };
   },
   methods: {
+    isNotMobile() {
+      if (this.$q.platform.is.mobile) {
+        if (this.buttonGroup == 0) {
+          return true;
+        }
+        return false;
+      }
+      return true;
+    },
     open() {
       if (this.buttonGroup === 1) {
         if (this.$props.buttonNumber == 1 || this.$props.buttonNumber == 0) {

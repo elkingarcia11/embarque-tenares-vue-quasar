@@ -1,185 +1,144 @@
 <template>
-  <div class="body">
-    <iframe
-      height="250"
-      style="border: 0"
-      loading="lazy"
-      allowfullscreen
-      class="iframe window-width"
-      :src="iframeSource"
-    ></iframe>
-    <div class="window-width">
-      <div class="text-h5 q-pa-md">Embarque Tenares Corp.</div>
-      <q-item>
-        <q-item-section avatar>
-          <q-icon name="location_on" color="primary" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>2249 Washington Ave</q-item-label>
-          <q-item-label style="font-size: 12px" caption lines="1">
-            Bronx, NY 10457
-          </q-item-label>
-        </q-item-section>
-        <q-btn @click="copy(0)" round flat icon="content_copy" color="grey-7">
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('copy0') }}</strong>
-          </q-tooltip></q-btn
-        >
-        <q-btn
-          @click="getDirections"
-          round
-          flat
-          icon="directions"
-          color="grey-7"
-        >
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('tooltip0') }}</strong>
-          </q-tooltip>
-        </q-btn>
-      </q-item>
-      <q-item>
-        <q-item-section avatar>
-          <q-icon name="call" color="primary" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>(718) 562-1300</q-item-label>
-        </q-item-section>
-
-        <q-btn @click="copy(1)" round flat icon="content_copy" color="grey-7">
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('copy1') }}</strong>
-          </q-tooltip></q-btn
-        >
-        <q-btn @click="call" round flat icon="call" color="grey-7">
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('tooltip1') }}</strong>
-          </q-tooltip>
-        </q-btn>
-      </q-item>
-      <q-item>
-        <q-item-section avatar>
-          <q-icon name="email" color="primary" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>ny@embarquetenares.com</q-item-label>
-        </q-item-section>
-        <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('copy2') }} </strong>
-          </q-tooltip></q-btn
-        >
-        <q-btn @click="email" round flat icon="email" color="grey-7">
-          <q-tooltip
-            transition-show="scale"
-            transition-hide="scale"
-            anchor="bottom middle"
-            self="center middle"
-          >
-            <strong>{{ $t('tooltip2') }}</strong>
-          </q-tooltip>
-        </q-btn>
-      </q-item>
-      <q-expansion-item
-        id="schedule_expansion_item"
-        icon="schedule"
-        :label="$t('hours')"
-        header-class="text-black text-bold q-py-md"
-        expand-icon-class="text-black text-bold"
-      >
-        <q-list>
-          <q-item style="padding-top: 1.5vh">
-            <q-item-section>
-              <q-item-label
-                overline
-                style="text-align: center; font-weight: bold; font-size: 18px"
-                >{{ $t('monToSat') }}</q-item-label
-              >
-              <q-item-label style="text-align: center; font-weight: bold"
-                >8AM - 6PM</q-item-label
-              >
-            </q-item-section>
-          </q-item>
-
-          <q-item style="padding-bottom: 1vh">
-            <q-item-section>
-              <q-item-label
-                overline
-                style="text-align: center; font-weight: bold; font-size: 18px"
-                >{{ $t('sunday') }}</q-item-label
-              >
-              <q-item-label style="text-align: center; font-weight: bold">{{
-                $t('closed')
-              }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-expansion-item>
-      <div class="row justify-around q-mt-sm">
-        <q-btn
-          flat
-          square
-          @click="openFB"
-          icon="facebook"
-          label="facebook"
-          style="color: #1778f2"
-        />
-        <q-btn
-          flat
-          square
-          @click="openWhatsapp"
-          icon="ion-logo-whatsapp"
-          label="whatsapp"
-          style="color: #25d366"
-        />
-        <q-btn
-          class="instagram"
-          flat
-          square
-          @click="openIG"
-          icon="ion-logo-instagram"
-          label="instagram"
-        />
-      </div>
-    </div>
-    <q-dialog v-model="dialog" seamless position="bottom">
-      <q-card style="width: 350px">
-        <q-card-section class="row justify-center wrap">
-          <div class="text-weight-bold">{{ this.tooltipResponse }}</div>
+  <div>
+    <q-scroll-area style="width: 100vw; height: 100vh">
+      <q-card class="my-card q-mt-xl">
+        <q-card-section>
+          <div class="col text-h6 ellipsis">Embarque Tenares</div>
         </q-card-section>
-      </q-card>
-    </q-dialog>
-  </div>
 
+        <iframe loading="lazy" class="iframe" :src="iframeSource" />
+
+        <q-card-section class="q-pa-none">
+          <q-btn
+            fab
+            @click="getDirections"
+            color="primary"
+            icon="directions"
+            class="absolute"
+            style="top: 0; right: 12px; transform: translateY(-50%)"
+          >
+            <q-tooltip
+              transition-show="scale"
+              transition-hide="scale"
+              anchor="bottom middle"
+              self="center middle"
+            >
+              <strong>{{ $t('tooltip0') }}</strong></q-tooltip
+            ></q-btn
+          >
+        </q-card-section>
+        <q-separator />
+        <q-card-actions>
+          <q-btn @click="call" flat round color="primary" icon="call" />
+          <q-btn @click="call" flat color="black"> (718) 562-1300 </q-btn>
+          <q-space />
+          <q-btn @click="copy(1)" round flat icon="content_copy" color="grey-7">
+            <q-tooltip
+              transition-show="scale"
+              transition-hide="scale"
+              anchor="bottom middle"
+              self="center middle"
+            >
+              <strong>{{ $t('copy1') }}</strong>
+            </q-tooltip></q-btn
+          >
+        </q-card-actions>
+        <q-card-actions>
+          <q-btn @click="email" flat round color="primary" icon="email" />
+          <q-btn @click="email" flat color="black" no-caps>
+            ny@embarquetenares.com
+          </q-btn>
+          <q-space />
+          <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
+            <q-tooltip
+              transition-show="scale"
+              transition-hide="scale"
+              anchor="bottom middle"
+              self="center middle"
+            >
+              <strong>{{ $t('copy2') }} </strong>
+            </q-tooltip></q-btn
+          >
+        </q-card-actions>
+
+        <q-expansion-item
+          id="schedule_expansion_item"
+          icon="schedule"
+          :label="$t('hours')"
+          header-class="text-black text-bold q-py-md"
+          expand-icon-class="text-black text-bold"
+        >
+          <q-list>
+            <q-item style="padding-top: 1.5vh">
+              <q-item-section>
+                <q-item-label
+                  overline
+                  style="text-align: center; font-weight: bold; font-size: 18px"
+                  >{{ $t('monToSat') }}</q-item-label
+                >
+                <q-item-label style="text-align: center; font-weight: bold"
+                  >8AM - 6PM</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+
+            <q-item style="padding-bottom: 1vh">
+              <q-item-section>
+                <q-item-label
+                  overline
+                  style="text-align: center; font-weight: bold; font-size: 18px"
+                  >{{ $t('sunday') }}</q-item-label
+                >
+                <q-item-label style="text-align: center; font-weight: bold">{{
+                  $t('closed')
+                }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
+        <q-separator />
+        <div>
+          <q-btn
+            flat
+            square
+            @click="openFB"
+            icon="facebook"
+            style="color: #1778f2; width: 33%"
+            size="lg"
+          />
+          <q-btn
+            flat
+            square
+            @click="openWhatsapp"
+            icon="ion-logo-whatsapp"
+            style="color: #25d366; width: 34%"
+            size="lg"
+          />
+          <q-btn
+            class="instagram"
+            flat
+            square
+            @click="openIG"
+            style="width: 33%"
+            icon="ion-logo-instagram"
+            size="lg"
+          />
+        </div>
+      </q-card>
+      <q-dialog v-model="dialog" seamless position="bottom">
+        <q-card style="width: 350px">
+          <q-card-section class="row justify-center wrap">
+            <div class="text-weight-bold">{{ tooltipResponse }}</div>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </q-scroll-area>
+  </div>
   <TabBar ref="tabBarRef" :buttonNumber="3" />
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
+import { ref, defineComponent } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
 import TabBar from 'src/components/TabBar.vue';
 
@@ -222,7 +181,7 @@ export default defineComponent({
     openWhatsapp() {
       openURL('https://api.whatsapp.com/send?phone=7185621300');
     },
-    copy(i) {
+    copy(i: number) {
       let text = '';
       let ttr = '';
       switch (i) {

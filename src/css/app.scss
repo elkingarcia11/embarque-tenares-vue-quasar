@@ -50,3 +50,13 @@
   color: $lightAccent;
   text-decoration: none;
 }
+
+.scrollArea {
+  height: 80vh;
+}
+
+@media (max-width: 600px) {
+  .scrollArea {
+    height: 100vh;
+  }
+}
