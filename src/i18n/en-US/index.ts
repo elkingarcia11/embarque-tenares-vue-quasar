@@ -37,4 +37,5 @@ export default {
   etaDisclaimer:
     'Delivery dates provided are an estimate and subject to change',
   invoice: 'Invoice',
+  search: 'search for invoice',
 };

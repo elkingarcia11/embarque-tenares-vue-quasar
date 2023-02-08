@@ -1,37 +1,41 @@
 <template>
   <q-page-container id="home-body">
     <q-page-sticky position="top" :offset="[0, 0]">
-      <q-input
-        ref="invoiceInputRef"
-        square
-        class="window-width overflow-hidden"
-        outlined
-        v-model="invoiceText"
-        :label="$t('trackPack')"
-        mask="############"
-        unmasked-value
-      >
-        <template v-slot:append>
-          <q-btn
-            flat
-            round
-            color="secondary"
-            icon="quiz"
-            @click="invoiceDialog = true"
-          />
-          <q-btn flat round color="primary" icon="search" />
-        </template>
-      </q-input>
+      <q-form @submit="searchOrSubmit">
+        <q-input
+          ref="invoiceInputRef"
+          square
+          class="window-width overflow-hidden"
+          outlined
+          v-model="invoiceText"
+          :label="$t('trackPack')"
+          mask="############"
+          unmasked-value
+          key=""
+        >
+          <template v-slot:append>
+            <q-btn
+              flat
+              round
+              color="secondary"
+              icon="quiz"
+              @click="invoiceDialog = true"
+            />
+            <q-btn
+              flat
+              round
+              color="primary"
+              icon="search"
+              @click="searchOrSubmit"
+            />
+          </template>
+        </q-input>
+      </q-form>
     </q-page-sticky>
     <div id="logoDiv">
       <q-img id="logo" src="../assets/logo.png" fit="contain" />
     </div>
-    <q-dialog
-      v-model="invoiceDialog"
-      full-width
-      position="bottom"
-      transition-hide="slide-down"
-    >
+    <q-dialog v-model="invoiceDialog" full-width transition-hide="slide-down">
       <q-card style="width: 90vw">
         <q-toolbar class="bg-primary text-white">
           <q-toolbar-title
@@ -73,12 +77,20 @@ export default defineComponent({
   setup() {
     return {
       invoiceDialog: ref(false),
-      invoiceText: ref(''),
+      invoiceText: '',
     };
   },
   methods: {
     focusInput() {
       console.log(this.$refs);
+    },
+    searchOrSubmit() {
+      if (this.invoiceText === '') {
+        (this.$refs['invoiceInputRef'] as any).focus();
+      } else {
+        // Submit
+        console.log('SUBMITTED');
+      }
     },
   },
 });

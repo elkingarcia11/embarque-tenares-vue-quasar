@@ -37,4 +37,5 @@ export default {
   etaDisclaimer:
     'Las fechas de entrega proporcionadas son una estimación y están sujetas a cambios',
   invoice: 'Factura',
+  search: 'Buscar factura',
 };

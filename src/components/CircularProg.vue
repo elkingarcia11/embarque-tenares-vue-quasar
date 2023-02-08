@@ -15,7 +15,7 @@
           font-size="25px"
           size="250px"
           :thickness="0.125"
-          color="accent"
+          color="primary"
           track-color="grey-3"
           class="q-ma-md"
         >
@@ -23,7 +23,7 @@
             <q-avatar
               size="75px"
               font-size="52px"
-              text-color="accent"
+              text-color="primary"
               icon="local_shipping"
             />
             <q-item-label caption>{{ $t('invoice') }}</q-item-label>

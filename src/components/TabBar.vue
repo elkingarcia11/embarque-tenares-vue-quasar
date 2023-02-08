@@ -108,7 +108,10 @@ export default defineComponent({
     },
     open() {
       if (this.buttonGroup === 1) {
-        if (this.$props.buttonNumber == 1 || this.$props.buttonNumber == 0) {
+        if (this.$props.buttonNumber == 0) {
+          this.buttonGroup = 0;
+          this.$emit('focusInput');
+        } else if (this.$props.buttonNumber == 1) {
           this.$emit('focusInput');
         } else {
           this.$router.push('track');
