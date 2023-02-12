@@ -56,10 +56,12 @@ export default defineComponent({
     },
   },
   async created() {
+    this.$q.loading.show();
     const faqsCol = collection(db, 'faqs');
     const faqsSnapshot = await getDocs(faqsCol);
     const fL = faqsSnapshot.docs.map((doc) => doc.data());
     this.faqsList = fL;
+    this.$q.loading.hide();
   },
 });
 </script>

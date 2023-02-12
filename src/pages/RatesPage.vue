@@ -74,6 +74,7 @@ export default defineComponent({
     };
   },
   async created() {
+    this.$q.loading.show();
     const ratesRef = collection(db, 'rates');
     const ratesSnapshot = await getDocs(ratesRef);
     const rL = ratesSnapshot.docs.map((doc) => doc.data());
@@ -99,6 +100,7 @@ export default defineComponent({
     iL = itemsSnapshot.docs.map((doc) => doc.data());
     arrayOfiL.push(iL);
     this.listOfLists = arrayOfiL;
+    this.$q.loading.hide();
   },
 });
 </script>
