@@ -1,10 +1,15 @@
 <template>
   <q-scroll-area class="scrollArea">
+    <q-item-section class="q-py-md q-pl-md text-h4 text-bold">{{
+      $t('rates')
+    }}</q-item-section>
     <q-expansion-item
       v-for="(category, index) in ratesList"
       :key="category.name_en"
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
+      header-style="
+  border-bottom-style: solid; border-color:grey; border-width: 0.25px;"
     >
       <template v-slot:header>
         <q-item-section avatar>

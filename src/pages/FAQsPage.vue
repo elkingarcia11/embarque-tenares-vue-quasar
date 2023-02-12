@@ -11,7 +11,7 @@
       expand-icon="arrow_right"
       :label="printQuestion(faq)"
       header-style="font-size: 18px; font-weight: bold;
-  border-bottom-style: solid; border-color:grey; border-width: 0.5px;"
+  border-bottom-style: solid; border-color:grey; border-width: 0.25px;"
       header-class="q-py-lg"
       active-class="expansion_active"
     >
