@@ -129,6 +129,7 @@ export default defineComponent({
       } else if (this.buttonGroup === 2) {
         this.$router.push('rates');
       } else if (this.buttonGroup === 3) {
+        this.buttonGroup = 0;
         this.dialog = true;
       } else {
         this.$router.push('faqs');
