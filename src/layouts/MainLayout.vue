@@ -55,18 +55,22 @@
       bordered
       class="bg-white"
     >
-      <q-scroll-area class="fit">
+      <q-scroll-area class="fit q-pt-xl">
         <q-list>
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item
-              class="text-h6 q-py-lg q-px-lg text-accent"
+              class="text-h6 q-pb-lg q-px-l"
               v-if="index < 4"
               clickable
               @click="$router.push(menuItem.route)"
               v-ripple
             >
               <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
+                <q-avatar
+                  :icon="menuItem.icon"
+                  color="primary"
+                  text-color="white"
+                />
               </q-item-section>
               <q-item-section>
                 {{ $t(menuItem.label) }}
@@ -76,24 +80,34 @@
               class="text-h6"
               v-if="index > 3"
               clickable
-              :icon="menuItem.icon"
-              expand-icon-class="text-accent"
               :label="$t(menuItem.label)"
-              header-class="q-py-lg q-px-lg text-accent"
               default-closed
             >
+              <template v-slot:header>
+                <q-item-section avatar>
+                  <q-avatar
+                    :icon="menuItem.icon"
+                    color="primary"
+                    text-color="white"
+                  />
+                </q-item-section>
+
+                <q-item-section> {{ $t(menuItem.label) }} </q-item-section>
+              </template>
               <q-item
-                class="text-subtitle1 q-py-md q-px-xl text-accent"
+                class="text-subtitle1 q-py-md q-px-xl"
                 v-for="(subMenuItem, index) in subMenuList"
                 :key="index"
                 clickable
                 @click="$router.push(subMenuItem.route)"
                 v-ripple
               >
-                <q-item-section avatar>
-                  <q-icon :name="subMenuItem.icon" />
-                </q-item-section>
-                <q-item-section>
+                <q-avatar
+                  :icon="subMenuItem.icon"
+                  color="primary"
+                  text-color="white"
+                />
+                <q-item-section class="q-pl-md">
                   {{ $t(subMenuItem.label) }}
                 </q-item-section>
               </q-item>

@@ -59,20 +59,30 @@
     </q-card>
   </q-page-sticky>
 
-  <q-dialog v-if="isNotMobile()" v-model="dialog">
+  <q-dialog v-model="dialog">
     <q-card style="width: 300px" class="q-px-sm q-pb-md">
       <q-card-section>
         <div class="text-h6">{{ $t('branch') }}</div>
       </q-card-section>
 
-      <q-item clickable v-ripple:grey @click="$router.push('ny-branch')">
+      <q-item
+        clickable
+        v-ripple:grey
+        color="grey-3"
+        @click="$router.push('ny-branch')"
+      >
         <q-item-section avatar>
           <q-avatar color="accent" text-color="white" icon="pin_drop" />
         </q-item-section>
 
         <q-item-section>{{ $t('ny') }}</q-item-section>
       </q-item>
-      <q-item clickable v-ripple:grey @click="$router.push('dr-branch')">
+      <q-item
+        clickable
+        v-ripple:grey
+        color="grey-3"
+        @click="$router.push('dr-branch')"
+      >
         <q-item-section avatar>
           <q-avatar color="dark" text-color="white" icon="pin_drop" />
         </q-item-section>

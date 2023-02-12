@@ -1,9 +1,9 @@
 <template>
   <q-scroll-area style="width: 100vw; height: 100vh">
-    <q-card class="my-card q-mt-xl">
-      <q-card-section>
-        <div class="col text-h6 ellipsis">Tenares Shipping Corp.</div>
-      </q-card-section>
+    <q-item-section class="q-py-md q-pl-md text-h4 text-bold">{{
+      $t('drb')
+    }}</q-item-section>
+    <q-card class="my-card">
       <iframe loading="lazy" class="iframe" :src="iframeSource" />
       <q-card-section class="q-pa-none">
         <q-btn
@@ -26,11 +26,9 @@
       </q-card-section>
 
       <q-separator />
-      <q-card-actions>
+      <q-card-actions class="q-pt-sm">
         <q-btn @click="call" flat round color="primary" icon="call" />
-        <q-btn @click="call" flat color="black"> (809) 970-0007 </q-btn>
-        <q-space />
-        <q-btn @click="copy(1)" round flat icon="content_copy" color="grey-7">
+        <q-btn @click="copy(1)" flat color="black">
           <q-tooltip
             transition-show="scale"
             transition-hide="scale"
@@ -38,8 +36,10 @@
             self="center middle"
           >
             <strong>{{ $t('copy1') }}</strong>
-          </q-tooltip></q-btn
-        >
+          </q-tooltip>
+          (809) 970-0007
+        </q-btn>
+        <q-space />
       </q-card-actions>
 
       <q-card-actions>
@@ -81,75 +81,52 @@
         :label="$t('hours')"
         header-class="text-black text-bold q-py-md"
         expand-icon-class="text-black text-bold"
+        header-style="
+  border-bottom-style: solid; border-color:grey; border-width: 0.25px;"
       >
-        <q-list>
-          <q-item style="padding-top: 1.5vh">
-            <q-item-section>
-              <q-item-label
-                overline
-                style="text-align: center; font-weight: bold; font-size: 18px"
-                >{{ $t('monToFri') }}</q-item-label
-              >
-              <q-item-label style="text-align: center; font-weight: bold"
-                >8AM - 5PM</q-item-label
-              >
-            </q-item-section>
-          </q-item>
-          <q-item>
-            <q-item-section>
-              <q-item-label
-                overline
-                style="text-align: center; font-weight: bold; font-size: 18px"
-                >{{ $t('sat') }}</q-item-label
-              >
-              <q-item-label style="text-align: center; font-weight: bold"
-                >8AM - 12PM</q-item-label
-              >
-            </q-item-section>
-          </q-item>
+        <q-item style="padding-top: 1.5vh" class="text-white">
+          <q-item-section>
+            <q-item-label
+              class="text-white"
+              overline
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ $t('monToFri') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold"
+              >8AM - 5PM</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section class="text-white">
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ $t('sat') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold"
+              >8AM - 12PM</q-item-label
+            >
+          </q-item-section>
+        </q-item>
 
-          <q-item style="padding-bottom: 1vh">
-            <q-item-section>
-              <q-item-label
-                overline
-                style="text-align: center; font-weight: bold; font-size: 18px"
-                >{{ $t('sunday') }}</q-item-label
-              >
-              <q-item-label style="text-align: center; font-weight: bold">{{
-                $t('closed')
-              }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
+        <q-item class="text-white" style="padding-bottom: 1vh">
+          <q-item-section>
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ $t('sunday') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold">{{
+              $t('closed')
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-expansion-item>
       <q-separator />
-      <div>
-        <q-btn
-          flat
-          square
-          @click="openFB"
-          icon="facebook"
-          style="color: #1778f2; width: 33%"
-          size="lg"
-        />
-        <q-btn
-          flat
-          square
-          @click="openWhatsapp"
-          icon="ion-logo-whatsapp"
-          style="color: #25d366; width: 34%"
-          size="lg"
-        />
-        <q-btn
-          class="instagram"
-          flat
-          square
-          @click="openIG"
-          style="width: 33%"
-          icon="ion-logo-instagram"
-          size="lg"
-        />
-      </div>
+      <SocialMediaFooter />
     </q-card>
     <q-dialog v-model="dialog" seamless position="bottom">
       <q-card style="width: 350px">
@@ -159,20 +136,19 @@
       </q-card>
     </q-dialog>
   </q-scroll-area>
-  <TabBar ref="tabBarRef" :buttonNumber="3" />
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
-import TabBar from 'src/components/TabBar.vue';
+import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 import '../css/branches.scss';
 const src =
   'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
   process.env.GOOGLE_MAPS_API_KEY;
 export default defineComponent({
   components: {
-    TabBar,
+    SocialMediaFooter,
   },
   setup() {
     return {
