@@ -11,44 +11,7 @@
           icon="menu"
         />
         <q-toolbar-title>
-          <a v-if="returnRoute() === 0" id="appTitle" href="/" class="q-pl-md"
-            >Embarque Tenares</a
-          >
-          <a
-            v-else-if="returnRoute() === 1"
-            id="appTitle"
-            href="/"
-            class="q-pl-md"
-            >{{ $t('track') }}</a
-          >
-          <a
-            v-else-if="returnRoute() === 2"
-            id="appTitle"
-            href="/"
-            class="q-pl-md"
-            >{{ $t('rates') }}</a
-          >
-          <a
-            v-else-if="returnRoute() === 3"
-            id="appTitle"
-            href="/"
-            class="q-pl-md"
-            >{{ $t('nyb') }}</a
-          >
-          <a
-            v-else-if="returnRoute() === 4"
-            id="appTitle"
-            href="/"
-            class="q-pl-md"
-            >{{ $t('drb') }}</a
-          >
-          <a
-            v-else-if="returnRoute() === 5"
-            id="appTitle"
-            href="/"
-            class="q-pl-md"
-            >{{ $t('faqs') }}</a
-          >
+          <a id="appTitle" href="/" class="q-pl-md">Embarque Tenares</a>
         </q-toolbar-title>
         <q-btn-dropdown
           :ripple="false"
@@ -210,24 +173,6 @@ export default defineComponent({
       } else {
         this.$i18n.locale = 'es-US';
         this.label = 'Español';
-      }
-    },
-    returnRoute() {
-      switch (this.$route.name) {
-        case 'main':
-          return 0;
-        case 'track':
-          return 1;
-        case 'rates':
-          return 2;
-        case 'nyb':
-          return 3;
-        case 'drb':
-          return 4;
-        case 'faqs':
-          return 5;
-        default:
-          return 0;
       }
     },
   },

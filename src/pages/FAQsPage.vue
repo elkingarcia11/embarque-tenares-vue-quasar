@@ -1,5 +1,8 @@
 <template>
   <q-scroll-area class="scrollArea">
+    <q-item-section class="q-py-md q-pl-md text-h4 text-bold">{{
+      $t('faqs')
+    }}</q-item-section>
     <q-expansion-item
       v-for="faq in faqsList"
       :key="faq.id"
@@ -7,7 +10,8 @@
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
       :label="printQuestion(faq)"
-      header-style="font-size: 18px; font-weight: bold;"
+      header-style="font-size: 18px; font-weight: bold;
+  border-bottom-style: solid; border-color:grey; border-width: 0.5px;"
       header-class="q-py-lg"
       active-class="expansion_active"
     >
