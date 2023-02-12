@@ -45,7 +45,7 @@ import '../css/track.scss';
 export default defineComponent({
   props: {
     percent: Number,
-    invoice: Number,
+    invoice: String,
     eta: String,
   },
 });

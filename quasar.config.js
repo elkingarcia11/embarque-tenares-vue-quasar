@@ -31,7 +31,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
-    boot: ['i18n', 'axios', 'firebase', 'hector'],
+    boot: ['i18n', 'axios', 'firebase'],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: ['app.scss'],
@@ -56,6 +56,7 @@ module.exports = configure(function (ctx) {
       env: {
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
 
+        HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_APP_ID: process.env.HECTOR_APP_ID,
         HECTOR_API_KEY: process.env.HECTOR_API_KEY,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
@@ -122,7 +123,11 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-framework
     framework: {
-      config: {},
+      config: {
+        loading: {
+          /* look at QuasarConfOptions from the API card */
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -135,7 +140,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['LocalStorage', 'SessionStorage', 'Loading'],
     },
 
     // animations: 'all', // --- includes all animations

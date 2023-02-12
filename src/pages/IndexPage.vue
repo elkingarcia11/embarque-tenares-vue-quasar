@@ -56,6 +56,37 @@
       :buttonNumber="0"
       @focus-input="$refs['invoiceInputRef'].focus()"
     />
+    <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
+      <q-card style="width: 90vw">
+        <q-toolbar class="bg-primary text-white">
+          <q-toolbar-title
+            >{{ $t('findInv')
+            }}<span class="text-weight-bold">{{
+              $t('findInvTwo')
+            }}</span></q-toolbar-title
+          >
+        </q-toolbar>
+        <q-separator />
+        <q-card-section class="row full-height justify-center">
+          <img
+            loading="lazy"
+            v-if="$i18n.locale == 'en-US'"
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackEN.png"
+          />
+          <img
+            loading="lazy"
+            v-else
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackES.png"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page-container>
 </template>
 
@@ -76,9 +107,6 @@ export default defineComponent({
     };
   },
   methods: {
-    focusInput() {
-      console.log(this.$refs);
-    },
     submit() {
       // Submit
       if (this.invoiceText === '') {
@@ -86,8 +114,6 @@ export default defineComponent({
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
         this.successfullyRetrieved = true;
-        console.log('SUBMITTED');
-
         // if this.successfullyRetrieved == true, go to track page with all the info
       }
     },

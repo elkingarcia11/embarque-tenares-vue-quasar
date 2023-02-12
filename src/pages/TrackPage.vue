@@ -24,13 +24,16 @@
       </q-input>
     </q-form>
   </q-page-sticky>
-  <CircularProg
-    v-if="successfullyRetrieved"
-    ref="circularProgRef"
-    :percent="percent"
-    :invoice="invoiceNumber"
-    :eta="eta"
-  />
+  <div v-if="onSubmitted">
+    <CircularProg
+      v-if="querySuccess"
+      ref="circularProgRef"
+      :percent="percent"
+      :invoice="invoiceNumber"
+      :eta="eta"
+    />
+    <TrackError v-else :invoice="invoiceNumber" />
+  </div>
   <q-page-sticky position="bottom" :offset="[18, 18]">
     <q-btn
       color="primary"
@@ -60,6 +63,7 @@
       <q-separator />
       <q-card-section class="row full-height justify-center">
         <img
+          loading="lazy"
           v-if="$i18n.locale == 'en-US'"
           class="self-center"
           id="logo"
@@ -67,6 +71,7 @@
           src="../assets/trackEN.png"
         />
         <img
+          loading="lazy"
           v-else
           class="self-center"
           id="logo"
@@ -81,14 +86,18 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import CircularProg from 'src/components/CircularProg.vue';
+import TrackError from 'src/components/TrackError.vue';
 import TabBar from 'src/components/TabBar.vue';
 
 import db from '../boot/firebase';
-import { getDoc, updateDoc, doc } from '@firebase/firestore/lite';
+import { getDoc, doc } from '@firebase/firestore/lite';
+
+import { api } from 'boot/axios';
 
 export default defineComponent({
   components: {
     CircularProg,
+    TrackError,
     TabBar,
   },
   data: function () {
@@ -96,11 +105,12 @@ export default defineComponent({
       percent: 20,
       daysLeft: 25,
       eta: 'December 20, 2023',
-      invoiceNumber: 123456,
+      invoiceText: ref(''),
+      invoiceNumber: ref(''),
       invoiceDialog: ref(false),
-      invoiceText: '',
-      successfullyRetrieved: false,
       etaDays: -1,
+      onSubmitted: ref(false),
+      querySuccess: ref(false),
     };
   },
   methods: {
@@ -113,15 +123,17 @@ export default defineComponent({
     search() {
       (this.$refs['invoiceInputRef'] as any).focus();
     },
-    submit() {
+    async submit() {
+      this.$q.loading.show();
       // Submit
       if (this.invoiceText === '') {
         (this.$refs['invoiceInputRef'] as any).focus();
+        this.$q.loading.hide();
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
-        this.successfullyRetrieved = true;
-        console.log('SUBMITTED');
-        this.retrieveEtaDays();
+
+        await this.retrieveEtaDays();
+        this.retrieveInvoiceInfo();
       }
     },
     async retrieveEtaDays() {
@@ -132,8 +144,27 @@ export default defineComponent({
         this.etaDays = d.days;
       } else {
         // doc.data() will be undefined in this case
-        console.log('No such document!');
+        this.etaDays = 25;
+        console.log('No such document! Default to 25 days');
       }
+    },
+    retrieveInvoiceInfo() {
+      this.onSubmitted = true;
+      this.invoiceNumber = this.invoiceText;
+      let url = '/invoice/' + this.invoiceText;
+      console.log(api);
+      api
+        .get(url)
+        .then((response) => {
+          console.log(response);
+          this.querySuccess = true;
+          this.$q.loading.hide();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.querySuccess = false;
+          this.$q.loading.hide();
+        });
     },
   },
 });
