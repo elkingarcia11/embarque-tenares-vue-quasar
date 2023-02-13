@@ -30,7 +30,8 @@
       ref="circularProgRef"
       :percent="percent"
       :invoice="invoiceNumber"
-      :eta="eta"
+      :enDate="enDate"
+      :esDate="esDate"
     />
     <TrackError v-else :invoice="invoiceNumber" />
   </div>
@@ -102,15 +103,16 @@ export default defineComponent({
   },
   data: function () {
     return {
-      percent: 20,
+      percent: ref(0),
       daysLeft: 25,
-      eta: 'December 20, 2023',
       invoiceText: ref(''),
       invoiceNumber: ref(''),
       invoiceDialog: ref(false),
       etaDays: -1,
       onSubmitted: ref(false),
       querySuccess: ref(false),
+      enDate: ref(''),
+      esDate: ref(''),
     };
   },
   methods: {
@@ -133,7 +135,7 @@ export default defineComponent({
         (this.$refs['invoiceInputRef'] as any).blur();
 
         await this.retrieveEtaDays();
-        this.retrieveInvoiceInfo();
+        await this.retrieveInvoiceInfo();
       }
     },
     async retrieveEtaDays() {
@@ -144,7 +146,6 @@ export default defineComponent({
         this.etaDays = d.days;
       } else {
         // doc.data() will be undefined in this case
-        this.etaDays = 25;
         console.log('No such document! Default to 25 days');
       }
     },
@@ -156,7 +157,30 @@ export default defineComponent({
       api
         .get(url)
         .then((response) => {
-          console.log(response);
+          var a = new Date(response.data.response[0].date);
+          const b = new Date();
+          const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          };
+
+          a.setDate(a.getDate() + 25);
+          this.enDate = a.toLocaleDateString('en-US', options);
+          this.esDate = a.toLocaleDateString('es-US', options);
+
+          const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+          // Discard the time and time-zone information.
+          const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+          const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+          let dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
+          if (dLeft <= 0) {
+            this.percent = 100;
+          } else {
+            this.percent = (1 - dLeft / this.etaDays) * 100;
+          }
+
           this.querySuccess = true;
           this.$q.loading.hide();
         })

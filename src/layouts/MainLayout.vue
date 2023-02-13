@@ -55,11 +55,11 @@
       bordered
       class="bg-white"
     >
-      <q-scroll-area class="fit q-pt-xl">
+      <q-scroll-area class="fit flex-center">
         <q-list>
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item
-              class="text-h6 q-pb-lg q-px-l"
+              class="text-h6 q-py-md q-px-l"
               v-if="index < 4"
               clickable
               @click="$router.push(menuItem.route)"

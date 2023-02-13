@@ -3,8 +3,14 @@
     <q-card>
       <q-card-section>
         <div class="text-h5 text-center">{{ $t('etod') }}</div>
-        <div class="text-h6 text-center text-accent text-bold">
-          {{ eta }}
+        <div
+          v-if="$i18n.locale == 'en-US'"
+          class="text-h6 text-center text-accent text-bold"
+        >
+          {{ enDate }}
+        </div>
+        <div v-else class="text-h6 text-center text-accent text-bold">
+          {{ esDate }}
         </div>
       </q-card-section>
       <q-card-section class="text-center">
@@ -46,7 +52,8 @@ export default defineComponent({
   props: {
     percent: Number,
     invoice: String,
-    eta: String,
+    enDate: String,
+    esDate: String,
   },
 });
 </script>
