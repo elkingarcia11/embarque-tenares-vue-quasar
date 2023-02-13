@@ -45,6 +45,12 @@
     />
   </q-page-sticky>
 
+  <TabBar
+    ref="tabBarRef"
+    :buttonNumber="1"
+    @focus-input="$refs['invoiceInputRef'].focus()"
+  />
+
   <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
     <q-card style="width: 90vw">
       <q-toolbar class="bg-primary text-white">
@@ -118,6 +124,10 @@ export default defineComponent({
     search() {
       (this.$refs['invoiceInputRef'] as any).focus();
     },
+    async submitFromExternalPage() {
+      await this.retrieveEtaDays();
+      await this.retrieveInvoiceInfo();
+    },
     async submit() {
       this.$q.loading.show();
       // Submit
@@ -126,7 +136,6 @@ export default defineComponent({
         this.$q.loading.hide();
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
-
         await this.retrieveEtaDays();
         await this.retrieveInvoiceInfo();
       }
@@ -183,6 +192,19 @@ export default defineComponent({
           this.$q.loading.hide();
         });
     },
+  },
+  async created() {
+    this.$watch(
+      () => this.$route.params,
+      (toParams, previousParams) => {
+        this.$router.push({
+          name: 'trackSpecific',
+          params: { invoice: toParams.invoice },
+        });
+      }
+    );
+    this.invoiceText = this.$route.params.invoice as string;
+    this.submitFromExternalPage();
   },
 });
 </script>

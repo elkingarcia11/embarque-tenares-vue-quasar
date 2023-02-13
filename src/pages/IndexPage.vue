@@ -113,8 +113,10 @@ export default defineComponent({
         (this.$refs['invoiceInputRef'] as any).focus();
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
-        this.successfullyRetrieved = true;
-        // if this.successfullyRetrieved == true, go to track page with all the info
+        this.$router.push({
+          name: 'trackSpecific',
+          params: { invoice: this.invoiceText },
+        });
       }
     },
   },

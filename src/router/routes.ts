@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
         name: 'track',
       },
       {
+        path: 'track/:invoice',
+        component: () => import('src/pages/TrackSpecificPage.vue'),
+        name: 'trackSpecific',
+      },
+      {
         path: 'rates',
         component: () => import('src/pages/RatesPage.vue'),
         name: 'rates',
