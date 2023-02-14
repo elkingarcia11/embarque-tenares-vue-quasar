@@ -88,7 +88,6 @@
 import { defineComponent, ref } from 'vue';
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
-import TabBar from 'src/components/TabBar.vue';
 
 import db from '../boot/firebase';
 import { getDoc, doc } from '@firebase/firestore/lite';
@@ -203,8 +202,12 @@ export default defineComponent({
         });
       }
     );
-    this.invoiceText = this.$route.params.invoice as string;
-    this.submitFromExternalPage();
+    if (typeof this.$route.params.invoice === 'string') {
+      this.invoiceText = this.$route.params.invoice;
+      if (this.$route.params.invoice != '') {
+        this.submitFromExternalPage();
+      }
+    }
   },
 });
 </script>

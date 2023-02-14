@@ -4,7 +4,7 @@
       <q-card-section>
         <div class="text-h5 text-center">Invoice not found</div>
       </q-card-section>
-      <q-card-section class="text-center">
+      <q-card-section class="text-h5 text-center">
         <q-avatar
           size="100px"
           font-size="100px"
