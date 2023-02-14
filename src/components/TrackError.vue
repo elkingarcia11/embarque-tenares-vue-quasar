@@ -14,10 +14,12 @@
       </q-card-section>
       <q-card-section
         class="text-h6 text-center text-accent text-bold q-px-lg flex-wrap"
-        >Invoice number {{ invoice }} could not be found
+      >
+        {{ $t('invoiceNumber') }} {{ invoice }}
+        {{ $t('cNBF') }}
       </q-card-section>
       <q-card-section class="text-italic text-bold text-center">
-        Please try again or contact our office for futher assistance
+        {{ $t('tryAgain') }}
       </q-card-section>
     </q-card>
   </div>

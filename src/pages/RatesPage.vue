@@ -9,7 +9,7 @@
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
       header-style="
-  border-bottom-style: solid; border-color:grey; border-width: 0.25px;"
+  border-bottom-style: solid; border-color:lightgrey; border-width: 0.5px;"
     >
       <template v-slot:header>
         <q-item-section avatar>

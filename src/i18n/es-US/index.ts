@@ -38,4 +38,8 @@ export default {
     'Las fechas de entrega proporcionadas son una estimación y están sujetas a cambios',
   invoice: 'Factura',
   search: 'Buscar factura',
+  invoiceNumber: 'Número de factura',
+  cNBF: 'no se pudo encontrar',
+  tryAgain:
+    'Inténtelo de nuevo o comuníquese con nuestra oficina para obtener más ayuda',
 };

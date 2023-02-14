@@ -38,4 +38,7 @@ export default {
     'Delivery dates provided are an estimate and subject to change',
   invoice: 'Invoice',
   search: 'search for invoice',
+  invoiceNumber: 'Invoice number',
+  cNBF: 'could not be found',
+  tryAgain: 'Please try again or contact our office for futher assistance',
 };
