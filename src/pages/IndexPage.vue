@@ -11,7 +11,6 @@
           :label="$t('trackPack')"
           mask="############"
           unmasked-value
-          key=""
         >
           <template v-slot:append>
             <q-btn
@@ -31,6 +30,7 @@
     </div>
 
     <TabBar
+      v-if="$q.platform.is.mobile"
       ref="tabBarRef"
       :buttonNumber="0"
       @focus-input="$refs['invoiceInputRef'].focus()"

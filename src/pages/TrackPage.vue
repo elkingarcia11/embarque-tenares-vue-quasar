@@ -1,85 +1,87 @@
 <template>
-  <q-page-sticky position="top" :offset="[0, 0]">
-    <q-form @submit="submit">
-      <q-input
-        ref="invoiceInputRef"
-        square
-        class="window-width overflow-hidden"
-        outlined
-        v-model="invoiceText"
-        :label="$t('trackPack')"
-        mask="############"
-        unmasked-value
+  <q-page-container id="home-body">
+    <q-page-sticky position="top" :offset="[0, 0]">
+      <q-form @submit="submit">
+        <q-input
+          ref="invoiceInputRef"
+          square
+          class="window-width overflow-hidden"
+          outlined
+          v-model="invoiceText"
+          :label="$t('trackPack')"
+          mask="############"
+          unmasked-value
+        >
+          <template v-slot:append>
+            <q-btn
+              flat
+              round
+              color="secondary"
+              icon="quiz"
+              @click="invoiceDialog = true"
+            />
+            <q-btn flat round color="primary" icon="search" @click="submit" />
+          </template>
+        </q-input>
+      </q-form>
+    </q-page-sticky>
+
+    <div v-if="onSubmitted">
+      <q-item-section
+        class="q-my-xl q-pt-xl text-h4 text-bold text-center"
+        style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+        >{{ $t('track') }}</q-item-section
       >
-        <template v-slot:append>
-          <q-btn
-            flat
-            round
-            color="secondary"
-            icon="quiz"
-            @click="invoiceDialog = true"
+      <CircularProg
+        v-if="querySuccess"
+        ref="circularProgRef"
+        :percent="percent"
+        :invoice="invoiceNumber"
+        :enDate="enDate"
+        :esDate="esDate"
+      />
+      <TrackError v-else :invoice="invoiceNumber" />
+    </div>
+    <q-page-sticky position="bottom" :offset="[18, 18]">
+      <q-btn
+        color="primary"
+        style="width: 90vw"
+        :label="$t('search')"
+        size="lg"
+        @click="search"
+      />
+    </q-page-sticky>
+
+    <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
+      <q-card style="width: 90vw">
+        <q-toolbar class="bg-primary">
+          <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+            {{ $t('findInv')
+            }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+          </div>
+        </q-toolbar>
+        <q-separator />
+        <q-card-section class="row full-height justify-center">
+          <img
+            loading="lazy"
+            v-if="$i18n.locale == 'en-US'"
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackEN.png"
           />
-          <q-btn flat round color="primary" icon="search" @click="submit" />
-        </template>
-      </q-input>
-    </q-form>
-  </q-page-sticky>
-
-  <div v-if="onSubmitted">
-    <q-item-section
-      class="q-my-xl q-pt-xl text-h4 text-bold text-center"
-      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-      >{{ $t('track') }}</q-item-section
-    >
-    <CircularProg
-      v-if="querySuccess"
-      ref="circularProgRef"
-      :percent="percent"
-      :invoice="invoiceNumber"
-      :enDate="enDate"
-      :esDate="esDate"
-    />
-    <TrackError v-else :invoice="invoiceNumber" />
-  </div>
-  <q-page-sticky position="bottom" :offset="[18, 18]">
-    <q-btn
-      color="primary"
-      style="width: 90vw"
-      :label="$t('search')"
-      size="lg"
-      @click="search"
-    />
-  </q-page-sticky>
-
-  <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
-    <q-card style="width: 90vw">
-      <q-toolbar class="bg-primary">
-        <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
-          {{ $t('findInv')
-          }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
-        </div>
-      </q-toolbar>
-      <q-separator />
-      <q-card-section class="row full-height justify-center">
-        <img
-          loading="lazy"
-          v-if="$i18n.locale == 'en-US'"
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackEN.png"
-        />
-        <img
-          loading="lazy"
-          v-else
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackES.png"
-        />
-      </q-card-section>
-    </q-card>
-  </q-dialog>
+          <img
+            loading="lazy"
+            v-else
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackES.png"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+  </q-page-container>
 </template>
 
 <script lang="ts">
