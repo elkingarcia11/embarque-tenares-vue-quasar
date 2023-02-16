@@ -42,4 +42,5 @@ export default {
   cNBF: 'no se pudo encontrar',
   tryAgain:
     'Inténtelo de nuevo o comuníquese con nuestra oficina para obtener más ayuda',
+  invNf: 'Factura no encontrada',
 };

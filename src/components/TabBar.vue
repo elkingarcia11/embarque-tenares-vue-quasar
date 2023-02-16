@@ -60,9 +60,11 @@
   </q-page-sticky>
 
   <q-dialog v-model="dialog">
-    <q-card style="width: 300px" class="q-px-sm q-pb-md">
+    <q-card class="q-px-sm q-py-md">
       <q-card-section>
-        <div class="text-h6">{{ $t('branch') }}</div>
+        <div class="text-h5" style="font-family: 'BodoniSvtyTwoSCITCTT-Book'">
+          {{ $t('branch') }}
+        </div>
       </q-card-section>
 
       <q-item
@@ -72,10 +74,10 @@
         @click="$router.push('ny-branch')"
       >
         <q-item-section avatar>
-          <q-avatar color="accent" text-color="white" icon="pin_drop" />
+          <q-avatar color="secondary" text-color="white" icon="pin_drop" />
         </q-item-section>
 
-        <q-item-section>{{ $t('ny') }}</q-item-section>
+        <q-item-section class="text-h6">{{ $t('ny') }}</q-item-section>
       </q-item>
       <q-item
         clickable
@@ -84,10 +86,10 @@
         @click="$router.push('dr-branch')"
       >
         <q-item-section avatar>
-          <q-avatar color="dark" text-color="white" icon="pin_drop" />
+          <q-avatar color="accent" text-color="white" icon="pin_drop" />
         </q-item-section>
 
-        <q-item-section>{{ $t('dr') }}</q-item-section>
+        <q-item-section class="text-h6">{{ $t('dr') }}</q-item-section>
       </q-item>
     </q-card>
   </q-dialog>

@@ -1,15 +1,17 @@
 <template>
-  <q-scroll-area class="scrollArea">
-    <q-item-section class="q-py-md q-pl-md text-h4 text-bold">{{
-      $t('rates')
-    }}</q-item-section>
+  <q-item-section
+    class="q-py-lg text-h4 text-bold text-center"
+    style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+    >{{ $t('rates') }}</q-item-section
+  >
+  <q-scroll-area class="scrollArea q-mt-sm">
     <q-expansion-item
       v-for="(category, index) in ratesList"
       :key="category.name_en"
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
-      header-style="
-  border-bottom-style: solid; border-color:lightgrey; border-width: 0.5px;"
+      header-class="q-py-lg bg-primary text-white"
+      expand-icon-class="text-white"
     >
       <template v-slot:header>
         <q-item-section avatar>
@@ -18,9 +20,17 @@
           </q-avatar>
         </q-item-section>
 
-        <q-item-section v-if="$i18n.locale == 'en-US'" class="text-h5">
+        <q-item-section
+          v-if="$i18n.locale == 'en-US'"
+          class="text-h4"
+          style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+        >
           {{ category.name_en }} </q-item-section
-        ><q-item-section v-else class="text-h5">
+        ><q-item-section
+          v-else
+          class="text-h4"
+          style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+        >
           {{ category.name_es }}
         </q-item-section>
       </template>
@@ -48,12 +58,10 @@
       </q-list>
     </q-expansion-item>
   </q-scroll-area>
-  <TabBar ref="tabBarRef" :buttonNumber="2" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import TabBar from 'src/components/TabBar.vue';
 
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
@@ -64,9 +72,6 @@ let rL: DocumentData[] = [];
 let arrayOfiL: DocumentData[][] = [];
 
 export default defineComponent({
-  components: {
-    TabBar,
-  },
   data: function () {
     return {
       ratesList: rL,

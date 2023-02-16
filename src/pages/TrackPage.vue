@@ -24,7 +24,13 @@
       </q-input>
     </q-form>
   </q-page-sticky>
+
   <div v-if="onSubmitted">
+    <q-item-section
+      class="q-my-xl q-pt-xl text-h4 text-bold text-center"
+      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+      >{{ $t('track') }}</q-item-section
+    >
     <CircularProg
       v-if="querySuccess"
       ref="circularProgRef"
@@ -47,13 +53,11 @@
 
   <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
     <q-card style="width: 90vw">
-      <q-toolbar class="bg-primary text-white">
-        <q-toolbar-title
-          >{{ $t('findInv')
-          }}<span class="text-weight-bold">{{
-            $t('findInvTwo')
-          }}</span></q-toolbar-title
-        >
+      <q-toolbar class="bg-primary">
+        <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+          {{ $t('findInv')
+          }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+        </div>
       </q-toolbar>
       <q-separator />
       <q-card-section class="row full-height justify-center">
@@ -89,6 +93,9 @@ import { getDoc, doc } from '@firebase/firestore/lite';
 import { api } from 'boot/axios';
 
 export default defineComponent({
+  props: {
+    invoice: String,
+  },
   components: {
     CircularProg,
     TrackError,
@@ -145,7 +152,6 @@ export default defineComponent({
       this.onSubmitted = true;
       this.invoiceNumber = this.invoiceText;
       let url = '/invoice/' + this.invoiceText;
-      console.log(api);
       api
         .get(url)
         .then((response) => {
@@ -182,6 +188,9 @@ export default defineComponent({
           this.$q.loading.hide();
         });
     },
+  },
+  async created() {
+    console.log('ROUTE PROPS: ', this.$props.invoice);
   },
 });
 </script>

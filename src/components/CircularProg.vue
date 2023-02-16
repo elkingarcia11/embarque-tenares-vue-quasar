@@ -1,6 +1,6 @@
 <template>
-  <div class="q-py-xl q-px-lg flex flex-center circularProg">
-    <q-card>
+  <div class="q-px-lg flex flex-center circularProg">
+    <q-card class="q-px-xl q-py-lg">
       <q-card-section>
         <div class="text-h5 text-center">{{ $t('etod') }}</div>
         <div

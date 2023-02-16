@@ -52,8 +52,21 @@
 }
 
 .scrollArea {
-  height: 80vh;
+  height: 100vh;
+}
+
+.faqsExpansionHeaderStyle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dialogToolbar {
+  font-size: 25px;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
+  .dialogToolbar {
+    font-size: 20px;
+  }
 }

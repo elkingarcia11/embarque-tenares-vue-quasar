@@ -1,6 +1,6 @@
 <template>
-  <div class="q-py-xl q-px-lg flex flex-center circularProg">
-    <q-card>
+  <div class="q-mx-lg flex flex-center circularProg">
+    <q-card class="q-px-md q-py-lg">
       <q-card-section>
         <div class="text-h5 text-center">Invoice not found</div>
       </q-card-section>

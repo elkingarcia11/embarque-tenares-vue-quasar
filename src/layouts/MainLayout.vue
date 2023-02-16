@@ -1,50 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="text-light">
-      <q-toolbar>
-        <q-btn
-          :ripple="false"
-          flat
-          @click="drawer = !drawer"
-          round
-          dense
-          icon="menu"
-        />
-        <q-toolbar-title>
-          <a id="appTitle" href="/" class="q-pl-md">Embarque Tenares</a>
-        </q-toolbar-title>
-        <q-btn-dropdown
-          :ripple="false"
-          flat
-          round
-          dense
-          icon="language"
-          :label="label"
-        >
-          <q-list>
-            <q-item
-              class="text-h6 text-black"
-              clickable
-              v-close-popup
-              @click="changeLanguage(0)"
-            >
-              <q-item-section>
-                <q-item-label>English</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item
-              class="text-h6 text-black"
-              clickable
-              v-close-popup
-              @click="changeLanguage(1)"
-            >
-              <q-item-section>
-                <q-item-label>Español</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-      </q-toolbar>
+      <ToolbarWrapper />
     </q-header>
 
     <q-drawer
@@ -55,11 +12,14 @@
       bordered
       class="bg-white"
     >
-      <q-scroll-area class="fit flex-center">
+      <q-scroll-area
+        class="fit flex-center"
+        style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+      >
         <q-list>
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item
-              class="text-h6 q-py-md q-px-l"
+              class="text-h5 q-py-md q-px-l"
               v-if="index < 4"
               clickable
               @click="$router.push(menuItem.route)"
@@ -77,11 +37,11 @@
               </q-item-section>
             </q-item>
             <q-expansion-item
-              class="text-h6"
               v-if="index > 3"
               clickable
               :label="$t(menuItem.label)"
               default-closed
+              header-class="q-py-md text-h5"
             >
               <template v-slot:header>
                 <q-item-section avatar>
@@ -95,7 +55,7 @@
                 <q-item-section> {{ $t(menuItem.label) }} </q-item-section>
               </template>
               <q-item
-                class="text-subtitle1 q-py-md q-px-xl"
+                class="text-h5 q-py-md q-px-xl"
                 v-for="(subMenuItem, index) in subMenuList"
                 :key="index"
                 clickable
@@ -125,8 +85,12 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
+import ToolbarWrapper from '../components/ToolbarWrapper.vue';
 
 export default defineComponent({
+  components: {
+    ToolbarWrapper,
+  },
   data() {
     return {
       drawer: ref(false),

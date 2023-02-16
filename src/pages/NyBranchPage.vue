@@ -1,9 +1,11 @@
 <template>
   <q-scroll-area style="width: 100vw; height: 100vh">
-    <q-item-section class="q-py-md q-pl-md text-h4 text-bold">{{
-      $t('nyb')
-    }}</q-item-section>
-    <q-card class="my-card">
+    <q-item-section
+      class="q-py-lg text-h4 text-bold text-center"
+      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+      >{{ $t('nyb') }}</q-item-section
+    >
+    <q-card class="my-card q-mt-sm">
       <iframe loading="lazy" class="iframe" :src="iframeSource" />
 
       <q-card-section class="q-pa-none">
@@ -66,7 +68,7 @@
         header-class="text-black text-bold q-py-md"
         expand-icon-class="text-black text-bold"
         header-style="
-  border-bottom-style: solid; border-color:grey; border-width: 0.25px;"
+  border-bottom-style: solid; border-color:lightgrey; border-width: 0.25px;"
       >
         <q-item class="text-white" style="padding-top: 1.5vh">
           <q-item-section>

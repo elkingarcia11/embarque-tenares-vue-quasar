@@ -41,4 +41,5 @@ export default {
   invoiceNumber: 'Invoice number',
   cNBF: 'could not be found',
   tryAgain: 'Please try again or contact our office for futher assistance',
+  invNf: 'Invoice not found',
 };

@@ -24,7 +24,13 @@
       </q-input>
     </q-form>
   </q-page-sticky>
+
   <div v-if="onSubmitted">
+    <q-item-section
+      class="q-my-xl q-pt-xl text-h4 text-bold text-center"
+      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+      >{{ $t('track') }}</q-item-section
+    >
     <CircularProg
       v-if="querySuccess"
       ref="circularProgRef"

@@ -29,27 +29,6 @@
     <div id="logoDiv">
       <q-img id="logo" src="../assets/logo.png" fit="contain" />
     </div>
-    <q-dialog v-model="invoiceDialog" full-width transition-hide="slide-down">
-      <q-card style="width: 90vw">
-        <q-toolbar class="bg-primary text-white">
-          <q-toolbar-title
-            >{{ $t('findInv')
-            }}<span class="text-weight-bold">{{
-              $t('findInvTwo')
-            }}</span></q-toolbar-title
-          >
-        </q-toolbar>
-        <q-separator />
-        <q-card-section class="row full-height justify-center">
-          <q-img
-            class="self-center"
-            id="logo"
-            :src="$t('inv_img_src')"
-            fit="contain"
-          />
-        </q-card-section>
-      </q-card>
-    </q-dialog>
 
     <TabBar
       ref="tabBarRef"
@@ -57,14 +36,12 @@
       @focus-input="$refs['invoiceInputRef'].focus()"
     />
     <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
-      <q-card style="width: 90vw">
-        <q-toolbar class="bg-primary text-white">
-          <q-toolbar-title
-            >{{ $t('findInv')
-            }}<span class="text-weight-bold">{{
-              $t('findInvTwo')
-            }}</span></q-toolbar-title
-          >
+      <q-card>
+        <q-toolbar class="bg-primary">
+          <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+            {{ $t('findInv')
+            }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+          </div>
         </q-toolbar>
         <q-separator />
         <q-card-section class="row full-height justify-center">
@@ -114,7 +91,7 @@ export default defineComponent({
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
         this.$router.push({
-          name: 'trackSpecific',
+          name: 'track',
           params: { invoice: this.invoiceText },
         });
       }
