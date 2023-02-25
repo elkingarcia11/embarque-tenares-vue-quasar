@@ -91,7 +91,7 @@ export default defineComponent({
       } else {
         (this.$refs['invoiceInputRef'] as any).blur();
         this.$router.push({
-          name: 'track',
+          name: 'search',
           params: { invoice: this.invoiceText },
         });
       }

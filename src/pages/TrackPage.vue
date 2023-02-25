@@ -1,5 +1,5 @@
 <template>
-  <q-page-container id="home-body">
+  <q-page-container id="specficTransactionBody">
     <q-page-sticky position="top" :offset="[0, 0]">
       <q-form @submit="submit">
         <q-input
@@ -45,7 +45,7 @@
     <q-page-sticky position="bottom" :offset="[18, 18]">
       <q-btn
         color="primary"
-        style="width: 90vw"
+        style="width: 90vw; font-weight: bold"
         :label="$t('search')"
         size="lg"
         @click="search"
@@ -95,9 +95,6 @@ import { getDoc, doc } from '@firebase/firestore/lite';
 import { api } from 'boot/axios';
 
 export default defineComponent({
-  props: {
-    invoice: String,
-  },
   components: {
     CircularProg,
     TrackError,
@@ -127,7 +124,8 @@ export default defineComponent({
       (this.$refs['invoiceInputRef'] as any).focus();
     },
     async submit() {
-      this.$q.loading.show();
+      console.log(this.invoiceText);
+      //setTimeout({}, 10000)
       // Submit
       if (this.invoiceText === '') {
         (this.$refs['invoiceInputRef'] as any).focus();
@@ -137,6 +135,8 @@ export default defineComponent({
 
         await this.retrieveEtaDays();
         await this.retrieveInvoiceInfo();
+
+        this.$q.loading.hide();
       }
     },
     async retrieveEtaDays() {
@@ -150,7 +150,7 @@ export default defineComponent({
         console.log('No such document! Default to 25 days');
       }
     },
-    retrieveInvoiceInfo() {
+    async retrieveInvoiceInfo() {
       this.onSubmitted = true;
       this.invoiceNumber = this.invoiceText;
       let url = '/invoice/' + this.invoiceText;
@@ -180,19 +180,13 @@ export default defineComponent({
           } else {
             this.percent = (1 - dLeft / this.etaDays) * 100;
           }
-
           this.querySuccess = true;
-          this.$q.loading.hide();
         })
         .catch((error) => {
           console.log(error);
           this.querySuccess = false;
-          this.$q.loading.hide();
         });
     },
-  },
-  async created() {
-    console.log('ROUTE PROPS: ', this.$props.invoice);
   },
 });
 </script>

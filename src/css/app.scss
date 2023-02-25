@@ -68,6 +68,15 @@
 .menuDrawer {
   white-space: break-spaces;
 }
+
+#specficTransactionBody {
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
 @media (max-width: 600px) {
   .dialogToolbar {
     font-size: 20px;

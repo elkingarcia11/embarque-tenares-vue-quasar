@@ -1,8 +1,8 @@
 <template>
   <div class="q-mx-lg flex flex-center circularProg">
-    <q-card class="q-px-md q-py-lg">
+    <q-card class="q-px-md q-py-lg myCard">
       <q-card-section>
-        <div class="text-h5 text-center">Invoice not found</div>
+        <div class="text-h5 text-center">{{ $t('invNf') }}</div>
       </q-card-section>
       <q-card-section class="text-h5 text-center">
         <q-avatar
