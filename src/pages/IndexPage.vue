@@ -1,30 +1,28 @@
 <template>
   <q-page-container id="home-body">
-    <q-page-sticky position="top" :offset="[0, 0]">
-      <q-form @submit="submit">
-        <q-input
-          ref="invoiceInputRef"
-          square
-          class="window-width overflow-hidden"
-          outlined
-          v-model="invoiceText"
-          :label="$t('trackPack')"
-          mask="############"
-          unmasked-value
-        >
-          <template v-slot:append>
-            <q-btn
-              flat
-              round
-              color="secondary"
-              icon="quiz"
-              @click="invoiceDialog = true"
-            />
-            <q-btn flat round color="primary" icon="search" @click="submit" />
-          </template>
-        </q-input>
-      </q-form>
-    </q-page-sticky>
+    <q-form @submit="submit" class="invoiceForm">
+      <q-input
+        ref="invoiceInputRef"
+        square
+        class="window-width overflow-hidden bg-white"
+        outlined
+        v-model="invoiceText"
+        :label="$t('trackPack')"
+        mask="############"
+        unmasked-value
+      >
+        <template v-slot:append>
+          <q-btn
+            flat
+            round
+            color="secondary"
+            icon="quiz"
+            @click="invoiceDialog = true"
+          />
+          <q-btn flat round color="primary" icon="search" @click="submit" />
+        </template>
+      </q-input>
+    </q-form>
     <div id="logoDiv">
       <q-img id="logo" src="../assets/logo.png" fit="contain" />
     </div>
@@ -64,17 +62,20 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+    <FooterComponent />
   </q-page-container>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import TabBar from 'src/components/TabBar.vue';
+import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/home.scss';
 
 export default defineComponent({
   components: {
     TabBar,
+    FooterComponent,
   },
   setup() {
     return {

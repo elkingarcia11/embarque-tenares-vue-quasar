@@ -1,5 +1,5 @@
 <template>
-  <q-btn flat class="q-pl-none">
+  <q-btn flat class="q-py-md">
     <q-avatar>
       <img src="../assets/logo.png" style="background-color: white" />
     </q-avatar>
@@ -21,6 +21,7 @@
   </q-btn>
   <div class="row flex-center q-pl-lg">
     <q-btn
+      class="q-py-md"
       @click="
         $router.push({
           name: 'track',
@@ -34,6 +35,7 @@
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'; font-weight: bolder"
     />
     <q-btn
+      class="q-py-md"
       @click="
         $router.push({
           name: 'rates',
@@ -46,6 +48,7 @@
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'; font-weight: bolder"
     />
     <q-btn
+      class="q-py-md"
       @click="
         $router.push({
           name: 'nyb',
@@ -58,6 +61,7 @@
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'; font-weight: bolder"
     />
     <q-btn
+      class="q-py-md"
       @click="
         $router.push({
           name: 'drb',
@@ -70,6 +74,7 @@
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'; font-weight: bolder"
     />
     <q-btn
+      class="q-py-md"
       @click="
         $router.push({
           name: 'faqs',

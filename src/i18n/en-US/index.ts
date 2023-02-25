@@ -42,4 +42,9 @@ export default {
   cNBF: 'could not be found',
   tryAgain: 'Please try again or contact our office for futher assistance',
   invNf: 'Invoice not found',
+  rights: 'ALL RIGHTS RESERVED.',
+  contact: 'Contact Us',
+  about: 'About Us',
+  nyo: 'New York Office',
+  dro: 'Dominican Republic Office',
 };

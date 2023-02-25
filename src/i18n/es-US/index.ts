@@ -43,4 +43,9 @@ export default {
   tryAgain:
     'Inténtelo de nuevo o comuníquese con nuestra oficina para obtener más ayuda',
   invNf: 'Factura no encontrada',
+  rights: 'RESERVADOS TODOS LOS DERECHOS.',
+  contact: 'Contáctenos',
+  about: 'Sobre nosotros',
+  nyo: 'Oficina de Nueva York',
+  dro: 'Oficina de República Dominicana',
 };
