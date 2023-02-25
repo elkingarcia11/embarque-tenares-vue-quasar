@@ -1,11 +1,6 @@
 <template>
-  <q-page-sticky
-    v-if="isNotMobile()"
-    position="bottom"
-    class="window-width"
-    :offset="[18, 18]"
-  >
-    <q-card class="tab-bar">
+  <div v-if="isNotMobile()" class="full-width">
+    <q-card class="tab-bar tabBarContainer">
       <q-btn-toggle
         spread
         :ripple="false"
@@ -57,7 +52,7 @@
         </template>
       </q-btn-toggle>
     </q-card>
-  </q-page-sticky>
+  </div>
 
   <q-dialog v-model="dialog">
     <q-card class="q-px-sm q-py-md">

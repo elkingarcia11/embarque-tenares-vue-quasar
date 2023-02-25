@@ -60,7 +60,7 @@
         </q-menu>
       </q-btn>
     </div>
-    <div class="row text-darkgrey">
+    <div class="row text-darkgrey flex-center">
       <q-btn flat @click="$router.push('faqs')">{{ $t('about') }}</q-btn>
       <q-btn flat @click="$router.push('track')">{{ $t('track') }}</q-btn>
       <q-btn flat @click="$router.push('rates')">{{ $t('rates') }}</q-btn>
@@ -88,7 +88,7 @@
       </q-btn>
       <q-btn flat @click="$router.push('faqs')">{{ $t('faqs') }}</q-btn>
     </div>
-    <div class="row q-py-md text-caption">
+    <div class="row q-py-md q-px-lg text-caption text-center">
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
     </div>
   </div>
