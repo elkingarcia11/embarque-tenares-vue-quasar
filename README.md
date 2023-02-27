@@ -13,7 +13,7 @@ npm install
 yarn add --dev @intlify/vue-i18n-loader
 yarn add --dev dotenv
 yarn add firebase
-yarn add pinia
+yarn global add @quasar/icongenie
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 

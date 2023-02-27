@@ -7,7 +7,15 @@
     dense
     icon="menu"
   />
-  <q-btn flat class="q-pl-none">
+  <q-btn
+    flat
+    class="q-pl-none"
+    @click="
+      $router.push({
+        name: 'main',
+      })
+    "
+  >
     <div
       class="q-pl-md"
       style="
