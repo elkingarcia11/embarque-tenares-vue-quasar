@@ -64,7 +64,7 @@
 import { defineComponent } from 'vue';
 
 import db from '../boot/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
+import { collection, DocumentData, getDocs } from 'firebase/firestore';
 
 import '../css/rates.scss';
 

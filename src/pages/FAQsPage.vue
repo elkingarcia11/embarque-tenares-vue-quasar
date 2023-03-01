@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import db from '../boot/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore/lite';
+import { collection, DocumentData, getDocs } from 'firebase/firestore';
 
 let fL: DocumentData[] = [];
 export default defineComponent({

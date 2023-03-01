@@ -90,7 +90,7 @@ import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
 
 import db from '../boot/firebase';
-import { getDoc, doc } from '@firebase/firestore/lite';
+import { getDoc, doc } from '@firebase/firestore';
 
 import { api } from 'boot/axios';
 

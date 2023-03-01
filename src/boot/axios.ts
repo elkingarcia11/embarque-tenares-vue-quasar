@@ -27,6 +27,4 @@ export default boot(({ app }) => {
   //       so you can easily perform requests against your app's API
 });
 
-api.defaults.headers.common['App-Id'] = process.env.HECTOR_APP_ID;
-api.defaults.headers.common['Api-Key'] = process.env.HECTOR_API_KEY;
 export { api };

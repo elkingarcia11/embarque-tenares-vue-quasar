@@ -57,8 +57,6 @@ module.exports = configure(function (ctx) {
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
 
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
-        HECTOR_APP_ID: process.env.HECTOR_APP_ID,
-        HECTOR_API_KEY: process.env.HECTOR_API_KEY,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
 
