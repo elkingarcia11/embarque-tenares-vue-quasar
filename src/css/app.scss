@@ -83,6 +83,12 @@
   text-align: center;
 }
 
+.invoiceForm {
+  position: relative;
+  top: 50;
+  left: 0;
+}
+
 @media (max-width: 600px) {
   .dialogToolbar {
     font-size: 20px;
