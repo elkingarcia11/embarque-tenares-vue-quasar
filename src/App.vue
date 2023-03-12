@@ -10,9 +10,8 @@ import { doc, getDoc } from 'firebase/firestore';
 
 export default defineComponent({
   name: 'App',
-  async created() {
-    await this.retrieveHectorApiInfo();
-    this.login();
+  created() {
+    this.retrieveHectorApiInfo();
   },
   data() {
     return {
@@ -29,6 +28,8 @@ export default defineComponent({
         try {
           api.defaults.headers.common['App-Id'] = d['App-Id'];
           api.defaults.headers.common['Api-Key'] = d['Api-Key'];
+
+          this.login();
         } catch (e) {
           console.log('Failed to store app id and api key');
         }
