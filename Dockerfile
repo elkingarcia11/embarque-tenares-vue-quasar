@@ -27,4 +27,4 @@ RUN mkdir -p shared/static
 
 EXPOSE 80
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
