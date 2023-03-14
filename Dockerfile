@@ -25,7 +25,6 @@ COPY --from=build-stage /app/nginx/nginx.conf /etc/nginx/nginx.conf
 WORKDIR /usr/src/app
 RUN mkdir -p shared/static
 
-EXPOSE 80
-EXPOSE 443
+ENV PORT 443
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
