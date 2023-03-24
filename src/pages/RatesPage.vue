@@ -10,7 +10,7 @@
       :key="category.name_en"
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
-      header-class="expansion q-py-lg bg-white text-primary"
+      header-class="expansion q-py-lg bg-white text-black"
       expand-icon-class="text-primary"
     >
       <template v-slot:header>
