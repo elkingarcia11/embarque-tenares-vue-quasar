@@ -8,7 +8,7 @@ COPY quasar.config.js ./
 COPY ./ ./
 
 RUN yarn global add @quasar/cli
-RUN yarn add --dev @intlify/vue-i18n-loader
+RUN yarn add -D @intlify/vue-i18n-loader@next
 RUN yarn add --dev dotenv
 RUN yarn add firebase
 RUN yarn install

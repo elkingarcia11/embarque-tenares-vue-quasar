@@ -103,13 +103,14 @@
       <SocialMediaFooter />
     </q-card>
   </q-scroll-area>
+  <FooterComponent />
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
-
+import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/branches.scss';
 
 const src =
@@ -118,6 +119,7 @@ const src =
 export default defineComponent({
   components: {
     SocialMediaFooter,
+    FooterComponent,
   },
   setup() {
     return {

@@ -4,20 +4,18 @@
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >{{ $t('rates') }}</q-item-section
   >
-  <q-scroll-area class="scrollArea q-mt-sm">
+  <div class="expansion_rows">
     <q-expansion-item
       v-for="(category, index) in ratesList"
       :key="category.name_en"
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
-      header-class="q-py-lg bg-primary text-white"
-      expand-icon-class="text-white"
+      header-class="expansion q-py-lg bg-white text-primary"
+      expand-icon-class="text-primary"
     >
       <template v-slot:header>
         <q-item-section avatar>
-          <q-avatar size="70px">
-            <img :src="`../assets/${category.name_en}.png`" />
-          </q-avatar>
+          <img class="img" :src="`../assets/${category.name_en}.png`" />
         </q-item-section>
 
         <q-item-section
@@ -57,12 +55,13 @@
         </q-item>
       </q-list>
     </q-expansion-item>
-  </q-scroll-area>
+  </div>
+  <FooterComponent />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
+import FooterComponent from 'src/components/FooterComponent.vue';
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore';
 
@@ -72,6 +71,7 @@ let rL: DocumentData[] = [];
 let arrayOfiL: DocumentData[][] = [];
 
 export default defineComponent({
+  components: { FooterComponent },
   data: function () {
     return {
       ratesList: rL,

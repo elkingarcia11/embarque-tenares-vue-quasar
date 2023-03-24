@@ -138,12 +138,14 @@
       </q-card>
     </q-dialog>
   </q-scroll-area>
+  <FooterComponent />
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
+import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/branches.scss';
 const src =
   'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
@@ -151,6 +153,7 @@ const src =
 export default defineComponent({
   components: {
     SocialMediaFooter,
+    FooterComponent,
   },
   setup() {
     return {

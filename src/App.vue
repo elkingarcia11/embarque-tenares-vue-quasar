@@ -28,6 +28,7 @@ export default defineComponent({
         try {
           api.defaults.headers.common['App-Id'] = d['App-Id'];
           api.defaults.headers.common['Api-Key'] = d['Api-Key'];
+          api.defaults.headers.common['Auth-Type'] = 'basic';
 
           this.login();
         } catch (e) {

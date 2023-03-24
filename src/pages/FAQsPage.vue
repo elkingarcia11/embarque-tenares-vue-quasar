@@ -4,7 +4,7 @@
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >{{ $t('faqs') }}</q-item-section
   >
-  <q-scroll-area class="scrollArea q-mt-sm">
+  <div>
     <q-expansion-item
       v-for="faq in faqsList"
       :key="faq.id"
@@ -12,8 +12,8 @@
       expanded-icon="arrow_drop_down"
       expand-icon="arrow_right"
       :label="printQuestion(faq)"
-      header-class="q-py-lg bg-primary text-white faqsExpansionHeaderStyle"
-      expand-icon-class="text-white"
+      header-class="q-py-lg bg-white text-black faqsExpansionHeaderStyle"
+      expand-icon-class="text-primary"
     >
       <q-card>
         <q-card-section v-if="$i18n.locale == 'en-US'" style="font-size: 18px">
@@ -24,16 +24,22 @@
         </q-card-section>
       </q-card>
     </q-expansion-item>
-  </q-scroll-area>
+  </div>
+
+  <FooterComponent />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import db from '../boot/firebase';
 import { collection, DocumentData, getDocs } from 'firebase/firestore';
-
+import FooterComponent from 'src/components/FooterComponent.vue';
+import '../css/faqs.scss';
 let fL: DocumentData[] = [];
 export default defineComponent({
+  components: {
+    FooterComponent,
+  },
   data: function () {
     return {
       faqsList: fL,

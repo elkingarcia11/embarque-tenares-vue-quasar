@@ -3,3 +3,13 @@
   display: flex;
   flex-direction: row;
 }
+
+.expansion {
+  border-bottom: solid 1px;
+  border-color: $primary;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+}

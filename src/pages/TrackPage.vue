@@ -150,6 +150,7 @@ export default defineComponent({
       this.onSubmitted = true;
       this.invoiceNumber = this.invoiceText;
       let url = '/invoice/' + this.invoiceText;
+
       api
         .get(url)
         .then((response) => {
