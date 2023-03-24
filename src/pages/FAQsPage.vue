@@ -16,10 +16,10 @@
       expand-icon-class="text-primary"
     >
       <q-card>
-        <q-card-section v-if="$i18n.locale == 'en-US'" style="font-size: 18px">
+        <q-card-section v-if="$i18n.locale == 'en-US'" style="font-size: 20px">
           {{ faq.a_en }}
         </q-card-section>
-        <q-card-section v-else style="font-size: 18px">
+        <q-card-section v-else style="font-size: 18px" class="answers q-pl-xl">
           {{ faq.a_es }}
         </q-card-section>
       </q-card>

@@ -4,7 +4,7 @@
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >{{ $t('rates') }}</q-item-section
   >
-  <div class="expansion_rows">
+  <div>
     <q-expansion-item
       v-for="(category, index) in ratesList"
       :key="category.name_en"

@@ -11,8 +11,12 @@
 }
 
 .iframe {
-  margin-top: 0vh;
-  margin-bottom: 0vh;
+  margin: 0px;
+  padding: 0px;
+}
+.belowIframe {
+  padding: 0px;
+  margin: 0px;
 }
 
 #schedule_expansion_item
