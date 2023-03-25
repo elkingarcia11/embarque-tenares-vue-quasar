@@ -60,52 +60,53 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import { collection, DocumentData, getDocs } from 'firebase/firestore';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import db from '../boot/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
 
 import '../css/rates.scss';
-
-let rL: DocumentData[] = [];
-let arrayOfiL: DocumentData[][] = [];
-
-export default defineComponent({
+import { useQuasar } from 'quasar';
+/*
+    const ratesList: DocumentData[] = ref([]);
+    const listOfLists: DocumentData[][] = ref([]);*/
+export default {
   components: { FooterComponent },
-  data: function () {
+  setup() {
+    const ratesList = ref<DocumentData[]>([]);
+    const listOfLists = ref<DocumentData[][]>([]);
+    const $q = useQuasar();
+    onBeforeMount(async () => {
+      $q.loading.show();
+      const ratesRef = collection(db, 'rates');
+      const ratesSnapshot = await getDocs(ratesRef);
+      ratesList.value = ratesSnapshot.docs.map((doc) => doc.data());
+
+      let itemsRef = collection(db, 'rates/0/items');
+      let itemsSnapshot = await getDocs(itemsRef);
+      let iL = itemsSnapshot.docs.map((doc) => doc.data());
+      listOfLists.value.push(iL);
+
+      itemsRef = collection(db, 'rates/1/items');
+      itemsSnapshot = await getDocs(itemsRef);
+      iL = itemsSnapshot.docs.map((doc) => doc.data());
+      listOfLists.value.push(iL);
+
+      itemsRef = collection(db, 'rates/2/items');
+      itemsSnapshot = await getDocs(itemsRef);
+      iL = itemsSnapshot.docs.map((doc) => doc.data());
+      listOfLists.value.push(iL);
+
+      itemsRef = collection(db, 'rates/3/items');
+      itemsSnapshot = await getDocs(itemsRef);
+      iL = itemsSnapshot.docs.map((doc) => doc.data());
+      listOfLists.value.push(iL);
+      $q.loading.hide();
+    });
     return {
-      ratesList: rL,
-      listOfLists: arrayOfiL,
+      ratesList,
+      listOfLists,
     };
   },
-  async created() {
-    this.$q.loading.show();
-    const ratesRef = collection(db, 'rates');
-    const ratesSnapshot = await getDocs(ratesRef);
-    const rL = ratesSnapshot.docs.map((doc) => doc.data());
-    this.ratesList = rL;
-
-    let itemsRef = collection(db, 'rates/0/items');
-    let itemsSnapshot = await getDocs(itemsRef);
-    let iL = itemsSnapshot.docs.map((doc) => doc.data());
-    arrayOfiL.push(iL);
-
-    itemsRef = collection(db, 'rates/1/items');
-    itemsSnapshot = await getDocs(itemsRef);
-    iL = itemsSnapshot.docs.map((doc) => doc.data());
-    arrayOfiL.push(iL);
-
-    itemsRef = collection(db, 'rates/2/items');
-    itemsSnapshot = await getDocs(itemsRef);
-    iL = itemsSnapshot.docs.map((doc) => doc.data());
-    arrayOfiL.push(iL);
-
-    itemsRef = collection(db, 'rates/3/items');
-    itemsSnapshot = await getDocs(itemsRef);
-    iL = itemsSnapshot.docs.map((doc) => doc.data());
-    arrayOfiL.push(iL);
-    this.listOfLists = arrayOfiL;
-    this.$q.loading.hide();
-  },
-});
+};
 </script>

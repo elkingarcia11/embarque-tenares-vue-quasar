@@ -5,8 +5,8 @@
 <script lang="ts">
 import { ref, onBeforeMount } from 'vue';
 import { api } from 'boot/axios';
-import db from './boot/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import db from './boot/firebase';
 
 export default {
   name: 'App',

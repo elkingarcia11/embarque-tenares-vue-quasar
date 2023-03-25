@@ -129,16 +129,7 @@ export default {
         // throw alert
       }
     };
-    return {
-      invoiceInputRef,
-      invoiceDialog,
-      invoiceText,
-      successfullyRetrieved,
-      submit,
-      focus,
-      showNotif,
-      t,
-    };
+    return { invoiceText, invoiceDialog, focus, submit };
   },
 };
 </script>
