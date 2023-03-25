@@ -3,24 +3,45 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { api } from 'boot/axios';
 import db from './boot/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-export default defineComponent({
+export default {
   name: 'App',
-  created() {
-    this.retrieveHectorApiInfo();
-  },
-  data() {
-    return {
-      token: ref(''),
-      user: ref(''),
+  setup() {
+    const token = ref('');
+
+    onBeforeMount(async () => {
+      await retrieveHectorApiInfo();
+    });
+
+    const saveAuthData = () => {
+      try {
+        api.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+      } catch (e) {
+        console.log('Token save failed');
+      }
     };
-  },
-  methods: {
-    async retrieveHectorApiInfo() {
+
+    const login = async () => {
+      const data = {
+        Username: process.env.HECTOR_USERNAME,
+        Type: process.env.HECTOR_TYPE,
+      };
+      await api
+        .post('/auth/login', data)
+        .then((response) => {
+          token.value = response.data.response[0].token.access;
+          saveAuthData();
+        })
+        .catch(() => {
+          console.log('Token retrieval failed');
+        });
+    };
+
+    const retrieveHectorApiInfo = async () => {
       const docRef = doc(db, 'auth', 'login');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -30,37 +51,14 @@ export default defineComponent({
           api.defaults.headers.common['Api-Key'] = d['Api-Key'];
           api.defaults.headers.common['Auth-Type'] = 'basic';
 
-          this.login();
+          await login();
         } catch (e) {
           console.log('Failed to store app id and api key');
         }
       } else {
-        // doc.data() will be undefined in this case
         console.log('Failed to retrieve app id and api key');
       }
-    },
-    async login() {
-      const data = {
-        Username: process.env.HECTOR_USERNAME,
-        Type: process.env.HECTOR_TYPE,
-      };
-      api
-        .post('/auth/login', data)
-        .then((response) => {
-          this.token = response.data.response[0].token.access;
-          this.saveAuthData();
-        })
-        .catch(() => {
-          console.log('Token retrieval failed');
-        });
-    },
-    saveAuthData() {
-      try {
-        api.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
-      } catch (e) {
-        console.log('Token save failed');
-      }
-    },
+    };
   },
-});
+};
 </script>
