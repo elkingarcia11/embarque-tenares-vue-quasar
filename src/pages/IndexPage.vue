@@ -68,8 +68,8 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { QInput, useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
+import { QInput, useQuasar } from 'quasar';
 
 import TabBar from 'src/components/TabBar.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';

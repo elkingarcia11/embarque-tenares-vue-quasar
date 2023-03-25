@@ -81,77 +81,75 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
+import { api } from 'boot/axios';
+import { getDoc, doc } from '@firebase/firestore';
+import { QInput, useQuasar } from 'quasar';
+
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
 
 import db from '../boot/firebase';
-import { getDoc, doc } from '@firebase/firestore';
 
-import { api } from 'boot/axios';
-
-export default defineComponent({
+export default {
+  name: 'TrackPage',
   components: {
     CircularProg,
     TrackError,
   },
-  data: function () {
-    return {
-      percent: ref(0),
-      daysLeft: 25,
-      invoiceText: ref(''),
-      invoiceNumber: ref(''),
-      invoiceDialog: ref(false),
-      etaDays: -1,
-      onSubmitted: ref(false),
-      querySuccess: ref(false),
-      enDate: ref(''),
-      esDate: ref(''),
-    };
-  },
-  methods: {
-    isMobile() {
-      if (this.$q.platform.is.mobile) {
-        return true;
+  setup() {
+    const $q = useQuasar();
+    const percent = ref(0);
+    const invoiceText = ref('');
+    const invoiceNumber = ref('');
+    const invoiceDialog = ref(false);
+    const etaDays = ref(-1);
+    const onSubmitted = ref(false);
+    const querySuccess = ref(false);
+    const enDate = ref('');
+    const esDate = ref('');
+    const invoiceInputRef = ref<QInput>();
+
+    const search = () => {
+      if (invoiceInputRef.value !== undefined) {
+        invoiceInputRef.value.focus();
       }
-      return false;
-    },
-    search() {
-      (this.$refs['invoiceInputRef'] as any).focus();
-    },
-    async submit() {
-      console.log(this.invoiceText);
+    };
+    const submit = async () => {
+      console.log(invoiceText);
       //setTimeout({}, 10000)
       // Submit
-      if (this.invoiceText === '') {
-        (this.$refs['invoiceInputRef'] as any).focus();
-        this.$q.loading.hide();
+      if (invoiceText.value === '') {
+        if (invoiceInputRef.value !== undefined) {
+          invoiceInputRef.value.focus();
+        }
       } else {
-        (this.$refs['invoiceInputRef'] as any).blur();
+        if (invoiceInputRef.value !== undefined) {
+          invoiceInputRef.value.blur();
+        }
 
-        await this.retrieveEtaDays();
-        await this.retrieveInvoiceInfo();
-
-        this.$q.loading.hide();
+        await retrieveEtaDays();
+        await retrieveInvoiceInfo();
       }
-    },
-    async retrieveEtaDays() {
+      $q.loading.hide();
+    };
+    const retrieveEtaDays = async () => {
       const docRef = doc(db, 'eta/eta_days');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const d = docSnap.data();
-        this.etaDays = d.days;
+        etaDays.value = d.days;
       } else {
         // doc.data() will be undefined in this case
         console.log('No such document! Default to 25 days');
       }
-    },
-    async retrieveInvoiceInfo() {
-      this.onSubmitted = true;
-      this.invoiceNumber = this.invoiceText;
-      let url = '/invoice/' + this.invoiceText;
+    };
+    const retrieveInvoiceInfo = async () => {
+      onSubmitted.value = true;
+      invoiceNumber.value = invoiceText.value;
+      let url = '/invoice/' + invoiceText.value;
 
-      api
+      await api
         .get(url)
         .then((response) => {
           var a = new Date(response.data.response[0].date);
@@ -163,8 +161,8 @@ export default defineComponent({
           };
 
           a.setDate(a.getDate() + 25);
-          this.enDate = a.toLocaleDateString('en-US', options);
-          this.esDate = a.toLocaleDateString('es-US', options);
+          enDate.value = a.toLocaleDateString('en-US', options);
+          esDate.value = a.toLocaleDateString('es-US', options);
 
           const _MS_PER_DAY = 1000 * 60 * 60 * 24;
           // Discard the time and time-zone information.
@@ -173,17 +171,30 @@ export default defineComponent({
 
           let dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
           if (dLeft <= 0) {
-            this.percent = 100;
+            percent.value = 100;
           } else {
-            this.percent = (1 - dLeft / this.etaDays) * 100;
+            percent.value = (1 - dLeft / etaDays.value) * 100;
           }
-          this.querySuccess = true;
+          querySuccess.value = true;
         })
         .catch((error) => {
           console.log(error);
-          this.querySuccess = false;
+          querySuccess.value = false;
         });
-    },
+    };
+
+    return {
+      submit,
+      search,
+      invoiceText,
+      invoiceDialog,
+      onSubmitted,
+      querySuccess,
+      percent,
+      invoiceNumber,
+      enDate,
+      esDate,
+    };
   },
-});
+};
 </script>

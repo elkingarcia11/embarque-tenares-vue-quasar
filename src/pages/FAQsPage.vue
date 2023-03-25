@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { collection, DocumentData, getDocs } from 'firebase/firestore';
 import { useQuasar } from 'quasar';
 
 import db from '../boot/firebase';
@@ -41,7 +41,7 @@ import FooterComponent from 'src/components/FooterComponent.vue';
 
 import '../css/faqs.scss';
 
-export default defineComponent({
+export default {
   components: {
     FooterComponent,
   },
@@ -70,5 +70,5 @@ export default defineComponent({
       printQuestion,
     };
   },
-});
+};
 </script>

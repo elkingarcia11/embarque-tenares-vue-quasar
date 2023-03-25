@@ -102,8 +102,8 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-import { openURL, copyToClipboard } from 'quasar';
 import { useI18n } from 'vue-i18n';
+import { openURL, copyToClipboard } from 'quasar';
 
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';

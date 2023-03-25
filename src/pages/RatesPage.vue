@@ -68,9 +68,7 @@ import FooterComponent from 'src/components/FooterComponent.vue';
 import db from '../boot/firebase';
 
 import '../css/rates.scss';
-/*
-    const ratesList: DocumentData[] = ref([]);
-    const listOfLists: DocumentData[][] = ref([]);*/
+
 export default {
   components: { FooterComponent },
   setup() {
