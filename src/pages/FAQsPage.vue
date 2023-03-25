@@ -30,37 +30,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import db from '../boot/firebase';
+import { defineComponent, ref } from 'vue';
 import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { onBeforeMount } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useQuasar } from 'quasar';
+
+import db from '../boot/firebase';
 import FooterComponent from 'src/components/FooterComponent.vue';
+
 import '../css/faqs.scss';
-let fL: DocumentData[] = [];
+
 export default defineComponent({
   components: {
     FooterComponent,
   },
-  data: function () {
-    return {
-      faqsList: fL,
-    };
-  },
-  methods: {
-    printQuestion(question: DocumentData) {
-      if (this.$i18n.locale == 'en-US') {
+  setup() {
+    const $q = useQuasar();
+    const faqsList = ref<DocumentData[]>([]);
+    const { locale } = useI18n();
+    const printQuestion = (question: DocumentData) => {
+      if (locale.value == 'en-US') {
         return question.q_en;
       } else {
         return question.q_es;
       }
-    },
-  },
-  async created() {
-    this.$q.loading.show();
-    const faqsCol = collection(db, 'faqs');
-    const faqsSnapshot = await getDocs(faqsCol);
-    const fL = faqsSnapshot.docs.map((doc) => doc.data());
-    this.faqsList = fL;
-    this.$q.loading.hide();
+    };
+
+    onBeforeMount(async () => {
+      $q.loading.show();
+      const faqsCol = collection(db, 'faqs');
+      const faqsSnapshot = await getDocs(faqsCol);
+      faqsList.value = faqsSnapshot.docs.map((doc) => doc.data());
+      $q.loading.hide();
+    });
+
+    return {
+      faqsList,
+      printQuestion,
+    };
   },
 });
 </script>

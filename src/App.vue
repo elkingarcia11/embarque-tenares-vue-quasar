@@ -6,6 +6,7 @@
 import { ref, onBeforeMount } from 'vue';
 import { api } from 'boot/axios';
 import { doc, getDoc } from 'firebase/firestore';
+
 import db from './boot/firebase';
 
 export default {

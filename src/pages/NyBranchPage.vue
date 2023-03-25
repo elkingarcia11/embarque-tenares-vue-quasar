@@ -101,24 +101,26 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
 import { useI18n } from 'vue-i18n';
+
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
+
 import '../css/branches.scss';
 
-export default defineComponent({
+export default {
+  name: 'NyBranchPage',
   components: {
     SocialMediaFooter,
     FooterComponent,
   },
   setup() {
-    const active = ref(true);
-    const expanded = ref(false);
     const dialog = ref(false);
     const tooltipResponse = ref('');
     const { t } = useI18n();
+
     const iframeSource =
       'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=' +
       process.env.GOOGLE_MAPS_API_KEY;
@@ -128,9 +130,11 @@ export default defineComponent({
         'https://www.google.com/maps/dir/?api=1&destination=2249+Washington+Ave,+Bronx,+NY+10457-1445,+USA'
       );
     };
+
     const call = () => {
       openURL('tel:7185621300');
     };
+
     const email = () => {
       openURL('mailto:ny@embarquetenares.com');
     };
@@ -163,10 +167,11 @@ export default defineComponent({
         })
         .catch(() => {
           // fail
+          console.log('Failed to copy to clipboard');
         });
     };
 
     return { iframeSource, getDirections, call, copy, email };
   },
-});
+};
 </script>

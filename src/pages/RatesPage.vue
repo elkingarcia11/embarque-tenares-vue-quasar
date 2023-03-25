@@ -62,11 +62,12 @@
 <script lang="ts">
 import { ref, onBeforeMount } from 'vue';
 import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { useQuasar } from 'quasar';
+
 import FooterComponent from 'src/components/FooterComponent.vue';
 import db from '../boot/firebase';
 
 import '../css/rates.scss';
-import { useQuasar } from 'quasar';
 /*
     const ratesList: DocumentData[] = ref([]);
     const listOfLists: DocumentData[][] = ref([]);*/
@@ -76,6 +77,7 @@ export default {
     const ratesList = ref<DocumentData[]>([]);
     const listOfLists = ref<DocumentData[][]>([]);
     const $q = useQuasar();
+
     onBeforeMount(async () => {
       $q.loading.show();
       const ratesRef = collection(db, 'rates');
@@ -103,6 +105,7 @@ export default {
       listOfLists.value.push(iL);
       $q.loading.hide();
     });
+
     return {
       ratesList,
       listOfLists,

@@ -138,82 +138,89 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { openURL, copyToClipboard } from 'quasar';
+
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
+
 import '../css/branches.scss';
-const src =
-  'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
-  process.env.GOOGLE_MAPS_API_KEY;
-export default defineComponent({
+
+export default {
+  name: 'DrBranchPage',
   components: {
     SocialMediaFooter,
     FooterComponent,
   },
   setup() {
-    return {
-      active: ref(true),
-      expanded: ref(false),
-      dialog: ref(false),
-      tooltipResponse: ref(''),
-      iframeSource: src,
-    };
-  },
-  methods: {
-    getDirections() {
+    const iframeSource =
+      'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
+      process.env.GOOGLE_MAPS_API_KEY;
+    const { t } = useI18n();
+    const dialog = ref(false);
+    const tooltipResponse = ref('');
+
+    const getDirections = () => {
       openURL(
         'https://www.google.com/maps/dir/?api=1&destination=Tenares+Shipping+Corp.,+San+Marcos,+Puerto+Plata+57000,+Dominican+Republic'
       );
-    },
-    call() {
+    };
+
+    const call = () => {
       openURL('tel:8099700007');
-    },
-    call2() {
+    };
+
+    const call2 = () => {
       openURL('tel:8092612373');
-    },
-    email() {
+    };
+
+    const email = () => {
       openURL('mailto:rd@embarquetenares.com');
-    },
-    openFB() {
-      openURL('https://www.facebook.com/EmbarqueTenaress/');
-    },
-    openIG() {
-      openURL('https://instagram.com/embarquetenares');
-    },
-    openWhatsapp() {
-      openURL('https://api.whatsapp.com/send?phone=7185621300');
-    },
-    copy(i: number) {
+    };
+
+    const copy = (i: number) => {
       let text = '';
       let ttr = '';
       switch (i) {
         case 0:
-          ttr = this.$t('tooltipRes0');
+          ttr = t('tooltipRes0');
           text = 'San Marcos #10 Puerto Plata, RD 57000';
           break;
         case 1:
-          ttr = this.$t('tooltipRes1');
+          ttr = t('tooltipRes1');
           text = '8099700007';
           break;
         case 2:
-          ttr = this.$t('tooltipRes2');
+          ttr = t('tooltipRes2');
           text = 'rd@embarquetenares.com';
           break;
       }
       copyToClipboard(text)
         .then(() => {
           // success!
-          this.tooltipResponse = ttr;
-          this.dialog = true;
+          tooltipResponse.value = ttr;
+          dialog.value = true;
           setTimeout(() => {
-            this.dialog = false;
+            dialog.value = false;
           }, 3000);
         })
         .catch(() => {
           // fail
+          console.log('Failed to copy to clipboard');
         });
-    },
+    };
+
+    return {
+      iframeSource,
+      getDirections,
+      call,
+      copy,
+      call2,
+      email,
+      dialog,
+      tooltipResponse,
+    };
   },
-});
+};
 </script>

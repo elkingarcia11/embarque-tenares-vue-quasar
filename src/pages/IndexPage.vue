@@ -67,14 +67,17 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-import TabBar from 'src/components/TabBar.vue';
-import FooterComponent from 'src/components/FooterComponent.vue';
-import '../css/home.scss';
 import { useRouter } from 'vue-router';
 import { QInput, useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 
+import TabBar from 'src/components/TabBar.vue';
+import FooterComponent from 'src/components/FooterComponent.vue';
+
+import '../css/home.scss';
+
 export default {
+  name: 'IndexPage',
   components: {
     TabBar,
     FooterComponent,
@@ -128,6 +131,7 @@ export default {
         // throw alert
       }
     };
+
     return { invoiceText, invoiceDialog, focus, submit };
   },
 };
