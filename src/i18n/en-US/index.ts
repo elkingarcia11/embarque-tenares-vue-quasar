@@ -47,4 +47,5 @@ export default {
   about: 'About Us',
   nyo: 'New York Office',
   dro: 'Dominican Republic Office',
+  invalidInvoice: 'Invalid invoice number!',
 };

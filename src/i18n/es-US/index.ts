@@ -48,4 +48,5 @@ export default {
   about: 'Sobre nosotros',
   nyo: 'Oficina de Nueva York',
   dro: 'Oficina de República Dominicana',
+  invalidInvoice: '¡Número de factura no válido!',
 };

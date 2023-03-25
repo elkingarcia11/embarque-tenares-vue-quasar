@@ -8,8 +8,7 @@
         outlined
         v-model="invoiceText"
         :label="$t('trackPack')"
-        mask="############"
-        unmasked-value
+        type="number"
       >
         <template v-slot:append>
           <q-btn
@@ -31,7 +30,7 @@
       v-if="$q.platform.is.mobile"
       ref="tabBarRef"
       :buttonNumber="0"
-      @focus-input="$refs['invoiceInputRef'].focus()"
+      @focus-input="focus"
     />
     <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
       <q-card>
@@ -43,7 +42,7 @@
         </q-toolbar>
         <q-separator />
         <q-card-section class="row full-height justify-center">
-          <img
+          <q-img
             loading="lazy"
             v-if="$i18n.locale == 'en-US'"
             class="self-center"
@@ -51,7 +50,7 @@
             fit="contain"
             src="../assets/trackEN.png"
           />
-          <img
+          <q-img
             loading="lazy"
             v-else
             class="self-center"
@@ -67,36 +66,79 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import TabBar from 'src/components/TabBar.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/home.scss';
+import { useRouter } from 'vue-router';
+import { QInput, useQuasar } from 'quasar';
+import { useI18n } from 'vue-i18n';
 
-export default defineComponent({
+export default {
   components: {
     TabBar,
     FooterComponent,
   },
   setup() {
+    const $router = useRouter();
+    const invoiceText = ref('');
+    const invoiceDialog = ref(false);
+    const successfullyRetrieved = ref(false);
+    const invoiceInputRef = ref<QInput>();
+
+    const $q = useQuasar();
+    const { t } = useI18n();
+
+    const focus = () => {
+      if (invoiceInputRef.value !== undefined) {
+        invoiceInputRef.value.focus();
+      }
+    };
+
+    const showNotif = () => {
+      $q.notify({
+        message: t('invalidInvoice'),
+        type: 'negative',
+        icon: 'error',
+      });
+    };
+
+    const submit = () => {
+      if (invoiceText.value === '') {
+        if (invoiceInputRef.value !== undefined) {
+          invoiceInputRef.value.focus();
+        }
+      } else if (Number.isInteger(invoiceText.value)) {
+        const n = Number(invoiceText.value);
+        if (n > 0) {
+          if (invoiceInputRef.value !== undefined) {
+            invoiceInputRef.value.blur();
+          }
+          $router.push({
+            name: 'search',
+            params: { invoice: invoiceText.value },
+          });
+        } else {
+          showNotif();
+        }
+      } else {
+        if (invoiceInputRef.value !== undefined) {
+          invoiceInputRef.value.blur();
+        }
+        showNotif();
+        // throw alert
+      }
+    };
     return {
-      invoiceDialog: ref(false),
-      invoiceText: '',
-      successfullyRetrieved: false,
+      invoiceInputRef,
+      invoiceDialog,
+      invoiceText,
+      successfullyRetrieved,
+      submit,
+      focus,
+      showNotif,
+      t,
     };
   },
-  methods: {
-    submit() {
-      // Submit
-      if (this.invoiceText === '') {
-        (this.$refs['invoiceInputRef'] as any).focus();
-      } else {
-        (this.$refs['invoiceInputRef'] as any).blur();
-        this.$router.push({
-          name: 'search',
-          params: { invoice: this.invoiceText },
-        });
-      }
-    },
-  },
-});
+};
 </script>

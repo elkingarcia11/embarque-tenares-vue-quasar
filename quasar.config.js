@@ -124,6 +124,9 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-framework
     framework: {
       config: {
+        notify: {
+          /* look at QuasarConfOptions from the API card */
+        },
         loading: {
           /* look at QuasarConfOptions from the API card */
         },
@@ -140,7 +143,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['LocalStorage', 'SessionStorage', 'Loading'],
+      plugins: ['LocalStorage', 'SessionStorage', 'Loading', 'Notify'],
     },
 
     // animations: 'all', // --- includes all animations
