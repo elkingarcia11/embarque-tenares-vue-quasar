@@ -83,7 +83,6 @@ export default {
     const $router = useRouter();
     const invoiceText = ref('');
     const invoiceDialog = ref(false);
-    const successfullyRetrieved = ref(false);
     const invoiceInputRef = ref<QInput>();
 
     const $q = useQuasar();

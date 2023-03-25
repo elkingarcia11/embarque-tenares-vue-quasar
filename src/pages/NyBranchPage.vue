@@ -103,78 +103,70 @@
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import { openURL, copyToClipboard } from 'quasar';
+import { useI18n } from 'vue-i18n';
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/branches.scss';
 
-const src =
-  'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=' +
-  process.env.GOOGLE_MAPS_API_KEY;
 export default defineComponent({
   components: {
     SocialMediaFooter,
     FooterComponent,
   },
   setup() {
-    return {
-      active: ref(true),
-      expanded: ref(false),
-      dialog: ref(false),
-      tooltipResponse: ref(''),
-      iframeSource: src,
-    };
-  },
-  methods: {
-    getDirections() {
+    const active = ref(true);
+    const expanded = ref(false);
+    const dialog = ref(false);
+    const tooltipResponse = ref('');
+    const { t } = useI18n();
+    const iframeSource =
+      'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=' +
+      process.env.GOOGLE_MAPS_API_KEY;
+
+    const getDirections = () => {
       openURL(
         'https://www.google.com/maps/dir/?api=1&destination=2249+Washington+Ave,+Bronx,+NY+10457-1445,+USA'
       );
-    },
-    call() {
+    };
+    const call = () => {
       openURL('tel:7185621300');
-    },
-    email() {
+    };
+    const email = () => {
       openURL('mailto:ny@embarquetenares.com');
-    },
-    openFB() {
-      openURL('https://www.facebook.com/EmbarqueTenaress/');
-    },
-    openIG() {
-      openURL('https://instagram.com/embarquetenares');
-    },
-    openWhatsapp() {
-      openURL('https://api.whatsapp.com/send?phone=7185621300');
-    },
-    copy(i: number) {
+    };
+
+    const copy = (i: number) => {
       let text = '';
       let ttr = '';
       switch (i) {
         case 0:
-          ttr = this.$t('tooltipRes0');
+          ttr = t('tooltipRes0');
           text = '2249 Washington Ave Bronx, NY 10457';
           break;
         case 1:
-          ttr = this.$t('tooltipRes1');
+          ttr = t('tooltipRes1');
           text = '7185621300';
           break;
         case 2:
-          ttr = this.$t('tooltipRes2');
+          ttr = t('tooltipRes2');
           text = 'ny@embarquetenares.com';
           break;
       }
       copyToClipboard(text)
         .then(() => {
           // success!
-          this.tooltipResponse = ttr;
-          this.dialog = true;
+          tooltipResponse.value = ttr;
+          dialog.value = true;
           setTimeout(() => {
-            this.dialog = false;
+            dialog.value = false;
           }, 3000);
         })
         .catch(() => {
           // fail
         });
-    },
+    };
+
+    return { iframeSource, getDirections, call, copy, email };
   },
 });
 </script>
