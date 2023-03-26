@@ -1,18 +1,14 @@
 <template>
-  <q-btn flat class="q-py-md">
+  <q-btn flat class="q-py-md q-ml-none">
     <q-avatar>
       <img src="../assets/logo.png" style="background-color: white" />
     </q-avatar>
     <div
-      @click="
-        $router.push({
-          name: 'main',
-        })
-      "
+      @click="$router.push('/')"
       class="q-pl-md"
       style="
         font-family: 'BodoniSvtyTwoSCITCTT-Book';
-        font-size: x-large;
+        font-size: xx-large;
         font-weight: bold;
       "
     >

@@ -5,7 +5,7 @@
       style="
         font-family: 'BodoniSvtyTwoSCITCTT-Book';
         font-weight: bolder;
-        font-size: 30px;
+        font-size: 37px;
       "
     >
       Embarque Tenares Corp.
@@ -60,7 +60,7 @@
         </q-menu>
       </q-btn>
     </div>
-    <div class="row text-darkgrey flex-center">
+    <div class="row text-grey-7 flex-center">
       <q-btn flat @click="$router.push('faqs')">{{ $t('about') }}</q-btn>
       <q-btn flat @click="$router.push('track')">{{ $t('track') }}</q-btn>
       <q-btn flat @click="$router.push('rates')">{{ $t('rates') }}</q-btn>

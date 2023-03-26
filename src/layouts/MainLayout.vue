@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="text-light row">
-      <q-toolbar>
+      <q-toolbar class="q-ml-none q-pl-none">
         <q-toolbar-title class="row">
           <ToolbarWrapper />
           <q-space />
