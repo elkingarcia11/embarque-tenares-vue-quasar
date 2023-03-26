@@ -34,11 +34,12 @@ export default {
       await api
         .post('/auth/login', data)
         .then((response) => {
+          console.log('response from hectors api', response);
           token.value = response.data.response[0].token.access;
           saveAuthData();
         })
-        .catch(() => {
-          console.log('Token retrieval failed');
+        .catch((error) => {
+          console.log('Token retrieval error: ', error);
         });
     };
 
@@ -54,7 +55,7 @@ export default {
 
           await login();
         } catch (e) {
-          console.log('Failed to store app id and api key');
+          console.log(e);
         }
       } else {
         console.log('Failed to retrieve app id and api key');

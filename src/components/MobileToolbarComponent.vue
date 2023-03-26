@@ -42,7 +42,7 @@
           class="text-h5 q-py-md q-px-l"
           v-if="index < 4"
           clickable
-          @click="$router.push(menuItem.route)"
+          @click="navigateToRoute(menuItem.route)"
           v-ripple
         >
           <q-item-section avatar>
@@ -101,57 +101,74 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
-export default defineComponent({
-  data() {
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const $router = useRouter();
+    
+    const drawer = ref(false);
+
+    const subMenuList = [
+      {
+        icon: 'pin_drop',
+        label: 'nyb',
+        route: 'ny-branch',
+        separator: false,
+      },
+      {
+        icon: 'pin_drop',
+        label: 'drb',
+        route: 'dr-branch',
+        separator: false,
+      },
+    ];
+
+    const menuList = [
+      {
+        icon: 'home',
+        label: 'home',
+        route: '/',
+        separator: false,
+      },
+      {
+        icon: 'search',
+        label: 'track',
+        route: 'track',
+        separator: false,
+      },
+      {
+        icon: 'local_atm',
+        label: 'rates',
+        route: 'rates',
+        separator: false,
+      },
+      {
+        icon: 'quiz',
+        label: 'faqs',
+        route: 'faqs',
+        separator: false,
+      },
+      {
+        icon: 'map',
+        label: 'branch',
+        separator: false,
+      },
+    ];
+
+    const navigateToRoute = (route: string | undefined) => {
+      if (typeof route === 'string') {
+        $router.push(route);
+      }
+    };
+
     return {
-      drawer: ref(false),
-      subMenuList: [
-        {
-          icon: 'pin_drop',
-          label: 'nyb',
-          route: 'ny-branch',
-          separator: false,
-        },
-        {
-          icon: 'pin_drop',
-          label: 'drb',
-          route: 'dr-branch',
-          separator: false,
-        },
-      ],
-      menuList: [
-        {
-          icon: 'home',
-          label: 'home',
-          route: '/',
-          separator: false,
-        },
-        {
-          icon: 'search',
-          label: 'track',
-          route: 'track',
-          separator: false,
-        },
-        {
-          icon: 'local_atm',
-          label: 'rates',
-          route: 'rates',
-          separator: false,
-        },
-        {
-          icon: 'quiz',
-          label: 'faqs',
-          route: 'faqs',
-          separator: false,
-        },
-        {
-          icon: 'map',
-          label: 'branch',
-          separator: false,
-        },
-      ],
+      drawer,
+      menuList,
+      subMenuList,
+      navigateToRoute,
     };
   },
-});
+};
 </script>

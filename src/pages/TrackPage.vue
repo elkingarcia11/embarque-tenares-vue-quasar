@@ -99,24 +99,28 @@ export default {
   },
   setup() {
     const $q = useQuasar();
-    const percent = ref(0);
+
+    const invoiceInputRef = ref<QInput>();
+
     const invoiceText = ref('');
     const invoiceNumber = ref('');
-    const invoiceDialog = ref(false);
-    const etaDays = ref(-1);
-    const onSubmitted = ref(false);
-    const querySuccess = ref(false);
     const enDate = ref('');
     const esDate = ref('');
-    const invoiceInputRef = ref<QInput>();
+
+    const invoiceDialog = ref(false);
+    const onSubmitted = ref(false);
+    const querySuccess = ref(false);
+
+    const etaDays = ref(-1);
+    const percent = ref(0);
 
     const search = () => {
       if (invoiceInputRef.value !== undefined) {
         invoiceInputRef.value.focus();
       }
     };
+
     const submit = async () => {
-      console.log(invoiceText);
       //setTimeout({}, 10000)
       // Submit
       if (invoiceText.value === '') {
@@ -133,6 +137,7 @@ export default {
       }
       $q.loading.hide();
     };
+
     const retrieveEtaDays = async () => {
       const docRef = doc(db, 'eta/eta_days');
       const docSnap = await getDoc(docRef);
@@ -144,6 +149,7 @@ export default {
         console.log('No such document! Default to 25 days');
       }
     };
+
     const retrieveInvoiceInfo = async () => {
       onSubmitted.value = true;
       invoiceNumber.value = invoiceText.value;

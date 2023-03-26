@@ -47,8 +47,10 @@ export default {
   },
   setup() {
     const $q = useQuasar();
-    const faqsList = ref<DocumentData[]>([]);
     const { locale } = useI18n();
+
+    const faqsList = ref<DocumentData[]>([]);
+
     const printQuestion = (question: DocumentData) => {
       if (locale.value == 'en-US') {
         return question.q_en;

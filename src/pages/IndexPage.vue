@@ -110,7 +110,7 @@ export default {
         if (invoiceInputRef.value !== undefined) {
           invoiceInputRef.value.focus();
         }
-      } else if (Number.isInteger(invoiceText.value)) {
+      } else if (Number.isInteger(parseInt(invoiceText.value, 10))) {
         const n = Number(invoiceText.value);
         if (n > 0) {
           if (invoiceInputRef.value !== undefined) {
@@ -128,7 +128,6 @@ export default {
           invoiceInputRef.value.blur();
         }
         showNotif();
-        // throw alert
       }
     };
 

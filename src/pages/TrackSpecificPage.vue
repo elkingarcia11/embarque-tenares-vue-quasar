@@ -1,5 +1,5 @@
 <template>
-  <q-form @submit="submit" class="invoiceForm">
+  <q-form @submit="search" class="invoiceForm">
     <q-input
       ref="invoiceInputRef"
       square
@@ -18,7 +18,7 @@
           icon="quiz"
           @click="invoiceDialog = true"
         />
-        <q-btn flat round color="primary" icon="search" @click="submit" />
+        <q-btn flat round color="primary" icon="search" @click="search" />
       </template>
     </q-input>
   </q-form>
@@ -81,79 +81,102 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { api } from 'boot/axios';
+import { getDoc, doc } from '@firebase/firestore';
+import { QInput, useQuasar } from 'quasar';
+
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
-
 import db from '../boot/firebase';
-import { getDoc, doc } from '@firebase/firestore';
 
-import { api } from 'boot/axios';
-
-export default defineComponent({
-  props: {
-    invoice: String,
-  },
+export default {
+  name: 'TrackSpecificPage',
   components: {
     CircularProg,
     TrackError,
   },
-  watch: {
-    '$route.params': 'submitNewInvoice',
-  },
-  data: function () {
-    return {
-      percent: ref(0),
-      daysLeft: 25,
-      invoiceText: ref(''),
-      invoiceNumber: ref(''),
-      invoiceDialog: ref(false),
-      etaDays: -1,
-      onSubmitted: ref(false),
-      querySuccess: ref(false),
-      enDate: ref(''),
-      esDate: ref(''),
-    };
-  },
-  methods: {
-    isMobile() {
-      if (this.$q.platform.is.mobile) {
-        return true;
-      }
-      return false;
-    },
-    search() {
-      (this.$refs['invoiceInputRef'] as any).focus();
-    },
-    async submit() {
-      this.$q.loading.show();
-      // Submit
-      if (this.invoiceText === '') {
-        (this.$refs['invoiceInputRef'] as any).focus();
-        this.$q.loading.hide();
-      } else {
-        (this.$refs['invoiceInputRef'] as any).blur();
+  setup() {
+    const $q = useQuasar();
+    const $route = useRoute();
+    const $router = useRouter();
+    const { t } = useI18n();
 
-        await this.retrieveEtaDays();
-        await this.retrieveInvoiceInfo();
+    const invoiceInputRef = ref<QInput>();
+
+    const invoiceText = ref('');
+    const invoiceNumber = ref('');
+    const enDate = ref('');
+    const esDate = ref('');
+    const percent = ref(0);
+    const etaDays = ref(-1);
+    const onSubmitted = ref(false);
+    const querySuccess = ref(false);
+    const invoiceDialog = ref(false);
+
+    onBeforeMount(async () => {
+      $q.loading.show();
+      if (typeof $route.params.invoice === 'string') {
+        invoiceText.value = $route.params.invoice;
       }
-    },
-    async retrieveEtaDays() {
+      await submit($route.params.invoice);
+      $q.loading.hide();
+    });
+
+    const showNotif = () => {
+      $q.notify({
+        message: t('invalidInvoice'),
+        type: 'negative',
+        icon: 'error',
+      });
+    };
+
+    const search = () => {
+      if (invoiceInputRef.value !== undefined) {
+        invoiceInputRef.value.focus();
+      } else {
+        $router.push({
+          name: 'search',
+          params: { invoice: invoiceText.value },
+        });
+      }
+    };
+
+    const submit = async (invoice: string | string[]) => {
+      if (
+        typeof invoice === 'string' &&
+        invoice !== '' &&
+        Number.isInteger(parseInt(invoice, 10))
+      ) {
+        const n = Number(invoice);
+        if (n > 0) {
+          await retrieveEtaDays();
+          await retrieveInvoiceInfo(invoice);
+        } else {
+          showNotif();
+        }
+      } else {
+        showNotif();
+      }
+    };
+
+    const retrieveEtaDays = async () => {
       const docRef = doc(db, 'eta/eta_days');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const d = docSnap.data();
-        this.etaDays = d.days;
+        etaDays.value = d.days;
       } else {
-        // doc.data() will be undefined in this case
         console.log('No such document! Default to 25 days');
-        this.$q.loading.hide();
       }
-    },
-    retrieveInvoiceInfo() {
-      this.onSubmitted = true;
-      this.invoiceNumber = this.invoiceText;
-      let url = '/invoice/' + this.invoiceText;
+    };
+
+    const retrieveInvoiceInfo = (invoice: string) => {
+      onSubmitted.value = true;
+      invoiceNumber.value = invoice;
+      let url = '/invoice/' + invoice;
       api
         .get(url)
         .then((response) => {
@@ -166,8 +189,8 @@ export default defineComponent({
           };
 
           a.setDate(a.getDate() + 25);
-          this.enDate = a.toLocaleDateString('en-US', options);
-          this.esDate = a.toLocaleDateString('es-US', options);
+          enDate.value = a.toLocaleDateString('en-US', options);
+          esDate.value = a.toLocaleDateString('es-US', options);
 
           const _MS_PER_DAY = 1000 * 60 * 60 * 24;
           // Discard the time and time-zone information.
@@ -176,26 +199,30 @@ export default defineComponent({
 
           let dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
           if (dLeft <= 0) {
-            this.percent = 100;
+            percent.value = 100;
           } else {
-            this.percent = (1 - dLeft / this.etaDays) * 100;
+            percent.value = (1 - dLeft / etaDays.value) * 100;
           }
 
-          this.querySuccess = true;
+          querySuccess.value = true;
         })
         .catch((error) => {
           console.log(error);
-          this.querySuccess = false;
+          querySuccess.value = false;
         });
+    };
 
-      this.$q.loading.hide();
-    },
+    return {
+      search,
+      invoiceText,
+      invoiceDialog,
+      onSubmitted,
+      querySuccess,
+      percent,
+      invoiceNumber,
+      enDate,
+      esDate,
+    };
   },
-  async mounted() {
-    if (this.$route.params.invoice != '') {
-      this.invoiceText = this.$route.params.invoice as string;
-      this.submit();
-    }
-  },
-});
+};
 </script>

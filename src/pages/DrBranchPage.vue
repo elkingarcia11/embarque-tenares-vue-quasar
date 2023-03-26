@@ -154,12 +154,14 @@ export default {
     FooterComponent,
   },
   setup() {
+    const { t } = useI18n();
+
+    const tooltipResponse = ref('');
     const iframeSource =
       'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ8VOEoNjtsY4R_dMCCAx0fK4&key=' +
       process.env.GOOGLE_MAPS_API_KEY;
-    const { t } = useI18n();
+
     const dialog = ref(false);
-    const tooltipResponse = ref('');
 
     const getDirections = () => {
       openURL(

@@ -53,7 +53,7 @@
             <q-avatar icon="mail" />
             <q-item-section>{{ $t('nyb') }}</q-item-section>
           </q-item>
-          <q-item clickable @click="emailNy" class="text-secondary">
+          <q-item clickable @click="emailDr" class="text-secondary">
             <q-avatar icon="mail" />
             <q-item-section>{{ $t('drb') }}</q-item-section>
           </q-item>
@@ -95,33 +95,48 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
 import { openURL } from 'quasar';
 import '../css/footer.scss';
 
-export default defineComponent({
-  methods: {
-    callNy() {
+export default {
+  setup() {
+    const callNy = () => {
       openURL('tel:7185621300');
-    },
-    callDr() {
+    };
+
+    const callDr = () => {
       openURL('tel:8099700007');
-    },
-    emailNy() {
+    };
+
+    const emailNy = () => {
       openURL('mailto:ny@embarquetenares.com');
-    },
-    emailDr() {
+    };
+
+    const emailDr = () => {
       openURL('mailto:rd@embarquetenares.com');
-    },
-    openFB() {
+    };
+
+    const openFB = () => {
       openURL('https://www.facebook.com/EmbarqueTenaress/');
-    },
-    openIG() {
+    };
+
+    const openIG = () => {
       openURL('https://instagram.com/embarquetenares');
-    },
-    openWhatsapp() {
+    };
+
+    const openWhatsapp = () => {
       openURL('https://api.whatsapp.com/send?phone=7185621300');
-    },
+    };
+
+    return {
+      openWhatsapp,
+      openFB,
+      openIG,
+      callNy,
+      callDr,
+      emailNy,
+      emailDr,
+    };
   },
-});
+};
 </script>

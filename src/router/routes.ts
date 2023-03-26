@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
         name: 'track',
       },
       {
-        path: 'search/:invoice',
+        path: 'search/:invoice(\\d+)',
         component: () => import('src/pages/TrackSpecificPage.vue'),
         name: 'search',
       },

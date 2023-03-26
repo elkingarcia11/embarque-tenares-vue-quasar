@@ -48,36 +48,37 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
 import ToolbarWrapper from '../components/ToolbarWrapper.vue';
 
-export default defineComponent({
+export default {
   components: {
     ToolbarWrapper,
   },
-  data() {
-    return {
-      drawer: ref(false),
-      label: 'Español',
-      title: 'Embarque Tenares',
-      engClass: '',
-      esClass: 'text-bold',
-    };
-  },
-  methods: {
-    changeLanguage(i: number) {
+  setup() {
+    const { locale } = useI18n();
+
+    const label = ref('Español');
+    const engClass = ref('');
+    const esClass = ref('text-bold');
+
+    const changeLanguage = (i: number) => {
       if (i === 0) {
-        this.$i18n.locale = 'en-US';
-        this.label = 'English';
-        this.engClass = 'text-bold';
-        this.esClass = '';
+        locale.value = 'en-US';
+        label.value = 'English';
+        engClass.value = 'text-bold';
+        esClass.value = '';
       } else {
-        this.$i18n.locale = 'es-US';
-        this.label = 'Español';
-        this.esClass = 'text-bold';
-        this.engClass = '';
+        locale.value = 'es-US';
+        label.value = 'Español';
+        esClass.value = 'text-bold';
+        engClass.value = '';
       }
-    },
+    };
+
+    return { label, esClass, engClass, changeLanguage };
   },
-});
+};
 </script>

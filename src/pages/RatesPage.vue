@@ -72,9 +72,9 @@ import '../css/rates.scss';
 export default {
   components: { FooterComponent },
   setup() {
+    const $q = useQuasar();
     const ratesList = ref<DocumentData[]>([]);
     const listOfLists = ref<DocumentData[][]>([]);
-    const $q = useQuasar();
 
     onBeforeMount(async () => {
       $q.loading.show();

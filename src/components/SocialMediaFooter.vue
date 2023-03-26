@@ -38,63 +38,27 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
-import { openURL, copyToClipboard } from 'quasar';
+import { openURL } from 'quasar';
 
 import '../css/branches.scss';
 
 export default defineComponent({
   setup() {
-    return {
-      dialog: ref(false),
-      tooltipResponse: ref(''),
-    };
-  },
-  methods: {
-    call() {
-      openURL('tel:7185621300');
-    },
-    email() {
-      openURL('mailto:ny@embarquetenares.com');
-    },
-    openFB() {
+    const tooltipResponse = ref('');
+
+    const dialog = ref(false);
+
+    const openFB = () => {
       openURL('https://www.facebook.com/EmbarqueTenaress/');
-    },
-    openIG() {
+    };
+    const openIG = () => {
       openURL('https://instagram.com/embarquetenares');
-    },
-    openWhatsapp() {
+    };
+    const openWhatsapp = () => {
       openURL('https://api.whatsapp.com/send?phone=7185621300');
-    },
-    copy(i: number) {
-      let text = '';
-      let ttr = '';
-      switch (i) {
-        case 0:
-          ttr = this.$t('tooltipRes0');
-          text = '2249 Washington Ave Bronx, NY 10457';
-          break;
-        case 1:
-          ttr = this.$t('tooltipRes1');
-          text = '7185621300';
-          break;
-        case 2:
-          ttr = this.$t('tooltipRes2');
-          text = 'ny@embarquetenares.com';
-          break;
-      }
-      copyToClipboard(text)
-        .then(() => {
-          // success!
-          this.tooltipResponse = ttr;
-          this.dialog = true;
-          setTimeout(() => {
-            this.dialog = false;
-          }, 3000);
-        })
-        .catch(() => {
-          // fail
-        });
-    },
+    };
+
+    return { openFB, openWhatsapp, openIG, dialog, tooltipResponse };
   },
 });
 </script>

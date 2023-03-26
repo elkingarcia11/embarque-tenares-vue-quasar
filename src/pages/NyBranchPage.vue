@@ -117,9 +117,9 @@ export default {
     FooterComponent,
   },
   setup() {
-    const dialog = ref(false);
-    const tooltipResponse = ref('');
     const { t } = useI18n();
+    const tooltipResponse = ref('');
+    const dialog = ref(false);
 
     const iframeSource =
       'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJ_htcnz0wokRSDrgX-Y-Cv4&key=' +
