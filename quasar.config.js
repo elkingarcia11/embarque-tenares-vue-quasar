@@ -59,7 +59,7 @@ module.exports = configure(function (ctx) {
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
-
+        HECTOR_AUTH_TYPE: process.env.HECTOR_AUTH_TYPE,
         FIREBASE_USERNAMER: process.env.FIREBASE_USERNAME,
         FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
         FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,

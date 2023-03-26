@@ -117,11 +117,13 @@ export default {
     const search = () => {
       if (invoiceInputRef.value !== undefined) {
         invoiceInputRef.value.focus();
+      } else {
+        submit();
       }
     };
 
     const submit = async () => {
-      //setTimeout({}, 10000)
+      $q.loading.show();
       // Submit
       if (invoiceText.value === '') {
         if (invoiceInputRef.value !== undefined) {
@@ -158,6 +160,7 @@ export default {
       await api
         .get(url)
         .then((response) => {
+          console.log(response);
           var a = new Date(response.data.response[0].date);
           const b = new Date();
           const options: Intl.DateTimeFormatOptions = {
@@ -184,6 +187,7 @@ export default {
           querySuccess.value = true;
         })
         .catch((error) => {
+          console.log('api catch');
           console.log(error);
           querySuccess.value = false;
         });

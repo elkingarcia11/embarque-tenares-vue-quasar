@@ -34,7 +34,6 @@ export default {
       await api
         .post('/auth/login', data)
         .then((response) => {
-          console.log('response from hectors api', response);
           token.value = response.data.response[0].token.access;
           saveAuthData();
         })
@@ -51,7 +50,8 @@ export default {
         try {
           api.defaults.headers.common['App-Id'] = d['App-Id'];
           api.defaults.headers.common['Api-Key'] = d['Api-Key'];
-          api.defaults.headers.common['Auth-Type'] = 'basic';
+          api.defaults.headers.common['Auth-Type'] =
+            process.env.HECTOR_AUTH_TYPE;
 
           await login();
         } catch (e) {

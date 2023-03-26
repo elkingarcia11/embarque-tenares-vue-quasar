@@ -30,13 +30,12 @@
 </template>
 
 <script lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { DocumentData } from 'firebase/firestore';
 import { useQuasar } from 'quasar';
 
-import db from '../boot/firebase';
 import FooterComponent from 'src/components/FooterComponent.vue';
 
 import '../css/faqs.scss';
