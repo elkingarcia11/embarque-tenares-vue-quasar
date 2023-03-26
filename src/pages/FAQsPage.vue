@@ -30,16 +30,17 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { onBeforeMount } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { DocumentData } from 'firebase/firestore';
 import { useQuasar } from 'quasar';
 
 import db from '../boot/firebase';
 import FooterComponent from 'src/components/FooterComponent.vue';
 
 import '../css/faqs.scss';
+import { useStore } from 'src/store';
 
 export default {
   components: {
@@ -47,9 +48,10 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+    const $store = useStore();
     const { locale } = useI18n();
 
-    const faqsList = ref<DocumentData[]>([]);
+    const faqsList = computed(() => $store.state.faqs.faqsList);
 
     const printQuestion = (question: DocumentData) => {
       if (locale.value == 'en-US') {
@@ -61,9 +63,9 @@ export default {
 
     onBeforeMount(async () => {
       $q.loading.show();
-      const faqsCol = collection(db, 'faqs');
-      const faqsSnapshot = await getDocs(faqsCol);
-      faqsList.value = faqsSnapshot.docs.map((doc) => doc.data());
+      if (faqsList.value.length < 1) {
+        await $store.dispatch('faqs/fetchFaqs');
+      }
       $q.loading.hide();
     });
 

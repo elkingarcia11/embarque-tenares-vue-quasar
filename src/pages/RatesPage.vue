@@ -60,47 +60,26 @@
 </template>
 
 <script lang="ts">
-import { ref, onBeforeMount } from 'vue';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { onBeforeMount, computed } from 'vue';
 import { useQuasar } from 'quasar';
 
 import FooterComponent from 'src/components/FooterComponent.vue';
-import db from '../boot/firebase';
-
 import '../css/rates.scss';
+import { useStore } from 'src/store';
 
 export default {
   components: { FooterComponent },
   setup() {
+    const $store = useStore();
     const $q = useQuasar();
-    const ratesList = ref<DocumentData[]>([]);
-    const listOfLists = ref<DocumentData[][]>([]);
+    const listOfLists = computed(() => $store.state.rates.listOfLists);
+    const ratesList = computed(() => $store.state.rates.ratesList);
 
     onBeforeMount(async () => {
       $q.loading.show();
-      const ratesRef = collection(db, 'rates');
-      const ratesSnapshot = await getDocs(ratesRef);
-      ratesList.value = ratesSnapshot.docs.map((doc) => doc.data());
-
-      let itemsRef = collection(db, 'rates/0/items');
-      let itemsSnapshot = await getDocs(itemsRef);
-      let iL = itemsSnapshot.docs.map((doc) => doc.data());
-      listOfLists.value.push(iL);
-
-      itemsRef = collection(db, 'rates/1/items');
-      itemsSnapshot = await getDocs(itemsRef);
-      iL = itemsSnapshot.docs.map((doc) => doc.data());
-      listOfLists.value.push(iL);
-
-      itemsRef = collection(db, 'rates/2/items');
-      itemsSnapshot = await getDocs(itemsRef);
-      iL = itemsSnapshot.docs.map((doc) => doc.data());
-      listOfLists.value.push(iL);
-
-      itemsRef = collection(db, 'rates/3/items');
-      itemsSnapshot = await getDocs(itemsRef);
-      iL = itemsSnapshot.docs.map((doc) => doc.data());
-      listOfLists.value.push(iL);
+      if (listOfLists.value.length < 1 && ratesList.value.length < 1) {
+        await $store.dispatch('rates/fetchRates');
+      }
       $q.loading.hide();
     });
 

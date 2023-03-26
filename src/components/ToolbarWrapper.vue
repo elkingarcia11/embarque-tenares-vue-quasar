@@ -4,14 +4,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
 import MobileToolbarComponent from './MobileToolbarComponent.vue';
 import AlternativeToolbarComponent from './AlternativeToolbarComponent.vue';
 
-export default defineComponent({
+export default {
   components: {
     MobileToolbarComponent,
     AlternativeToolbarComponent,
   },
-});
+};
 </script>

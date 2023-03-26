@@ -37,12 +37,13 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref } from 'vue';
 import { openURL } from 'quasar';
 
 import '../css/branches.scss';
 
-export default defineComponent({
+export default {
+  name: 'SocialMediaFooter',
   setup() {
     const tooltipResponse = ref('');
 
@@ -60,5 +61,5 @@ export default defineComponent({
 
     return { openFB, openWhatsapp, openIG, dialog, tooltipResponse };
   },
-});
+};
 </script>
