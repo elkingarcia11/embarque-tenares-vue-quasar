@@ -7,8 +7,10 @@ import {
   useStore as vuexUseStore,
 } from 'vuex';
 import faqs from './faqs';
-import { FaqsStateInterface } from './faqs/state';
 import rates from './rates';
+import invoice from './invoice';
+import { FaqsStateInterface } from './faqs/state';
+import { InvoiceStateInterface } from './invoice/state';
 import { RatesStateInterface } from './rates/state';
 
 // import example from './module-example'
@@ -26,6 +28,7 @@ import { RatesStateInterface } from './rates/state';
 export interface StateInterface {
   rates: RatesStateInterface;
   faqs: FaqsStateInterface;
+  invoice: InvoiceStateInterface;
 }
 
 // provide typings for `this.$store`
@@ -47,7 +50,7 @@ declare module 'vuex' {
 }
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
-    modules: { rates, faqs },
+    modules: { rates, faqs, invoice },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

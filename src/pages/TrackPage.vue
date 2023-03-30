@@ -47,7 +47,7 @@
         style="width: 90vw; font-weight: bold"
         :label="$t('search')"
         size="lg"
-        @click="search"
+        @click="submit"
       />
     </q-page-sticky>
 
@@ -84,15 +84,13 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-import { api } from 'boot/axios';
-import { getDoc, doc } from '@firebase/firestore';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
+import { useStore } from 'src/store';
 
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
-
-import db from '../boot/firebase';
 
 export default {
   name: 'TrackPage',
@@ -102,103 +100,63 @@ export default {
   },
   setup() {
     const $q = useQuasar();
-
+    const $store = useStore();
+    const { t } = useI18n();
     const invoiceInputRef = ref<QInput>();
 
     const invoiceText = ref('');
     const invoiceNumber = ref('');
-    const enDate = ref('');
-    const esDate = ref('');
 
     const invoiceDialog = ref(false);
     const onSubmitted = ref(false);
-    const querySuccess = ref(false);
+    const querySuccess = computed(() => $store.state.invoice.querySuccess);
 
-    const etaDays = ref(-1);
-    const percent = ref(0);
+    const enDate = computed(() => $store.state.invoice.enDate);
+    const esDate = computed(() => $store.state.invoice.esDate);
+    const percent = computed(() => $store.state.invoice.percent);
 
-    const search = () => {
-      if (invoiceInputRef.value !== undefined) {
-        invoiceInputRef.value.focus();
-      } else {
-        submit();
-      }
+    const showNotif = () => {
+      $q.notify({
+        message: t('invalidInvoice'),
+        type: 'negative',
+        icon: 'error',
+      });
     };
 
     const submit = async () => {
-      $q.loading.show();
-      // Submit
-      if (invoiceText.value === '') {
-        if (invoiceInputRef.value !== undefined) {
-          invoiceInputRef.value.focus();
-        }
-      } else {
-        if (invoiceInputRef.value !== undefined) {
-          invoiceInputRef.value.blur();
-        }
-
-        await retrieveEtaDays();
-        await retrieveInvoiceInfo();
-      }
-      $q.loading.hide();
-    };
-
-    const retrieveEtaDays = async () => {
-      const docRef = doc(db, 'eta/eta_days');
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const d = docSnap.data();
-        etaDays.value = d.days;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document! Default to 25 days');
-      }
-    };
-
-    const retrieveInvoiceInfo = async () => {
-      onSubmitted.value = true;
-      invoiceNumber.value = invoiceText.value;
-      let url = '/invoice/' + invoiceText.value;
-
-      await api
-        .get(url)
-        .then((response) => {
-          console.log(response);
-          var a = new Date(response.data.response[0].date);
-          const b = new Date();
-          const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          };
-
-          a.setDate(a.getDate() + 25);
-          enDate.value = a.toLocaleDateString('en-US', options);
-          esDate.value = a.toLocaleDateString('es-US', options);
-
-          const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-          // Discard the time and time-zone information.
-          const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-          const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-          let dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
-          if (dLeft <= 0) {
-            percent.value = 100;
+      if (
+        typeof invoiceText.value === 'string' &&
+        invoiceText.value !== '' &&
+        Number.isInteger(parseInt(invoiceText.value, 10))
+      ) {
+        const n = Number(invoiceText.value);
+        if (n > 0) {
+          $q.loading.show();
+          // Submit
+          if (invoiceText.value === '') {
+            if (invoiceInputRef.value !== undefined) {
+              invoiceInputRef.value.focus();
+            }
           } else {
-            percent.value = (1 - dLeft / etaDays.value) * 100;
+            if (invoiceInputRef.value !== undefined) {
+              invoiceInputRef.value.blur();
+            }
+            invoiceNumber.value = invoiceText.value;
+            const url = '/invoice/' + invoiceText.value;
+            $store.dispatch('invoice/fetchInvoice', url);
+            onSubmitted.value = true;
           }
-          querySuccess.value = true;
-        })
-        .catch((error) => {
-          console.log('api catch');
-          console.log(error);
-          querySuccess.value = false;
-        });
+          $q.loading.hide();
+        } else {
+          showNotif();
+        }
+      } else {
+        showNotif();
+      }
     };
 
     return {
       submit,
-      search,
       invoiceText,
       invoiceDialog,
       onSubmitted,

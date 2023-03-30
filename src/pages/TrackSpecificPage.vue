@@ -176,7 +176,7 @@ export default {
     const retrieveInvoiceInfo = (invoice: string) => {
       onSubmitted.value = true;
       invoiceNumber.value = invoice;
-      let url = '/invoice/' + invoice;
+      const url = '/invoice/' + invoice;
       api
         .get(url)
         .then((response) => {

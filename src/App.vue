@@ -14,32 +14,16 @@ export default {
   setup() {
     const token = ref('');
 
-    onBeforeMount(async () => {
-      await retrieveHectorApiInfo();
+    onBeforeMount(() => {
+      retrieveHectorApiInfo();
     });
 
-    const saveAuthData = () => {
+    const saveAuthData = (token: string) => {
       try {
-        api.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       } catch (e) {
         console.log('Token save failed');
       }
-    };
-
-    const login = async () => {
-      const data = {
-        Username: process.env.HECTOR_USERNAME,
-        Type: process.env.HECTOR_TYPE,
-      };
-      await api
-        .post('/auth/login', data)
-        .then((response) => {
-          token.value = response.data.response[0].token.access;
-          saveAuthData();
-        })
-        .catch((error) => {
-          console.log('Token retrieval error: ', error);
-        });
     };
 
     const retrieveHectorApiInfo = async () => {
@@ -53,13 +37,29 @@ export default {
           api.defaults.headers.common['Auth-Type'] =
             process.env.HECTOR_AUTH_TYPE;
 
-          await login();
+          login();
         } catch (e) {
           console.log(e);
         }
       } else {
         console.log('Failed to retrieve app id and api key');
       }
+    };
+
+    const login = async () => {
+      const data = {
+        Username: process.env.HECTOR_USERNAME,
+        Type: process.env.HECTOR_TYPE,
+      };
+      api
+        .post('/auth/login', data)
+        .then((response) => {
+          token.value = response.data.response[0].token.access;
+          saveAuthData(token.value);
+        })
+        .catch((error) => {
+          console.log('Token retrieval error: ', error);
+        });
     };
   },
 };
