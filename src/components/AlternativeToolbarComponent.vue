@@ -1,10 +1,9 @@
 <template>
-  <q-btn flat class="q-py-md q-ml-none">
+  <q-btn @click="$router.push('/')" flat class="q-py-md q-ml-none">
     <q-avatar>
       <img src="../assets/logo.png" style="background-color: white" />
     </q-avatar>
     <div
-      @click="$router.push('/')"
       class="q-pl-md"
       style="
         font-family: 'BodoniSvtyTwoSCITCTT-Book';
@@ -18,12 +17,7 @@
   <div class="row flex-center q-pl-lg">
     <q-btn
       class="q-py-md"
-      @click="
-        $router.push({
-          name: 'track',
-          params: { invoice: '' },
-        })
-      "
+      @click="$router.push('/track')"
       flat
       text-color="white"
       :label="$t('track')"

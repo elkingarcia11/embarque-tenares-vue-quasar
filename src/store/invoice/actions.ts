@@ -23,7 +23,12 @@ const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
   async fetchInvoice({ commit, dispatch }, payload) {
     const eta = await dispatch('fetchEtaDays');
     await api
-      .get(payload)
+      .get(payload, {
+        withCredentials: true,
+        headers: {
+          'cache-control': 'max-age=0',
+        },
+      })
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
           const a = new Date(response.data.response[0].date);

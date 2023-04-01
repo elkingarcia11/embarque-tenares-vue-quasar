@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isNotMobile()" class="full-width">
+  <div class="full-width">
     <q-card class="tab-bar tabBarContainer">
       <q-btn-toggle
         spread
@@ -92,46 +92,33 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
-  props: {
-    buttonNumber: Number,
-  },
-  data() {
-    return {
-      dialog: ref(false),
-      buttonGroup: this.buttonNumber,
-    };
-  },
-  methods: {
-    isNotMobile() {
-      if (this.$q.platform.is.mobile) {
-        if (this.buttonGroup == 0) {
-          return true;
-        }
-        return false;
-      }
-      return true;
-    },
-    open() {
-      if (this.buttonGroup === 1) {
-        if (this.$props.buttonNumber == 0) {
-          this.buttonGroup = 0;
-          this.$emit('focusInput');
-        } else if (this.$props.buttonNumber == 1) {
-          this.$emit('focusInput');
-        } else {
-          this.$router.push('track');
-        }
-      } else if (this.buttonGroup === 2) {
-        this.$router.push('rates');
-      } else if (this.buttonGroup === 3) {
-        this.buttonGroup = 0;
-        this.dialog = true;
+  emits: ['focusInput'],
+  setup(props, { emit }) {
+    const $router = useRouter();
+
+    const dialog = ref(false);
+
+    const buttonGroup = ref(0);
+
+    const open = () => {
+      if (buttonGroup.value === 1) {
+        emit('focusInput');
+      } else if (buttonGroup.value === 2) {
+        $router.push('rates');
+      } else if (buttonGroup.value === 3) {
+        dialog.value = true;
       } else {
-        this.$router.push('faqs');
+        $router.push('faqs');
       }
-    },
+    };
+    return {
+      dialog,
+      buttonGroup,
+      open,
+    };
   },
 });
 </script>

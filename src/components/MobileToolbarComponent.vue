@@ -6,6 +6,7 @@
     round
     dense
     icon="menu"
+    class="q-ml-xs"
   />
   <q-btn
     flat
@@ -107,7 +108,7 @@ import { useRouter } from 'vue-router';
 export default {
   setup() {
     const $router = useRouter();
-    
+
     const drawer = ref(false);
 
     const subMenuList = [

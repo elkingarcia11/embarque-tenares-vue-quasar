@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { api } from 'boot/axios';
@@ -91,6 +91,7 @@ import { QInput, useQuasar } from 'quasar';
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
 import db from '../boot/firebase';
+import { useStore } from 'src/store';
 
 export default {
   name: 'TrackSpecificPage',
@@ -100,6 +101,7 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+    const $store = useStore();
     const $route = useRoute();
     const $router = useRouter();
     const { t } = useI18n();
@@ -108,12 +110,12 @@ export default {
 
     const invoiceText = ref('');
     const invoiceNumber = ref('');
-    const enDate = ref('');
-    const esDate = ref('');
-    const percent = ref(0);
-    const etaDays = ref(-1);
+    const enDate = computed(() => $store.state.invoice.enDate);
+    const esDate = computed(() => $store.state.invoice.esDate);
+    const percent = computed(() => $store.state.invoice.percent);
+    const etaDays = computed(() => $store.state.invoice.etaDays);
     const onSubmitted = ref(false);
-    const querySuccess = ref(false);
+    const querySuccess = computed(() => $store.state.invoice.querySuccess);
     const invoiceDialog = ref(false);
 
     onBeforeMount(async () => {
@@ -152,8 +154,7 @@ export default {
       ) {
         const n = Number(invoice);
         if (n > 0) {
-          await retrieveEtaDays();
-          await retrieveInvoiceInfo(invoice);
+          retrieveInvoiceInfo(invoice);
         } else {
           showNotif();
         }
@@ -162,54 +163,11 @@ export default {
       }
     };
 
-    const retrieveEtaDays = async () => {
-      const docRef = doc(db, 'eta/eta_days');
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const d = docSnap.data();
-        etaDays.value = d.days;
-      } else {
-        console.log('No such document! Default to 25 days');
-      }
-    };
-
     const retrieveInvoiceInfo = (invoice: string) => {
       onSubmitted.value = true;
       invoiceNumber.value = invoice;
       const url = '/invoice/' + invoice;
-      api
-        .get(url)
-        .then((response) => {
-          var a = new Date(response.data.response[0].date);
-          const b = new Date();
-          const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          };
-
-          a.setDate(a.getDate() + 25);
-          enDate.value = a.toLocaleDateString('en-US', options);
-          esDate.value = a.toLocaleDateString('es-US', options);
-
-          const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-          // Discard the time and time-zone information.
-          const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-          const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-          let dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
-          if (dLeft <= 0) {
-            percent.value = 100;
-          } else {
-            percent.value = (1 - dLeft / etaDays.value) * 100;
-          }
-
-          querySuccess.value = true;
-        })
-        .catch((error) => {
-          console.log(error);
-          querySuccess.value = false;
-        });
+      $store.dispatch('invoice/fetchInvoice', url);
     };
 
     return {

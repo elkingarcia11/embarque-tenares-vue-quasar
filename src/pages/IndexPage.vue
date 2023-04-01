@@ -27,10 +27,9 @@
     </div>
 
     <TabBar
+      @focus-input="focusInput"
       v-if="$q.platform.is.mobile"
       ref="tabBarRef"
-      :buttonNumber="0"
-      @focus-input="focus"
     />
     <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
       <q-card>
@@ -66,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
@@ -84,17 +83,23 @@ export default {
   },
   setup() {
     const $router = useRouter();
-    const invoiceText = ref('');
-    const invoiceDialog = ref(false);
-    const invoiceInputRef = ref<QInput>();
-
     const $q = useQuasar();
     const { t } = useI18n();
 
-    const focus = () => {
-      if (invoiceInputRef.value !== undefined) {
-        invoiceInputRef.value.focus();
-      }
+    const invoiceText = ref('');
+
+    const invoiceDialog = ref(false);
+
+    const invoiceInputRef: Ref<QInput | null> = ref(null);
+
+    const focusInput = () => {
+      const inputEl = invoiceInputRef.value?.$el.querySelector('input');
+      inputEl?.focus();
+    };
+
+    const blurInput = () => {
+      const inputEl = invoiceInputRef.value?.$el.querySelector('input');
+      inputEl?.blur();
     };
 
     const showNotif = () => {
@@ -107,15 +112,11 @@ export default {
 
     const submit = () => {
       if (invoiceText.value === '') {
-        if (invoiceInputRef.value !== undefined) {
-          invoiceInputRef.value.focus();
-        }
+        focusInput();
       } else if (Number.isInteger(parseInt(invoiceText.value, 10))) {
         const n = Number(invoiceText.value);
         if (n > 0) {
-          if (invoiceInputRef.value !== undefined) {
-            invoiceInputRef.value.blur();
-          }
+          blurInput();
           $router.push({
             name: 'search',
             params: { invoice: invoiceText.value },
@@ -125,13 +126,13 @@ export default {
         }
       } else {
         if (invoiceInputRef.value !== undefined) {
-          invoiceInputRef.value.blur();
+          blurInput();
         }
         showNotif();
       }
     };
 
-    return { invoiceText, invoiceDialog, focus, submit };
+    return { invoiceText, invoiceDialog, invoiceInputRef, focusInput, submit };
   },
 };
 </script>
