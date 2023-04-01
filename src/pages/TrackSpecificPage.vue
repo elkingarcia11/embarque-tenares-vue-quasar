@@ -84,13 +84,10 @@
 import { ref, onBeforeMount, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { api } from 'boot/axios';
-import { getDoc, doc } from '@firebase/firestore';
 import { QInput, useQuasar } from 'quasar';
 
 import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
-import db from '../boot/firebase';
 import { useStore } from 'src/store';
 
 export default {
@@ -113,7 +110,6 @@ export default {
     const enDate = computed(() => $store.state.invoice.enDate);
     const esDate = computed(() => $store.state.invoice.esDate);
     const percent = computed(() => $store.state.invoice.percent);
-    const etaDays = computed(() => $store.state.invoice.etaDays);
     const onSubmitted = ref(false);
     const querySuccess = computed(() => $store.state.invoice.querySuccess);
     const invoiceDialog = ref(false);

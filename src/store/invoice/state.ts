@@ -4,6 +4,7 @@ export interface InvoiceStateInterface {
   esDate: string;
   percent: number;
   querySuccess: boolean;
+  token: string;
 }
 
 export interface InvoiceResponse {
@@ -15,11 +16,12 @@ export interface InvoiceResponse {
 
 function state(): InvoiceStateInterface {
   return {
-    etaDays: 0,
+    etaDays: -1,
     percent: 0,
     enDate: '',
     esDate: '',
     querySuccess: false,
+    token: '',
   };
 }
 
