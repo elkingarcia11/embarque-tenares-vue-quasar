@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/FAQsPage.vue'),
         name: 'faqs',
       },
+      {
+        path: 'shipping-policy',
+        component: () => import('src/pages/ShippingPolicyPage.vue'),
+        name: 'shipping-policy',
+      },
     ],
   },
 

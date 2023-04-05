@@ -48,4 +48,35 @@ export default {
   nyo: 'New York Office',
   dro: 'Dominican Republic Office',
   invalidInvoice: 'Invalid invoice number!',
+  disclaimer:'When you sign at point of pick-up you are agreeing to the following:',
+  policy: 'Shipping Policy',
+  policy1:
+    'Embarque Tenares is not responsible for items packed by the client.',
+  policy2:
+    'If you do not declare the items lost or damaged, you will not be reimbursed.',
+  policy3:
+    'To be reimbursed, you must provide proof of loss or damage of goods.',
+  policy4:
+    'To be reimbursed, you must provide proof that Embarque Tenares is at fault.',
+  policy5:
+    'Undeclared merchandise will be charged a fine equivalent to the amount of tax to be paid in customs.',
+  policy6:
+    'Embarque Tenares is not responsible for lamps or crystals packed by people who do not belong to the company. Only a maximum of US$100 will be paid for said objects.',
+  policy7:
+    'In case of loss or damage to a box containing used items, only US$200 will be paid per box and a credit for shipping one of the same size.',
+  policy8:
+    'Every person in charge of receiving the merchandise must review the content. After signing this invoice at the point of delivery, we are not responsible.',
+  policy9:
+    'We are not responsible for electrical failures in new or used items.',
+  policy10:
+    "We do not assume responsibility in the event that the property does not enter through the client's door.",
+  policy11:
+    'RD Invoices: after having been confirmed "positive to send" it cannot be returned, otherwise a surcharge of $40.00 will be incurred to be sent again.',
+  policy12:
+    'After your merchandise has arrived in our warehouse, it will be given a period of 45 days to be withdrawn, otherwise you will lose property rights.',
+  policy13:
+    'If you send prohibited items and they are lost or damaged, you will not be reimbursed.',
+  policy14:
+    'No matter the amount you declare, our liability won’t exceed your shipment’s repair cost, its depreciated value, or its replacement cost—whichever is less.',
+  policy15: 'No reimbursements are made for the misdelivery of information.',
 };

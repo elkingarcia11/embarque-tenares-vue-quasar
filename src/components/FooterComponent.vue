@@ -1,15 +1,6 @@
 <template>
   <div class="footer">
-    <div
-      class="text-primary q-pt-lg"
-      style="
-        font-family: 'BodoniSvtyTwoSCITCTT-Book';
-        font-weight: bolder;
-        font-size: 37px;
-      "
-    >
-      Embarque Tenares Corp.
-    </div>
+    <div class="text-primary q-pt-lg footer-title">Embarque Tenares Corp.</div>
     <div class="q-pt-sm row">
       <q-btn
         flat
@@ -87,6 +78,9 @@
         </q-menu>
       </q-btn>
       <q-btn flat @click="$router.push('faqs')">{{ $t('faqs') }}</q-btn>
+      <q-btn flat @click="$router.push('shipping-policy')">{{
+        $t('policy')
+      }}</q-btn>
     </div>
     <div class="row q-py-md q-px-lg text-caption text-center">
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}

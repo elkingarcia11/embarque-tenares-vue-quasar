@@ -17,3 +17,15 @@
     #285aeb 90%
   );
 }
+
+.footer-title {
+  font-family: 'BodoniSvtyTwoSCITCTT-Book';
+  font-weight: bolder;
+  font-size: 37px;
+}
+
+@media (max-width: 600px) {
+  .footer-title {
+    font-size: 30px;
+  }
+}

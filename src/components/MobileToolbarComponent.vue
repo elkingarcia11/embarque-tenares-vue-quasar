@@ -41,7 +41,7 @@
       <template v-for="(menuItem, index) in menuList" :key="index">
         <q-item
           class="text-h5 q-py-md q-px-l"
-          v-if="index < 4"
+          v-if="menuItem.label !== 'branch'"
           clickable
           @click="navigateToRoute(menuItem.route)"
           v-ripple
@@ -58,7 +58,7 @@
           </q-item-section>
         </q-item>
         <q-expansion-item
-          v-if="index > 3"
+          v-else
           clickable
           :label="$t(menuItem.label)"
           default-closed
@@ -154,6 +154,12 @@ export default {
       {
         icon: 'map',
         label: 'branch',
+        separator: false,
+      },
+      {
+        icon: 'policy',
+        label: 'policy',
+        route: 'shipping-policy',
         separator: false,
       },
     ];
