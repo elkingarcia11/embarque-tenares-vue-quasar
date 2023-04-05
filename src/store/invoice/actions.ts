@@ -8,7 +8,7 @@ import db from 'src/boot/firebase';
 import { ref } from 'vue';
 
 const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
-  async fetchAuthHeader({ dispatch }) {
+  async fetchAuthHeader() {
     const docRef = doc(db, 'auth', 'login');
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -16,28 +16,11 @@ const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
       try {
         api.defaults.headers.common['App-Id'] = d['App-Id'];
         api.defaults.headers.common['Api-Key'] = d['Api-Key'];
-        api.defaults.headers.common['Auth-Type'] = process.env.HECTOR_AUTH_TYPE;
-        const t = await dispatch('fetchToken');
-        api.defaults.headers.common['Authorization'] = t;
       } catch (e) {
         console.log(e);
       }
     } else {
       console.log('Failed to retrieve app id and api key');
-    }
-  },
-  async fetchToken() {
-    const data = {
-      Username: process.env.HECTOR_USERNAME,
-      Type: process.env.HECTOR_TYPE,
-    };
-    try {
-      const response = await api.post('/auth/login', data);
-
-      const t = 'Bearer ' + response.data.response[0].token.access;
-      return t;
-    } catch (error) {
-      console.log('Token retrieval error: ', error);
     }
   },
   async fetchEtaDays({ commit, state }) {
@@ -59,10 +42,8 @@ const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
     } else {
       eta.value = state.etaDays;
     }
-    if (api.defaults.headers.common['Authorization'] === undefined) {
-      const t = await dispatch('fetchToken');
-      api.defaults.headers.common['Authorization'] = t;
-    }
+    const t = `Bearer ${state.token}`;
+    api.defaults.headers.common['Authorization'] = t;
     try {
       const response = await api.get(payload);
 
