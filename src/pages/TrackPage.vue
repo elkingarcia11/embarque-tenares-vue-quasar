@@ -133,7 +133,6 @@ export default {
 
     const submit = () => {
       if (invoiceText.value === '') {
-        console.log('text', invoiceText.value);
         focusInput();
       } else if (
         typeof invoiceText.value === 'string' &&

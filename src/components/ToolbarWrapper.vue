@@ -8,6 +8,7 @@ import MobileToolbarComponent from './MobileToolbarComponent.vue';
 import AlternativeToolbarComponent from './AlternativeToolbarComponent.vue';
 
 export default {
+  name: 'ToolbarWrapper',
   components: {
     MobileToolbarComponent,
     AlternativeToolbarComponent,

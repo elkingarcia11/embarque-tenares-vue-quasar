@@ -32,8 +32,9 @@
                   <q-item-label
                     :class="engClass"
                     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-                    >English</q-item-label
                   >
+                    English
+                  </q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>

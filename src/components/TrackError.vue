@@ -29,6 +29,7 @@
 import '../css/track.scss';
 
 export default {
+  name: 'TrackError',
   props: {
     invoice: String,
   },

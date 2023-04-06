@@ -61,9 +61,9 @@
 <script lang="ts">
 import { onBeforeMount, computed } from 'vue';
 import { useQuasar } from 'quasar';
+import { useStore } from 'src/store';
 
 import '../css/rates.scss';
-import { useStore } from 'src/store';
 
 export default {
   setup() {

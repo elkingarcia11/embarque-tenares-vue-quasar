@@ -89,11 +89,14 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
-  emits: ['focusInput'],
+  name: 'TabBar',
+  props: {
+    isDismissed: Boolean,
+  },
   setup(props, { emit }) {
     const $router = useRouter();
 
@@ -113,15 +116,22 @@ export default defineComponent({
       }
     };
 
-    const dismiss = () => {
-      buttonGroup.value = 0;
-    };
+    watch(
+      () => props.isDismissed,
+      (newVal) => {
+        // Accessing component variable from watch function
+        if (newVal) {
+          buttonGroup.value = 0;
+        } else {
+          buttonGroup.value = 1;
+        }
+      }
+    );
 
     return {
       dialog,
       buttonGroup,
       open,
-      dismiss,
     };
   },
 });

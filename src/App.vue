@@ -21,6 +21,7 @@ export default {
           .getIdToken()
           .then((token) => {
             // Access user token
+            console.log('user is signed in');
             $store.commit('invoice/setToken', token);
           })
           .catch((error) => {

@@ -137,7 +137,6 @@ export default {
 
     const search = () => {
       if (invoiceText.value === '') {
-        console.log('text', invoiceText);
         focusInput();
       } else {
         $router.push({
