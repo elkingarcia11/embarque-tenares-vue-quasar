@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer full-width">
     <div class="text-primary q-pt-lg footer-title">Embarque Tenares Corp.</div>
     <div class="q-pt-sm row">
       <q-btn
@@ -82,7 +82,8 @@
         $t('policy')
       }}</q-btn>
     </div>
-    <div class="row q-py-md q-px-lg text-caption text-center">
+
+    <div class="text-caption text-center q-px-md q-py-sm">
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
     </div>
   </div>

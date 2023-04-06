@@ -97,7 +97,6 @@
     </q-expansion-item>
     <SocialMediaFooter />
   </q-card>
-  <FooterComponent />
 </template>
 
 <script lang="ts">
@@ -106,7 +105,6 @@ import { useI18n } from 'vue-i18n';
 import { openURL, copyToClipboard } from 'quasar';
 
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
-import FooterComponent from 'src/components/FooterComponent.vue';
 
 import '../css/branches.scss';
 
@@ -114,7 +112,6 @@ export default {
   name: 'NyBranchPage',
   components: {
     SocialMediaFooter,
-    FooterComponent,
   },
   setup() {
     const { t } = useI18n();

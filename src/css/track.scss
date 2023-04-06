@@ -2,10 +2,22 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#home-body {
-  background-color: white;
+.track-container {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  top: 0;
-  left: 0;
+  min-height: 100vh;
+  margin-bottom: 50px; /* Add a margin equal to the height of the bottom item */
+  position: relative;
+}
+
+.search-button {
   position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .search-button {
+    bottom: 15%;
+  }
 }

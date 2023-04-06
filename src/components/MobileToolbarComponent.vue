@@ -6,11 +6,9 @@
     round
     dense
     icon="menu"
-    class="q-ml-xs"
   />
   <q-btn
     flat
-    class="q-pl-none"
     @click="
       $router.push({
         name: 'main',
@@ -18,7 +16,6 @@
     "
   >
     <div
-      class="q-pl-md"
       style="
         font-family: 'BodoniSvtyTwoSCITCTT-Book';
         font-size: large;

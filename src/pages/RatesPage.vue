@@ -56,19 +56,16 @@
       </q-list>
     </q-expansion-item>
   </div>
-  <FooterComponent />
 </template>
 
 <script lang="ts">
 import { onBeforeMount, computed } from 'vue';
 import { useQuasar } from 'quasar';
 
-import FooterComponent from 'src/components/FooterComponent.vue';
 import '../css/rates.scss';
 import { useStore } from 'src/store';
 
 export default {
-  components: { FooterComponent },
   setup() {
     const $store = useStore();
     const $q = useQuasar();

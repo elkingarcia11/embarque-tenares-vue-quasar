@@ -1,54 +1,15 @@
-#appTitle {
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+#app_layout {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 .tab-bar {
   width: 90vw;
 }
-
 #logo {
   width: 80%;
 }
 
-.bs-hrs {
-  display: flex;
-  flex-direction: column;
-  font-size: larger;
-  .title {
-    font-weight: bold;
-    font-size: larger;
-  }
-}
-
-.text-h5 {
-  font-weight: bold;
-}
-
 .labels {
   font-size: smaller;
-}
-
-.title:link {
-  color: white;
-  text-decoration: none;
-}
-
-/* visited link */
-.title:visited {
-  color: white;
-  text-decoration: none;
-}
-
-.title:hover {
-  color: $lightAccent;
-  text-decoration: none;
-}
-
-.scrollArea {
-  height: 100vh;
 }
 
 .dialogToolbar {
@@ -60,32 +21,28 @@
   white-space: break-spaces;
 }
 
-#specficTransactionBody {
-  background-color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .tabBarContainer {
-  position: absolute;
-  bottom: 23em;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
   text-align: center;
 }
 
-.invoiceForm {
-  position: relative;
-  top: 50;
-  left: 0;
+.tabBar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+.home-container {
+  min-height: 100vh;
+  position: relative;
+}
 @media (max-width: 600px) {
   .dialogToolbar {
     font-size: 20px;
+  }
+  #logoDiv {
+    margin-top: 0vh;
   }
 }

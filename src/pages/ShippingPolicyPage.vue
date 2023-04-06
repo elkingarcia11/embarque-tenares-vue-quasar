@@ -21,18 +21,13 @@
       Our company is backed by F.M.C. 01917n
     </div>
   </div>
-  <FooterComponent />
 </template>
 
 <script lang="ts">
-import FooterComponent from 'src/components/FooterComponent.vue';
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 export default {
   name: 'shipping-policy',
-  components: { FooterComponent },
   setup() {
-    const { t } = useI18n();
     const policies = ref<string[]>();
     policies.value = [
       '1',

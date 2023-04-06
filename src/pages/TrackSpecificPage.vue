@@ -7,8 +7,6 @@
       outlined
       v-model="invoiceText"
       :label="$t('trackPack')"
-      mask="############"
-      unmasked-value
     >
       <template v-slot:append>
         <q-btn
@@ -25,7 +23,7 @@
 
   <div v-if="onSubmitted">
     <q-item-section
-      class="q-my-lg text-h4 text-bold text-center"
+      class="q-py-lg text-h4 text-bold text-center"
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
       >{{ $t('track') }}</q-item-section
     >
@@ -39,7 +37,7 @@
     />
     <TrackError v-else :invoice="invoiceNumber" />
   </div>
-  <q-page-sticky position="bottom" :offset="[18, 18]">
+  <div class="search-button">
     <q-btn
       color="primary"
       style="width: 90vw; font-weight: bold"
@@ -47,7 +45,7 @@
       size="lg"
       @click="search"
     />
-  </q-page-sticky>
+  </div>
 
   <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
     <q-card style="width: 90vw">
@@ -81,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onBeforeMount, computed } from 'vue';
+import { Ref, ref, onBeforeMount, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
@@ -90,6 +88,7 @@ import CircularProg from 'src/components/CircularProg.vue';
 import TrackError from 'src/components/TrackError.vue';
 import { useStore } from 'src/store';
 
+import '../css/track.scss';
 export default {
   name: 'TrackSpecificPage',
   components: {
@@ -103,7 +102,7 @@ export default {
     const $router = useRouter();
     const { t } = useI18n();
 
-    const invoiceInputRef = ref<QInput>();
+    const invoiceInputRef: Ref<QInput | null> = ref(null);
 
     const invoiceText = ref('');
     const invoiceNumber = ref('');
@@ -131,9 +130,15 @@ export default {
       });
     };
 
+    const focusInput = () => {
+      const inputEl = invoiceInputRef.value?.$el.querySelector('input');
+      inputEl?.focus();
+    };
+
     const search = () => {
-      if (invoiceInputRef.value !== undefined) {
-        invoiceInputRef.value.focus();
+      if (invoiceText.value === '') {
+        console.log('text', invoiceText);
+        focusInput();
       } else {
         $router.push({
           name: 'search',
@@ -142,7 +147,7 @@ export default {
       }
     };
 
-    const submit = async (invoice: string | string[]) => {
+    const submit = (invoice: string | string[]) => {
       if (
         typeof invoice === 'string' &&
         invoice !== '' &&

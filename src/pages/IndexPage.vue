@@ -1,5 +1,5 @@
 <template>
-  <q-page-container id="home-body">
+  <div class="home-container">
     <q-form @submit="submit" class="invoiceForm">
       <q-input
         ref="invoiceInputRef"
@@ -8,7 +8,6 @@
         outlined
         v-model="invoiceText"
         :label="$t('trackPack')"
-        type="number"
       >
         <template v-slot:append>
           <q-btn
@@ -22,14 +21,21 @@
         </template>
       </q-input>
     </q-form>
-    <div id="logoDiv">
-      <q-img id="logo" src="../assets/logo.png" fit="contain" />
+    <div class="row flex-center q-py-xl">
+      <q-img
+        class="q-my-xl"
+        id="logo"
+        src="../assets/logo.png"
+        fit="contain"
+        :style="dynamicHeight"
+      />
     </div>
 
     <TabBar
       @focus-input="focusInput"
-      v-if="$q.platform.is.mobile"
+      class="tabBar"
       ref="tabBarRef"
+      v-if="$q.platform.is.mobile"
     />
     <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
       <q-card>
@@ -60,38 +66,35 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <FooterComponent />
-  </q-page-container>
+  </div>
 </template>
 
 <script lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, computed, onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
-
 import TabBar from 'src/components/TabBar.vue';
-import FooterComponent from 'src/components/FooterComponent.vue';
 
-import '../css/home.scss';
+import '../css/app.scss';
 
 export default {
   name: 'IndexPage',
   components: {
     TabBar,
-    FooterComponent,
   },
   setup() {
     const $router = useRouter();
     const $q = useQuasar();
     const { t } = useI18n();
+    const tabBarRef = ref<InstanceType<typeof TabBar> | null>(null);
 
     const invoiceText = ref('');
 
     const invoiceDialog = ref(false);
 
     const invoiceInputRef: Ref<QInput | null> = ref(null);
-
+      
     const focusInput = () => {
       const inputEl = invoiceInputRef.value?.$el.querySelector('input');
       inputEl?.focus();
@@ -101,6 +104,31 @@ export default {
       const inputEl = invoiceInputRef.value?.$el.querySelector('input');
       inputEl?.blur();
     };
+
+    const handleDismissKeyboard = (event: Event) => {
+      if (
+        event.type === 'blur' ||
+        (event instanceof KeyboardEvent && event.key === 'Escape')
+      ) {
+        if (tabBarRef.value) {
+          tabBarRef.value.dismiss();
+        }
+      }
+    };
+
+    onMounted(() => {
+      window.addEventListener('blur', handleDismissKeyboard);
+      window.addEventListener('keydown', handleDismissKeyboard);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('blur', handleDismissKeyboard);
+      window.removeEventListener('keydown', handleDismissKeyboard);
+    });
+
+    const dynamicHeight = computed(() => {
+      return $q.platform.is.mobile ? 'height: 33vh' : 'height: 50vh';
+    });
 
     const showNotif = () => {
       $q.notify({
@@ -132,7 +160,14 @@ export default {
       }
     };
 
-    return { invoiceText, invoiceDialog, invoiceInputRef, focusInput, submit };
+    return {
+      invoiceText,
+      invoiceDialog,
+      invoiceInputRef,
+      focusInput,
+      submit,
+      dynamicHeight,
+    };
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header class="text-light row">
-      <q-toolbar class="q-ml-none q-pl-none">
+  <q-layout view="hHh lpR fFf" id="app_layout">
+    <q-header>
+      <q-toolbar>
         <q-toolbar-title class="row">
           <ToolbarWrapper />
           <q-space />
@@ -41,20 +41,21 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
-    <q-page-container>
+    <q-page-container style="position: relative; min-height: 100vh">
       <router-view :key="$route.fullPath"></router-view>
     </q-page-container>
+    <FooterComponent />
   </q-layout>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-
+import FooterComponent from 'src/components/FooterComponent.vue';
 import ToolbarWrapper from '../components/ToolbarWrapper.vue';
-
 export default {
   components: {
+    FooterComponent,
     ToolbarWrapper,
   },
   setup() {

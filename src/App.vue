@@ -22,7 +22,6 @@ export default {
           .then((token) => {
             // Access user token
             $store.commit('invoice/setToken', token);
-            console.log($store.state.invoice.token);
           })
           .catch((error) => {
             console.log('Error getting user token:', error);

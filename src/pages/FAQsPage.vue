@@ -25,8 +25,6 @@
       </q-card>
     </q-expansion-item>
   </div>
-
-  <FooterComponent />
 </template>
 
 <script lang="ts">
@@ -36,15 +34,10 @@ import { useI18n } from 'vue-i18n';
 import { DocumentData } from 'firebase/firestore';
 import { useQuasar } from 'quasar';
 
-import FooterComponent from 'src/components/FooterComponent.vue';
-
 import '../css/faqs.scss';
 import { useStore } from 'src/store';
 
 export default {
-  components: {
-    FooterComponent,
-  },
   setup() {
     const $q = useQuasar();
     const $store = useStore();
