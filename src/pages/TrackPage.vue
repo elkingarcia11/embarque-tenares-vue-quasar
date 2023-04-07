@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { Ref, computed, ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
 import { useStore } from 'src/store';
@@ -104,11 +104,11 @@ export default {
 
     const invoiceDialog = ref(false);
     const onSubmitted = ref(false);
-    const querySuccess = computed(() => $store.state.invoice.querySuccess);
 
-    const enDate = computed(() => $store.state.invoice.enDate);
-    const esDate = computed(() => $store.state.invoice.esDate);
-    const percent = computed(() => $store.state.invoice.percent);
+    const querySuccess = ref(false);
+    const enDate = ref('');
+    const esDate = ref('');
+    const percent = ref(0);
 
     const showNotif = () => {
       $q.notify({
@@ -130,7 +130,8 @@ export default {
       inputEl?.blur();
     };
 
-    const submit = () => {
+    const submit = async () => {
+      $q.loading.show();
       if (
         invoiceText.value === '' ||
         previousInvoice.value === invoiceText.value
@@ -143,22 +144,24 @@ export default {
       ) {
         const n = Number(invoiceText.value);
         if (n > 0) {
-          $q.loading.show();
-
           blurInput();
           previousInvoice.value = invoiceText.value;
           invoiceNumber.value = invoiceText.value;
           const url = '/invoice/' + invoiceText.value;
-          $store.dispatch('invoice/fetchInvoice', url);
-          onSubmitted.value = true;
 
-          $q.loading.hide();
+          const response = await $store.dispatch('invoice/fetchInvoice', url);
+          querySuccess.value = response.querySuccess;
+          enDate.value = response.enDate;
+          esDate.value = response.esDate;
+          percent.value = response.percent;
+          onSubmitted.value = true;
         } else {
           showNotif();
         }
       } else {
         showNotif();
       }
+      $q.loading.hide();
     };
 
     return {

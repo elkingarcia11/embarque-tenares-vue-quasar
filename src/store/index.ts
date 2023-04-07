@@ -9,9 +9,11 @@ import {
 import faqs from './faqs';
 import rates from './rates';
 import invoice from './invoice';
+import auth from './auth';
 import { FaqsStateInterface } from './faqs/state';
 import { InvoiceStateInterface } from './invoice/state';
 import { RatesStateInterface } from './rates/state';
+import { AuthStateInterface } from './auth/state';
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -29,6 +31,7 @@ export interface StateInterface {
   rates: RatesStateInterface;
   faqs: FaqsStateInterface;
   invoice: InvoiceStateInterface;
+  auth: AuthStateInterface;
 }
 
 // provide typings for `this.$store`
@@ -50,7 +53,7 @@ declare module 'vuex' {
 }
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
-    modules: { rates, faqs, invoice },
+    modules: { rates, faqs, invoice, auth },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

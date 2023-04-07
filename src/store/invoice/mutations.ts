@@ -11,9 +11,6 @@ const mutation: MutationTree<InvoiceStateInterface> = {
     state.percent = payload.percent;
     state.querySuccess = payload.querySuccess;
   },
-  setToken(state, payload: string) {
-    state.token = payload;
-  },
 };
 
 export default mutation;

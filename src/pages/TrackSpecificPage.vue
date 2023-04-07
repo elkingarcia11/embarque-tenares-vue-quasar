@@ -79,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { Ref, ref, onBeforeMount, computed } from 'vue';
+import { Ref, ref, onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
@@ -107,11 +107,14 @@ export default {
 
     const invoiceText = ref('');
     const invoiceNumber = ref('');
-    const enDate = computed(() => $store.state.invoice.enDate);
-    const esDate = computed(() => $store.state.invoice.esDate);
-    const percent = computed(() => $store.state.invoice.percent);
+
     const onSubmitted = ref(false);
-    const querySuccess = computed(() => $store.state.invoice.querySuccess);
+
+    const querySuccess = ref(false);
+    const enDate = ref('');
+    const esDate = ref('');
+    const percent = ref(0);
+
     const invoiceDialog = ref(false);
 
     onBeforeMount(async () => {
@@ -167,11 +170,16 @@ export default {
       }
     };
 
-    const retrieveInvoiceInfo = (invoice: string) => {
-      onSubmitted.value = true;
+    const retrieveInvoiceInfo = async (invoice: string) => {
       invoiceNumber.value = invoice;
       const url = '/invoice/' + invoice;
-      $store.dispatch('invoice/fetchInvoice', url);
+      
+      const response = await $store.dispatch('invoice/fetchInvoice', url);
+      querySuccess.value = response.querySuccess;
+      enDate.value = response.enDate;
+      esDate.value = response.esDate;
+      percent.value = response.percent;
+      onSubmitted.value = true;
     };
 
     return {
