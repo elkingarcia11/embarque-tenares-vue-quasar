@@ -30,6 +30,7 @@
     :width="300"
     :breakpoint="500"
     overlay
+    overflow-auto
     bordered
     class="bg-white menuDrawer"
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
@@ -37,7 +38,7 @@
     <q-list>
       <template v-for="(menuItem, index) in menuList" :key="index">
         <q-item
-          class="text-h5 q-py-md q-px-l"
+          class="text-h4 q-py-md q-px-l"
           v-if="menuItem.label !== 'branch'"
           clickable
           @click="navigateToRoute(menuItem.route)"
@@ -47,6 +48,7 @@
             <q-avatar
               :icon="menuItem.icon"
               color="primary"
+              size="xl"
               text-color="white"
             />
           </q-item-section>
@@ -59,13 +61,14 @@
           clickable
           :label="$t(menuItem.label)"
           default-closed
-          header-class="q-py-md text-h5"
+          header-class="q-py-md text-h4"
         >
           <template v-slot:header>
             <q-item-section avatar>
               <q-avatar
                 :icon="menuItem.icon"
                 color="primary"
+                size="xl"
                 text-color="white"
               />
             </q-item-section>
@@ -75,7 +78,7 @@
             </q-item-section>
           </template>
           <q-item
-            class="text-h5 q-py-md q-pl-xl row"
+            class="text-h4 q-py-md q-pl-xl row"
             v-for="(subMenuItem, index) in subMenuList"
             :key="index"
             clickable
@@ -85,6 +88,7 @@
             <q-avatar
               :icon="subMenuItem.icon"
               color="primary"
+              size="xl"
               text-color="white"
             />
             <q-item-section class="q-pl-md text-black">
