@@ -48,7 +48,7 @@
             <q-avatar
               :icon="menuItem.icon"
               color="primary"
-              size="xl"
+              size="lg"
               text-color="white"
             />
           </q-item-section>
@@ -68,7 +68,7 @@
               <q-avatar
                 :icon="menuItem.icon"
                 color="primary"
-                size="xl"
+                size="lg"
                 text-color="white"
               />
             </q-item-section>
@@ -88,7 +88,7 @@
             <q-avatar
               :icon="subMenuItem.icon"
               color="primary"
-              size="xl"
+              size="lg"
               text-color="white"
             />
             <q-item-section class="q-pl-md text-black">

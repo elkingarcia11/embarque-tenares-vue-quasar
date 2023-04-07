@@ -135,7 +135,6 @@ export default {
         invoiceText.value === '' ||
         previousInvoice.value === invoiceText.value
       ) {
-        console.log('BASE CASE');
         focusInput();
       } else if (
         typeof invoiceText.value === 'string' &&
@@ -165,6 +164,7 @@ export default {
     return {
       submit,
       invoiceText,
+      invoiceInputRef,
       invoiceDialog,
       onSubmitted,
       querySuccess,

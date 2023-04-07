@@ -1,7 +1,5 @@
 <template>
-  <div>
-    
-  </div>
+  <div></div>
   <q-form @submit="submit" class="invoiceForm">
     <q-input
       ref="invoiceInputRef"

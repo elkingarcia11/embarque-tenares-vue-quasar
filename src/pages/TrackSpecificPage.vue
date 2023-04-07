@@ -89,6 +89,7 @@ import TrackError from 'src/components/TrackError.vue';
 import { useStore } from 'src/store';
 
 import '../css/track.scss';
+
 export default {
   name: 'TrackSpecificPage',
   components: {
@@ -136,7 +137,10 @@ export default {
     };
 
     const search = () => {
-      if (invoiceText.value === '') {
+      if (
+        invoiceText.value === '' ||
+        $route.params.invoice === invoiceText.value
+      ) {
         focusInput();
       } else {
         $router.push({
@@ -173,6 +177,7 @@ export default {
     return {
       search,
       invoiceText,
+      invoiceInputRef,
       invoiceDialog,
       onSubmitted,
       querySuccess,
