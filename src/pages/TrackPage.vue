@@ -16,7 +16,6 @@
           icon="quiz"
           @click="invoiceDialog = true"
         />
-        <q-btn flat round color="primary" icon="search" @click="submit" />
       </template>
     </q-input>
   </q-form>
@@ -132,7 +131,11 @@ export default {
     };
 
     const submit = () => {
-      if (invoiceText.value === '') {
+      if (
+        invoiceText.value === '' ||
+        previousInvoice.value === invoiceText.value
+      ) {
+        console.log('BASE CASE');
         focusInput();
       } else if (
         typeof invoiceText.value === 'string' &&

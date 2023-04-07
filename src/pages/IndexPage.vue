@@ -1,9 +1,12 @@
 <template>
+  <div>
+    
+  </div>
   <q-form @submit="submit" class="invoiceForm">
     <q-input
       ref="invoiceInputRef"
       square
-      class="window-width overflow-hidden bg-white"
+      class="bg-white"
       outlined
       @blur="handleDismiss"
       v-model="invoiceText"
@@ -17,7 +20,6 @@
           icon="quiz"
           @click="invoiceDialog = true"
         />
-        <q-btn flat round color="primary" icon="search" @click="submit" />
       </template>
     </q-input>
   </q-form>
@@ -126,7 +128,7 @@ export default {
 
     const submit = () => {
       if (invoiceText.value === '') {
-        focusInput();
+        blurInput();
       } else if (Number.isInteger(parseInt(invoiceText.value, 10))) {
         const n = Number(invoiceText.value);
         if (n > 0) {

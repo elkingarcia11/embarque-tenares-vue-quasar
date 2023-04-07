@@ -1,5 +1,5 @@
 <template>
-  <q-card class="tab-bar tabBarContainer">
+  <q-card class="tab-bar">
     <q-btn-toggle
       spread
       :ripple="false"
