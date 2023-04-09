@@ -20,7 +20,7 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
         appId = d['App-Id'];
         apiKey = d['Api-Key'];
       } else {
-        throw Error('ERROR CODE 01: Failed to retrieve authentication fields.');
+        throw Error();
       }
     }
 
@@ -32,7 +32,7 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
       if (typeof t === 'string') {
         token = t;
       } else {
-        throw Error('ERROR CODE 01: Failed to retrieve authentication fields.');
+        throw Error();
       }
     }
 

@@ -35,7 +35,7 @@
     />
     <TrackError v-else :invoice="invoiceNumber" />
   </div>
-  <div class="search-button">
+  <div :class="searchButtonClass">
     <q-btn
       color="primary"
       style="width: 90vw; font-weight: bold"
@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { QInput, useQuasar } from 'quasar';
 import { useStore } from 'src/store';
@@ -129,7 +129,11 @@ export default {
       const inputEl = invoiceInputRef.value?.$el.querySelector('input');
       inputEl?.blur();
     };
-
+    const searchButtonClass = computed(() =>
+      querySuccess.value && $q.platform.is.mobile
+        ? 'search-button-mobile'
+        : 'search-button'
+    );
     const submit = async () => {
       $q.loading.show();
       if (
@@ -149,11 +153,18 @@ export default {
           invoiceNumber.value = invoiceText.value;
           const url = '/invoice/' + invoiceText.value;
 
-          const response = await $store.dispatch('invoice/fetchInvoice', url);
-          querySuccess.value = response.querySuccess;
-          enDate.value = response.enDate;
-          esDate.value = response.esDate;
-          percent.value = response.percent;
+          try {
+            const response = await $store.dispatch('invoice/fetchInvoice', url);
+            querySuccess.value = response.querySuccess;
+            enDate.value = response.enDate;
+            esDate.value = response.esDate;
+            percent.value = response.percent;
+          } catch {
+            querySuccess.value = false;
+            enDate.value = '';
+            esDate.value = '';
+            percent.value = 0;
+          }
           onSubmitted.value = true;
         } else {
           showNotif();
@@ -166,6 +177,7 @@ export default {
 
     return {
       submit,
+      searchButtonClass,
       invoiceText,
       invoiceInputRef,
       invoiceDialog,

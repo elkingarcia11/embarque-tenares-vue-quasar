@@ -6,7 +6,6 @@ import { api } from 'boot/axios';
 
 import db from 'src/boot/firebase';
 import { ref } from 'vue';
-
 const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
   async fetchEtaDays({ commit, state }) {
     const docRef = doc(db, 'eta/eta_days');
@@ -27,49 +26,53 @@ const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
     } else {
       eta.value = state.etaDays;
     }
-    const header = await dispatch('auth/fetchAuthData', null, { root: true });
-    const response = await api.get(payload, { headers: header });
+    try {
+      const header = await dispatch('auth/fetchAuthData', null, { root: true });
+      const response = await api.get(payload, { headers: header });
 
-    if (response.status >= 200 && response.status <= 299) {
-      const a = new Date(response.data.response[0].date);
-      const b = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      };
+      if (response.status >= 200 && response.status <= 299) {
+        const a = new Date(response.data.response[0].date);
+        const b = new Date();
+        const options: Intl.DateTimeFormatOptions = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        };
 
-      a.setDate(a.getDate() + 25);
-      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-      // Discard the time and time-zone information.
-      const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-      const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+        a.setDate(a.getDate() + 25);
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-      const enDate = a.toLocaleDateString('en-US', options);
-      const esDate = a.toLocaleDateString('es-US', options);
-      const dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
-      const percent = ref(0);
+        const enDate = a.toLocaleDateString('en-US', options);
+        const esDate = a.toLocaleDateString('es-US', options);
+        const dLeft = Math.floor((utc1 - utc2) / _MS_PER_DAY);
+        const percent = ref(0);
 
-      if (dLeft <= 0) {
-        percent.value = 100;
+        if (dLeft <= 0) {
+          percent.value = 100;
+        } else {
+          percent.value = (1 - dLeft / eta.value) * 100;
+        }
+        const invoiceResponse = {
+          enDate: enDate,
+          esDate: esDate,
+          percent: percent.value,
+          querySuccess: true,
+        };
+        return invoiceResponse;
       } else {
-        percent.value = (1 - dLeft / eta.value) * 100;
+        const invoiceResponse = {
+          enDate: '',
+          esDate: '',
+          percent: 0,
+          querySuccess: false,
+        };
+        return invoiceResponse;
       }
-      const invoiceResponse = {
-        enDate: enDate,
-        esDate: esDate,
-        percent: percent.value,
-        querySuccess: true,
-      };
-      return invoiceResponse;
-    } else {
-      const invoiceResponse = {
-        enDate: '',
-        esDate: '',
-        percent: 0,
-        querySuccess: false,
-      };
-      return invoiceResponse;
+    } catch {
+      throw Error();
     }
   },
 };
