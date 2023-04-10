@@ -33,7 +33,7 @@ jobs:
       - name: Push Docker Image to Artifact Registry
         env:
           GIT_TAG: v0.1.0
-        run:
+        run: |-
           docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
           docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
           docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
