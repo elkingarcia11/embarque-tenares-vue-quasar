@@ -6,6 +6,7 @@ on:
 jobs:
   build-push-gcr:
     name: Build and push to GCP
+    runs-on: ubuntu-latest
     env:
       REGION_NAME: us-east1-docker.pkg.dev
       PROJECT_ID: extended-poetry-223323
