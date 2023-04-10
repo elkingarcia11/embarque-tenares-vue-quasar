@@ -14,8 +14,9 @@ jobs:
       IMAGE_NAME: web-tenares-image
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
+      -id: "auth"
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
@@ -27,13 +28,12 @@ jobs:
         run: docker buildx build --platform=linux/amd64 -t $IMAGE_NAME:latest .
 
       - name: Configure Docker client
-        run: |-
-          gcloud auth configure-docker --quiet
+        run: gcloud auth configure-docker --quiet
 
       - name: Push Docker Image to Artifact Registry
         env:
           GIT_TAG: v0.1.0
-        run: |-
+        run:
           docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
           docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
           docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
