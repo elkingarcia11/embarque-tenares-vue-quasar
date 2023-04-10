@@ -1,6 +1,8 @@
+---
 name: Build and Push Quasar / Nginx image to Google Cloud Platform
 on:
-  push: [main]
+  push:
+    branches: [main]
 jobs:
   build-push-gcr:
     name: Build and push to GCP
