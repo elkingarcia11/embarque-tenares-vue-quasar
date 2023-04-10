@@ -1,9 +1,6 @@
-name:
-Build and push
-Quasar / Nginx image to Google Cloud Platform
+name: Build and Push Quasar / Nginx image to Google Cloud Platform
 on:
-
-  push: [ main ]
+  push: [main]
 jobs:
   build-push-gcr:
     name: Build and push to GCP
@@ -14,27 +11,27 @@ jobs:
       REGISTRY_NAME: web-tenares
       IMAGE_NAME: web-tenares-image
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - uses: google-github-actions/setup-gcloud@master
-      with:
-        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        project_id: ${{ env.PROJECT_ID }}
-        export_default_credentials: true
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ env.PROJECT_ID }}
+          export_default_credentials: true
 
-    - name: Build Docker Image
-      run: docker buildx build -t $IMAGE_NAME:latest .
+      - name: Build Docker Image
+        run: docker buildx build -t $IMAGE_NAME:latest .
 
-    - name: Configure Docker client
-      run: |-
-        gcloud auth configure-docker --quiet
+      - name: Configure Docker client
+        run: |-
+          gcloud auth configure-docker --quiet
 
-    - name: Push Docker Image to Artifact Registry
-      env:
-        GIT_TAG: v0.1.0
-      run: |-
-        docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
-        docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
-        docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
-        docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
+      - name: Push Docker Image to Artifact Registry
+        env:
+          GIT_TAG: v0.1.0
+        run: |-
+          docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+          docker tag $IMAGE_NAME:latest $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
+          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:$GIT_TAG
