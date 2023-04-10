@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      -id: "auth"
+      - name: 'Set up Cloud auth'
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
