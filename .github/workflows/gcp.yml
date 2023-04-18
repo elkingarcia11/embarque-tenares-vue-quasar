@@ -16,12 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up gcloud CLI
-        uses: google-github-actions/setup-gcloud@v1
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
         with:
-          version: '>= 363.0.0'
-          project_id: $PROJECT_ID
-          service_account_key: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Build Docker image
         run: |
