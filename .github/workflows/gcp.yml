@@ -24,11 +24,10 @@ jobs:
 
       - name: 'Authenticate region'
         run: |
-        gcloud auth configure-docker $REGION_NAME
+          gcloud auth configure-docker $REGION_NAME
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
-
 
       - name: 'Build Docker image'
         run: |
