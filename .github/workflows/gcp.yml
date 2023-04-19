@@ -24,8 +24,8 @@ jobs:
           credentials_json: $GCP_CREDENTIALS
 
       - name: 'Authenticate Service Account'
-      run: |
-        gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=$GCP_CREDENTIALS --project=$PROJECT_ID
+        run: |
+          gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=$GCP_CREDENTIALS --project=$PROJECT_ID
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
