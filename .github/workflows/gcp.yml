@@ -12,6 +12,8 @@ jobs:
       PROJECT_ID: extended-poetry-223323
       REGISTRY_NAME: web-tenares
       IMAGE_NAME: web-tenares-image
+      SERVICE_ACCOUNT: github-actions@extended-poetry-223323.iam.gserviceaccount.com
+      GCP_CREDENTIALS: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,7 +21,11 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+          credentials_json: $GCP_CREDENTIALS
+
+      -name: 'Authenticate Service Account'
+      run: |
+        gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=$GCP_CREDENTIALS --project=$PROJECT_ID
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
