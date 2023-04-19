@@ -28,6 +28,7 @@ jobs:
       - name: 'Authenticate region'
         run: |
         gcloud auth configure-docker $REGION_NAME
+
       - name: 'Build Docker image'
         run: |
           docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
