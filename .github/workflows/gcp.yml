@@ -13,7 +13,7 @@ jobs:
       REGISTRY_NAME: web-tenares
       IMAGE_NAME: web-tenares-image
       SERVICE_ACCOUNT: github-actions@extended-poetry-223323.iam.gserviceaccount.com
-      GCP_CREDENTIALS: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+      GCP_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
