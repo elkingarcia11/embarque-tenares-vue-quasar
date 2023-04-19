@@ -31,4 +31,4 @@ jobs:
 
       - name: 'Push Docker image'
         run: |
-          docker push https://$REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
