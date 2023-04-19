@@ -29,10 +29,6 @@ jobs:
         run: |
           docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
 
-      - name: 'Tag Docker image'
-        run: |
-          docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME \ $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
-
       - name: 'Push Docker image'
         run: |
           docker push https://$REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
