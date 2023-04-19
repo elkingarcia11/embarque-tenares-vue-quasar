@@ -8,7 +8,7 @@ jobs:
     name: Build and push to GCP
     runs-on: ubuntu-latest
     env:
-      REGION_NAME: us-east1-docker.pkg.dev
+      REGION_NAME: https://us-east1-docker.pkg.dev
       PROJECT_ID: extended-poetry-223323
       REGISTRY_NAME: web-tenares
       IMAGE_NAME: web-tenares-image
@@ -22,22 +22,17 @@ jobs:
         with:
           credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
 
-      - name: 'Authenticate Service Account'
-        run: |
-          gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file='${{ secrets.SERVICE_ACCOUNT_KEY }}' --project=$PROJECT_ID
-
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: 'Build Docker image'
         run: |
-          docker buildx build --platform=linux/amd64 -t us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image .
+          docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
 
       - name: 'Tag Docker image'
         run: |
-          docker tag us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image \
-            us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image
+          docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME \ $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
 
       - name: 'Push Docker image'
         run: |
-          docker push us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image
+          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
