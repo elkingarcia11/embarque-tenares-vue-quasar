@@ -23,7 +23,7 @@ jobs:
         with:
           credentials_json: $GCP_CREDENTIALS
 
-      -name: 'Authenticate Service Account'
+      - name: 'Authenticate Service Account'
       run: |
         gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=$GCP_CREDENTIALS --project=$PROJECT_ID
 
