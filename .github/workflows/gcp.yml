@@ -8,7 +8,7 @@ jobs:
     name: Build and push to GCP
     runs-on: ubuntu-latest
     env:
-      REGION_NAME: https://us-east1-docker.pkg.dev
+      REGION_NAME: us-east1-docker.pkg.dev
       PROJECT_ID: extended-poetry-223323
       REGISTRY_NAME: web-tenares
       IMAGE_NAME: web-tenares-image
@@ -35,4 +35,4 @@ jobs:
 
       - name: 'Push Docker image'
         run: |
-          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+          docker push https://$REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
