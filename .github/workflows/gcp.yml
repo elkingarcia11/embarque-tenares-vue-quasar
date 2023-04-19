@@ -31,7 +31,7 @@ jobs:
 
       - name: 'Tag Docker image'
         run: |
-          docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME \$REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+          docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME \ $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
 
       - name: 'Push Docker image'
         run: |
