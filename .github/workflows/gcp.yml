@@ -4,26 +4,10 @@ on:
   push:
     branches: [main]
 jobs:
-  setup-gcr:
+  build-push-gcr:
     name: Configure GCP
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
-
-      - name: 'Authenticate region'
-        run: |
-          gcloud auth configure-docker $REGION_NAME
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
-
-  build-push:
     name: Build image and push to GCP
     runs-on: ubuntu-latest
     env:
@@ -46,6 +30,7 @@ jobs:
       FIREBASE_MESSAGING_SENDER_ID: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}'
       FIREBASE_APP_ID: '${{ secrets.FIREBASE_APP_ID }}'
       FIREBASE_MEASUREMENT_ID: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
+
     steps:
       - name: 'Export env variables'
         run: |
@@ -63,6 +48,21 @@ jobs:
             FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID \
             FIREBASE_APP_ID=$FIREBASE_APP_ID \
             FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+
+      - name: 'Authenticate region'
+        run: |
+          gcloud auth configure-docker $REGION_NAME
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: 'Build Docker image'
         run: docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
