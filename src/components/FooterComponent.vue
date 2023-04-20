@@ -87,7 +87,7 @@
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
     </div>
 
-    <div>CI/CD Test</div>
+    <div>CI/CD Testt</div>
   </div>
 </template>
 
