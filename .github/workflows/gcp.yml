@@ -7,13 +7,6 @@ jobs:
   setup-gcr:
     name: Configure GCP
     runs-on: ubuntu-latest
-    env:
-      REGION_NAME: 'us-east1-docker.pkg.dev'
-      PROJECT_ID: 'extended-poetry-223323'
-      REGISTRY_NAME: 'web-tenares'
-      IMAGE_NAME: 'web-tenares-image'
-      SERVICE_ACCOUNT: 'github-actions@extended-poetry-223323.iam.gserviceaccount.com'
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,6 +27,11 @@ jobs:
     name: Build image to push to GCP
     runs-on: ubuntu-latest
     env:
+      REGION_NAME: 'us-east1-docker.pkg.dev'
+      PROJECT_ID: 'extended-poetry-223323'
+      REGISTRY_NAME: 'web-tenares'
+      IMAGE_NAME: 'web-tenares-image'
+      SERVICE_ACCOUNT: 'github-actions@extended-poetry-223323.iam.gserviceaccount.com'
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       FIREBASE_USERNAME: ${{ secrets.FIREBASE_USERNAME }}
       FIREBASE_PASSWORD: ${{ secrets.FIREBASE_PASSWORD }}
