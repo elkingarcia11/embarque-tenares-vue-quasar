@@ -12,7 +12,7 @@ jobs:
       PROJECT_ID: 'extended-poetry-223323'
       REGISTRY_NAME: 'web-tenares'
       IMAGE_NAME: 'web-tenares-image'
-      SERVICE_ACCOUNT: github-actions@extended-poetry-223323.iam.gserviceaccount.com
+      SERVICE_ACCOUNT: 'github-actions@extended-poetry-223323.iam.gserviceaccount.com'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
