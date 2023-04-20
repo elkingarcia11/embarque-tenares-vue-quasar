@@ -1,5 +1,5 @@
 ---
-name: Build and Push Quasar / Nginx image to Google Cloud Platform
+name: Build and Push Vue/Quasar/Nginx image to Google Cloud Platform
 on:
   push:
     branches: [main]
@@ -24,7 +24,7 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v1'
 
   build-push:
-    name: Build image to push to GCP
+    name: Build image and push to GCP
     runs-on: ubuntu-latest
     env:
       REGION_NAME: 'us-east1-docker.pkg.dev'
@@ -47,17 +47,15 @@ jobs:
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
     steps:
-      - name: Echo variables
+      - name: 'Export env variables'
         run: |
-        export $GOOGLE_MAPS_API_KEY $FIREBASE_USERNAME $FIREBASE_PASSWORD \
-          $HECTOR_BASE_URL $HECTOR_USERNAME $HECTOR_TYPE $FIREBASE_API_KEY \
-          $FIREBASE_AUTH_DOMAIN $FIREBASE_DATABASE_URL $FIREBASE_PROJECT_ID $FIREBASE_STORAGE_BUCKET \
-          $FIREBASE_MESSAGING_SENDER_ID $FIREBASE_APP_ID $FIREBASE_MEASUREMENT_ID
+          export $GOOGLE_MAPS_API_KEY $FIREBASE_USERNAME $FIREBASE_PASSWORD \
+            $HECTOR_BASE_URL $HECTOR_USERNAME $HECTOR_TYPE $FIREBASE_API_KEY \
+            $FIREBASE_AUTH_DOMAIN $FIREBASE_DATABASE_URL $FIREBASE_PROJECT_ID $FIREBASE_STORAGE_BUCKET \
+            $FIREBASE_MESSAGING_SENDER_ID $FIREBASE_APP_ID $FIREBASE_MEASUREMENT_ID
 
       - name: 'Build Docker image'
-        run: |
-          docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
+        run: docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
 
       - name: Push Docker image
-        run: |
-          docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+        run: docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
