@@ -93,6 +93,7 @@
 import { openURL } from 'quasar';
 import '../css/footer.scss';
 
+
 export default {
   setup() {
     const callNy = () => {
