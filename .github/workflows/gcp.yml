@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
 jobs:
-  build-push-gcr:
-    name: Build and push to GCP
+  setup-gcr:
+    name: Configure GCP
     runs-on: ubuntu-latest
     env:
       REGION_NAME: 'us-east1-docker.pkg.dev'
@@ -13,20 +13,6 @@ jobs:
       REGISTRY_NAME: 'web-tenares'
       IMAGE_NAME: 'web-tenares-image'
       SERVICE_ACCOUNT: 'github-actions@extended-poetry-223323.iam.gserviceaccount.com'
-      GOOGLE_MAPS_API_KEY: '${{ secrets.GOOGLE_MAPS_API_KEY }}'
-      FIREBASE_USERNAME: '${{ secrets.FIREBASE_USERNAME }}'
-      FIREBASE_PASSWORD: '${{ secrets.FIREBASE_PASSWORD }}'
-      HECTOR_BASE_URL: '${{ secrets.HECTOR_BASE_URL }}'
-      HECTOR_USERNAME: '${{ secrets.HECTOR_USERNAME }}'
-      HECTOR_TYPE: '${{ secrets.HECTOR_TYPE }}'
-      FIREBASE_API_KEY: '${{ secrets.FIREBASE_API_KEY }}'
-      FIREBASE_AUTH_DOMAIN: '${{ secrets.FIREBASE_AUTH_DOMAIN }}'
-      FIREBASE_DATABASE_URL: '${{ secrets.FIREBASE_DATABASE_URL }}'
-      FIREBASE_PROJECT_ID: '${{ secrets.FIREBASE_PROJECT_ID }}'
-      FIREBASE_STORAGE_BUCKET: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'
-      FIREBASE_MESSAGING_SENDER_ID: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}'
-      FIREBASE_APP_ID: '${{ secrets.FIREBASE_APP_ID }}'
-      FIREBASE_MEASUREMENT_ID: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
 
     steps:
       - name: Checkout code
@@ -43,6 +29,32 @@ jobs:
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
+
+  build-push:
+    name: Build image to push to GCP
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      FIREBASE_USERNAME: ${{ secrets.FIREBASE_USERNAME }}
+      FIREBASE_PASSWORD: ${{ secrets.FIREBASE_PASSWORD }}
+      HECTOR_BASE_URL: ${{ secrets.HECTOR_BASE_URL }}
+      HECTOR_USERNAME: ${{ secrets.HECTOR_USERNAME }}
+      HECTOR_TYPE: ${{ secrets.HECTOR_TYPE }}
+      FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+      FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+      FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+      FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+      FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+    steps:
+      - name: Echo variables
+        run: |
+        export $GOOGLE_MAPS_API_KEY $FIREBASE_USERNAME $FIREBASE_PASSWORD \
+          $HECTOR_BASE_URL $HECTOR_USERNAME $HECTOR_TYPE $FIREBASE_API_KEY \
+          $FIREBASE_AUTH_DOMAIN $FIREBASE_DATABASE_URL $FIREBASE_PROJECT_ID $FIREBASE_STORAGE_BUCKET \
+          $FIREBASE_MESSAGING_SENDER_ID $FIREBASE_APP_ID $FIREBASE_MEASUREMENT_ID
 
       - name: 'Build Docker image'
         run: |
