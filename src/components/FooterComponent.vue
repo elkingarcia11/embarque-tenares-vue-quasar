@@ -86,8 +86,6 @@
     <div class="text-caption text-center q-px-md q-py-sm">
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
     </div>
-
-    <div>CI/CD Testt</div>
   </div>
 </template>
 
