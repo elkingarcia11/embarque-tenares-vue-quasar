@@ -86,13 +86,15 @@
     <div class="text-caption text-center q-px-md q-py-sm">
       © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
     </div>
+    <div class="text-caption text-center q-px-md q-py-sm">
+      © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { openURL } from 'quasar';
 import '../css/footer.scss';
-
 
 export default {
   setup() {
