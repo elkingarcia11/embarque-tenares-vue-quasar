@@ -15,6 +15,7 @@ import { InvoiceStateInterface } from './invoice/state';
 import { RatesStateInterface } from './rates/state';
 import { AuthStateInterface } from './auth/state';
 
+import process from 'process';
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
 

@@ -141,6 +141,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { openURL, copyToClipboard } from 'quasar';
 
+import process from 'process';
 import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 
 import '../css/branches.scss';

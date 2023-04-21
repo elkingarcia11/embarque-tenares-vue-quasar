@@ -9,6 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
 /* eslint-disable @typescript-eslint/no-var-requires */
+const process = require('process');
 const path = require('path');
 const { configure } = require('quasar/wrappers');
 
