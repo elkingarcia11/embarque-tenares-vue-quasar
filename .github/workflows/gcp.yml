@@ -43,8 +43,10 @@ jobs:
             FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET \
             FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID \
             FIREBASE_APP_ID=$FIREBASE_APP_ID \
-            FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID \
-            echo $GMAP \
+            FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID
+
+      - name: 'PRINT ECHO'
+        run: echo $GMAP
 
       - name: Checkout code
         uses: actions/checkout@v2
