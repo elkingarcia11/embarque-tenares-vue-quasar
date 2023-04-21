@@ -15,6 +15,7 @@ yarn add --dev dotenv
 yarn add firebase
 yarn add vuex
 yarn global add @quasar/icongenie
+yarn add process
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
