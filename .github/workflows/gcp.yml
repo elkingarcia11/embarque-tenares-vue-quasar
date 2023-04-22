@@ -51,7 +51,7 @@ jobs:
       - name: Push Docker image
         run: docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
 
-      - id: 'Deploy Artifact Registry image to GCP'
+      - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
           service: $IMAGE_NAME
