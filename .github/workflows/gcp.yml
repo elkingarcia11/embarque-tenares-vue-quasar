@@ -55,4 +55,4 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
           service: $IMAGE_NAME
-          image: $IMAGE_NAME
+          image: $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
