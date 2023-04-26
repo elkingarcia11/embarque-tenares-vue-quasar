@@ -74,4 +74,4 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
           service: 'extended-poetry-223323'
-          image: 'us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image'
+          image: 'web-tenares-image'
