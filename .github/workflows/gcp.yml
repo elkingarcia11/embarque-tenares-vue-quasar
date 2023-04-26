@@ -75,3 +75,4 @@ jobs:
         with:
           service: 'extended-poetry-223323'
           image: 'web-tenares-image'
+          region: us-east1
