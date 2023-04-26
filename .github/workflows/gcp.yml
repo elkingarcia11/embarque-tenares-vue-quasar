@@ -69,3 +69,9 @@ jobs:
 
       - name: Push Docker image
         run: docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+
+      - id: 'deploy'
+            uses: 'google-github-actions/deploy-cloudrun@v1'
+            with:
+              service: 'extended-poetry-223323'
+              image: 'us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image'
