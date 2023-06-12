@@ -118,15 +118,14 @@ export default {
     const invoiceDialog = ref(false);
 
     onBeforeMount(async () => {
-      $q.loading.show();
       if (typeof $route.params.invoice === 'string') {
         invoiceText.value = $route.params.invoice;
       }
       await submit($route.params.invoice);
-      $q.loading.hide();
     });
 
     const showNotif = () => {
+      $q.loading.hide();
       $q.notify({
         message: t('invalidInvoice'),
         type: 'negative',
@@ -152,6 +151,7 @@ export default {
       ) {
         focusInput();
       } else {
+        $q.loading.show();
         $router.push({
           name: 'search',
           params: { invoice: invoiceText.value },
@@ -185,11 +185,13 @@ export default {
         enDate.value = response.enDate;
         esDate.value = response.esDate;
         percent.value = response.percent;
+        $q.loading.hide();
       } catch {
         querySuccess.value = false;
         enDate.value = '';
         esDate.value = '';
         percent.value = 0;
+        $q.loading.hide();
       }
       onSubmitted.value = true;
     };
