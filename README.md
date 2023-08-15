@@ -44,31 +44,24 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 
 <b> Desktop </b>
 
-<tr>
-![Landing Page](./images/w1.png)
-![Track Page](./images/w2.png)
-![Rates Page](./images/w3.png)
-![FAQs Page](./images/w4.png)
-![Location Page](./images/w5.png)
-![Policy Page](./images/w6.png)
-![Landing Page](./images/m1.jpg)
-![Track Page](./images/m2.jpg)
-![Rates Page](./images/m3.jpg)
-![FAQs Page](./images/m4.jpg)
-![Location Page](./images/m6.jpg)
-![Policy Page](./images/m7.jpg)
-</tr>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./images/d1.PNG" alt="Landing Page" width="30%">
+  <img src="./images/d2.PNG" alt="Track Page" width="30%">
+  <img src="./images/d3.PNG" alt="Rates Page" width="30%">
+  <img src="./images/d4.PNG" alt="FAQs Page" width="30%">
+  <img src="./images/d5.PNG" alt="Location Page" width="30%">
+  <img src="./images/d6.PNG" alt="Policy Page" width="30%">
+</div>
 
 <b> Mobile </b>
 
 <div style="display: flex; justify-content: space-between;">
-
-  <img src="./images/m1.jpg" alt="Landing Page" width="30%">
-  <img src="./images/m2.jpg" alt="Track Page" width="30%">
-  <img src="./images/m3.jpg" alt="Rates Page" width="30%">
-  <img src="./images/m4.jpg" alt="FAQs Page" width="30%">
-  <img src="./images/m6.jpg" alt="Location Page" width="30%">
-  <img src="./images/m7.jpg" alt="Policy Page" width="30%">
+  <img src="./images/m1.PNG" alt="Landing Page" width="30%">
+  <img src="./images/m2.PNG" alt="Sidebar Menu" width="30%">
+  <img src="./images/m3.PNG" alt="Track Page" width="30%">
+  <img src="./images/m4.PNG" alt="Rates Page" width="30%">
+  <img src="./images/m5.PNG" alt="FAQs Page" width="30%">
+  <img src="./images/m6.PNG" alt="Location Page" width="30%">
 </div>
 
 ## Acknowledgments
