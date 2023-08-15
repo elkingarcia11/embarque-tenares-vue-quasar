@@ -28,6 +28,8 @@ Run the following commands in your terminal:
 
 ## Usage
 
+To run the project, you'll need to add an .env file containing required sensitive information
+
 <b>Development</b>
 
 Run the following command to start the development server:
