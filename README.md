@@ -53,6 +53,7 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
   <img src="./images/d6.png" alt="Policy Page" width="30%">
 </div>
 
+<br/>
 <b> Mobile </b>
 
 <div style="display: flex; justify-content: space-between;">
