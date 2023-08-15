@@ -51,18 +51,24 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 ![FAQs Page](./images/w4.png)
 ![Location Page](./images/w5.png)
 ![Policy Page](./images/w6.png)
+![Landing Page](./images/m1.jpg)
+![Track Page](./images/m2.jpg)
+![Rates Page](./images/m3.jpg)
+![FAQs Page](./images/m4.jpg)
+![Location Page](./images/m6.jpg)
+![Policy Page](./images/m7.jpg)
 </tr>
 
 <b> Mobile </b>
 
 <div style="display: flex; justify-content: space-between;">
-![Landing Page](./images/m1.jpg)
-![Track Page](./images/m2.jpg)
-![Rates Page](./images/m3.jpg)
-![FAQs Page](./images/m4.jpg)
-![Location Popup](./images/m5.jpg)
-![Location Page](./images/m6.jpg)
-![Policy Page](./images/m7.jpg)
+
+  <img src="./images/m1.png" alt="Landing Page" width="30%">
+  <img src="./images/m2.png" alt="Track Page" width="30%">
+  <img src="./images/m3.png" alt="Rates Page" width="30%">
+  <img src="./images/m4.png" alt="FAQs Page" width="30%">
+  <img src="./images/m6.png" alt="Location Page" width="30%">
+  <img src="./images/m7.png" alt="Policy Page" width="30%">
 </div>
 
 ## Acknowledgments
