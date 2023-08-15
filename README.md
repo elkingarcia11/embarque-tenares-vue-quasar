@@ -28,26 +28,26 @@ Run the following commands in your terminal:
 
 ## Usage
 
+# Development
+
 Run the following command to start the development server:
 
 ```bash
 quasar dev
 ```
 
-Visit embarquetenares.com(embarquetenares.com) to interact with the project.
+# Production
 
-Screenshots
+Visit [embarquetenares.com](https://embarquetenares.com) to interact with the project.
+
+## Screenshots
+
 Insert screenshots or GIFs showcasing your project's interface or functionality here.
 
-Acknowledgments
+## Acknowledgments
+
 I would like to acknowledge the Vue.js and Quasar framework communities for their detailed documentation and powerful tools.
 
-Contact
+## Contact
+
 For questions or feedback about the project, feel free to get in touch with me at elkingarcia.11@gmail.com.
-
-This project is open-source. Contributions are welcome. Please refer to the Contribution Guidelines for more information.
-
-vbnet
-Copy code
-
-Please copy and paste this corrected template into your project's README file, and it should format correctly. If you have any further questions or need assistance with any other aspect of your project, feel free to ask!
