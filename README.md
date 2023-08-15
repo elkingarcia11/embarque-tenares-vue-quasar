@@ -45,12 +45,12 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 <b> Desktop </b>
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./images/d1.PNG" alt="Landing Page" width="30%">
-  <img src="./images/d2.PNG" alt="Track Page" width="30%">
-  <img src="./images/d3.PNG" alt="Rates Page" width="30%">
-  <img src="./images/d4.PNG" alt="FAQs Page" width="30%">
-  <img src="./images/d5.PNG" alt="Location Page" width="30%">
-  <img src="./images/d6.PNG" alt="Policy Page" width="30%">
+  <img src="./images/d1.png" alt="Landing Page" width="30%">
+  <img src="./images/d2.png" alt="Track Page" width="30%">
+  <img src="./images/d3.png" alt="Rates Page" width="30%">
+  <img src="./images/d4.png" alt="FAQs Page" width="30%">
+  <img src="./images/d5.png" alt="Location Page" width="30%">
+  <img src="./images/d6.png" alt="Policy Page" width="30%">
 </div>
 
 <b> Mobile </b>
