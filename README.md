@@ -42,6 +42,14 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 
 ## Screenshots
 
+<b> Web </b>
+![Landing Page](./images/w1.jpg)
+![Track Page](./images/w2.jpg)
+![Rates Page](./images/w3.jpg)
+![FAQs Page](./images/w4.jpg)
+![Location Page](./images/w5.jpg)
+![Policy Page](./images/w6.jpg)
+
 <b> Mobile </b>
 ![Landing Page](./images/m1.jpg)
 ![Track Page](./images/m2.jpg)
