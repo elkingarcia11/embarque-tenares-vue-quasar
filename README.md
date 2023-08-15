@@ -63,12 +63,12 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 
 <div style="display: flex; justify-content: space-between;">
 
-  <img src="./images/m1.png" alt="Landing Page" width="30%">
-  <img src="./images/m2.png" alt="Track Page" width="30%">
-  <img src="./images/m3.png" alt="Rates Page" width="30%">
-  <img src="./images/m4.png" alt="FAQs Page" width="30%">
-  <img src="./images/m6.png" alt="Location Page" width="30%">
-  <img src="./images/m7.png" alt="Policy Page" width="30%">
+  <img src="./images/m1.jpg" alt="Landing Page" width="30%">
+  <img src="./images/m2.jpg" alt="Track Page" width="30%">
+  <img src="./images/m3.jpg" alt="Rates Page" width="30%">
+  <img src="./images/m4.jpg" alt="FAQs Page" width="30%">
+  <img src="./images/m6.jpg" alt="Location Page" width="30%">
+  <img src="./images/m7.jpg" alt="Policy Page" width="30%">
 </div>
 
 ## Acknowledgments
