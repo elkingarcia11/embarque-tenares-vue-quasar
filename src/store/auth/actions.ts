@@ -29,13 +29,13 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
     } else {
       const auth = getAuth();
       const t = await auth.currentUser?.getIdToken();
+
       if (typeof t === 'string') {
         token = t;
       } else {
         throw Error();
       }
     }
-
     return {
       'App-Id': appId,
       'Api-Key': apiKey,

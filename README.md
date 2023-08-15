@@ -1,50 +1,33 @@
-# EmbarqueTenaresVueQuasar (embarquetenaresvuequasar)
+# Embarque Tenares (Front-Facing Website)
 
-A Vue/Quasar version of the Embarque Tenares app
+A mobile and desktop-friendly website for clients to track packages and find the latest prices, frequently asked questions, business policies, and location information using VueJS / Quasar Framework.
 
-## Install the dependencies
+## Table of Contents
 
-```bash
-yarn
-# or
-npm install
-```
+- [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Acknowledgments](#acknowledgments)
+- [Contact](#contact)
+  A Vue/Quasar version of the Embarque Tenares app## Installation
 
-yarn add --dev @intlify/vue-i18n-loader
-yarn add --dev dotenv
-yarn add firebase
-yarn add vuex
-yarn global add @quasar/icongenie
-yarn add process
+To set up and install the project, you'll need the following:
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+- [GitHub CLI](https://cli.github.com/manual/installation)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
+- Dependencies: axios, @intlify/vue-i18n-loader, dotenv, firebase, process, quasar, @quasar/extras, @quasar/icongenie, serve, surge, vue, vue-router, vuex
+
+Run the following commands in your terminal:
+
+1. Clone the repository: `git clone https://github.com/your-username/embarque-tenares.git`
+2. Navigate to the project directory: `cd embarque-tenares`
+3. Install dependencies: `npm install` or `yarn install`
+4. Build the project: `quasar build`
+
+## Usage
+
+Run the following command to start the development server:
 
 ```bash
 quasar dev
 ```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
