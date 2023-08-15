@@ -28,7 +28,7 @@ Run the following commands in your terminal:
 
 ## Usage
 
-# Development
+<b>Development</b>
 
 Run the following command to start the development server:
 
@@ -36,7 +36,7 @@ Run the following command to start the development server:
 quasar dev
 ```
 
-# Production
+<b>Production</b>
 
 Visit [embarquetenares.com](https://embarquetenares.com) to interact with the project.
 
