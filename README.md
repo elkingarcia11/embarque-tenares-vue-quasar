@@ -42,15 +42,20 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 
 ## Screenshots
 
-<b> Web </b>
-![Landing Page](./images/w1.jpg)
-![Track Page](./images/w2.jpg)
-![Rates Page](./images/w3.jpg)
-![FAQs Page](./images/w4.jpg)
-![Location Page](./images/w5.jpg)
-![Policy Page](./images/w6.jpg)
+<b> Desktop </b>
+
+<tr>
+![Landing Page](./images/w1.png)
+![Track Page](./images/w2.png)
+![Rates Page](./images/w3.png)
+![FAQs Page](./images/w4.png)
+![Location Page](./images/w5.png)
+![Policy Page](./images/w6.png)
+</tr>
 
 <b> Mobile </b>
+
+<div style="display: flex; justify-content: space-between;">
 ![Landing Page](./images/m1.jpg)
 ![Track Page](./images/m2.jpg)
 ![Rates Page](./images/m3.jpg)
@@ -58,6 +63,7 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 ![Location Popup](./images/m5.jpg)
 ![Location Page](./images/m6.jpg)
 ![Policy Page](./images/m7.jpg)
+</div>
 
 ## Acknowledgments
 
