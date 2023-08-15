@@ -42,7 +42,14 @@ Visit [embarquetenares.com](https://embarquetenares.com) to interact with the pr
 
 ## Screenshots
 
-Insert screenshots or GIFs showcasing your project's interface or functionality here.
+<b> Mobile </b>
+![Landing Page](./images/m1.jpg)
+![Track Page](./images/m2.jpg)
+![Rates Page](./images/m3.jpg)
+![FAQs Page](./images/m4.jpg)
+![Location Popup](./images/m5.jpg)
+![Location Page](./images/m6.jpg)
+![Policy Page](./images/m7.jpg)
 
 ## Acknowledgments
 
