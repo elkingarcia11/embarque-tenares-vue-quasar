@@ -1,78 +1,75 @@
-# Embarque Tenares (Front-Facing Website)
+# Embarque Tenares (Front-Facing App: Vue & Quasar)
 
-A mobile and desktop-friendly website built using VueJs / Quasar Framework for clients to track packages and find the latest prices, frequently asked questions, business policies, and location information.
+A mobile and desktop-friendly web application for clients to track packages and to find the latest prices, frequently asked questions, business policies, and location information.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Acknowledgments](#acknowledgments)
-- [Contact](#contact)
-  A Vue/Quasar version of the Embarque Tenares app## Installation
+1. [Installation](#installation)
+2. [Configuration](#configuration)
+3. [Prerequisites](#prerequisites)
+4. [Usage](#usage)
+5. [Features](#features)
+6. [Production Link](#production-link)
+7. [Contact Information](#contact-information)
+8. [Acknowledgments](#acknowledgments)
 
 ## Installation
 
 To set up and install the project, install the following:
 
 - [GitHub CLI](https://github.com/git-guides/install-git)
+- Clone the repository: `git clone [repository_url]`
 - [npm](https://docs.npmjs.com/) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
-- Dependencies:
-  axios, @intlify/vue-i18n-loader, dotenv, firebase, process, quasar, @quasar/extras, @quasar/icongenie, serve, surge, vue, vue-router, vuex
-- Configure .env file with sensitive api and database information
+- Install dependencies using npm or yarn: `npm install` or `yarn install`
+- Build the project: `quasar build`
 
-Run the following commands in your terminal:
+## Configuration
 
-1. Clone the repository: `git clone https://github.com/your-username/embarque-tenares.git`
-2. Navigate to the project directory: `cd embarque-tenares`
-3. Install dependencies: `npm install` or `yarn install`
-4. Build the project: `quasar build`
+Configure the environment variables for the project by creating a `.env` file and adding your sensitive api and database information
+
+## Prerequisites
+
+Before running the project, ensure you have the following prerequisites:
+
+- [ ] npm/yarn installed
+- [ ] npm/yarn dependencies installed
+- [ ] Configure .env file
+- [ ] Build project
 
 ## Usage
 
-To run the project, you'll need to add an .env file containing required sensitive information
+### Development
 
-<b>Development</b>
+1. Run the development server: `quasar dev`
+2. Open your browser and go to http://localhost:3000 to see the result.
 
-Run the following command to start the development server:
+### Production
 
-```bash
-quasar dev
-```
+To deploy this Vue and Quasar project on Google Cloud Platform, follow these steps:
 
-<b>Production</b>
+1. Install Docker on your machine.
+2. Build the Docker image of the application.
+3. Tag the image with the name of the Artifact Registry project.
+4. Push the project image to the Artifact Registry or Container Registry.
+5. Deploy an instance of the image using Cloud Run to listen on port 80.
+6. Verify the deployment on your website.
+
+## Features
+
+- Slideshow of images for each apartment
+- Internationalization to cater to a multitude of foreign clients
+- Filtering based on desired amount of people, views, bathrooms, and bedrooms
+- Link to reserve for each apartment
+- Directions and location information in case Airbnb information is faulty or difficult to understand
+
+### Production Link
 
 Visit [embarquetenares.com](https://embarquetenares.com) to interact with the project.
-
-## Screenshots
-
-<b> Desktop </b>
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./images/d1.png" alt="Landing Page" width="30%">
-  <img src="./images/d2.png" alt="Track Page" width="30%">
-  <img src="./images/d3.png" alt="Rates Page" width="30%">
-  <img src="./images/d4.png" alt="FAQs Page" width="30%">
-  <img src="./images/d5.png" alt="Location Page" width="30%">
-  <img src="./images/d6.png" alt="Policy Page" width="30%">
-</div>
-
-<br/>
-<b> Mobile </b>
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./images/m1.PNG" alt="Landing Page" width="30%">
-  <img src="./images/m2.PNG" alt="Sidebar Menu" width="30%">
-  <img src="./images/m3.PNG" alt="Track Page" width="30%">
-  <img src="./images/m4.PNG" alt="Rates Page" width="30%">
-  <img src="./images/m5.PNG" alt="FAQs Page" width="30%">
-  <img src="./images/m6.PNG" alt="Location Page" width="30%">
-</div>
-
-## Acknowledgments
-
-I would like to acknowledge the Vue.js and Quasar framework communities for their detailed documentation and powerful tools.
 
 ## Contact
 
 For questions or feedback about the project, feel free to get in touch with me at elkingarcia.11@gmail.com.
+
+## Acknowledgments
+
+I would like to acknowledge the Vue.js and Quasar framework communities for their detailed documentation and powerful tools.
