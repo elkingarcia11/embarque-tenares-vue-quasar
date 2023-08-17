@@ -56,11 +56,10 @@ To deploy this Vue and Quasar project on Google Cloud Platform, follow these ste
 
 ## Features
 
-- Slideshow of images for each apartment
-- Internationalization to cater to a multitude of foreign clients
-- Filtering based on desired amount of people, views, bathrooms, and bedrooms
-- Link to reserve for each apartment
-- Directions and location information in case Airbnb information is faulty or difficult to understand
+- Track package status using invoice number
+- Internationalization to cater to bilingual clients
+- View latest rates, FAQs, and location information like addresses, phones, hours and more
+- Links to our social media platforms
 
 ### Production Link
 
