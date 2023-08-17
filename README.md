@@ -1,4 +1,4 @@
-# Embarque Tenares (Front-Facing App: Vue & Quasar)
+# Embarque Tenares (Front-Facing App)
 
 A mobile and desktop-friendly web application for clients to track packages and to find the latest prices, frequently asked questions, business policies, and location information.
 
