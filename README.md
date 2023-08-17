@@ -33,7 +33,7 @@ Before running the project, ensure you have the following prerequisites:
 
 - [ ] npm/yarn installed
 - [ ] npm/yarn dependencies installed
-- [ ] Configure .env file
+- [ ] `.env` file created & configured
 - [ ] Build project
 
 ## Usage
