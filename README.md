@@ -34,7 +34,7 @@ Before running the project, ensure you have the following prerequisites:
 - [ ] npm/yarn installed
 - [ ] npm/yarn dependencies installed
 - [ ] `.env` file created & configured
-- [ ] Build project
+- [ ] Project built
 
 ## Usage
 
