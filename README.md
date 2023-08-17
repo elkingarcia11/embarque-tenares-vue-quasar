@@ -1,6 +1,6 @@
 # Embarque Tenares (Front-Facing Website)
 
-A mobile and desktop-friendly website for clients to track packages and find the latest prices, frequently asked questions, business policies, and location information using VueJS / Quasar Framework.
+A mobile and desktop-friendly website built using VueJs / Quasar Framework for clients to track packages and find the latest prices, frequently asked questions, business policies, and location information.
 
 ## Table of Contents
 
@@ -13,11 +13,13 @@ A mobile and desktop-friendly website for clients to track packages and find the
 
 ## Installation
 
-To set up and install the project, you'll need the following:
+To set up and install the project, install the following:
 
 - [GitHub CLI](https://github.com/git-guides/install-git)
 - [npm](https://docs.npmjs.com/) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
-- Dependencies: axios, @intlify/vue-i18n-loader, dotenv, firebase, process, quasar, @quasar/extras, @quasar/icongenie, serve, surge, vue, vue-router, vuex
+- Dependencies:
+  axios, @intlify/vue-i18n-loader, dotenv, firebase, process, quasar, @quasar/extras, @quasar/icongenie, serve, surge, vue, vue-router, vuex
+- Configure .env file with sensitive api and database information
 
 Run the following commands in your terminal:
 
