@@ -1,6 +1,6 @@
-# Embarque Tenares (Front-Facing App: Web)
+# Embarque Tenares Web App (Front-Facing Application)
 
-A mobile and desktop-friendly web application for clients to track packages and to find the latest prices, frequently asked questions, business policies, and location information.
+Embarque Tenares is a responsive web application designed for both mobile and desktop devices. It serves as a platform for clients to track packages, access up-to-date pricing information, frequently asked questions, business policies, and location details.
 
 ## Table of Contents
 
@@ -15,24 +15,24 @@ A mobile and desktop-friendly web application for clients to track packages and 
 
 ## Installation
 
-To set up and install the project, install the following:
+To set up and install the project, follow these steps:
 
-- [GitHub CLI](https://github.com/git-guides/install-git)
-- Clone the repository: `git clone [repository_url]`
-- [npm](https://docs.npmjs.com/) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
-- Install dependencies using npm or yarn: `npm install` or `yarn install`
+- Install [GitHub CLI](https://github.com/git-guides/install-git)
+- Clone the repository: `git clone https://github.com/elkingarcia11/EmbarqueTenaresVueQuasar.git`
+- Install [npm](https://docs.npmjs.com/) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
+- Install project dependencies using npm or yarn: `npm install` or `yarn install`
 - Build the project: `quasar build`
 
 ## Configuration
 
-Configure the environment variables for the project by creating a `.env` file and adding your sensitive api and database information
+Configure the environment variables for the project by creating a .env file and adding your Google Maps API key, third party software authentication information and Cloud Firestore authentication information.
 
 ## Prerequisites
 
 Before running the project, ensure you have the following prerequisites:
 
-- [ ] npm/yarn installed
-- [ ] npm/yarn dependencies installed
+- [ ] Npm/yarn installed
+- [ ] Npm/yarn dependencies installed
 - [ ] `.env` file created & configured
 - [ ] Project built
 
@@ -41,11 +41,11 @@ Before running the project, ensure you have the following prerequisites:
 ### Development
 
 1. Run the development server: `quasar dev`
-2. Open your browser and go to http://localhost:3000 to see the result.
+2. Open your browser and navigate to http://localhost:3000 to view the application during development.
 
 ### Production
 
-To deploy this Vue and Quasar project on Google Cloud Platform, follow these steps:
+To deploy this Vue and Quasar project on the Google Cloud Platform, follow these steps:
 
 1. Install Docker on your machine.
 2. Build the Docker image of the application.
@@ -56,19 +56,19 @@ To deploy this Vue and Quasar project on Google Cloud Platform, follow these ste
 
 ## Features
 
-- Track package status using invoice number
-- Internationalization to cater to bilingual clients
-- View latest rates, FAQs, and location information like addresses, phones, hours and more
-- Links to our social media platforms
+- Efficiently track package status using an invoice number.
+- Provide an internationalized experience for bilingual clients.
+- Access the latest rates, FAQs, and location information including addresses, contact numbers, and operating hours.
+- Seamlessly link to our social media platforms for broader engagement.
 
 ### Production Link
 
-Visit [embarquetenares.com](https://embarquetenares.com) to interact with the project.
+Experience the application by visiting [embarquetenares.com](https://embarquetenares.com).
 
 ## Contact
 
-For questions, feedback, or inquiries, feel free to contact me via email at elkingarcia.11@gmail.com or connect with me on [LinkedIn](https://www.linkedin.com/in/elkingarcia11/)
+For any questions, feedback, or inquiries, please reach out via email at elkingarcia.11@gmail.com or connect with me on [LinkedIn](https://www.linkedin.com/in/elkingarcia11/)
 
 ## Acknowledgments
 
-I would like to acknowledge the Vue.js and Quasar framework communities for their detailed documentation and powerful tools.
+Special acknowledgment goes to the Vue.js and Quasar framework communities for their comprehensive documentation and powerful tools. Your contributions have been instrumental in making this project possible.
