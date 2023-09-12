@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <!-- Main content of the index page -->
+
+  <!-- Invoice tracking form -->
   <q-form @submit="submit" class="invoiceForm">
     <q-input
       ref="invoiceInputRef"
@@ -11,6 +13,7 @@
       :label="$t('trackPack')"
     >
       <template v-slot:append>
+        <!-- Button to open the invoice dialog -->
         <q-btn
           flat
           round
@@ -22,6 +25,7 @@
     </q-input>
   </q-form>
 
+  <!-- Logo display -->
   <div class="row flex-center q-py-xl">
     <q-img
       class="q-my-xl"
@@ -32,16 +36,19 @@
     />
   </div>
 
+  <!-- Invoice dialog -->
   <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
     <q-card>
       <q-toolbar class="bg-primary">
         <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+          <!-- Title of the invoice dialog -->
           {{ $t('findInv')
           }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
         </div>
       </q-toolbar>
       <q-separator />
       <q-card-section class="row full-height justify-center">
+        <!-- Display an image based on the selected locale -->
         <q-img
           loading="lazy"
           v-if="$i18n.locale == 'en-US'"
@@ -62,6 +69,7 @@
     </q-card>
   </q-dialog>
 
+  <!-- Tab bar component -->
   <TabBar
     @focus-input="focusInput"
     class="tabBar"
@@ -85,37 +93,41 @@ export default {
     TabBar,
   },
   setup() {
+    // State variables
     const isDismissed = ref(false);
+    const invoiceText = ref('');
+    const invoiceDialog = ref(false);
+    const invoiceInputRef: Ref<QInput | null> = ref(null);
 
-    const handleDismiss = () => {
-      isDismissed.value = true;
-    };
-
+    // Access Quasar utilities
     const $router = useRouter();
     const $q = useQuasar();
     const { t } = useI18n();
 
-    const invoiceText = ref('');
+    // Computed property for dynamic logo height
+    const dynamicHeight = computed(() => {
+      return $q.platform.is.mobile ? 'height: 33vh' : 'height: 50vh';
+    });
 
-    const invoiceDialog = ref(false);
+    // Function to handle input blur event
+    const handleDismiss = () => {
+      isDismissed.value = true;
+    };
 
-    const invoiceInputRef: Ref<QInput | null> = ref(null);
-
+    // Focus the input element
     const focusInput = () => {
       isDismissed.value = false;
       const inputEl = invoiceInputRef.value?.$el.querySelector('input');
       inputEl?.focus();
     };
 
+    // Blur the input element
     const blurInput = () => {
       const inputEl = invoiceInputRef.value?.$el.querySelector('input');
       inputEl?.blur();
     };
 
-    const dynamicHeight = computed(() => {
-      return $q.platform.is.mobile ? 'height: 33vh' : 'height: 50vh';
-    });
-
+    // Show a notification
     const showNotif = () => {
       $q.notify({
         message: t('invalidInvoice'),
@@ -124,6 +136,7 @@ export default {
       });
     };
 
+    // Handle form submission
     const submit = () => {
       if (invoiceText.value === '') {
         blurInput();
@@ -147,6 +160,7 @@ export default {
       }
     };
 
+    // Return data and methods for the component
     return {
       invoiceText,
       invoiceDialog,

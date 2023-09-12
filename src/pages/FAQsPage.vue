@@ -1,10 +1,14 @@
 <template>
+  <!-- Section containing the list of FAQs -->
   <q-item-section
     class="q-py-lg text-h4 text-bold text-center"
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-    >{{ $t('faqs') }}</q-item-section
   >
+    <!-- Title of the FAQs section -->
+    {{ $t('faqs') }}
+  </q-item-section>
   <div>
+    <!-- Iterate through the list of FAQs -->
     <q-expansion-item
       v-for="faq in faqsList"
       :key="faq.id"
@@ -16,6 +20,7 @@
       expand-icon-class="text-primary"
     >
       <q-card>
+        <!-- Display the FAQ answer based on the selected locale -->
         <q-card-section v-if="$i18n.locale == 'en-US'" style="font-size: 20px">
           {{ faq.a_en }}
         </q-card-section>
@@ -39,20 +44,20 @@ import { useStore } from 'src/store';
 
 export default {
   setup() {
+    // Access Quasar utilities
     const $q = useQuasar();
     const $store = useStore();
     const { locale } = useI18n();
 
+    // Compute the list of FAQs from the store
     const faqsList = computed(() => $store.state.faqs.faqsList);
 
+    // Function to print the question based on the selected locale
     const printQuestion = (question: DocumentData) => {
-      if (locale.value == 'en-US') {
-        return question.q_en;
-      } else {
-        return question.q_es;
-      }
+      return locale.value == 'en-US' ? question.q_en : question.q_es;
     };
 
+    // Fetch FAQs before component mount
     onBeforeMount(async () => {
       $q.loading.show();
       if (faqsList.value.length < 1) {

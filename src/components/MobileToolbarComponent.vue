@@ -1,4 +1,5 @@
 <template>
+  <!-- Button to toggle the drawer -->
   <q-btn
     :ripple="false"
     flat
@@ -7,14 +8,9 @@
     dense
     icon="menu"
   />
-  <q-btn
-    flat
-    @click="
-      $router.push({
-        name: 'main',
-      })
-    "
-  >
+
+  <!-- Button to navigate to the 'main' route -->
+  <q-btn flat @click="navigateToRoute('/')">
     <div
       style="
         font-family: 'BodoniSvtyTwoSCITCTT-Book';
@@ -25,6 +21,8 @@
       Embarque Tenares
     </div>
   </q-btn>
+
+  <!-- Navigation Drawer -->
   <q-drawer
     v-model="drawer"
     :width="300"
@@ -36,7 +34,9 @@
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
   >
     <q-list>
+      <!-- Loop through menu items -->
       <template v-for="(menuItem, index) in menuList" :key="index">
+        <!-- Regular menu item -->
         <q-item
           class="text-h4 q-py-md q-px-l"
           v-if="menuItem.label !== 'branch'"
@@ -56,6 +56,8 @@
             {{ $t(menuItem.label) }}
           </q-item-section>
         </q-item>
+
+        <!-- Menu item with sub-items -->
         <q-expansion-item
           v-else
           clickable
@@ -77,12 +79,14 @@
               {{ $t(menuItem.label) }}
             </q-item-section>
           </template>
+
+          <!-- Loop through sub-menu items -->
           <q-item
             class="text-h4 q-py-md q-pl-xl row"
             v-for="(subMenuItem, index) in subMenuList"
             :key="index"
             clickable
-            @click="$router.push(subMenuItem.route)"
+            @click="navigateToRoute(subMenuItem.route)"
             v-ripple
           >
             <q-avatar
@@ -96,6 +100,8 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
+
+        <!-- Separator between menu items -->
         <q-separator :key="'sep' + index" v-if="menuItem.separator" />
       </template>
     </q-list>
@@ -108,10 +114,13 @@ import { useRouter } from 'vue-router';
 
 export default {
   setup() {
+    // Initialize Vue Router
     const $router = useRouter();
 
+    // Reactive state for the drawer's open/closed state
     const drawer = ref(false);
 
+    // Sub-menu items
     const subMenuList = [
       {
         icon: 'pin_drop',
@@ -127,6 +136,7 @@ export default {
       },
     ];
 
+    // Main menu items
     const menuList = [
       {
         icon: 'home',
@@ -171,6 +181,7 @@ export default {
       }
     };
 
+    // Expose data and methods to the template
     return {
       drawer,
       menuList,

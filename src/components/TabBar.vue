@@ -1,4 +1,5 @@
 <template>
+  <!-- Tab bar with button toggle -->
   <q-card class="tab-bar">
     <q-btn-toggle
       spread
@@ -8,13 +9,9 @@
       text-color="primary"
       toggle-color="white"
       toggle-text-color="secondary"
-      :options="[
-        { value: 1, slot: 'one' },
-        { value: 2, slot: 'two' },
-        { value: 3, slot: 'three' },
-        { value: 4, slot: 'four' },
-      ]"
+      :options="tabOptions"
     >
+      <!-- Template for each tab option -->
       <template v-slot:one>
         <div class="q-py-md column items-center no-wrap btn-tgle">
           <q-icon center name="search" />
@@ -52,6 +49,7 @@
     </q-btn-toggle>
   </q-card>
 
+  <!-- Dialog for branch selection -->
   <q-dialog v-model="dialog">
     <q-card class="q-px-sm q-py-md">
       <q-card-section>
@@ -60,29 +58,24 @@
         </div>
       </q-card-section>
 
+      <!-- List of branch options -->
       <q-item
         clickable
         v-ripple:grey
         color="grey-3"
-        @click="$router.push('ny-branch')"
+        v-for="(branch, index) in branchOptions"
+        :key="index"
+        @click="$router.push(branch.route)"
       >
         <q-item-section avatar>
-          <q-avatar color="secondary" text-color="white" icon="pin_drop" />
+          <q-avatar
+            :color="branch.color"
+            text-color="white"
+            :icon="branch.icon"
+          />
         </q-item-section>
 
-        <q-item-section class="text-h6">{{ $t('ny') }}</q-item-section>
-      </q-item>
-      <q-item
-        clickable
-        v-ripple:grey
-        color="grey-3"
-        @click="$router.push('dr-branch')"
-      >
-        <q-item-section avatar>
-          <q-avatar color="accent" text-color="white" icon="pin_drop" />
-        </q-item-section>
-
-        <q-item-section class="text-h6">{{ $t('dr') }}</q-item-section>
+        <q-item-section class="text-h6">{{ $t(branch.label) }}</q-item-section>
       </q-item>
     </q-card>
   </q-dialog>
@@ -99,11 +92,24 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const $router = useRouter();
-
     const dialog = ref(false);
+    const buttonGroup = ref(0); // Default selected tab
 
-    const buttonGroup = ref(0);
+    // Tab options configuration
+    const tabOptions = [
+      { value: 1, slot: 'one' },
+      { value: 2, slot: 'two' },
+      { value: 3, slot: 'three' },
+      { value: 4, slot: 'four' },
+    ];
 
+    // Branch options configuration
+    const branchOptions = [
+      { icon: 'pin_drop', label: 'ny', route: 'ny-branch', color: 'secondary' },
+      { icon: 'pin_drop', label: 'dr', route: 'dr-branch', color: 'accent' },
+    ];
+
+    // Handle tab button clicks
     const open = () => {
       if (buttonGroup.value === 1) {
         emit('focusInput');
@@ -116,23 +122,16 @@ export default defineComponent({
       }
     };
 
+    // Watch for changes in 'isDismissed' prop
     watch(
       () => props.isDismissed,
       (newVal) => {
         // Accessing component variable from watch function
-        if (newVal) {
-          buttonGroup.value = 0;
-        } else {
-          buttonGroup.value = 1;
-        }
+        buttonGroup.value = newVal ? 0 : 1;
       }
     );
 
-    return {
-      dialog,
-      buttonGroup,
-      open,
-    };
+    return { branchOptions, tabOptions, dialog, buttonGroup, open };
   },
 });
 </script>

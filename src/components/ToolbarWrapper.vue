@@ -1,4 +1,5 @@
 <template>
+  <!-- Conditional rendering of toolbar components based on platform -->
   <MobileToolbarComponent v-if="$q.platform.is.mobile" />
   <AlternativeToolbarComponent v-else />
 </template>
@@ -10,8 +11,8 @@ import AlternativeToolbarComponent from './AlternativeToolbarComponent.vue';
 export default {
   name: 'ToolbarWrapper',
   components: {
-    MobileToolbarComponent,
-    AlternativeToolbarComponent,
+    MobileToolbarComponent, // Import of MobileToolbarComponent
+    AlternativeToolbarComponent, // Import of AlternativeToolbarComponent
   },
 };
 </script>

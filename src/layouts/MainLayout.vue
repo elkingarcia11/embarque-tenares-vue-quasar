@@ -1,10 +1,18 @@
 <template>
+  <!-- Main layout structure of the application -->
   <q-layout view="hHh lpR fFf" id="app_layout">
+    <!-- Header section with toolbar -->
     <q-header>
       <q-toolbar>
+        <!-- Title and language dropdown in the toolbar -->
         <q-toolbar-title class="row">
+          <!-- ToolbarWrapper component for rendering toolbar content -->
           <ToolbarWrapper />
+
+          <!-- Spacer to push items to the right -->
           <q-space />
+
+          <!-- Language dropdown button -->
           <q-btn-dropdown
             :ripple="false"
             flat
@@ -17,7 +25,9 @@
               font-weight: bolder;
             "
           >
+            <!-- Language options in the dropdown -->
             <q-list class="text-h6 text-black">
+              <!-- Option for switching to Español -->
               <q-item clickable v-close-popup @click="changeLanguage(1)">
                 <q-item-section>
                   <q-item-label
@@ -27,6 +37,8 @@
                   >
                 </q-item-section>
               </q-item>
+
+              <!-- Option for switching to English -->
               <q-item clickable v-close-popup @click="changeLanguage(0)">
                 <q-item-section>
                   <q-item-label
@@ -42,9 +54,13 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
+
+    <!-- Page container for displaying router views -->
     <q-page-container style="position: relative; min-height: 100vh">
       <router-view :key="$route.fullPath"></router-view>
     </q-page-container>
+
+    <!-- Footer component -->
     <FooterComponent />
   </q-layout>
 </template>
@@ -62,10 +78,12 @@ export default {
   setup() {
     const { locale } = useI18n();
 
+    // Reactive variables for language dropdown
     const label = ref('Español');
     const engClass = ref('');
     const esClass = ref('text-bold');
 
+    // Function to change the application language
     const changeLanguage = (i: number) => {
       if (i === 0) {
         locale.value = 'en-US';
