@@ -31,9 +31,9 @@ Configure the environment variables for the project by creating a .env file and 
 
 Before running the project, ensure you have the following prerequisites:
 
-- [ ] Npm/yarn installed
-- [ ] Npm/yarn dependencies installed
-- [ ] `.env` file created & configured
+- [ ] npm/yarn installed
+- [ ] npm/yarn dependencies installed
+- [ ] .env file configured
 - [ ] Project built
 
 ## Usage
