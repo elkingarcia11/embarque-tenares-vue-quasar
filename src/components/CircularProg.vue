@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 // Import the component's CSS styles
 import '../css/track.scss';
 
