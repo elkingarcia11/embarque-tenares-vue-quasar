@@ -50,7 +50,7 @@
       <q-card-section class="row full-height justify-center">
         <!-- Display an image based on the selected locale -->
         <q-img
-          loading="lazy"
+          loading="eager"
           v-if="$i18n.locale == 'en-US'"
           class="self-center"
           id="logo"
@@ -58,7 +58,7 @@
           src="../assets/trackEN.png"
         />
         <q-img
-          loading="lazy"
+          loading="eager"
           v-else
           class="self-center"
           id="logo"
@@ -162,14 +162,14 @@ export default {
 
     // Return data and methods for the component
     return {
-      invoiceText,
+      dynamicHeight,
       invoiceDialog,
       invoiceInputRef,
-      dynamicHeight,
+      invoiceText,
       isDismissed,
       focusInput,
-      submit,
       handleDismiss,
+      submit,
     };
   },
 };

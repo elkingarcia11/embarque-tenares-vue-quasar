@@ -1,79 +1,87 @@
 <template>
-  <q-form @submit="submit" class="invoiceForm">
-    <q-input
-      ref="invoiceInputRef"
-      square
-      class="window-width overflow-hidden"
-      outlined
-      v-model="invoiceText"
-      :label="$t('trackPack')"
-    >
-      <template v-slot:append>
-        <q-btn
-          flat
-          round
-          color="secondary"
-          icon="quiz"
-          @click="invoiceDialog = true"
-        />
-      </template>
-    </q-input>
-  </q-form>
-  <div v-if="onSubmitted">
-    <q-item-section
-      class="q-py-lg text-h4 text-bold text-center"
-      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-      >{{ $t('track') }}</q-item-section
-    >
-    <CircularProg
-      v-if="querySuccess"
-      ref="circularProgRef"
-      :percent="percent"
-      :invoice="invoiceNumber"
-      :enDate="enDate"
-      :esDate="esDate"
-    />
-    <TrackError v-else :invoice="invoiceNumber" />
-  </div>
-  <div :class="searchButtonClass">
-    <q-btn
-      color="primary"
-      style="width: 90vw; font-weight: bold"
-      :label="$t('search')"
-      size="lg"
-      @click="submit"
-    />
-  </div>
+  <q-inner-loading
+    :showing="loading"
+    label="Please wait..."
+    label-class="text-primary"
+    label-style="font-size: 1.1em"
+  />
+  <div v-show="!loading">
+    <q-form @submit="submit" class="invoiceForm">
+      <q-input
+        ref="invoiceInputRef"
+        square
+        class="window-width overflow-hidden"
+        outlined
+        v-model="invoiceText"
+        :label="$t('trackPack')"
+      >
+        <template v-slot:append>
+          <q-btn
+            flat
+            round
+            color="secondary"
+            icon="quiz"
+            @click="invoiceDialog = true"
+          />
+        </template>
+      </q-input>
+    </q-form>
+    <div v-if="onSubmitted">
+      <q-item-section
+        class="q-py-lg text-h4 text-bold text-center"
+        style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
+        >{{ $t('track') }}</q-item-section
+      >
+      <CircularProg
+        v-if="querySuccess"
+        ref="circularProgRef"
+        :percent="percent"
+        :invoice="invoiceNumber"
+        :enDate="enDate"
+        :esDate="esDate"
+      />
+      <TrackError v-else :invoice="invoiceNumber" />
+    </div>
+    <div :class="searchButtonClass">
+      <q-btn
+        color="primary"
+        style="width: 90vw; font-weight: bold"
+        :label="$t('search')"
+        size="lg"
+        @click="submit"
+      />
+    </div>
 
-  <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
-    <q-card style="width: 90vw">
-      <q-toolbar class="bg-primary">
-        <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
-          {{ $t('findInv')
-          }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
-        </div>
-      </q-toolbar>
-      <q-separator />
-      <q-card-section class="row full-height justify-center">
-        <img
-          loading="lazy"
-          v-if="$i18n.locale == 'en-US'"
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackEN.png"
-        />
-        <img
-          loading="lazy"
-          v-else
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackES.png"
-        />
-      </q-card-section>
-    </q-card>
-  </q-dialog>
+    <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
+      <q-card style="width: 90vw">
+        <q-toolbar class="bg-primary">
+          <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+            {{ $t('findInv')
+            }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+          </div>
+        </q-toolbar>
+        <q-separator />
+        <q-card-section class="row full-height justify-center">
+          <img
+            loading="eager"
+            v-if="$i18n.locale == 'en-US'"
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackEN.png"
+          />
+          <img
+            loading="eager"
+            v-else
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="../assets/trackES.png"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script lang="ts">
@@ -105,6 +113,8 @@ export default {
     const invoiceDialog = ref(false);
     const onSubmitted = ref(false);
 
+    const loading = ref(false);
+
     const querySuccess = ref(false);
     const enDate = ref('');
     const esDate = ref('');
@@ -135,7 +145,7 @@ export default {
         : 'search-button'
     );
     const submit = async () => {
-      $q.loading.show();
+      loading.value = true;
       if (
         invoiceText.value === '' ||
         previousInvoice.value === invoiceText.value
@@ -172,21 +182,22 @@ export default {
       } else {
         showNotif();
       }
-      $q.loading.hide();
+      loading.value = false;
     };
 
     return {
-      submit,
-      searchButtonClass,
-      invoiceText,
-      invoiceInputRef,
-      invoiceDialog,
-      onSubmitted,
-      querySuccess,
-      percent,
-      invoiceNumber,
       enDate,
       esDate,
+      invoiceDialog,
+      invoiceInputRef,
+      invoiceNumber,
+      invoiceText,
+      loading,
+      onSubmitted,
+      percent,
+      querySuccess,
+      searchButtonClass,
+      submit,
     };
   },
 };

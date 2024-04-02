@@ -13,7 +13,7 @@
   <!-- Card to display branch information and actions -->
   <q-card class="my-card q-mt-sm">
     <!-- Google Maps embedded iframe for location -->
-    <iframe loading="lazy" class="iframe" :src="iframeSource" />
+    <iframe loading="eager" class="iframe" :src="iframeSource" />
 
     <!-- Button to get directions to the branch -->
     <q-card-section class="q-pa-none q-ma-none">

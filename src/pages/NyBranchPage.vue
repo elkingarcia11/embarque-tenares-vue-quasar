@@ -10,7 +10,7 @@
   <!-- Card containing branch information -->
   <q-card class="my-card q-mt-sm">
     <!-- Google Maps embedded iframe -->
-    <iframe loading="lazy" class="iframe" :src="iframeSource" />
+    <iframe loading="eager" class="iframe" :src="iframeSource" />
 
     <!-- Button for getting directions -->
     <q-card-section class="q-pa-none q-ma-none">
@@ -205,7 +205,7 @@ export default {
         });
     };
 
-    return { iframeSource, openUrl, copy };
+    return { iframeSource, copy, openUrl };
   },
 };
 </script>
