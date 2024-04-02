@@ -144,7 +144,6 @@ export default {
         const n = Number(invoiceText.value);
         if (n > 0) {
           blurInput();
-          $q.loading.show();
           $router.push({
             name: 'search',
             params: { invoice: invoiceText.value },

@@ -123,6 +123,7 @@ export default {
     const invoiceDialog = ref(false);
 
     onBeforeMount(async () => {
+      loading.value = true;
       if (typeof $route.params.invoice === 'string') {
         invoiceText.value = $route.params.invoice;
       }
