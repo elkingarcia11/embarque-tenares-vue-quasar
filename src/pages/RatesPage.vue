@@ -1,10 +1,5 @@
 <template>
-  <q-inner-loading
-    :showing="loading"
-    label="Please wait..."
-    label-class="text-primary"
-    label-style="font-size: 1.1em"
-  />
+  <q-inner-loading :showing="loading" color="primary" />
   <div v-show="!loading">
     <!-- This section displays the main header with the localized text for "rates" -->
     <q-item-section
