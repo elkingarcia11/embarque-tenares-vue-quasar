@@ -8,14 +8,14 @@ WORKDIR /app
 # Copy the package.json and package-lock.json (if it exists) files to the container's working directory.
 COPY package*.json ./
 # Copy the Quasar configuration file to the container's working directory.
-COPY quasar.config.cjs ./
+COPY quasar.config.js ./
 # Copy all files from the host's current directory to the container's working directory.
 COPY ./ ./
 
-# Install Quasar CLI globally using npm.
-RUN npm install -g @quasar/cli
+# Install Quasar CLI globally using Yarn.
+RUN yarn global add @quasar/cli
 # Install project dependencies based on package.json.
-RUN npm install --legacy-peer-deps
+RUN yarn install
 # Build the Quasar application.
 RUN quasar build
 

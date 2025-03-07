@@ -2,9 +2,10 @@
   <router-view />
 </template>
 
-<script lang="ts">
+<script>
 import { useStore } from './store';
 import { onMounted } from 'vue';
+
 export default {
   name: 'App',
   setup() {
