@@ -8,7 +8,7 @@ WORKDIR /app
 # Copy the package.json and package-lock.json (if it exists) files to the container's working directory.
 COPY package*.json ./
 # Copy the Quasar configuration file to the container's working directory.
-COPY quasar.config.js ./
+COPY quasar.config.cjs ./
 # Copy all files from the host's current directory to the container's working directory.
 COPY ./ ./
 
