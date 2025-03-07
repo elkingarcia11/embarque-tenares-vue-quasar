@@ -12,10 +12,10 @@ COPY quasar.config.js ./
 # Copy all files from the host's current directory to the container's working directory.
 COPY ./ ./
 
-# Install Quasar CLI globally using Yarn.
-RUN yarn global add @quasar/cli
+# Install Quasar CLI globally using npm.
+RUN npm install -g @quasar/cli
 # Install project dependencies based on package.json.
-RUN yarn install
+RUN npm install
 # Build the Quasar application.
 RUN quasar build
 
