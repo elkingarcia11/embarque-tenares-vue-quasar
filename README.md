@@ -19,8 +19,8 @@ To set up and install the project, follow these steps:
 
 - Install [GitHub CLI](https://github.com/git-guides/install-git)
 - Clone the repository: `git clone https://github.com/elkingarcia11/EmbarqueTenaresVueQuasar.git`
-- Install [npm](https://docs.npmjs.com/) or [yarn](https://classic.yarnpkg.com/en/docs/install/)
-- Install project dependencies using npm or yarn: `npm install` or `yarn install`
+- Install [npm](https://docs.npmjs.com/)
+- Install project dependencies using npm: `npm install`
 - Build the project: `quasar build`
 
 ## Configuration
@@ -31,8 +31,8 @@ Configure the environment variables for the project by creating a .env file and 
 
 Before running the project, ensure you have the following prerequisites:
 
-- [ ] npm/yarn installed
-- [ ] npm/yarn dependencies installed
+- [ ] npm installed
+- [ ] npm dependencies installed
 - [ ] .env file configured
 - [ ] Project built
 

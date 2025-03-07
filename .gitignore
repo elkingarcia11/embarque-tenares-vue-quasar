@@ -33,3 +33,30 @@ yarn-error.log*
 *.sln
 
 .env
+
+# Quasar related directories and files
+/src-quasar/node_modules
+/src-quasar/dist
+/src-quasar/src-capacitor
+/src-quasar/src-cordova
+
+*.local
+*.tsbuildinfo
+
+logs
+*.log
+/coverage
+.nyc_output
+.env.*
+!.env.example
+.vscode
+*.sw?
+.pnpm-debug.log*
+.yarn-integrity
+.npm
+.node_repl_history
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db

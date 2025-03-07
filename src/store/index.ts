@@ -48,7 +48,8 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> =
 
 // Provide typings for `this.$router` inside Vuex store
 declare module 'vuex' {
-  export interface Store<S> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  export interface Store<S, G = Record<string, unknown>, A = Record<string, unknown>, M = Record<string, unknown>> {
     readonly $router: Router;
   }
 }

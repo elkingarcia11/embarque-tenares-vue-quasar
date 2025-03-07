@@ -181,40 +181,60 @@ module.exports = configure(function (ctx) {
       // chainWebpackCustomSW (/* chain */) {},
 
       manifest: {
-        name: 'Embarque Tenares',
+        name: 'Embarque Tenares - International Shipping Services',
         short_name: 'Embarque Tenares',
-        description: '',
+        description: 'Professional shipping services from New York to Dominican Republic. Door-to-door delivery, customs clearance, and affordable rates.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: 'icons/icon-128x128.png',
             sizes: '128x128',
             type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-256x256.png',
             sizes: '256x256',
             type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-384x384.png',
             sizes: '384x384',
             type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-          },
+            purpose: 'any maskable'
+          }
         ],
+        categories: ['shopping', 'lifestyle', 'travel'],
+        lang: 'en-US',
+        dir: 'ltr',
+        iarc_rating_id: 'e84b072d-71b3-4d3e-86ae-31a8ce4e53b7',
+        screenshots: [
+          {
+            src: 'screenshots/home.png',
+            sizes: '1280x720',
+            type: 'image/png',
+            platform: 'wide',
+            label: 'Home Screen'
+          }
+        ]
       },
     },
 
