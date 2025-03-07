@@ -170,7 +170,7 @@ export default {
       submit,
       t,
       locale,
-      $q
+      showNotif
     };
   },
 };

@@ -6,6 +6,7 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
   browserSessionPersistence,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import process from 'process';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -27,23 +28,27 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore(app);
+
+// Set up authentication persistence
 setPersistence(auth, browserSessionPersistence)
   .then(() => {
-    // Existing and future Auth states are now persisted in the current
-    // session only. Closing the window would clear any existing state even
-    // if a user forgets to sign out.
-    // ...
-    // New sign-in will be persisted with session persistence.
-    return signInWithEmailAndPassword(auth, email, password);
+    // Check if user is already signed in
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Only sign in if no user is currently signed in
+        return signInWithEmailAndPassword(auth, email, password)
+          .catch((error) => {
+            console.error('Authentication error:', error);
+          });
+      }
+    });
   })
   .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
+    console.error('Persistence error:', error);
   });
 
-const db = getFirestore(app);
 export default db;
