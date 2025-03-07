@@ -8,14 +8,13 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
-const { configure } = require('quasar/wrappers');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const process = require('process');
 const path = require('path');
-const dotenv = require('dotenv');
-
-// Load environment variables
-dotenv.config();
+const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+  require('dotenv').config();
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -56,8 +55,8 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
-        ...process.env,
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
@@ -89,6 +88,8 @@ module.exports = configure(function (ctx) {
           .loader('@intlify/vue-i18n-loader');
       },
 
+      env: require('dotenv').config().parsed,
+
       // transpile: false,
       // publicPath: '/',
 
@@ -116,7 +117,7 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http',
       },
-      port: 9000,
+      port: 8080,
       open: true, // opens browser window automatically
     },
 
@@ -180,60 +181,40 @@ module.exports = configure(function (ctx) {
       // chainWebpackCustomSW (/* chain */) {},
 
       manifest: {
-        name: 'Embarque Tenares - International Shipping Services',
+        name: 'Embarque Tenares',
         short_name: 'Embarque Tenares',
-        description: 'Professional shipping services from New York to Dominican Republic. Door-to-door delivery, customs clearance, and affordable rates.',
+        description: '',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
-        start_url: '/',
-        scope: '/',
         icons: [
           {
             src: 'icons/icon-128x128.png',
             sizes: '128x128',
             type: 'image/png',
-            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
-            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-256x256.png',
             sizes: '256x256',
             type: 'image/png',
-            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-384x384.png',
             sizes: '384x384',
             type: 'image/png',
-            purpose: 'any maskable'
           },
           {
             src: 'icons/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
-          }
+          },
         ],
-        categories: ['shopping', 'lifestyle', 'travel'],
-        lang: 'en-US',
-        dir: 'ltr',
-        iarc_rating_id: 'e84b072d-71b3-4d3e-86ae-31a8ce4e53b7',
-        screenshots: [
-          {
-            src: 'screenshots/home.png',
-            sizes: '1280x720',
-            type: 'image/png',
-            platform: 'wide',
-            label: 'Home Screen'
-          }
-        ]
       },
     },
 
@@ -245,6 +226,40 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-capacitor-apps/configuring-capacitor
     capacitor: {
       hideSplashscreen: true,
-    }
+    },
+
+    // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/configuring-electron
+    electron: {
+      bundler: 'packager', // 'packager' or 'builder'
+
+      packager: {
+        // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
+        // OS X / Mac App Store
+        // appBundleId: '',
+        // appCategoryType: '',
+        // osxSign: '',
+        // protocol: 'myapp://path',
+        // Windows only
+        // win32metadata: { ... }
+      },
+
+      builder: {
+        // https://www.electron.build/configuration/configuration
+
+        appId: 'embarquetenaresvuequasar',
+      },
+
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
+      chainWebpackMain(/* chain */) {
+        // do something with the Electron main process Webpack cfg
+        // extendWebpackMain also available besides this chainWebpackMain
+      },
+
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
+      chainWebpackPreload(/* chain */) {
+        // do something with the Electron main process Webpack cfg
+        // extendWebpackPreload also available besides this chainWebpackPreload
+      },
+    },
   };
 });
