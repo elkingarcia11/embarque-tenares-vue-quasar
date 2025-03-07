@@ -8,13 +8,18 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-const process = require('process');
-const path = require('path');
-const { configure } = require('quasar/wrappers');
+import { configure } from 'quasar/wrappers';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
-module.exports = configure(function (ctx) {
-  require('dotenv').config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables
+dotenv.config();
+
+export default configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -55,8 +60,8 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
+        ...process.env,
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
-
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
@@ -87,8 +92,6 @@ module.exports = configure(function (ctx) {
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
       },
-
-      env: require('dotenv').config().parsed,
 
       // transpile: false,
       // publicPath: '/',
@@ -246,40 +249,6 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-capacitor-apps/configuring-capacitor
     capacitor: {
       hideSplashscreen: true,
-    },
-
-    // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/configuring-electron
-    electron: {
-      bundler: 'packager', // 'packager' or 'builder'
-
-      packager: {
-        // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-        // OS X / Mac App Store
-        // appBundleId: '',
-        // appCategoryType: '',
-        // osxSign: '',
-        // protocol: 'myapp://path',
-        // Windows only
-        // win32metadata: { ... }
-      },
-
-      builder: {
-        // https://www.electron.build/configuration/configuration
-
-        appId: 'embarquetenaresvuequasar',
-      },
-
-      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpackMain(/* chain */) {
-        // do something with the Electron main process Webpack cfg
-        // extendWebpackMain also available besides this chainWebpackMain
-      },
-
-      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpackPreload(/* chain */) {
-        // do something with the Electron main process Webpack cfg
-        // extendWebpackPreload also available besides this chainWebpackPreload
-      },
     },
   };
 });
