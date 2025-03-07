@@ -40,27 +40,19 @@ module.exports = configure(function (ctx) {
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       'ionicons-v4',
-      // 'mdi-v5',
-      // 'fontawesome-v6',
-      // 'eva-icons',
-      // 'themify',
-      // 'line-awesome',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
-      'roboto-font', // optional, you are not bound to it
-      'material-icons', // optional, you are not bound to it
+      'roboto-font',
+      'material-icons',
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'history',
       env: {
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
-
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
-        FIREBASE_USERNAMER: process.env.FIREBASE_USERNAME,
+        FIREBASE_USERNAME: process.env.FIREBASE_USERNAME,
         FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
         FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
         FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
@@ -88,28 +80,23 @@ module.exports = configure(function (ctx) {
           .loader('@intlify/vue-i18n-loader');
       },
 
-      env: require('dotenv').config().parsed,
-
-      // transpile: false,
-      // publicPath: '/',
-
-      // Add dependencies for transpiling with Babel (Array of string/regex)
-      // (from node_modules, which are by default not transpiled).
-      // Applies only if "transpile" is set to true.
-      // transpileDependencies: [],
-
-      // rtl: true, // https://quasar.dev/options/rtl-support
-      // preloadChunks: true,
-      // showProgress: false,
-      // gzip: true,
-      // analyze: true,
-
-      // Options below are automatically set depending on the env, set them if you want to override
-      // extractCSS: false,
-
-      // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
-      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      // chainWebpack (/* chain */) {}
+      // Add robots.txt and sitemap.xml generation
+      generateRobotsTxt: true,
+      generateSitemap: true,
+      sitemapOptions: {
+        hostname: 'https://embarquetenares.com',
+        gzip: true,
+        exclude: ['/admin/**'],
+        routes: [
+          '/',
+          '/track',
+          '/rates',
+          '/ny-branch',
+          '/dr-branch',
+          '/faqs',
+          '/shipping-policy'
+        ]
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
@@ -117,7 +104,7 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http',
       },
-      port: 8080,
+      port: 9000,
       open: true, // opens browser window automatically
     },
 
@@ -152,7 +139,7 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false,
+      pwa: true, // Enable PWA in SSR mode
 
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
@@ -174,20 +161,35 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
-
-      // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
-      // if using workbox in InjectManifest mode
-      // chainWebpackCustomSW (/* chain */) {},
+      workboxOptions: {
+        // Workbox options
+        skipWaiting: true,
+        clientsClaim: true,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/api\./i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 24 * 60 * 60 // 24 hours
+              }
+            }
+          }
+        ]
+      },
 
       manifest: {
         name: 'Embarque Tenares',
         short_name: 'Embarque Tenares',
-        description: '',
+        description: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: 'icons/icon-128x128.png',
@@ -216,6 +218,30 @@ module.exports = configure(function (ctx) {
           },
         ],
       },
+    },
+
+    // Add meta tags configuration
+    meta: {
+      title: 'Embarque Tenares - Rastrea tus paquetes',
+      description: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
+      keywords: 'paquetes, rastreo, tarifas, embarque, tenares, dominican republic',
+      ogTitle: 'Embarque Tenares - Rastrea tus paquetes',
+      ogDescription: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
+      ogImage: 'icons/icon-512x512.png',
+      ogUrl: 'https://embarquetenares.com',
+      twitterCard: 'summary_large_image',
+      twitterTitle: 'Embarque Tenares - Rastrea tus paquetes',
+      twitterDescription: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
+      twitterImage: 'icons/icon-512x512.png',
+      robots: 'index, follow',
+      canonical: 'https://embarquetenares.com',
+      lang: 'es',
+      author: 'Elkin Garcia',
+      geo: {
+        region: 'US',
+        position: '40.854549806144156,-73.89396628342254',
+        placename: 'Bronx, NY 10457'
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-cordova-apps/configuring-cordova
