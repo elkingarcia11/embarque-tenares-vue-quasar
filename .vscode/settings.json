@@ -15,5 +15,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }

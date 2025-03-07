@@ -15,7 +15,7 @@ COPY ./ ./
 # Install Quasar CLI globally using npm.
 RUN npm install -g @quasar/cli
 # Install project dependencies based on package.json.
-RUN npm install
+RUN npm install --legacy-peer-deps
 # Build the Quasar application.
 RUN quasar build
 
