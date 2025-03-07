@@ -4,21 +4,10 @@
   <AlternativeToolbarComponent v-else />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useQuasar } from 'quasar';
 import MobileToolbarComponent from './MobileToolbarComponent.vue';
 import AlternativeToolbarComponent from './AlternativeToolbarComponent.vue';
 
-export default defineComponent({
-  name: 'ToolbarWrapper',
-  components: {
-    MobileToolbarComponent,
-    AlternativeToolbarComponent,
-  },
-  setup() {
-    const $q = useQuasar();
-    return { $q };
-  }
-});
+const $q = useQuasar();
 </script>

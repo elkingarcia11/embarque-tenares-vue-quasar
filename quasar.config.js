@@ -8,18 +8,14 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
-import { configure } from 'quasar/wrappers';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { configure } = require('quasar/wrappers');
+const path = require('path');
+const dotenv = require('dotenv');
 
 // Load environment variables
 dotenv.config();
 
-export default configure(function (ctx) {
+module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -120,7 +116,7 @@ export default configure(function (ctx) {
       server: {
         type: 'http',
       },
-      port: 8080,
+      port: 9000,
       open: true, // opens browser window automatically
     },
 
