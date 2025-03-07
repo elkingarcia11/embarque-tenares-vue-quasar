@@ -7,7 +7,7 @@
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >
       <!-- Title of the FAQs section -->
-      {{ $t('faqs') }}
+      {{ t('faqs') }}
     </q-item-section>
     <div>
       <!-- Iterate through the list of FAQs -->
@@ -24,7 +24,7 @@
         <q-card>
           <!-- Display the FAQ answer based on the selected locale -->
           <q-card-section
-            v-if="$i18n.locale == 'en-US'"
+            v-if="locale == 'en-US'"
             style="font-size: 20px"
           >
             {{ faq.a_en }}
@@ -52,7 +52,7 @@ import '../css/faqs.scss';
 export default {
   setup() {
     const $store = useStore();
-    const { locale } = useI18n();
+    const { locale, t } = useI18n();
 
     // Compute the list of FAQs from the store
     const faqsList = computed(() => $store.state.faqs.faqsList);
@@ -77,6 +77,8 @@ export default {
       faqsList,
       loading,
       printQuestion,
+      locale,
+      t
     };
   },
 };

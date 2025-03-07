@@ -5,14 +5,20 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
 import MobileToolbarComponent from './MobileToolbarComponent.vue';
 import AlternativeToolbarComponent from './AlternativeToolbarComponent.vue';
 
-export default {
+export default defineComponent({
   name: 'ToolbarWrapper',
   components: {
-    MobileToolbarComponent, // Import of MobileToolbarComponent
-    AlternativeToolbarComponent, // Import of AlternativeToolbarComponent
+    MobileToolbarComponent,
+    AlternativeToolbarComponent,
   },
-};
+  setup() {
+    const $q = useQuasar();
+    return { $q };
+  }
+});
 </script>

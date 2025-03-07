@@ -7,7 +7,7 @@
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
   >
     <!-- Display the branch label using i18n translation -->
-    {{ $t('drb') }}
+    {{ t('drb') }}
   </q-item-section>
 
   <!-- Card to display branch information and actions -->
@@ -36,7 +36,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('tooltip0') }}</strong></q-tooltip
+          <strong>{{ t('tooltip0') }}</strong></q-tooltip
         ></q-btn
       >
     </q-card-section>
@@ -61,7 +61,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('copy1') }}</strong>
+          <strong>{{ t('copy1') }}</strong>
         </q-tooltip>
         (809) 970-0007
       </q-btn>
@@ -92,7 +92,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('copy1') }}</strong>
+          <strong>{{ t('copy1') }}</strong>
         </q-tooltip></q-btn
       >
     </q-card-actions>
@@ -126,7 +126,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('copy2') }} </strong>
+          <strong>{{ t('copy2') }}</strong>
         </q-tooltip></q-btn
       >
     </q-card-actions>
@@ -135,7 +135,7 @@
     <q-expansion-item
       id="schedule_expansion_item"
       icon="schedule"
-      :label="$t('hours')"
+      :label="t('hours')"
       header-class="text-black text-bold q-py-md"
       expand-icon-class="text-black text-bold"
       header-style="
@@ -148,7 +148,7 @@
             class="text-white"
             overline
             style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ $t('monToFri') }}</q-item-label
+            >{{ t('monToFri') }}</q-item-label
           >
           <q-item-label style="text-align: center; font-weight: bold"
             >8AM - 5PM</q-item-label
@@ -161,7 +161,7 @@
             overline
             class="text-white"
             style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ $t('sat') }}</q-item-label
+            >{{ t('sat') }}</q-item-label
           >
           <q-item-label style="text-align: center; font-weight: bold"
             >8AM - 12PM</q-item-label
@@ -175,10 +175,10 @@
             overline
             class="text-white"
             style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ $t('sunday') }}</q-item-label
+            >{{ t('sunday') }}</q-item-label
           >
           <q-item-label style="text-align: center; font-weight: bold">{{
-            $t('closed')
+            t('closed')
           }}</q-item-label>
         </q-item-section>
       </q-item>
@@ -268,6 +268,7 @@ export default {
       iframeSource,
       dialog,
       tooltipResponse,
+      t
     };
   },
 };

@@ -8,7 +8,7 @@
         class="window-width overflow-hidden"
         outlined
         v-model="invoiceText"
-        :label="$t('trackPack')"
+        :label="t('trackPack')"
       >
         <template v-slot:append>
           <q-btn
@@ -25,7 +25,7 @@
       <q-item-section
         class="q-py-lg text-h4 text-bold text-center"
         style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-        >{{ $t('track') }}</q-item-section
+        >{{ t('track') }}</q-item-section
       >
       <CircularProg
         v-if="querySuccess"
@@ -41,7 +41,7 @@
       <q-btn
         color="primary"
         style="width: 90vw; font-weight: bold"
-        :label="$t('search')"
+        :label="t('search')"
         size="lg"
         @click="submit"
       />
@@ -51,15 +51,15 @@
       <q-card style="width: 90vw">
         <q-toolbar class="bg-primary">
           <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
-            {{ $t('findInv')
-            }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+            {{ t('findInv')
+            }}<span class="text-weight-bold">{{ t('findInvTwo') }}</span>
           </div>
         </q-toolbar>
         <q-separator />
         <q-card-section class="row full-height justify-center">
           <img
             loading="eager"
-            v-if="$i18n.locale == 'en-US'"
+            v-if="locale == 'en-US'"
             class="self-center"
             id="logo"
             fit="contain"
@@ -99,7 +99,7 @@ export default {
   setup() {
     const $q = useQuasar();
     const $store = useStore();
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
 
     const previousInvoice = ref('-1');
     const invoiceText = ref('');
@@ -193,6 +193,8 @@ export default {
       querySuccess,
       searchButtonClass,
       submit,
+      t,
+      locale
     };
   },
 };

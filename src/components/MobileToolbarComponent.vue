@@ -53,7 +53,7 @@
             />
           </q-item-section>
           <q-item-section class="text-black">
-            {{ $t(menuItem.label) }}
+            {{ t(menuItem.label) }}
           </q-item-section>
         </q-item>
 
@@ -61,7 +61,7 @@
         <q-expansion-item
           v-else
           clickable
-          :label="$t(menuItem.label)"
+          :label="t(menuItem.label)"
           default-closed
           header-class="q-py-md text-h4"
         >
@@ -76,7 +76,7 @@
             </q-item-section>
 
             <q-item-section class="text-black">
-              {{ $t(menuItem.label) }}
+              {{ t(menuItem.label) }}
             </q-item-section>
           </template>
 
@@ -96,7 +96,7 @@
               text-color="white"
             />
             <q-item-section class="q-pl-md text-black">
-              {{ $t(subMenuItem.label) }}
+              {{ t(subMenuItem.label) }}
             </q-item-section>
           </q-item>
         </q-expansion-item>
@@ -111,13 +111,12 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 export default {
   setup() {
-    // Initialize Vue Router
-    const $router = useRouter();
-
-    // Reactive state for the drawer's open/closed state
+    const router = useRouter();
+    const { t } = useI18n();
     const drawer = ref(false);
 
     // Sub-menu items
@@ -177,7 +176,7 @@ export default {
 
     const navigateToRoute = (route: string | undefined) => {
       if (typeof route === 'string') {
-        $router.push(route);
+        router.push(route);
       }
     };
 
@@ -187,6 +186,7 @@ export default {
       menuList,
       subMenuList,
       navigateToRoute,
+      t
     };
   },
 };

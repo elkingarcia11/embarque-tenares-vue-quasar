@@ -39,7 +39,7 @@
             class="text-accent"
           >
             <q-avatar icon="phone" />
-            <q-item-section>{{ $t('nyb') }}</q-item-section>
+            <q-item-section>{{ t('nyb') }}</q-item-section>
           </q-item>
           <q-item
             clickable
@@ -47,7 +47,7 @@
             class="text-secondary"
           >
             <q-avatar icon="phone" />
-            <q-item-section>{{ $t('drb') }}</q-item-section>
+            <q-item-section>{{ t('drb') }}</q-item-section>
           </q-item>
         </q-menu>
       </q-btn>
@@ -61,7 +61,7 @@
             class="text-accent"
           >
             <q-avatar icon="mail" />
-            <q-item-section>{{ $t('nyb') }}</q-item-section>
+            <q-item-section>{{ t('nyb') }}</q-item-section>
           </q-item>
           <q-item
             clickable
@@ -69,7 +69,7 @@
             class="text-secondary"
           >
             <q-avatar icon="mail" />
-            <q-item-section>{{ $t('drb') }}</q-item-section>
+            <q-item-section>{{ t('drb') }}</q-item-section>
           </q-item>
         </q-menu>
       </q-btn>
@@ -77,58 +77,61 @@
 
     <!-- Navigation Links -->
     <div class="row text-grey-7 flex-center">
-      <q-btn flat @click="$router.push('faqs')">{{ $t('about') }}</q-btn>
-      <q-btn flat @click="$router.push('track')">{{ $t('track') }}</q-btn>
-      <q-btn flat @click="$router.push('rates')">{{ $t('rates') }}</q-btn>
+      <q-btn flat @click="router.push('faqs')">{{ t('about') }}</q-btn>
+      <q-btn flat @click="router.push('track')">{{ t('track') }}</q-btn>
+      <q-btn flat @click="router.push('rates')">{{ t('rates') }}</q-btn>
 
       <!-- Contact Dropdown Menu -->
       <q-btn flat
-        >{{ $t('contact') }}
+        >{{ t('contact') }}
         <q-menu anchor="top middle" self="bottom middle">
           <q-item
             clickable
-            @click="$router.push('ny-branch')"
+            @click="router.push('ny-branch')"
             class="text-accent"
           >
             <q-avatar icon="person" />
-            <q-item-section>{{ $t('nyb') }}</q-item-section>
+            <q-item-section>{{ t('nyb') }}</q-item-section>
           </q-item>
           <q-item
             clickable
-            @click="$router.push('dr-branch')"
+            @click="router.push('dr-branch')"
             class="text-secondary"
           >
             <q-avatar icon="person" />
-            <q-item-section>{{ $t('drb') }}</q-item-section>
+            <q-item-section>{{ t('drb') }}</q-item-section>
           </q-item>
         </q-menu>
       </q-btn>
-      <q-btn flat @click="$router.push('faqs')">{{ $t('faqs') }}</q-btn>
-      <q-btn flat @click="$router.push('shipping-policy')">{{
-        $t('policy')
-      }}</q-btn>
+      <q-btn flat @click="router.push('faqs')">{{ t('faqs') }}</q-btn>
+      <q-btn flat @click="router.push('shipping-policy')">{{ t('policy') }}</q-btn>
     </div>
 
     <!-- Copyright Notice -->
     <div class="text-caption text-center q-px-md q-py-sm">
-      © 1998-2023 EMBARQUE TENARES CORP. {{ $t('rights') }}
+      © 1998-2025 EMBARQUE TENARES CORP. {{ t('rights') }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { openURL } from 'quasar';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import '../css/footer.scss';
 
 export default {
   setup() {
-    // Receives a url in string format to redirect to
+    const router = useRouter();
+    const { t } = useI18n();
     const openUrl = (url: string) => {
       openURL(url);
     };
 
     return {
       openUrl,
+      router,
+      t
     };
   },
 };

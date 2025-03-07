@@ -5,7 +5,7 @@
     <q-item-section
       class="q-py-lg text-h4 text-bold text-center"
       style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-      >{{ $t('rates') }}</q-item-section
+      >{{ t('rates') }}</q-item-section
     >
     <div>
       <!-- This loop creates an expansion item for each category in ratesList -->
@@ -26,7 +26,7 @@
 
           <!-- Display the category name based on the selected locale -->
           <q-item-section
-            v-if="$i18n.locale == 'en-US'"
+            v-if="locale == 'en-US'"
             class="text-h4"
             style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
           >
@@ -51,7 +51,7 @@
           >
             <q-item-section class="text-h6">
               <!-- Display the item name based on the selected locale -->
-              <q-item-label v-if="$i18n.locale == 'en-US'">{{
+              <q-item-label v-if="locale == 'en-US'">{{
                 item.name_en
               }}</q-item-label>
               <q-item-label v-else>{{ item.name_es }}</q-item-label>
@@ -74,12 +74,13 @@
 <script lang="ts">
 import { onBeforeMount, computed, ref } from 'vue';
 import { useStore } from 'src/store';
+import { useI18n } from 'vue-i18n';
 
 import '../css/rates.scss';
 
 export default {
   setup() {
-    // Access the Vuex store and Quasar utilities
+    const { t, locale } = useI18n();
     const $store = useStore();
 
     // Get the rates data from the Vuex store
@@ -103,6 +104,8 @@ export default {
       listOfLists,
       loading,
       ratesList,
+      t,
+      locale
     };
   },
 };

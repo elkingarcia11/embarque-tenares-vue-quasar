@@ -16,7 +16,7 @@
         <div class="q-py-md column items-center no-wrap btn-tgle">
           <q-icon center name="search" />
           <div class="text-center labels">
-            {{ $t('track') }}
+            {{ t('track') }}
           </div>
         </div>
       </template>
@@ -24,7 +24,7 @@
         <div class="q-py-md column items-center no-wrap btn-tgle">
           <q-icon center name="local_atm" />
           <div class="text-center labels">
-            {{ $t('rates') }}
+            {{ t('rates') }}
           </div>
         </div>
       </template>
@@ -33,7 +33,7 @@
         <div class="q-py-md column items-center no-wrap btn-tgle">
           <q-icon center name="domain" />
           <div class="text-center labels">
-            {{ $t('branch') }}
+            {{ t('branch') }}
           </div>
         </div>
       </template>
@@ -42,7 +42,7 @@
         <div class="q-py-md column items-center no-wrap btn-tgle">
           <q-icon center name="quiz" />
           <div class="text-center labels">
-            {{ $t('faqs') }}
+            {{ t('faqs') }}
           </div>
         </div>
       </template>
@@ -54,7 +54,7 @@
     <q-card class="q-px-sm q-py-md">
       <q-card-section>
         <div class="text-h5" style="font-family: 'BodoniSvtyTwoSCITCTT-Book'">
-          {{ $t('branch') }}
+          {{ t('branch') }}
         </div>
       </q-card-section>
 
@@ -65,7 +65,7 @@
         color="grey-3"
         v-for="(branch, index) in branchOptions"
         :key="index"
-        @click="$router.push(branch.route)"
+        @click="router.push(branch.route)"
       >
         <q-item-section avatar>
           <q-avatar
@@ -75,7 +75,7 @@
           />
         </q-item-section>
 
-        <q-item-section class="text-h6">{{ $t(branch.label) }}</q-item-section>
+        <q-item-section class="text-h6">{{ t(branch.label) }}</q-item-section>
       </q-item>
     </q-card>
   </q-dialog>
@@ -84,6 +84,7 @@
 <script lang="ts">
 import { ref, defineComponent, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'TabBar',
@@ -91,7 +92,8 @@ export default defineComponent({
     isDismissed: Boolean,
   },
   setup(props, { emit }) {
-    const $router = useRouter();
+    const router = useRouter();
+    const { t } = useI18n();
     const dialog = ref(false);
     const buttonGroup = ref(0); // Default selected tab
 
@@ -114,11 +116,11 @@ export default defineComponent({
       if (buttonGroup.value === 1) {
         emit('focusInput');
       } else if (buttonGroup.value === 2) {
-        $router.push('rates');
+        router.push('rates');
       } else if (buttonGroup.value === 3) {
         dialog.value = true;
       } else {
-        $router.push('faqs');
+        router.push('faqs');
       }
     };
 
@@ -131,7 +133,7 @@ export default defineComponent({
       }
     );
 
-    return { branchOptions, tabOptions, dialog, buttonGroup, open };
+    return { branchOptions, tabOptions, dialog, buttonGroup, open, t, router };
   },
 });
 </script>

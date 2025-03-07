@@ -57,7 +57,7 @@
 
     <!-- Page container for displaying router views -->
     <q-page-container style="position: relative; min-height: 100vh">
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view :key="route.fullPath"></router-view>
     </q-page-container>
 
     <!-- Footer component -->
@@ -68,8 +68,10 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import ToolbarWrapper from '../components/ToolbarWrapper.vue';
+
 export default {
   components: {
     FooterComponent,
@@ -77,6 +79,7 @@ export default {
   },
   setup() {
     const { locale } = useI18n();
+    const route = useRoute();
 
     // Reactive variables for language dropdown
     const label = ref('Español');
@@ -98,7 +101,7 @@ export default {
       }
     };
 
-    return { label, esClass, engClass, changeLanguage };
+    return { label, esClass, engClass, changeLanguage, route };
   },
 };
 </script>

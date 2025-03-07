@@ -10,7 +10,7 @@
       outlined
       @blur="handleDismiss"
       v-model="invoiceText"
-      :label="$t('trackPack')"
+      :label="t('trackPack')"
     >
       <template v-slot:append>
         <!-- Button to open the invoice dialog -->
@@ -42,8 +42,7 @@
       <q-toolbar class="bg-primary">
         <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
           <!-- Title of the invoice dialog -->
-          {{ $t('findInv')
-          }}<span class="text-weight-bold">{{ $t('findInvTwo') }}</span>
+          {{ t('findInv') }}<span class="text-weight-bold">{{ t('findInvTwo') }}</span>
         </div>
       </q-toolbar>
       <q-separator />
@@ -51,7 +50,7 @@
         <!-- Display an image based on the selected locale -->
         <q-img
           loading="eager"
-          v-if="$i18n.locale == 'en-US'"
+          v-if="locale == 'en-US'"
           class="self-center"
           id="logo"
           fit="contain"
@@ -102,7 +101,7 @@ export default {
     // Access Quasar utilities
     const $router = useRouter();
     const $q = useQuasar();
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
 
     // Computed property for dynamic logo height
     const dynamicHeight = computed(() => {
@@ -169,6 +168,9 @@ export default {
       focusInput,
       handleDismiss,
       submit,
+      t,
+      locale,
+      $q
     };
   },
 };

@@ -4,7 +4,7 @@
     class="q-py-lg text-h4 text-bold text-center"
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
   >
-    <!-- Title of the branch -->{{ $t('nyb') }}
+    <!-- Title of the branch -->{{ t('nyb') }}
   </q-item-section>
 
   <!-- Card containing branch information -->
@@ -33,7 +33,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('tooltip0') }}</strong></q-tooltip
+          <strong>{{ t('tooltip0') }}</strong></q-tooltip
         ></q-btn
       >
     </q-card-section>
@@ -57,7 +57,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('copy1') }}</strong>
+          <strong>{{ t('copy1') }}</strong>
         </q-tooltip>
         (718) 562-1300
       </q-btn>
@@ -89,7 +89,7 @@
           anchor="bottom middle"
           self="center middle"
         >
-          <strong>{{ $t('copy2') }} </strong>
+          <strong>{{ t('copy2') }} </strong>
         </q-tooltip></q-btn
       >
     </q-card-actions>
@@ -98,7 +98,7 @@
     <q-expansion-item
       id="schedule_expansion_item"
       icon="schedule"
-      :label="$t('hours')"
+      :label="t('hours')"
       header-class="text-black text-bold q-py-md"
       expand-icon-class="text-black text-bold"
       header-style="
@@ -111,7 +111,7 @@
             overline
             class="text-white"
             style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ $t('monToSat') }}</q-item-label
+            >{{ t('monToSat') }}</q-item-label
           >
           <q-item-label style="text-align: center; font-weight: bold"
             >8AM - 6PM</q-item-label
@@ -126,10 +126,10 @@
             overline
             class="text-white"
             style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ $t('sunday') }}</q-item-label
+            >{{ t('sunday') }}</q-item-label
           >
           <q-item-label style="text-align: center; font-weight: bold">{{
-            $t('closed')
+            t('closed')
           }}</q-item-label>
         </q-item-section>
       </q-item>
@@ -205,7 +205,7 @@ export default {
         });
     };
 
-    return { iframeSource, copy, openUrl };
+    return { iframeSource, copy, openUrl, t };
   },
 };
 </script>

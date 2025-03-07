@@ -4,7 +4,7 @@
     <q-list bordered class="rounded-borders q-mx-lg q-pb-lg">
       <!-- Display the disclaimer heading -->
       <h4 class="q-px-lg text-center">
-        {{ $t('disclaimer') }}
+        {{ t('disclaimer') }}
       </h4>
 
       <!-- Loop through policies and display each policy as a list item -->
@@ -17,7 +17,7 @@
         <q-item-section>
           <!-- Display the policy content based on its localized key -->
           <q-item-label class="text-subtitle1">
-            {{ $t(`policy${policy}`) }}
+            {{ t(`policy${policy}`) }}
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -32,10 +32,12 @@
 
 <script lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
 export default {
   name: 'shipping-policy',
   setup() {
-    // Create a reactive reference to hold the list of policy numbers
+    const { t } = useI18n();
     const policies = ref<string[]>();
 
     // Initialize the policies with numbers from 1 to 15
@@ -58,7 +60,7 @@ export default {
     ];
 
     // Return the policies reference to be used in the template
-    return { policies };
+    return { policies, t };
   },
 };
 </script>
