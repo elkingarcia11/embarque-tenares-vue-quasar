@@ -10,7 +10,7 @@ env:
   PROJECT_ID: 'extended-poetry-223323'
   REGISTRY_NAME: 'web-tenares'
   IMAGE_NAME: 'web-tenares-image'
-  SERVICE_NAME: 'web-tenares-service'
+  SERVICE_NAME: 'web-tenares-image'
 
 jobs:
   build-push-deploy:
