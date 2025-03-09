@@ -76,6 +76,7 @@ jobs:
           --build-arg HECTOR_USERNAME="${{ secrets.HECTOR_USERNAME }}" \
           --build-arg HECTOR_TYPE="${{ secrets.HECTOR_TYPE }}" \
           -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
+          
       - name: 'Tag docker image'
         run: docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:latest
 
