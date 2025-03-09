@@ -49,20 +49,20 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'history',
       env: {
         APP_VERSION: `${require('./package.json').version}-${new Date().toISOString()}`,
-        GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
-        HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
-        HECTOR_USERNAME: process.env.HECTOR_USERNAME,
-        HECTOR_TYPE: process.env.HECTOR_TYPE,
-        FIREBASE_USERNAME: process.env.FIREBASE_USERNAME,
-        FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
-        FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
-        FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
-        FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
-        FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
-        FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
-        FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-        FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
+        QENV_GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+        QENV_HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
+        QENV_HECTOR_USERNAME: process.env.HECTOR_USERNAME,
+        QENV_HECTOR_TYPE: process.env.HECTOR_TYPE,
+        QENV_FIREBASE_USERNAME: process.env.FIREBASE_USERNAME,
+        QENV_FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
+        QENV_FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+        QENV_FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+        QENV_FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
+        QENV_FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+        QENV_FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
+        QENV_FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        QENV_FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+        QENV_FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
       },
       chainWebpack: (chain) => {
         chain.module
@@ -162,24 +162,7 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {
-        // Workbox options
-        skipWaiting: true,
-        clientsClaim: true,
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/api\./i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api-cache',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 24 * 60 * 60 // 24 hours
-              }
-            }
-          }
-        ]
-      },
+      workboxOptions: {},
 
       manifest: {
         name: 'Embarque Tenares',
