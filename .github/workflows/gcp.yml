@@ -3,18 +3,30 @@ name: Build and Push Vue/Quasar/Nginx image to Google Cloud Platform
 on:
   push:
     branches: [main]
+  workflow_dispatch: # Added manual trigger option
+
+env:
+  REGION_NAME: 'us-east1-docker.pkg.dev'
+  PROJECT_ID: 'extended-poetry-223323'
+  REGISTRY_NAME: 'web-tenares'
+  IMAGE_NAME: 'web-tenares-image'
+  SERVICE_NAME: 'web-tenares-service' # Added to make service name configurable
+
 jobs:
-  build-push-gcr:
-    name: Build image and push to GCP
+  build-push-deploy:
+    name: Build, Push and Deploy to GCP
     runs-on: ubuntu-latest
-    env:
-      REGION_NAME: 'us-east1-docker.pkg.dev'
-      PROJECT_ID: 'extended-poetry-223323'
-      REGISTRY_NAME: 'web-tenares'
-      IMAGE_NAME: 'web-tenares-image'
+    permissions:
+      contents: 'read'
+      id-token: 'write' # Added for workload identity federation
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Generate version tag
+        id: version
+        run: echo "VERSION=$(date +%Y%m%d)-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Export environment variables to .env file
         env:
@@ -33,61 +45,79 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         run: |
-          echo "GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}" >> .env
-          echo "FIREBASE_USERNAME=${FIREBASE_USERNAME}" >> .env
-          echo "FIREBASE_PASSWORD=${FIREBASE_PASSWORD}" >> .env
-          echo "HECTOR_BASE_URL=${HECTOR_BASE_URL}" >> .env
-          echo "HECTOR_USERNAME=${HECTOR_USERNAME}" >> .env
-          echo "HECTOR_TYPE=${HECTOR_TYPE}" >> .env
-          echo "FIREBASE_API_KEY=${FIREBASE_API_KEY}" >> .env
-          echo "FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}" >> .env
-          echo "FIREBASE_DATABASE_URL=${FIREBASE_DATABASE_URL}" >> .env
-          echo "FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}" >> .env
-          echo "FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}" >> .env
-          echo "FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}" >> .env
-          echo "FIREBASE_APP_ID=${FIREBASE_APP_ID}" >> .env
-          echo "FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}" >> .env
-          cat .env
+          touch .env
+          chmod 600 .env # Restrict permissions
+          {
+            echo "GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}"
+            echo "FIREBASE_USERNAME=${FIREBASE_USERNAME}"
+            echo "FIREBASE_PASSWORD=${FIREBASE_PASSWORD}"
+            echo "HECTOR_BASE_URL=${HECTOR_BASE_URL}"
+            echo "HECTOR_USERNAME=${HECTOR_USERNAME}"
+            echo "HECTOR_TYPE=${HECTOR_TYPE}"
+            echo "FIREBASE_API_KEY=${FIREBASE_API_KEY}"
+            echo "FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}"
+            echo "FIREBASE_DATABASE_URL=${FIREBASE_DATABASE_URL}"
+            echo "FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}"
+            echo "FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}"
+            echo "FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}"
+            echo "FIREBASE_APP_ID=${FIREBASE_APP_ID}"
+            echo "FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}"
+          } >> .env
 
       - id: 'auth'
+        name: Authenticate to Google Cloud
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
 
-      - name: 'Authenticate region'
-        run: |
-          gcloud auth configure-docker $REGION_NAME
-
-      - name: 'Set up Cloud SDK'
+      - name: Set up Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Build Docker image'
-        run: docker buildx build --platform=linux/amd64 -t $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME .
+      - name: Configure Docker for GCP
+        run: gcloud auth configure-docker ${{ env.REGION_NAME }} --quiet
 
-      - name: 'Tag docker image'
-        run: docker tag $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME:latest
+      - name: Build Docker image
+        run: |
+          docker buildx build \
+            --platform=linux/amd64 \
+            -t ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }} \
+            -t ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            .
 
       - name: Push Docker image
-        run: docker push $REGION_NAME/$PROJECT_ID/$REGISTRY_NAME/$IMAGE_NAME
+        run: |
+          docker push ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
+          docker push ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
 
-      - id: 'deploy'
+      - name: Deploy to Cloud Run
+        id: deploy
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
-          service: 'web-tenares-image'
-          image: 'us-east1-docker.pkg.dev/extended-poetry-223323/web-tenares/web-tenares-image'
+          service: ${{ env.SERVICE_NAME }}
+          image: ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
           region: us-east1
           env_vars: |
-            GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-            FIREBASE_USERNAME: ${{ secrets.FIREBASE_USERNAME }}
-            FIREBASE_PASSWORD: ${{ secrets.FIREBASE_PASSWORD }}
-            HECTOR_BASE_URL: ${{ secrets.HECTOR_BASE_URL }}
-            HECTOR_USERNAME: ${{ secrets.HECTOR_USERNAME }}
-            HECTOR_TYPE: ${{ secrets.HECTOR_TYPE }}
-            FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-            FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
-            FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
-            FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-            FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
-            FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
-            FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-            FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+            GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
+            FIREBASE_USERNAME=${{ secrets.FIREBASE_USERNAME }}
+            FIREBASE_PASSWORD=${{ secrets.FIREBASE_PASSWORD }}
+            HECTOR_BASE_URL=${{ secrets.HECTOR_BASE_URL }}
+            HECTOR_USERNAME=${{ secrets.HECTOR_USERNAME }}
+            HECTOR_TYPE=${{ secrets.HECTOR_TYPE }}
+            FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
+            FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}
+            FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}
+            FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+            FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}
+            FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+            FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
+            FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}
+
+      - name: Verify deployment
+        run: |
+          sleep 10 # Wait for deployment to settle
+          curl -f "$(gcloud run services describe ${{ env.SERVICE_NAME }} --region us-east1 --format 'value(status.url)')" || exit 1
+
+      - name: Cleanup
+        if: always() # Run even if previous steps fail
+        run: |
+          rm -f .env
