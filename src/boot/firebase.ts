@@ -22,6 +22,14 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
+// Debug log (remove this in production)
+console.log('Firebase config check:', {
+  hasApiKey: !!firebaseConfig.apiKey,
+  apiKeyFirstChars: firebaseConfig.apiKey ? `${firebaseConfig.apiKey.substring(0, 5)}...` : 'missing',
+  hasAuthDomain: !!firebaseConfig.authDomain,
+  hasProjectId: !!firebaseConfig.projectId
+});
+
 // Initialize Firebase
 let app;
 try {

@@ -48,6 +48,7 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history',
       env: {
+        APP_VERSION: `${require('./package.json').version}-${new Date().toISOString()}`,
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
@@ -79,7 +80,6 @@ module.exports = configure(function (ctx) {
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
       },
-      env: require('dotenv').config().parsed,
 
       // Add robots.txt and sitemap.xml generation
       generateRobotsTxt: true,
