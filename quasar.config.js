@@ -48,7 +48,6 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history',
       env: {
-        APP_VERSION: `${require('./package.json').version}-${new Date().toISOString()}`,
         QENV_GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
         QENV_HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         QENV_HECTOR_USERNAME: process.env.HECTOR_USERNAME,
