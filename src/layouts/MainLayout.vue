@@ -58,7 +58,6 @@
     <!-- Page container for displaying router views -->
     <q-page-container style="position: relative; min-height: 100vh">
       <router-view :key="route.fullPath"></router-view>
-      <VersionIndicator v-if="isDesktop" />
     </q-page-container>
 
     <!-- Footer component -->
@@ -73,13 +72,11 @@ import { useRoute } from 'vue-router';
 import { useQuasar } from 'quasar';
 import FooterComponent from 'src/components/FooterComponent.vue';
 import ToolbarWrapper from '../components/ToolbarWrapper.vue';
-import VersionIndicator from '../components/VersionIndicator.vue';
 
 export default {
   components: {
     FooterComponent,
-    ToolbarWrapper,
-    VersionIndicator,
+    ToolbarWrapper
   },
   setup() {
     const { locale } = useI18n();
@@ -107,11 +104,11 @@ export default {
       }
     };
 
-    return { 
-      label, 
-      esClass, 
-      engClass, 
-      changeLanguage, 
+    return {
+      label,
+      esClass,
+      engClass,
+      changeLanguage,
       route,
       isDesktop
     };
