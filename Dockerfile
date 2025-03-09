@@ -1,5 +1,5 @@
 # Build stage - Build the Quasar application.
-FROM node:18.12.1 as build-stage
+FROM node:18.12.1 AS build-stage
 
 # Set the working directory
 WORKDIR /app
@@ -8,26 +8,12 @@ WORKDIR /app
 COPY package*.json ./
 COPY quasar.config.js ./
 COPY ./ ./
+# Copy .env file into the container
+COPY .env .env
 
 # Install dependencies and build
 RUN yarn global add @quasar/cli
 RUN yarn install
-
-# Build arguments for environment variables
-ARG FIREBASE_API_KEY
-ARG FIREBASE_AUTH_DOMAIN
-ARG FIREBASE_DATABASE_URL
-ARG FIREBASE_PROJECT_ID
-ARG FIREBASE_STORAGE_BUCKET
-ARG FIREBASE_MESSAGING_SENDER_ID
-ARG FIREBASE_APP_ID
-ARG FIREBASE_MEASUREMENT_ID
-ARG FIREBASE_USERNAME
-ARG FIREBASE_PASSWORD
-ARG GOOGLE_MAPS_API_KEY
-ARG HECTOR_BASE_URL
-ARG HECTOR_USERNAME
-ARG HECTOR_TYPE
 
 # Build the application
 RUN quasar build
@@ -36,7 +22,7 @@ RUN quasar build
 COPY ./nginx ./nginx
 
 # Production stage
-FROM nginx:1.23.3-alpine as production-stage
+FROM nginx:1.23.3-alpine AS production-stage
 
 # Copy built files and nginx configuration
 COPY --from=build-stage /app/dist/spa /usr/src/app
