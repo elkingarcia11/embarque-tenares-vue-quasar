@@ -7,7 +7,9 @@ import { db } from 'src/boot/firebase';
 
 const actions: ActionTree<AuthStateInterface, StateInterface> = {
   async fetchAuthData({ state }) {
-    let appId: string | null, apiKey: string | null, token: string | null;
+    let appId: string | null = null;
+    let apiKey: string | null = null;
+    let token: string | null = null;
     
     // Check if we already have the credentials in state
     if (state.apiKey && state.appId) {
@@ -22,34 +24,48 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
           appId = d['App-Id'];
           apiKey = d['Api-Key'];
         } else {
-          throw new Error('Auth document not found');
+          console.warn('Auth document not found');
+          return null;
         }
       } catch (error) {
         console.error('Error fetching auth data:', error);
-        throw new Error('Failed to fetch auth data');
+        return null;
       }
     }
 
-    // Get the auth token
+    // Get the auth token with retry logic
     try {
       const auth = getAuth();
-      const currentUser = auth.currentUser;
+      let retries = 0;
+      const maxRetries = 3;
       
-      if (currentUser) {
-        token = await currentUser.getIdToken();
-      } else {
-        throw new Error('No authenticated user');
+      while (retries < maxRetries) {
+        const currentUser = auth.currentUser;
+        
+        if (currentUser) {
+          token = await currentUser.getIdToken();
+          break;
+        } else {
+          // Wait for 1 second before retrying
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          retries++;
+          
+          if (retries === maxRetries) {
+            console.warn('Max retries reached waiting for authentication');
+            return null;
+          }
+        }
       }
+      
+      return {
+        'App-Id': appId,
+        'Api-Key': apiKey,
+        Authorization: token ? `Bearer ${token}` : undefined,
+      };
     } catch (error) {
       console.error('Error getting auth token:', error);
-      throw new Error('Failed to get auth token');
+      return null;
     }
-
-    return {
-      'App-Id': appId,
-      'Api-Key': apiKey,
-      Authorization: `Bearer ${token}`,
-    };
   },
 };
 
