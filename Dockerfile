@@ -1,4 +1,4 @@
-# Build stage
+# Build stage - Build the Quasar application.
 # Use the Node.js version 18.12.1 as the base image for the build stage.
 FROM node:18.12.1 as build-stage
 
