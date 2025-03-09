@@ -4,8 +4,9 @@ import { getDoc, doc } from '@firebase/firestore';
 import { InvoiceStateInterface } from './state';
 import { api } from 'boot/axios';
 
-import db from 'src/boot/firebase';
 import { ref } from 'vue';
+import { db } from 'src/boot/firebase';
+
 const actions: ActionTree<InvoiceStateInterface, StateInterface> = {
   async fetchEtaDays({ commit, state }) {
     const docRef = doc(db, 'eta/eta_days');

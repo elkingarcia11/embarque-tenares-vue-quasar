@@ -48,6 +48,7 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history',
       env: {
+        APP_VERSION: `${require('./package.json').version}-${new Date().toISOString()}`,
         GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
@@ -222,25 +223,27 @@ module.exports = configure(function (ctx) {
 
     // Add meta tags configuration
     meta: {
-      title: 'Embarque Tenares - Rastrea tus paquetes',
-      description: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
-      keywords: 'paquetes, rastreo, tarifas, embarque, tenares, dominican republic',
-      ogTitle: 'Embarque Tenares - Rastrea tus paquetes',
-      ogDescription: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
+      title: 'Embarque Tenares - International Shipping Services to Dominican Republic',
+      description: 'Professional shipping services from New York to Dominican Republic. Door-to-door delivery, customs clearance, and affordable rates. Serving the Dominican community in NYC, Bronx, Brooklyn, Queens, and more.',
+      keywords: 'shipping, international shipping, overseas shipping, global shipping, freight, cargo, logistics, transporte, customs clearance, parcel shipping, package delivery, Dominican Republic shipping, envíos a República Dominicana, shipping from New York, NYC shipping, Bronx shipping, Brooklyn shipping, Queens shipping, Staten Island shipping, Long Island shipping, Westchester shipping, Connecticut shipping, North Carolina shipping, New Jersey shipping, Eastchester shipping',
+      ogTitle: 'Embarque Tenares - International Shipping Services to Dominican Republic',
+      ogDescription: 'Professional shipping services from New York to Dominican Republic. Door-to-door delivery, customs clearance, and affordable rates.',
       ogImage: 'icons/icon-512x512.png',
       ogUrl: 'https://embarquetenares.com',
       twitterCard: 'summary_large_image',
-      twitterTitle: 'Embarque Tenares - Rastrea tus paquetes',
-      twitterDescription: 'Una aplicación para rastrear tus paquetes, ver tarifas y más',
+      twitterTitle: 'Embarque Tenares - International Shipping Services to Dominican Republic',
+      twitterDescription: 'Professional shipping services from New York to Dominican Republic. Door-to-door delivery, customs clearance, and affordable rates.',
       twitterImage: 'icons/icon-512x512.png',
       robots: 'index, follow',
       canonical: 'https://embarquetenares.com',
-      lang: 'es',
-      author: 'Elkin Garcia',
+      lang: ['en-US', 'es-US'],
+      author: 'Embarque Tenares',
+      version: new Date().toISOString(),
       geo: {
-        region: 'US',
+        region: 'US-NY',
         position: '40.854549806144156,-73.89396628342254',
-        placename: 'Bronx, NY 10457'
+        placename: 'Bronx, New York',
+        ICBM: '40.854549806144156, -73.89396628342254'
       }
     },
 

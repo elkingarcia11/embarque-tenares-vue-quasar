@@ -1,8 +1,8 @@
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from '@firebase/firestore';
 import { FaqsStateInterface } from './state';
-import db from 'src/boot/firebase';
+import { db } from 'src/boot/firebase';
 
 const actions: ActionTree<FaqsStateInterface, StateInterface> = {
   async fetchFaqs({ commit }) {

@@ -3,8 +3,7 @@ import { StateInterface } from '../index';
 import { getDoc, doc } from '@firebase/firestore';
 import { AuthStateInterface } from './state';
 import { getAuth } from 'firebase/auth';
-
-import db from 'src/boot/firebase';
+import { db } from 'src/boot/firebase';
 
 const actions: ActionTree<AuthStateInterface, StateInterface> = {
   async fetchAuthData({ state }) {
