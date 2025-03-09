@@ -14,7 +14,27 @@ const path = require('path');
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+  // Load environment variables from .env file
   require('dotenv').config();
+
+  // Get raw environment variables
+  const {
+    QENV_FIREBASE_API_KEY,
+    QENV_FIREBASE_AUTH_DOMAIN,
+    QENV_FIREBASE_DATABASE_URL,
+    QENV_FIREBASE_PROJECT_ID,
+    QENV_FIREBASE_STORAGE_BUCKET,
+    QENV_FIREBASE_MESSAGING_SENDER_ID,
+    QENV_FIREBASE_APP_ID,
+    QENV_FIREBASE_MEASUREMENT_ID,
+    QENV_FIREBASE_USERNAME,
+    QENV_FIREBASE_PASSWORD,
+    GOOGLE_MAPS_API_KEY,
+    HECTOR_BASE_URL,
+    HECTOR_USERNAME,
+    HECTOR_TYPE
+  } = process.env;
+
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -48,20 +68,20 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history',
       env: {
-        QENV_GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
-        QENV_HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
-        QENV_HECTOR_USERNAME: process.env.HECTOR_USERNAME,
-        QENV_HECTOR_TYPE: process.env.HECTOR_TYPE,
-        QENV_FIREBASE_USERNAME: process.env.FIREBASE_USERNAME,
-        QENV_FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
-        QENV_FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
-        QENV_FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
-        QENV_FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
-        QENV_FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
-        QENV_FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
-        QENV_FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        QENV_FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-        QENV_FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
+        FIREBASE_API_KEY: QENV_FIREBASE_API_KEY,
+        FIREBASE_AUTH_DOMAIN: QENV_FIREBASE_AUTH_DOMAIN,
+        FIREBASE_DATABASE_URL: QENV_FIREBASE_DATABASE_URL,
+        FIREBASE_PROJECT_ID: QENV_FIREBASE_PROJECT_ID,
+        FIREBASE_STORAGE_BUCKET: QENV_FIREBASE_STORAGE_BUCKET,
+        FIREBASE_MESSAGING_SENDER_ID: QENV_FIREBASE_MESSAGING_SENDER_ID,
+        FIREBASE_APP_ID: QENV_FIREBASE_APP_ID,
+        FIREBASE_MEASUREMENT_ID: QENV_FIREBASE_MEASUREMENT_ID,
+        FIREBASE_USERNAME: QENV_FIREBASE_USERNAME,
+        FIREBASE_PASSWORD: QENV_FIREBASE_PASSWORD,
+        GOOGLE_MAPS_API_KEY: GOOGLE_MAPS_API_KEY,
+        HECTOR_BASE_URL: HECTOR_BASE_URL,
+        HECTOR_USERNAME: HECTOR_USERNAME,
+        HECTOR_TYPE: HECTOR_TYPE,
       },
       chainWebpack: (chain) => {
         chain.module
@@ -79,7 +99,6 @@ module.exports = configure(function (ctx) {
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
       },
-
       // Add robots.txt and sitemap.xml generation
       generateRobotsTxt: true,
       generateSitemap: true,

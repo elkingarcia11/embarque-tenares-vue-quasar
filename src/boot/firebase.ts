@@ -12,28 +12,24 @@ import { boot } from 'quasar/wrappers';
 
 // Firebase configuration object
 const firebaseConfig = {
-  apiKey: process.env.QENV_FIREBASE_API_KEY,
-  authDomain: process.env.QENV_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.QENV_FIREBASE_DATABASE_URL,
-  projectId: process.env.QENV_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.QENV_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.QENV_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.QENV_FIREBASE_APP_ID,
-  measurementId: process.env.QENV_FIREBASE_MEASUREMENT_ID,
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
-
-// Debug log (remove this in production)
-console.log('Firebase config check:', {
-  hasApiKey: !!firebaseConfig.apiKey,
-  apiKeyFirstChars: firebaseConfig.apiKey ? `${firebaseConfig.apiKey.substring(0, 5)}...` : 'missing',
-  hasAuthDomain: !!firebaseConfig.authDomain,
-  hasProjectId: !!firebaseConfig.projectId
-});
 
 // Initialize Firebase
 let app;
 try {
+  if (!firebaseConfig.apiKey) {
+    throw new Error('Firebase API Key is missing');
+  }
   app = initializeApp(firebaseConfig);
+  console.log('Firebase initialized successfully');
 } catch (error) {
   console.error('Firebase initialization error:', error);
   throw error;
@@ -43,8 +39,18 @@ const auth = getAuth();
 const firestore: Firestore = getFirestore(app);
 
 // Set up authentication persistence
-const email = process.env.QENV_FIREBASE_USERNAME || '';
-const password = process.env.QENV_FIREBASE_PASSWORD || '';
+const email = process.env.FIREBASE_USERNAME;
+const password = process.env.FIREBASE_PASSWORD;
+
+if (process.env.DEV) {
+  console.log('Development mode - Environment check:', {
+    config: firebaseConfig,
+    auth: {
+      hasEmail: !!email,
+      hasPassword: !!password
+    }
+  });
+}
 
 setPersistence(auth, browserSessionPersistence)
   .then(() => {

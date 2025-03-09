@@ -1,6 +1,6 @@
 # Build stage
 # Use the Node.js version 18.12.1 as the base image for the build stage.
-FROM node:18.12.1 as build-stage
+FROM node:18.12.1 AS build-stage
 
 # Set the working directory inside the container to /app.
 WORKDIR /app
@@ -24,7 +24,7 @@ COPY ./nginx ./nginx
 
 # Production stage
 # Use the nginx version 1.23.3-alpine as the base image for the production stage.
-FROM nginx:1.23.3-alpine as production-stage
+FROM nginx:1.23.3-alpine AS production-stage
 
 # Copy the built static files from the build stage to the directory inside the nginx container.
 COPY --from=build-stage /app/dist/spa /usr/src/app
