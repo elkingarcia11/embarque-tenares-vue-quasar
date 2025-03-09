@@ -3,14 +3,14 @@ name: Build and Push Vue/Quasar/Nginx image to Google Cloud Platform
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Added manual trigger option
+  workflow_dispatch: # Manual trigger option
 
 env:
   REGION_NAME: 'us-east1-docker.pkg.dev'
   PROJECT_ID: 'extended-poetry-223323'
   REGISTRY_NAME: 'web-tenares'
   IMAGE_NAME: 'web-tenares-image'
-  SERVICE_NAME: 'web-tenares-service' # Added to make service name configurable
+  SERVICE_NAME: 'web-tenares-service'
 
 jobs:
   build-push-deploy:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
-      id-token: 'write' # Added for workload identity federation
+      id-token: 'write'
 
     steps:
       - name: Checkout code
@@ -28,41 +28,55 @@ jobs:
         id: version
         run: echo "VERSION=$(date +%Y%m%d)-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Export environment variables to .env file
-        env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-          FIREBASE_USERNAME: ${{ secrets.FIREBASE_USERNAME }}
-          FIREBASE_PASSWORD: ${{ secrets.FIREBASE_PASSWORD }}
-          HECTOR_BASE_URL: ${{ secrets.HECTOR_BASE_URL }}
-          HECTOR_USERNAME: ${{ secrets.HECTOR_USERNAME }}
-          HECTOR_TYPE: ${{ secrets.HECTOR_TYPE }}
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
-          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
-          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-          FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+      # Create the scripts directory and the replacement script
+      - name: Create environment variable script
         run: |
-          touch .env
-          chmod 600 .env # Restrict permissions
-          {
-            echo "GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}"
-            echo "FIREBASE_USERNAME=${FIREBASE_USERNAME}"
-            echo "FIREBASE_PASSWORD=${FIREBASE_PASSWORD}"
-            echo "HECTOR_BASE_URL=${HECTOR_BASE_URL}"
-            echo "HECTOR_USERNAME=${HECTOR_USERNAME}"
-            echo "HECTOR_TYPE=${HECTOR_TYPE}"
-            echo "FIREBASE_API_KEY=${FIREBASE_API_KEY}"
-            echo "FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}"
-            echo "FIREBASE_DATABASE_URL=${FIREBASE_DATABASE_URL}"
-            echo "FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}"
-            echo "FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}"
-            echo "FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}"
-            echo "FIREBASE_APP_ID=${FIREBASE_APP_ID}"
-            echo "FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}"
-          } >> .env
+          mkdir -p scripts
+          cat > scripts/replace-env.sh << 'EOF'
+          #!/bin/sh
+          set -e
+
+          echo "Replacing environment variables in JS files..."
+
+          # Find main JS file with the environment variable declarations
+          JS_FILE=$(find /usr/src/app -name "*.js" -type f -exec grep -l "FIREBASE_API_KEY" {} \; | head -n 1)
+
+          if [ -z "$JS_FILE" ]; then
+            echo "Warning: Could not find JS file with environment variables. Skipping replacement."
+            exit 0
+          fi
+
+          # Replace each environment variable
+          replace_var() {
+            VAR_NAME=$1
+            VAR_VALUE=${!VAR_NAME}
+            
+            if [ -n "$VAR_VALUE" ]; then
+              # Look for patterns like: FIREBASE_API_KEY:"abc123" or FIREBASE_API_KEY: "abc123"
+              sed -i "s|${VAR_NAME}:[[:space:]]*\"[^\"]*\"|${VAR_NAME}:\"${VAR_VALUE}\"|g" $JS_FILE
+              echo "Replaced $VAR_NAME in $JS_FILE"
+            fi
+          }
+
+          # Replace all environment variables
+          replace_var "GOOGLE_MAPS_API_KEY"
+          replace_var "FIREBASE_USERNAME"
+          replace_var "FIREBASE_PASSWORD"
+          replace_var "HECTOR_BASE_URL"
+          replace_var "HECTOR_USERNAME"
+          replace_var "HECTOR_TYPE"
+          replace_var "FIREBASE_API_KEY"
+          replace_var "FIREBASE_AUTH_DOMAIN"
+          replace_var "FIREBASE_DATABASE_URL"
+          replace_var "FIREBASE_PROJECT_ID"
+          replace_var "FIREBASE_STORAGE_BUCKET"
+          replace_var "FIREBASE_MESSAGING_SENDER_ID"
+          replace_var "FIREBASE_APP_ID"
+          replace_var "FIREBASE_MEASUREMENT_ID"
+
+          echo "Environment variable replacement complete."
+          EOF
+          chmod +x scripts/replace-env.sh
 
       - id: 'auth'
         name: Authenticate to Google Cloud
@@ -76,19 +90,32 @@ jobs:
       - name: Configure Docker for GCP
         run: gcloud auth configure-docker ${{ env.REGION_NAME }} --quiet
 
-      - name: Build Docker image
-        run: |
-          docker buildx build \
-            --platform=linux/amd64 \
-            -t ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }} \
-            -t ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest \
-            .
+      # Setup Docker Buildx for improved build performance
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Push Docker image
-        run: |
-          docker push ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
-          docker push ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
+      # Cache Docker layers
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
+            ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      # Deploy to Cloud Run with environment variables
       - name: Deploy to Cloud Run
         id: deploy
         uses: 'google-github-actions/deploy-cloudrun@v1'
@@ -96,13 +123,45 @@ jobs:
           service: ${{ env.SERVICE_NAME }}
           image: ${{ env.REGION_NAME }}/${{ env.PROJECT_ID }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
           region: us-east1
+          env_vars: |
+            GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
+            FIREBASE_USERNAME=${{ secrets.FIREBASE_USERNAME }}
+            FIREBASE_PASSWORD=${{ secrets.FIREBASE_PASSWORD }}
+            HECTOR_BASE_URL=${{ secrets.HECTOR_BASE_URL }}
+            HECTOR_USERNAME=${{ secrets.HECTOR_USERNAME }}
+            HECTOR_TYPE=${{ secrets.HECTOR_TYPE }}
+            FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
+            FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}
+            FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}
+            FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+            FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}
+            FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+            FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
+            FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}
 
+      # More comprehensive health check
       - name: Verify deployment
         run: |
-          sleep 10 # Wait for deployment to settle
-          curl -f "$(gcloud run services describe ${{ env.SERVICE_NAME }} --region us-east1 --format 'value(status.url)')" || exit 1
+          SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} --region us-east1 --format 'value(status.url)')
+          echo "Service URL: $SERVICE_URL"
+          
+          # Wait for deployment to be fully ready
+          for i in {1..10}; do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL)
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "Service is responding with 200 OK"
+              exit 0
+            fi
+            echo "Attempt $i: Service returned HTTP $HTTP_STATUS. Waiting..."
+            sleep 10
+          done
+          
+          echo "Service verification failed after 10 attempts"
+          exit 1
 
-      - name: Cleanup
-        if: always() # Run even if previous steps fail
+      # Swap cache to improve performance for subsequent builds
+      - name: Move cache
+        if: always()
         run: |
-          rm -f .env
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
