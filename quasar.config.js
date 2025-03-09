@@ -52,7 +52,7 @@ module.exports = configure(function (ctx) {
         HECTOR_BASE_URL: process.env.HECTOR_BASE_URL,
         HECTOR_USERNAME: process.env.HECTOR_USERNAME,
         HECTOR_TYPE: process.env.HECTOR_TYPE,
-        FIREBASE_USERNAME: process.env.FIREBASE_USERNAME,
+        FIREBASE_USERNAMER: process.env.FIREBASE_USERNAME,
         FIREBASE_PASSWORD: process.env.FIREBASE_PASSWORD,
         FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
         FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
@@ -79,6 +79,7 @@ module.exports = configure(function (ctx) {
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
       },
+      env: require('dotenv').config().parsed,
 
       // Add robots.txt and sitemap.xml generation
       generateRobotsTxt: true,
