@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
         name: 'rates',
       },
       {
+        path: 'shipping-services',
+        component: () => import('src/pages/ShippingServicesPage.vue'),
+        name: 'shipping-services',
+      },
+      {
         path: 'ny-branch',
         component: () => import('src/pages/NyBranchPage.vue'),
         name: 'nyb',

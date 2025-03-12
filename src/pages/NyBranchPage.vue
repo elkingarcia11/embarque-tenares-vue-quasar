@@ -1,163 +1,178 @@
 <template>
-  <!-- Main content of the New York branch page -->
-  <q-item-section
-    class="q-py-lg text-h4 text-bold text-center"
-    style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-  >
-    <!-- Title of the branch -->{{ t('nyb') }}
-  </q-item-section>
-
-  <!-- Card containing branch information -->
-  <q-card class="my-card q-mt-sm">
-    <!-- Google Maps embedded iframe -->
-    <iframe loading="eager" class="iframe" :src="iframeSource" />
-
-    <!-- Button for getting directions -->
-    <q-card-section class="q-pa-none q-ma-none">
-      <q-btn
-        fab
-        @click="
-          openUrl(
-            'https://www.google.com/maps/dir/?api=1&destination=2249+Washington+Ave,+Bronx,+NY+10457-1445,+USA'
-          )
-        "
-        color="primary"
-        icon="directions"
-        class="absolute"
-        style="top: 0px; right: 0px; transform: translateY(-50%)"
-      >
-        <!-- Tooltip for the button -->
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('tooltip0') }}</strong></q-tooltip
-        ></q-btn
-      >
-    </q-card-section>
-
-    <!-- Card actions for contact information -->
-    <q-card-actions class="q-pt-sm">
-      <!-- Button to call the branch -->
-      <q-btn
-        @click="openUrl('tel:7185621300')"
-        flat
-        round
-        color="primary"
-        icon="call"
-      />
-
-      <!-- Button to copy phone number -->
-      <q-btn @click="copy(1)" flat color="black">
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('copy1') }}</strong>
-        </q-tooltip>
-        (718) 562-1300
-      </q-btn>
-      <q-space />
-    </q-card-actions>
-    <q-card-actions>
-      <!-- Buttons to email the branch -->
-      <q-btn
-        @click="openUrl('mailto:ny@embarquetenares.com')"
-        flat
-        round
-        color="primary"
-        icon="email"
-      />
-      <q-btn
-        @click="openUrl('mailto:ny@embarquetenares.com')"
-        flat
-        color="black"
-        no-caps
-      >
-        ny@embarquetenares.com
-      </q-btn>
-      <q-space />
-      <!-- Button to copy email address -->
-      <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('copy2') }} </strong>
-        </q-tooltip></q-btn
-      >
-    </q-card-actions>
-
-    <!-- Expansion item for displaying branch hours -->
-    <q-expansion-item
-      id="schedule_expansion_item"
-      icon="schedule"
-      :label="t('hours')"
-      header-class="text-black text-bold q-py-md"
-      expand-icon-class="text-black text-bold"
-      header-style="
-  border-bottom-style: solid; border-color:lightgrey; border-width: 0.25px;"
+  <q-page :class="{'pb-tabbar': isMobile}">
+    <!-- Main content of the New York branch page -->
+    <q-item-section
+      class="q-py-lg text-h4 text-bold text-center"
+      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >
-      <!-- Opening hours for the branch -->
-      <q-item class="text-white" style="padding-top: 1.5vh">
-        <q-item-section>
-          <q-item-label
-            overline
-            class="text-white"
-            style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ t('monToSat') }}</q-item-label
-          >
-          <q-item-label style="text-align: center; font-weight: bold"
-            >8AM - 6PM</q-item-label
-          >
-        </q-item-section>
-      </q-item>
+      <!-- Title of the branch -->{{ t('nyb') }}
+    </q-item-section>
 
-      <!-- Closing hours for the branch -->
-      <q-item class="text-white" style="padding-bottom: 1vh">
-        <q-item-section>
-          <q-item-label
-            overline
-            class="text-white"
-            style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ t('sunday') }}</q-item-label
-          >
-          <q-item-label style="text-align: center; font-weight: bold">{{
-            t('closed')
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-expansion-item>
+    <!-- Card containing branch information -->
+    <q-card class="my-card q-mt-sm">
+      <!-- Google Maps embedded iframe -->
+      <iframe loading="eager" class="iframe" :src="iframeSource" />
 
-    <!-- Social media footer component -->
-    <SocialMediaFooter />
-  </q-card>
+      <!-- Button for getting directions -->
+      <q-card-section class="q-pa-none q-ma-none">
+        <q-btn
+          fab
+          @click="
+            openUrl(
+              'https://www.google.com/maps/dir/?api=1&destination=2249+Washington+Ave,+Bronx,+NY+10457-1445,+USA'
+            )
+          "
+          color="primary"
+          icon="directions"
+          class="absolute"
+          style="top: 0px; right: 0px; transform: translateY(-50%)"
+        >
+          <!-- Tooltip for the button -->
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('tooltip0') }}</strong></q-tooltip
+          ></q-btn
+        >
+      </q-card-section>
+
+      <!-- Card actions for contact information -->
+      <q-card-actions class="q-pt-sm">
+        <!-- Button to call the branch -->
+        <q-btn
+          @click="openUrl('tel:7185621300')"
+          flat
+          round
+          color="primary"
+          icon="call"
+        />
+
+        <!-- Button to copy phone number -->
+        <q-btn @click="copy(1)" flat color="black">
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('copy1') }}</strong>
+          </q-tooltip>
+          (718) 562-1300
+        </q-btn>
+        <q-space />
+      </q-card-actions>
+      <q-card-actions>
+        <!-- Buttons to email the branch -->
+        <q-btn
+          @click="openUrl('mailto:ny@embarquetenares.com')"
+          flat
+          round
+          color="primary"
+          icon="email"
+        />
+        <q-btn
+          @click="openUrl('mailto:ny@embarquetenares.com')"
+          flat
+          color="black"
+          no-caps
+        >
+          ny@embarquetenares.com
+        </q-btn>
+        <q-space />
+        <!-- Button to copy email address -->
+        <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('copy2') }} </strong>
+          </q-tooltip></q-btn
+        >
+      </q-card-actions>
+
+      <!-- Expansion item for displaying branch hours -->
+      <q-expansion-item
+        id="schedule_expansion_item"
+        icon="schedule"
+        :label="t('hours')"
+        header-class="text-black text-bold q-py-md"
+        expand-icon-class="text-black text-bold"
+        header-style="
+  border-bottom-style: solid; border-color:lightgrey; border-width: 0.25px;"
+      >
+        <!-- Opening hours for the branch -->
+        <q-item class="text-white" style="padding-top: 1.5vh">
+          <q-item-section>
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ t('monToSat') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold"
+              >8AM - 6PM</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+
+        <!-- Closing hours for the branch -->
+        <q-item class="text-white" style="padding-bottom: 1vh">
+          <q-item-section>
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ t('sunday') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold">{{
+              t('closed')
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-expansion-item>
+    </q-card>
+
+    <!-- Tab bar component -->
+    <TabBar
+      @focus-input="focusInput"
+      class="tabBar"
+      v-if="isMobile"
+    />
+  </q-page>
 </template>
 
 <script lang="ts">
 import process from 'process';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { openURL, copyToClipboard } from 'quasar';
-
-import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
+import { useQuasar } from 'quasar';
+import TabBar from 'src/components/TabBar.vue';
 
 import '../css/branches.scss';
 
 export default {
   name: 'NyBranchPage',
   components: {
-    SocialMediaFooter,
+    TabBar
   },
   setup() {
-    // Access i18n translation function
     const { t } = useI18n();
+    const $q = useQuasar();
+    
+    // Check if mobile
+    const isMobile = computed(() => $q.platform.is.mobile);
+    
+    // Dummy function for TabBar focus-input event
+    const focusInput = () => {
+      // Navigate to the home page when track tab is clicked
+      window.location.href = '/';
+    };
 
     // State variables
     const tooltipResponse = ref('');
@@ -205,7 +220,7 @@ export default {
         });
     };
 
-    return { iframeSource, copy, openUrl, t };
+    return { iframeSource, copy, openUrl, t, isMobile, focusInput };
   },
 };
 </script>

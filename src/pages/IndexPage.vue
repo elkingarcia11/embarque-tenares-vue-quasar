@@ -1,95 +1,206 @@
 <template>
-  <!-- Main content of the index page -->
+  <q-page :class="{'pb-tabbar': isMobile}">
+        <!-- Invoice tracking form -->
+        <q-form @submit="submit" class="invoiceForm">
+      <q-input
+        ref="invoiceInputRef"
+        square
+        class="bg-white"
+        outlined
+        @blur="handleDismiss"
+        v-model="invoiceText"
+        :label="t('trackPack')"
+      >
+        <template v-slot:append>
+          <!-- Button to open the invoice dialog -->
+          <q-btn
+            flat
+            round
+            color="secondary"
+            icon="quiz"
+            @click="invoiceDialog = true"
+          />
+        </template>
+      </q-input>
+    </q-form>
 
-  <!-- Invoice tracking form -->
-  <q-form @submit="submit" class="invoiceForm">
-    <q-input
-      ref="invoiceInputRef"
-      square
-      class="bg-white"
-      outlined
-      @blur="handleDismiss"
-      v-model="invoiceText"
-      :label="t('trackPack')"
-    >
-      <template v-slot:append>
-        <!-- Button to open the invoice dialog -->
-        <q-btn
-          flat
-          round
-          color="secondary"
-          icon="quiz"
-          @click="invoiceDialog = true"
-        />
-      </template>
-    </q-input>
-  </q-form>
+    <!-- SEO Component -->
+    <SeoComponent pageType="home" />
 
-  <!-- Logo display -->
-  <div class="row flex-center q-py-xl">
-    <q-img
-      class="q-my-xl"
-      id="logo"
-      src="../assets/logo.png"
-      fit="contain"
-      :style="dynamicHeight"
-    />
-  </div>
-
-  <!-- Invoice dialog -->
-  <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
-    <q-card>
-      <q-toolbar class="bg-primary">
-        <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
-          <!-- Title of the invoice dialog -->
-          {{ t('findInv') }}<span class="text-weight-bold">{{ t('findInvTwo') }}</span>
+    <!-- SEO Content Section - Visible to users and search engines -->
+    <section class="seo-content q-pa-md q-mb-xl">
+      <div class="container">
+         <div class="row flex-center">
+          <q-img
+            id="logo"
+            src="/logo.png"
+            fit="contain"
+            :style="dynamicHeight"
+          />
         </div>
-      </q-toolbar>
-      <q-separator />
-      <q-card-section class="row full-height justify-center">
-        <!-- Display an image based on the selected locale -->
-        <q-img
-          loading="eager"
-          v-if="locale == 'en-US'"
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackEN.png"
-        />
-        <q-img
-          loading="eager"
-          v-else
-          class="self-center"
-          id="logo"
-          fit="contain"
-          src="../assets/trackES.png"
-        />
-      </q-card-section>
-    </q-card>
-  </q-dialog>
 
-  <!-- Tab bar component -->
-  <TabBar
-    @focus-input="focusInput"
-    class="tabBar"
-    v-if="$q.platform.is.mobile"
-    :is-dismissed="isDismissed"
-  />
+
+        
+        <h1 class="text-h4 text-weight-bold text-center q-mb-md">
+          {{ t('home.seo.title') }}
+        </h1>
+        <p class="text-body1 text-center q-mb-lg">
+          {{ t('home.seo.description') }}
+        </p>
+        <div class="row q-col-gutter-md q-mb-xl">
+          <div class="col-12 col-md-4" v-for="(service, index) in shippingServices" :key="index">
+            <q-card class="service-card q-pa-md">
+              <q-card-section>
+                <h2 class="text-h6 text-weight-bold">{{ t(service.title) }}</h2>
+                <p>{{ t(service.description) }}</p>
+              </q-card-section>
+            </q-card>
+          </div>
+        </div>
+        
+        <!-- Shipping Locations Section -->
+        <div class="q-mt-xl">
+          <h2 class="text-h5 text-weight-bold text-center q-mb-md">
+            {{ t('home.seo.locations.title') }}
+          </h2>
+          <p class="text-body1 text-center q-mb-lg">
+            {{ t('home.seo.locations.description') }}
+          </p>
+          <div class="row justify-center q-mt-md">
+            <div class="col-12 col-md-10">
+              <q-card class="location-card q-pa-md">
+                <q-card-section>
+                  <div class="row q-col-gutter-sm">
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">New York City</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Brooklyn</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Queens</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Bronx</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Manhattan</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Long Island</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">New Jersey</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Connecticut</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Yonkers</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Mount Vernon</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">Upstate NY</div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 q-pa-xs">
+                      <div class="location-item text-center">
+                        <div class="text-weight-medium">North Carolina</div>
+                      </div>
+                    </div>
+                  </div>
+                </q-card-section>
+              </q-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- Invoice dialog -->
+    <q-dialog v-model="invoiceDialog" transition-hide="slide-down">
+      <q-card>
+        <q-toolbar class="bg-primary">
+          <div class="text-white text-center q-px-sm q-py-md dialogToolbar">
+            <!-- Title of the invoice dialog -->
+            {{ t('findInv') }}<span class="text-weight-bold">{{ t('findInvTwo') }}</span>
+          </div>
+        </q-toolbar>
+        <q-separator />
+        <q-card-section class="row full-height justify-center">
+          <!-- Display an image based on the selected locale -->
+          <q-img
+            loading="eager"
+            v-if="locale == 'en-US'"
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="/assets/trackEN.png"
+          />
+          <q-img
+            loading="eager"
+            v-else
+            class="self-center"
+            id="logo"
+            fit="contain"
+            src="/assets/trackES.png"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
+    <!-- Tab bar component -->
+    <TabBar
+      @focus-input="focusInput"
+      class="tabBar"
+      v-if="isMobile"
+      :is-dismissed="isDismissed"
+    />
+  </q-page>
 </template>
 
 <script lang="ts">
 import { Ref, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { QInput, useQuasar } from 'quasar';
+import { QInput, useQuasar, useMeta } from 'quasar';
+import { defineComponent } from 'vue';
 import TabBar from 'src/components/TabBar.vue';
+import SeoComponent from 'src/components/SeoComponent.vue';
 
 import '../css/app.scss';
 
-export default {
+export default defineComponent({
   name: 'IndexPage',
   components: {
     TabBar,
+    SeoComponent
   },
   setup() {
     // State variables
@@ -102,11 +213,56 @@ export default {
     const $router = useRouter();
     const $q = useQuasar();
     const { t, locale } = useI18n();
-
-    // Computed property for dynamic logo height
+    
+    // Check if mobile
+    const isMobile = computed(() => $q.platform.is.mobile);
+    
+    // Dynamic height for logo based on screen size
     const dynamicHeight = computed(() => {
-      return $q.platform.is.mobile ? 'height: 33vh' : 'height: 50vh';
+      return $q.screen.lt.md ? 'height: 23vh' : 'height: 45vh';
     });
+
+    // SEO metadata
+    useMeta(() => {
+      return {
+        title: 'Embarque Tenares - Door-to-Door Shipping to Dominican Republic',
+        meta: {
+          description: { name: 'description', content: 'Embarque Tenares specializes in shipping boxes, barrels, and all kinds of cargo door-to-door from the United States to the Dominican Republic. Fast, secure, and reliable service.' },
+          keywords: { name: 'keywords', content: 'shipping to Dominican Republic, boxes to Dominican Republic, barrels to Dominican Republic, door-to-door shipping, envios a Republica Dominicana, cajas a Republica Dominicana' }
+        }
+      }
+    });
+
+    // Shipping services for SEO content
+    const shippingServices = [
+      {
+        title: 'home.services.boxes.title',
+        description: 'home.services.boxes.description'
+      },
+      {
+        title: 'home.services.barrels.title',
+        description: 'home.services.barrels.description'
+      },
+      {
+        title: 'home.services.doorToDoor.title',
+        description: 'home.services.doorToDoor.description'
+      }
+    ];
+
+    // Features for the homepage
+    const features = [
+      {
+        icon: 'security',
+        title: 'home.features.secure.title',
+        description: 'home.features.secure.description'
+      },
+      {
+        icon: 'support_agent',
+        title: 'home.features.support.title',
+        description: 'home.features.support.description'
+      }
+    ];
+
 
     // Function to handle input blur event
     const handleDismiss = () => {
@@ -160,7 +316,6 @@ export default {
 
     // Return data and methods for the component
     return {
-      dynamicHeight,
       invoiceDialog,
       invoiceInputRef,
       invoiceText,
@@ -170,8 +325,63 @@ export default {
       submit,
       t,
       locale,
-      showNotif
+      showNotif,
+      shippingServices,
+      features,
+      isMobile,
+      dynamicHeight
     };
   },
-};
+});
 </script>
+
+<style lang="scss" scoped>
+.seo-content {
+  background-color: rgba($primary, 0.05);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.logo {
+  max-width: 80%;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    max-width: 60%;
+  }
+}
+
+.service-card {
+  height: 100%;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+}
+
+.location-card {
+  background-color: rgba($primary, 0.02);
+}
+
+.location-item {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: rgba($primary, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: rgba($primary, 0.1);
+    transform: translateY(-2px);
+  }
+}
+</style>

@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .instagram {
   color: #d6249f;
   color: radial-gradient(
@@ -22,8 +23,28 @@
   font-size: 37px;
 }
 
+/* Add padding to the footer when the TabBar is visible */
+.pb-tabbar.footer {
+  padding-bottom: 90px; /* Increased padding to ensure copyright text is fully visible */
+}
+
+/* Specific styling for the copyright notice */
+.copyright-notice {
+  margin-bottom: 10px;
+}
+
+/* Additional padding for the copyright notice on mobile devices */
 @media (max-width: 600px) {
   .footer-title {
     font-size: 30px;
+  }
+  
+  .copyright-notice {
+    margin-bottom: 15px;
+  }
+  
+  /* When TabBar is present, add even more margin to the copyright notice */
+  .pb-tabbar .copyright-notice {
+    margin-bottom: 20px;
   }
 }

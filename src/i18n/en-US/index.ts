@@ -21,8 +21,47 @@ export default {
   ny: 'New York',
   dr: 'Dominican Republic',
   website: 'Website',
-  home: 'Home',
-  inv_img_src: '../assets/trackEN.png',
+  home: {
+    title: 'Home',
+    subtitle: 'Fast and reliable shipping services',
+    cta: 'View Rates',
+    track: 'Track Package',
+    features: {
+      title: 'Why Choose Us',
+      secure: {
+        title: 'Secure Handling',
+        description: 'Your items are handled with care throughout the entire shipping process'
+      },
+      support: {
+        title: 'Customer Support',
+        description: 'Our customer service team is available Monday-Saturday, 8am-6pm via phone, email, or WhatsApp'
+      }
+    },
+    services: {
+      title: 'Our Services',
+      boxes: {
+        title: 'Boxes to Dominican Republic',
+        description: 'We ship boxes of all sizes from the United States to any location in the Dominican Republic'
+      },
+      barrels: {
+        title: 'Barrels to Dominican Republic',
+        description: 'Specialized in shipping barrels with household goods, food items, and more to the Dominican Republic'
+      },
+      doorToDoor: {
+        title: 'Door-to-Door Shipping',
+        description: 'Complete door-to-door shipping service from your location in the US to any address in the Dominican Republic'
+      }
+    },
+    seo: {
+      title: 'Door-to-Door Shipping to Dominican Republic',
+      description: 'Embarque Tenares specializes in shipping boxes, barrels, and all kinds of cargo door-to-door from the United States to the Dominican Republic. We offer fast, secure, and reliable shipping services for all your needs.',
+      locations: {
+        title: 'Shipping from the Tri-State Area to Dominican Republic',
+        description: 'We provide shipping services from New York City, Brooklyn, Queens, Bronx, Manhattan, Long Island, New Jersey, Connecticut, Yonkers, Mount Vernon, upstate New York, and North Carolina to any location in the Dominican Republic.'
+      }
+    }
+  },
+  inv_img_src: '/assets/trackEN.png',
   copy0: 'Copy address',
   copy1: 'Copy phone number',
   copy2: 'Copy email',
@@ -77,6 +116,84 @@ export default {
   policy13:
     'If you send prohibited items and they are lost or damaged, you will not be reimbursed.',
   policy14:
-    'No matter the amount you declare, our liability won’t exceed your shipment’s repair cost, its depreciated value, or its replacement cost—whichever is less.',
+    "No matter the amount you declare, our liability won't exceed your shipment's repair cost, its depreciated value, or its replacement cost—whichever is less.",
   policy15: 'No reimbursements are made for the misdelivery of information.',
+  shipping: {
+    hero: {
+      title: 'Door-to-Door Shipping to Dominican Republic',
+      subtitle: 'Fast, reliable, and secure shipping services for all your needs',
+      cta: 'View Rates',
+      track: 'Track Package'
+    },
+    services: {
+      title: 'Our Shipping Services',
+      boxes: {
+        title: 'Boxes to Dominican Republic',
+        description: 'We ship boxes of all sizes from the United States to any location in the Dominican Republic. Perfect for sending personal items, gifts, and more.'
+      },
+      barrels: {
+        title: 'Barrels to Dominican Republic',
+        description: 'Specialized in shipping barrels with household goods, food items, clothing, and more to the Dominican Republic. Ideal for sending larger quantities.'
+      },
+      doorToDoor: {
+        title: 'Door-to-Door Shipping',
+        description: 'Complete door-to-door shipping service from your location in the US to any address in the Dominican Republic. We handle everything from pickup to delivery.'
+      }
+    },
+    locations: {
+      title: 'Shipping from Multiple Locations',
+      description: 'We provide shipping services from across the East Coast to the Dominican Republic:',
+      areas: [
+        {
+          title: 'New York City Area',
+          description: 'Shipping from Manhattan, Brooklyn, Queens, Bronx, Staten Island, and surrounding areas to Dominican Republic'
+        },
+        {
+          title: 'Tri-State Area',
+          description: 'Shipping from New Jersey, Connecticut, and Long Island to Dominican Republic'
+        },
+        {
+          title: 'Westchester County',
+          description: 'Shipping from Yonkers, Mount Vernon, and upstate New York to Dominican Republic'
+        },
+        {
+          title: 'Southern States',
+          description: 'Shipping from North Carolina to Dominican Republic'
+        }
+      ]
+    },
+    benefits: {
+      title: 'Why Choose Our Shipping Services',
+      reliable: {
+        title: 'Reliable Delivery',
+        description: 'With years of experience shipping to the Dominican Republic, we ensure your packages arrive safely and on time.'
+      },
+      affordable: {
+        title: 'Affordable Rates',
+        description: 'We offer competitive pricing for all our shipping services, with no hidden fees or surprises.'
+      },
+      support: {
+        title: 'Dedicated Support',
+        description: 'Our customer service team is available Monday-Saturday, 8am-6pm via phone, email, or WhatsApp to assist you throughout the entire shipping process.'
+      }
+    },
+    faq: {
+      title: 'Frequently Asked Questions',
+      q1: 'How long does shipping to Dominican Republic take?',
+      a1: 'Shipping times vary depending on the service selected. Regular shipping typically takes 7-10 business days, while express shipping can arrive in 3-5 business days.',
+      q2: 'What items can I ship to Dominican Republic?',
+      a2: 'You can ship most personal items, household goods, clothing, non-perishable food items, and gifts. There are restrictions on certain items like liquids, batteries, and prohibited goods.',
+      q3: 'Do you provide packaging materials?',
+      a3: 'Yes, we offer boxes, barrels, and packaging materials at our locations. You can also use your own packaging if it meets our shipping requirements.',
+      q4: 'How can I track my shipment?',
+      a4: 'You can track your shipment using the invoice number provided at the time of shipping. Simply enter it in our tracking tool on the website or contact our customer service.',
+      q5: 'What is door-to-door shipping?',
+      a5: 'Door-to-door shipping means we pick up your items from your location in the US and deliver them directly to the recipient\'s address in the Dominican Republic. This service includes all handling, customs clearance, and delivery.'
+    },
+    cta: {
+      title: 'Ready to Ship to Dominican Republic?',
+      subtitle: 'Contact us today to get started with your shipment',
+      button: 'Get a Quote'
+    }
+  },
 };

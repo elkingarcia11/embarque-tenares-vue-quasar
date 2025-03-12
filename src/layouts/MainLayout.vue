@@ -61,12 +61,12 @@
     </q-page-container>
 
     <!-- Footer component -->
-    <FooterComponent />
+    <FooterComponent :class="{'pb-tabbar': isMobile}" />
   </q-layout>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { useQuasar } from 'quasar';
@@ -82,6 +82,9 @@ export default {
     const { locale } = useI18n();
     const route = useRoute();
     const $q = useQuasar();
+
+    // Compute if the device is mobile
+    const isMobile = computed(() => $q.platform.is.mobile);
 
     // Reactive variables for language dropdown
     const label = ref('Español');
@@ -110,7 +113,8 @@ export default {
       engClass,
       changeLanguage,
       route,
-      isDesktop
+      isDesktop,
+      isMobile
     };
   },
 };

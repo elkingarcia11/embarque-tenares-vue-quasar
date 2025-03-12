@@ -2,7 +2,7 @@
   <!-- Logo and Title Button -->
   <q-btn @click="$router.push('/')" flat class="q-py-md q-ml-none">
     <q-avatar>
-      <img src="../assets/logo.png" alt="Logo" />
+      <img src="/logo.png" alt="Logo" />
     </q-avatar>
     <div class="logo-text q-pl-md">Embarque Tenares</div>
   </q-btn>

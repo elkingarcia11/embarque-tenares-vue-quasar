@@ -65,7 +65,7 @@
             class="self-center"
             id="logo"
             fit="contain"
-            src="../assets/trackEN.png"
+            src="/assets/trackEN.png"
           />
           <img
             loading="eager"
@@ -73,7 +73,7 @@
             class="self-center"
             id="logo"
             fit="contain"
-            src="../assets/trackES.png"
+            src="/assets/trackES.png"
           />
         </q-card-section>
       </q-card>

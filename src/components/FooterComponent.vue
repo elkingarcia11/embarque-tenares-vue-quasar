@@ -108,7 +108,7 @@
     </div>
 
     <!-- Copyright Notice -->
-    <div class="text-caption text-center q-px-md q-py-sm">
+    <div class="text-caption text-center q-px-md q-py-md copyright-notice">
       © 1998-2025 EMBARQUE TENARES CORP. {{ t('rights') }}
     </div>
   </div>
@@ -121,6 +121,7 @@ import { useI18n } from 'vue-i18n';
 import '../css/footer.scss';
 
 export default {
+  name: 'FooterComponent',
   setup() {
     const router = useRouter();
     const { t } = useI18n();

@@ -1,220 +1,237 @@
 <template>
-  <!-- Main content of the Dominican Republic branch page -->
+  <q-page :class="{'pb-tabbar': isMobile}">
+    <!-- Main content of the Dominican Republic branch page -->
 
-  <!-- Display the branch label using i18n translation -->
-  <q-item-section
-    class="q-py-lg text-h4 text-bold text-center"
-    style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
-  >
     <!-- Display the branch label using i18n translation -->
-    {{ t('drb') }}
-  </q-item-section>
-
-  <!-- Card to display branch information and actions -->
-  <q-card class="my-card q-mt-sm">
-    <!-- Google Maps embedded iframe for location -->
-    <iframe loading="eager" class="iframe" :src="iframeSource" />
-
-    <!-- Button to get directions to the branch -->
-    <q-card-section class="q-pa-none q-ma-none">
-      <q-btn
-        fab
-        @click="
-          openUrl(
-            'https://www.google.com/maps/dir/?api=1&destination=Tenares+Shipping+Corp.,+San+Marcos,+Puerto+Plata+57000,+Dominican+Republic'
-          )
-        "
-        color="primary"
-        icon="directions"
-        class="absolute"
-        style="top: 0; right: 12px; transform: translateY(-50%)"
-      >
-        <!-- Tooltip for the get directions button -->
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('tooltip0') }}</strong></q-tooltip
-        ></q-btn
-      >
-    </q-card-section>
-
-    <!-- Card actions section with contact information buttons -->
-    <q-card-actions class="q-pt-sm">
-      <!-- Call button for the primary phone number -->
-      <q-btn
-        @click="openUrl('tel:8099700007')"
-        flat
-        round
-        color="primary"
-        icon="call"
-      />
-
-      <!-- Button to copy primary phone number to clipboard -->
-      <q-btn @click="copy(1)" flat color="black">
-        <!-- Tooltip for the copy phone number button -->
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('copy1') }}</strong>
-        </q-tooltip>
-        (809) 970-0007
-      </q-btn>
-      <q-space />
-    </q-card-actions>
-
-    <!-- Card actions for the secondary phone number -->
-    <q-card-actions>
-      <!-- Call button for the secondary phone number -->
-      <q-btn
-        @click="openUrl('tel:8092612373')"
-        flat
-        round
-        color="primary"
-        icon="call"
-      />
-      <q-btn @click="openUrl('tel:8092612373')" flat color="black">
-        (809) 261-2373
-      </q-btn>
-      <q-space />
-
-      <!-- Button to copy secondary phone number to clipboard -->
-      <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
-        <!-- Tooltip for the copy email button -->
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('copy1') }}</strong>
-        </q-tooltip></q-btn
-      >
-    </q-card-actions>
-
-    <!-- Card actions for the email -->
-    <q-card-actions>
-      <!-- Email button to send email -->
-      <q-btn
-        @click="openUrl('mailto:rd@embarquetenares.com')"
-        flat
-        round
-        color="primary"
-        icon="email"
-      />
-      <q-btn
-        @click="openUrl('mailto:rd@embarquetenares.com')"
-        flat
-        color="black"
-        no-caps
-      >
-        rd@embarquetenares.com
-      </q-btn>
-      <q-space />
-
-      <!-- Button to copy email to clipboard -->
-      <q-btn @click="copy(3)" round flat icon="content_copy" color="grey-7">
-        <!-- Tooltip for the copy email button -->
-        <q-tooltip
-          transition-show="scale"
-          transition-hide="scale"
-          anchor="bottom middle"
-          self="center middle"
-        >
-          <strong>{{ t('copy2') }}</strong>
-        </q-tooltip></q-btn
-      >
-    </q-card-actions>
-
-    <!-- Expansion item to show branch schedule -->
-    <q-expansion-item
-      id="schedule_expansion_item"
-      icon="schedule"
-      :label="t('hours')"
-      header-class="text-black text-bold q-py-md"
-      expand-icon-class="text-black text-bold"
-      header-style="
-  border-bottom-style: solid; border-color:lightgrey; border-width: 0.25px;"
+    <q-item-section
+      class="q-py-lg text-h4 text-bold text-center"
+      style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
     >
-      <!-- Schedule information for different days -->
-      <q-item style="padding-top: 1.5vh" class="text-white">
-        <q-item-section>
-          <q-item-label
-            class="text-white"
-            overline
-            style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ t('monToFri') }}</q-item-label
-          >
-          <q-item-label style="text-align: center; font-weight: bold"
-            >8AM - 5PM</q-item-label
-          >
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section class="text-white">
-          <q-item-label
-            overline
-            class="text-white"
-            style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ t('sat') }}</q-item-label
-          >
-          <q-item-label style="text-align: center; font-weight: bold"
-            >8AM - 12PM</q-item-label
-          >
-        </q-item-section>
-      </q-item>
+      <!-- Display the branch label using i18n translation -->
+      {{ t('drb') }}
+    </q-item-section>
 
-      <q-item class="text-white" style="padding-bottom: 1vh">
-        <q-item-section>
-          <q-item-label
-            overline
-            class="text-white"
-            style="text-align: center; font-weight: bold; font-size: 18px"
-            >{{ t('sunday') }}</q-item-label
+    <!-- Card to display branch information and actions -->
+    <q-card class="my-card q-mt-sm">
+      <!-- Google Maps embedded iframe for location -->
+      <iframe loading="eager" class="iframe" :src="iframeSource" />
+
+      <!-- Button to get directions to the branch -->
+      <q-card-section class="q-pa-none q-ma-none">
+        <q-btn
+          fab
+          @click="
+            openUrl(
+              'https://www.google.com/maps/dir/?api=1&destination=Tenares+Shipping+Corp.,+San+Marcos,+Puerto+Plata+57000,+Dominican+Republic'
+            )
+          "
+          color="primary"
+          icon="directions"
+          class="absolute"
+          style="top: 0; right: 12px; transform: translateY(-50%)"
+        >
+          <!-- Tooltip for the get directions button -->
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
           >
-          <q-item-label style="text-align: center; font-weight: bold">{{
-            t('closed')
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-expansion-item>
+            <strong>{{ t('tooltip0') }}</strong></q-tooltip
+          ></q-btn
+        >
+      </q-card-section>
 
-    <!-- Include the SocialMediaFooter component for social media links -->
-    <SocialMediaFooter />
+      <!-- Card actions section with contact information buttons -->
+      <q-card-actions class="q-pt-sm">
+        <!-- Call button for the primary phone number -->
+        <q-btn
+          @click="openUrl('tel:8099700007')"
+          flat
+          round
+          color="primary"
+          icon="call"
+        />
 
-    <!-- Dialog to show tooltip response after copying to clipboard -->
-    <q-dialog v-model="dialog" seamless position="bottom">
-      <q-card style="width: 350px">
-        <q-card-section class="row justify-center wrap">
-          <div class="text-weight-bold">{{ tooltipResponse }}</div>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-  </q-card>
+        <!-- Button to copy primary phone number to clipboard -->
+        <q-btn @click="copy(1)" flat color="black">
+          <!-- Tooltip for the copy phone number button -->
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('copy1') }}</strong>
+          </q-tooltip>
+          (809) 970-0007
+        </q-btn>
+        <q-space />
+      </q-card-actions>
+
+      <!-- Card actions for the secondary phone number -->
+      <q-card-actions>
+        <!-- Call button for the secondary phone number -->
+        <q-btn
+          @click="openUrl('tel:8092612373')"
+          flat
+          round
+          color="primary"
+          icon="call"
+        />
+        <q-btn @click="openUrl('tel:8092612373')" flat color="black">
+          (809) 261-2373
+        </q-btn>
+        <q-space />
+
+        <!-- Button to copy secondary phone number to clipboard -->
+        <q-btn @click="copy(2)" round flat icon="content_copy" color="grey-7">
+          <!-- Tooltip for the copy email button -->
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('copy1') }}</strong>
+          </q-tooltip></q-btn
+        >
+      </q-card-actions>
+
+      <!-- Card actions for the email -->
+      <q-card-actions>
+        <!-- Email button to send email -->
+        <q-btn
+          @click="openUrl('mailto:rd@embarquetenares.com')"
+          flat
+          round
+          color="primary"
+          icon="email"
+        />
+        <q-btn
+          @click="openUrl('mailto:rd@embarquetenares.com')"
+          flat
+          color="black"
+          no-caps
+        >
+          rd@embarquetenares.com
+        </q-btn>
+        <q-space />
+
+        <!-- Button to copy email to clipboard -->
+        <q-btn @click="copy(3)" round flat icon="content_copy" color="grey-7">
+          <!-- Tooltip for the copy email button -->
+          <q-tooltip
+            transition-show="scale"
+            transition-hide="scale"
+            anchor="bottom middle"
+            self="center middle"
+          >
+            <strong>{{ t('copy2') }}</strong>
+          </q-tooltip></q-btn
+        >
+      </q-card-actions>
+
+      <!-- Expansion item to show branch schedule -->
+      <q-expansion-item
+        id="schedule_expansion_item"
+        icon="schedule"
+        :label="t('hours')"
+        header-class="text-black text-bold q-py-md"
+        expand-icon-class="text-black text-bold"
+        header-style="
+  border-bottom-style: solid; border-color:lightgrey; border-width: 0.25px;"
+      >
+        <!-- Schedule information for different days -->
+        <q-item style="padding-top: 1.5vh" class="text-white">
+          <q-item-section>
+            <q-item-label
+              class="text-white"
+              overline
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ t('monToFri') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold"
+              >8AM - 5PM</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section class="text-white">
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ t('sat') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold"
+              >8AM - 12PM</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+
+        <q-item class="text-white" style="padding-bottom: 1vh">
+          <q-item-section>
+            <q-item-label
+              overline
+              class="text-white"
+              style="text-align: center; font-weight: bold; font-size: 18px"
+              >{{ t('sunday') }}</q-item-label
+            >
+            <q-item-label style="text-align: center; font-weight: bold">{{
+              t('closed')
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-expansion-item>
+
+      <!-- Dialog to show tooltip response after copying to clipboard -->
+      <q-dialog v-model="dialog" seamless position="bottom">
+        <q-card style="width: 350px">
+          <q-card-section class="row justify-center wrap">
+            <div class="text-weight-bold">{{ tooltipResponse }}</div>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </q-card>
+
+    <!-- Tab bar component -->
+    <TabBar
+      @focus-input="focusInput"
+      class="tabBar"
+      v-if="isMobile"
+    />
+  </q-page>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { openURL, copyToClipboard } from 'quasar';
+import { useQuasar } from 'quasar';
+import TabBar from 'src/components/TabBar.vue';
 
 import process from 'process';
-import SocialMediaFooter from 'src/components/SocialMediaFooter.vue';
 
 import '../css/branches.scss';
 
 export default {
   name: 'DrBranchPage',
   components: {
-    SocialMediaFooter,
+    TabBar
   },
   setup() {
     const { t } = useI18n();
+    const $q = useQuasar();
+    
+    // Check if mobile
+    const isMobile = computed(() => $q.platform.is.mobile);
+    
+    // Dummy function for TabBar focus-input event
+    const focusInput = () => {
+      // Navigate to the home page when track tab is clicked
+      window.location.href = '/';
+    };
 
     // Reactive variables for tooltip response and iframe source
     const tooltipResponse = ref('');
@@ -268,7 +285,9 @@ export default {
       iframeSource,
       dialog,
       tooltipResponse,
-      t
+      t,
+      isMobile,
+      focusInput
     };
   },
 };

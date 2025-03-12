@@ -1,5 +1,5 @@
 <template>
-  <!-- Tab bar with button toggle -->
+  <!-- Tab bar with button toggle - now fixed to bottom of screen -->
   <q-card class="tab-bar">
     <q-btn-toggle
       spread
@@ -82,8 +82,8 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, defineComponent, watch, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
@@ -93,6 +93,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const router = useRouter();
+    const route = useRoute();
     const { t } = useI18n();
     const dialog = ref(false);
     const buttonGroup = ref(0); // Default selected tab
@@ -111,6 +112,49 @@ export default defineComponent({
       { icon: 'pin_drop', label: 'dr', route: 'dr-branch', color: 'accent' },
     ];
 
+    // Set the active tab based on the current route
+    const setActiveTab = () => {
+      const path = route.path;
+      
+      // Default to no selection (0) for home page
+      if (path === '/' || path === '') {
+        buttonGroup.value = 0;
+      } 
+      // Track page - tab 1
+      else if (path.includes('/track')) {
+        buttonGroup.value = 1;
+      } 
+      // Rates page - tab 2
+      else if (path.includes('/rates')) {
+        buttonGroup.value = 2;
+      } 
+      // Branch pages - tab 3
+      else if (path.includes('/ny-branch') || path.includes('/dr-branch')) {
+        buttonGroup.value = 3;
+      } 
+      // FAQs page - tab 4
+      else if (path.includes('/faqs')) {
+        buttonGroup.value = 4;
+      } 
+      // Default to no selection for other pages
+      else {
+        buttonGroup.value = 0;
+      }
+    };
+
+    // Set the active tab on component mount
+    onMounted(() => {
+      setActiveTab();
+    });
+
+    // Watch for route changes to update the active tab
+    watch(
+      () => route.path,
+      () => {
+        setActiveTab();
+      }
+    );
+
     // Handle tab button clicks
     const open = () => {
       if (buttonGroup.value === 1) {
@@ -128,9 +172,12 @@ export default defineComponent({
     watch(
       () => props.isDismissed,
       (newVal) => {
-        // Accessing component variable from watch function
-        buttonGroup.value = newVal ? 0 : 1;
-      }
+        // Only update if we're on the home page (track tab)
+        if (route.path === '/' || route.path === '') {
+          buttonGroup.value = newVal ? 0 : 1;
+        }
+      },
+      { immediate: true } // Run immediately to set initial state
     );
 
     return { branchOptions, tabOptions, dialog, buttonGroup, open, t, router };
