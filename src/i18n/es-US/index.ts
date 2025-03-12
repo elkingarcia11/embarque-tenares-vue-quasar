@@ -21,6 +21,7 @@ export default {
   ny: 'Nueva York',
   dr: 'República Dominicana',
   website: 'Pagina web',
+  services: 'Servicios',
   home: {
     title: 'Inicio',
     subtitle: 'Servicios de envío rápidos y confiables',

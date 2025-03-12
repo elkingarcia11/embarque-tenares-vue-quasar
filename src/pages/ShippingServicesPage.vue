@@ -5,13 +5,13 @@
     <SeoComponent pageType="shipping" />
 
     <!-- Hero Section -->
-    <section class="hero-section bg-primary text-white q-py-xl">
-      <div class="container text-center q-px-md">                
+    <section class="hero-section bg-primary text-white q-py-lg">
+      <div class="container text-center q-px-md">
         <h1 class="text-h3 text-weight-bold q-mb-md">
           {{ t('shipping.hero.title') }}
         </h1> 
 
-        <p class="text-h6 q-mb-xl">
+        <p class="text-h6 q-mb-md">
           {{ t('shipping.hero.subtitle') }}
         </p>
         <div class="row justify-center q-gutter-md">
@@ -34,13 +34,13 @@
     </section>
 
     <!-- Services Section -->
-    <section class="q-py-xl">
+    <section class="q-py-md">
       <div class="container q-px-md">
-        <h2 class="text-h4 text-center text-weight-bold q-mb-xl">
+        <h2 class="text-h4 text-center text-weight-bold q-mb-lg">
           {{ t('shipping.services.title') }}
         </h2>
         
-        <div class="row q-col-gutter-lg q-mb-xl">
+        <div class="row q-col-gutter-lg q-mb-md">
           <div class="col-12 col-md-6" v-for="(service, index) in shippingServices" :key="index">
             <q-card class="service-card q-pa-lg">
               <div class="row items-center">
@@ -63,12 +63,12 @@
     </section>
 
     <!-- Locations Section -->
-    <section class="locations-section bg-grey-2 q-py-xl">
+    <section class="locations-section bg-grey-2 q-py-md">
       <div class="container q-px-md">
         <h2 class="text-h4 text-center text-weight-bold q-mb-md">
           {{ t('shipping.locations.title') }}
         </h2>
-        <p class="text-body1 text-center q-mb-xl">
+        <p class="text-body1 text-center q-mb-lg">
           {{ t('shipping.locations.description') }}
         </p>
         
@@ -96,9 +96,9 @@
     </section>
 
     <!-- Benefits Section -->
-    <section class="benefits-section bg-grey-2 q-py-xl">
+    <section class="benefits-section bg-grey-2 q-py-md">
       <div class="container q-px-md">
-        <h2 class="text-h4 text-center text-weight-bold q-mb-xl">
+        <h2 class="text-h4 text-center text-weight-bold q-mb-lg">
           {{ t('shipping.benefits.title') }}
         </h2>
         
@@ -118,38 +118,13 @@
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="q-py-xl">
-      <div class="container q-px-md">
-        <h2 class="text-h4 text-center text-weight-bold q-mb-xl">
-          {{ t('shipping.faq.title') }}
-        </h2>
-        
-        <q-list bordered separator class="rounded-borders">
-          <q-expansion-item
-            v-for="(faq, index) in faqs"
-            :key="index"
-            :label="t(faq.question)"
-            header-class="text-primary text-weight-medium"
-            expand-icon-class="text-primary"
-          >
-            <q-card>
-              <q-card-section>
-                {{ t(faq.answer) }}
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-list>
-      </div>
-    </section>
-
     <!-- CTA Section -->
-    <section class="cta-section bg-primary text-white q-py-xl">
+    <section class="cta-section bg-primary text-white q-py-lg">
       <div class="container text-center q-px-md">
         <h2 class="text-h4 text-weight-bold q-mb-md">
           {{ t('shipping.cta.title') }}
         </h2>
-        <p class="text-h6 q-mb-xl">
+        <p class="text-h6 q-mb-lg">
           {{ t('shipping.cta.subtitle') }}
         </p>
         <q-btn
@@ -292,7 +267,7 @@ export default defineComponent({
 .hero-section {
   background: linear-gradient(rgba(var(--q-primary-rgb), 0.9), rgba(var(--q-primary-rgb), 0.7)), url('/shipping-hero.jpg') no-repeat center center;
   background-size: cover;
-  padding: 5rem 0;
+  padding: 3rem 0;
 }
 
 .service-card, 
@@ -343,6 +318,23 @@ export default defineComponent({
   
   &:hover {
     background-color: rgba($primary, 0.2);
+  }
+}
+
+.hero-logo {
+  height: 120px;
+  max-width: 80%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 0 auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hero-logo {
+    height: 150px;
+    max-width: 60%;
   }
 }
 </style> 

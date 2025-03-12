@@ -21,6 +21,7 @@ export default {
   ny: 'New York',
   dr: 'Dominican Republic',
   website: 'Website',
+  services: 'Services',
   home: {
     title: 'Home',
     subtitle: 'Fast and reliable shipping services',

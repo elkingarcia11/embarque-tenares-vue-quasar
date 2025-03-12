@@ -44,6 +44,7 @@ export default {
       routes: [
         { name: 'track', label: 'track' },
         { name: 'rates', label: 'rates' },
+        { name: 'shipping-services', label: 'services' },
         { name: 'nyb', label: 'nyb' },
         { name: 'drb', label: 'drb' },
         { name: 'faqs', label: 'faqs' },

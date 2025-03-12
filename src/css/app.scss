@@ -1,6 +1,20 @@
 #app_layout {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   overflow-x: hidden;
+  background-color: #f5f8fa; /* Light blue-gray background for the entire app */
+}
+
+/* Apply background color to q-page-container to ensure it extends to the footer */
+.q-page-container {
+  background-color: #f5f8fa;
+  min-height: calc(100vh - 50px); /* Adjust based on your header height */
+  padding-bottom: 0; /* Remove default padding */
+}
+
+/* Ensure q-page has the same background and extends fully */
+.q-page {
+  background-color: #f5f8fa;
+  min-height: 100%;
 }
 
 .tab-bar {

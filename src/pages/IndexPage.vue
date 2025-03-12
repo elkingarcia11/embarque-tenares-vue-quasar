@@ -29,7 +29,7 @@
 
     <!-- SEO Content Section - Visible to users and search engines -->
     <section class="seo-content q-pa-md q-mb-xl">
-      <div class="container">
+      <div class="container content-container">
          <div class="row flex-center">
           <q-img
             id="logo"
@@ -59,7 +59,7 @@
         </div>
         
         <!-- Shipping Locations Section -->
-        <div class="q-mt-xl">
+        <div class="q-mt-xl section-divider">
           <h2 class="text-h5 text-weight-bold text-center q-mb-md">
             {{ t('home.seo.locations.title') }}
           </h2>
@@ -219,7 +219,7 @@ export default defineComponent({
     
     // Dynamic height for logo based on screen size
     const dynamicHeight = computed(() => {
-      return $q.screen.lt.md ? 'height: 23vh' : 'height: 45vh';
+      return $q.screen.lt.md ? 'height: 23vh' : 'height: 40vh';
     });
 
     // SEO metadata
@@ -337,9 +337,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .seo-content {
-  background-color: rgba($primary, 0.05);
+  background-color: #f5f8fa; /* Match the app background color */
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -362,6 +367,8 @@ export default defineComponent({
 .service-card {
   height: 100%;
   transition: transform 0.3s ease;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   
   &:hover {
     transform: translateY(-5px);
@@ -370,7 +377,8 @@ export default defineComponent({
 }
 
 .location-card {
-  background-color: rgba($primary, 0.02);
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .location-item {
@@ -378,10 +386,28 @@ export default defineComponent({
   border-radius: 8px;
   background-color: rgba($primary, 0.05);
   transition: all 0.3s ease;
+  border: 1px solid rgba($primary, 0.1);
   
   &:hover {
     background-color: rgba($primary, 0.1);
     transform: translateY(-2px);
+  }
+}
+
+.section-divider {
+  position: relative;
+  padding-top: 1.5rem;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: rgba($primary, 0.2);
+    border-radius: 3px;
   }
 }
 </style>

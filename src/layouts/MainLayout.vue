@@ -56,7 +56,7 @@
     </q-header>
 
     <!-- Page container for displaying router views -->
-    <q-page-container style="position: relative; min-height: 100vh">
+    <q-page-container style="position: relative; min-height: 100vh; padding-bottom: 0;">
       <router-view :key="route.fullPath"></router-view>
     </q-page-container>
 

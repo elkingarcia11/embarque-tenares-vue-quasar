@@ -30,7 +30,7 @@
     overlay
     overflow-auto
     bordered
-    class="bg-white menuDrawer"
+    class="bg-white menuDrawer menu-drawer"
     style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
   >
     <q-list>
@@ -38,7 +38,7 @@
       <template v-for="(menuItem, index) in menuList" :key="index">
         <!-- Regular menu item -->
         <q-item
-          class="text-h4 q-py-md q-px-l"
+          class="menu-item q-py-md q-px-l"
           v-if="menuItem.label !== 'branch'"
           clickable
           @click="navigateToRoute(menuItem.route)"
@@ -48,11 +48,11 @@
             <q-avatar
               :icon="menuItem.icon"
               color="primary"
-              size="lg"
+              size="md"
               text-color="white"
             />
           </q-item-section>
-          <q-item-section class="text-black">
+          <q-item-section class="text-black menu-item-text">
             {{ t(menuItem.label) }}
           </q-item-section>
         </q-item>
@@ -63,26 +63,26 @@
           clickable
           :label="t(menuItem.label)"
           default-closed
-          header-class="q-py-md text-h4"
+          header-class="q-py-md menu-item"
         >
           <template v-slot:header>
             <q-item-section avatar>
               <q-avatar
                 :icon="menuItem.icon"
                 color="primary"
-                size="lg"
+                size="md"
                 text-color="white"
               />
             </q-item-section>
 
-            <q-item-section class="text-black">
+            <q-item-section class="text-black menu-item-text">
               {{ t(menuItem.label) }}
             </q-item-section>
           </template>
 
           <!-- Loop through sub-menu items -->
           <q-item
-            class="text-h4 q-py-md q-pl-xl row"
+            class="submenu-item q-py-md q-pl-xl row"
             v-for="(subMenuItem, index) in subMenuList"
             :key="index"
             clickable
@@ -92,10 +92,10 @@
             <q-avatar
               :icon="subMenuItem.icon"
               color="primary"
-              size="lg"
+              size="md"
               text-color="white"
             />
-            <q-item-section class="q-pl-md text-black">
+            <q-item-section class="q-pl-md text-black menu-item-text">
               {{ t(subMenuItem.label) }}
             </q-item-section>
           </q-item>
@@ -156,6 +156,12 @@ export default {
         separator: false,
       },
       {
+        icon: 'local_shipping',
+        label: 'services',
+        route: 'shipping-services',
+        separator: false,
+      },
+      {
         icon: 'quiz',
         label: 'faqs',
         route: 'faqs',
@@ -191,3 +197,40 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.menu-drawer {
+  .menu-item, .q-expansion-item__content {
+    font-size: 22px;
+  }
+  
+  .submenu-item {
+    font-size: 20px;
+  }
+  
+  .q-item__section--avatar {
+    min-width: 56px;
+  }
+  
+  .q-avatar {
+    font-size: 32px;
+  }
+}
+
+.menu-item-text {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+/* Force consistent font size for all menu items */
+.q-item__label, .q-expansion-item__content {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+/* Add more padding to menu items for better touch targets */
+.q-item {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+</style>
