@@ -2,8 +2,8 @@
   <div class="row justify-center q-mt-xl">
     <div class="col-12 col-md-10 text-center">
       <q-card flat bordered class="contact-card q-pa-lg">
-        <h2 class="text-h5 text-weight-bold q-mb-md">{{ t('faqs.stillHaveQuestions') }}</h2>
-        <p class="text-body1 q-mb-lg">{{ t('faqs.contactUs') }}</p>
+        <h2 class="text-h5 text-weight-bold q-mb-md">{{ t('faqsPage.stillHaveQuestions') }}</h2>
+        <p class="text-body1 q-mb-lg">{{ t('faqsPage.contactUs') }}</p>
         
         <!-- Social Media Bar -->
         <div>

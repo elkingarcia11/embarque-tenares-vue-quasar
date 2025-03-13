@@ -5,11 +5,11 @@
       <!-- Hero Section -->
       <section class="hero-section bg-primary text-white q-py-lg">
         <div class="container text-center q-px-md">
-          <h1 class="text-h3 text-weight-bold q-mb-md" style="font-family: 'BodoniSvtyTwoSCITCTT-Book'">
-            {{ t('faqs.title') }}
+          <h1 class="text-h3 text-weight-bold q-mb-md">
+            {{ t('faqs') }}
           </h1>
           <p class="text-h6 q-mb-md">
-            {{ t('faqs.subtitle') }}
+            {{ t('faqsPage.subtitle') }}
           </p>
         </div>
       </section>

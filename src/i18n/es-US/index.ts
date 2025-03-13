@@ -4,12 +4,18 @@ export default {
   findInv: '¿Dónde encuentro mi',
   findInvTwo: ' número de factura?',
   rates: 'Tarifas',
+  ratesSubtitle: 'Consulte nuestras tarifas de envío para diferentes categorías',
   branch: 'Surcursales',
   branchLabel: 'Surcursal',
   nyb: 'Nueva York',
   drb: 'República Dominicana',
   hours: 'Horario',
-  faqs: {
+  menu: 'Menú',
+  home: 'Inicio',
+  faqs: 'Preguntas',
+  stillHaveQuestions: '¿Todavía tiene preguntas?',
+  contactUs: 'Contacte a nuestro equipo de atención al cliente para obtener más ayuda con sus necesidades de envío.',
+  faqsPage: {
     title: 'Preguntas',
     subtitle: 'Encuentre respuestas a preguntas frecuentes sobre nuestros servicios de envío',
     stillHaveQuestions: '¿Todavía tiene preguntas?',
@@ -17,7 +23,7 @@ export default {
   },
   aboutUs: 'Acerca de nosotros',
   businessH: 'Horario de negocio',
-  dr_province: 'Puerto Plata, RD',
+  dr_province: 'San Marcos #10 Puerto Plata, RD 57000',
   monToSat: 'LUNES A SÁBADO',
   monToFri: 'LUNES A VIERNES',
   sat: 'SÁBADO',
@@ -27,7 +33,8 @@ export default {
   dr: 'República Dominicana',
   website: 'Pagina web',
   services: 'Servicios',
-  home: {
+  companyBacking: 'Nuestra empresa está respaldada por F.M.C. 01917n',
+  homePage: {
     title: 'Inicio',
     subtitle: 'Servicios de envío rápidos y confiables',
     cta: 'Ver Tarifas',
@@ -91,7 +98,7 @@ export default {
   rights: 'RESERVADOS TODOS LOS DERECHOS.',
   contact: {
     title: 'Contáctenos',
-    branchInfo: 'Información de Contacto de la Sucursal',
+    branchInfo: 'Contactos de Sucursal',
     whatsapp: 'Chatea con nosotros en WhatsApp',
     facebook: 'Visita nuestra página de Facebook',
     instagram: 'Síguenos en Instagram',

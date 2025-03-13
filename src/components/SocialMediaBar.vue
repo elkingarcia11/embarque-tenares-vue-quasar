@@ -5,7 +5,7 @@
       flat 
       :round="isRound" 
       :square="!isRound" 
-      class="q-mx-xs" 
+      class="social-btn q-mx-xs" 
       icon="phone" 
       :style="`color: #0c8043; font-size: ${fontSize};`"
     >
@@ -35,7 +35,7 @@
       flat
       :round="isRound" 
       :square="!isRound"
-      class="q-mx-xs"
+      class="social-btn q-mx-xs"
       @click="openUrl('https://api.whatsapp.com/send?phone=7185621300')"
       icon="ion-logo-whatsapp"
       :style="`color: #25d366; font-size: ${fontSize};`"
@@ -48,7 +48,7 @@
       flat 
       :round="isRound" 
       :square="!isRound" 
-      class="q-mx-xs" 
+      class="social-btn q-mx-xs" 
       icon="mail" 
       :style="`color: #d93025; font-size: ${fontSize};`"
     >
@@ -78,7 +78,7 @@
       flat
       :round="isRound" 
       :square="!isRound"
-      class="q-mx-xs"
+      class="social-btn q-mx-xs"
       @click="openUrl('https://www.facebook.com/EmbarqueTenaress/')"
       icon="facebook"
       :style="`color: #1778f2; font-size: ${fontSize};`"
@@ -91,7 +91,7 @@
       flat
       :round="isRound" 
       :square="!isRound"
-      class="q-mx-xs"
+      class="social-btn q-mx-xs"
       @click="openUrl('https://instagram.com/embarquetenares')"
       icon="ion-logo-instagram"
       :style="`color: #e1306c; font-size: ${fontSize};`"
@@ -138,12 +138,16 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
   
-  .q-btn {
+  .social-btn {
     margin: 0 8px;
     transition: transform 0.3s ease;
     border-radius: 50% !important; /* Force round shape for hover effects */
+    flex: 0 0 auto;
+    min-width: auto; /* Allow buttons to shrink below default min-width */
     
     &:hover {
       transform: translateY(-3px);
@@ -156,6 +160,31 @@ export default defineComponent({
     
     &:not(.q-btn--round) .q-btn__content {
       border-radius: 0;
+    }
+  }
+  
+  @media (max-width: 599px) {
+    justify-content: space-around;
+    
+    .social-btn {
+      margin: 0; /* Remove margins when using space-around */
+      padding: 0 6px; /* Add padding instead */
+      
+      /* Increase icon size on mobile since we have space-around */
+      :deep(.q-icon) {
+        font-size: 1.1em;
+      }
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .social-btn {
+      padding: 0 4px; /* Further reduce padding on very small screens */
+      
+      /* Keep icon size the same as desktop on smaller screens */
+      :deep(.q-icon) {
+        font-size: 1em;
+      }
     }
   }
 }

@@ -3,10 +3,10 @@
     <!-- Hero Section -->
     <section class="branch-hero bg-primary text-white q-py-lg">
       <div class="container text-center q-px-md">
-        <h1 class="text-h3 text-weight-bold q-mb-md" style="font-family: 'BodoniSvtyTwoSCITCTT-Book'">
+        <h1 class="text-h3 text-weight-bold q-mb-md">
           {{ t('nyb') }}
         </h1>
-        <p class="text-subtitle1 q-mb-sm">
+        <p class="text-h6 q-mb-md">
           2249 Washington Ave Bronx, NY 10457
           <q-btn flat dense round color="white" icon="directions" @click="openUrl('https://www.google.com/maps/dir/?api=1&destination=2249+Washington+Ave,+Bronx,+NY+10457-1445,+USA')">
             <q-tooltip>{{ t('tooltip0') }}</q-tooltip>
@@ -93,7 +93,7 @@
           <div class="q-mt-md">
             <q-card class="contact-section-card">
               <q-card-section>
-                <SocialMediaBar fontSize="1.2rem" />
+                <SocialMediaBar fontSize="1.5rem" />
               </q-card-section>
             </q-card>
           </div>

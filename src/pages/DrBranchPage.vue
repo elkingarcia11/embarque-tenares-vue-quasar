@@ -3,12 +3,12 @@
     <!-- Hero Section -->
     <section class="branch-hero bg-primary text-white q-py-lg">
       <div class="container text-center q-px-md">
-        <h1 class="text-h3 text-weight-bold q-mb-md" style="font-family: 'BodoniSvtyTwoSCITCTT-Book'">
+        <h1 class="text-h3 text-weight-bold q-mb-md">
           {{ t('drb') }}
         </h1>
-        <p class="text-subtitle1 q-mb-sm">
+        <p class="text-h6 q-mb-md">
           {{ t('dr_province') }}
-          <q-btn flat dense round color="white" icon="directions" @click="openUrl('https://www.google.com/maps/dir/?api=1&destination=Tenares+Shipping+Corp.,+San+Marcos,+Puerto+Plata+57000,+Dominican+Republic')">
+          <q-btn flat dense round color="white" icon="directions" @click="openUrl('https://www.google.com/maps/dir/?api=1&destination=Tenares+Shipping+Corp.,+San+Marcos+%2310,+Puerto+Plata+57000,+Dominican+Republic')">
             <q-tooltip>{{ t('tooltip0') }}</q-tooltip>
           </q-btn>
           <q-btn flat dense round color="white" icon="content_copy" @click="copy(0)">
@@ -110,7 +110,7 @@
           <div class="q-mt-md">
             <q-card class="contact-section-card">
               <q-card-section>
-                <SocialMediaBar fontSize="1.2rem" />
+                <SocialMediaBar fontSize="1.5rem" />
               </q-card-section>
             </q-card>
           </div>
@@ -155,7 +155,7 @@ export default {
     SocialMediaBar
   },
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const $q = useQuasar();
     
     // Check if mobile
@@ -187,7 +187,9 @@ export default {
       switch (i) {
         case 0:
           ttr = t('tooltipRes0');
-          text = 'San Marcos, Puerto Plata 57000, Dominican Republic';
+          text = locale.value === 'en-US' 
+            ? 'San Marcos #10, Puerto Plata, DR 57000' 
+            : 'San Marcos #10, Puerto Plata, RD 57000';
           break;
         case 1:
           ttr = t('tooltipRes1');

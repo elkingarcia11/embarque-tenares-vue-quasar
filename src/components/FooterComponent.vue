@@ -3,16 +3,12 @@
     <!-- Footer Title -->
     <div class="text-primary q-pt-lg footer-title">Embarque Tenares Corp.</div>
 
-    <!-- Social Media Icons -->
-    <div class="q-pt-sm row justify-center">
-      <SocialMediaBar :isRound="true" fontSize="30px" />
-    </div>
-
     <!-- Navigation Links -->
     <div class="row text-grey-7 flex-center">
       <q-btn flat @click="router.push('faqs')">{{ t('about') }}</q-btn>
       <q-btn flat @click="router.push('track')">{{ t('track') }}</q-btn>
       <q-btn flat @click="router.push('rates')">{{ t('rates') }}</q-btn>
+      <q-btn flat @click="router.push('shipping-services')">{{ t('services') }}</q-btn>
 
       <!-- Contact Dropdown Menu -->
       <q-btn flat
@@ -40,9 +36,14 @@
       <q-btn flat @click="router.push('shipping-policy')">{{ t('policy') }}</q-btn>
     </div>
 
+    <!-- Social Media Icons -->
+    <div class="q-pt-md q-pb-sm row justify-center">
+      <SocialMediaBar :isRound="true" fontSize="30px" />
+    </div>
+
     <!-- Copyright Notice -->
     <div class="text-caption text-center q-px-md q-py-md copyright-notice">
-      © 1998-2025 EMBARQUE TENARES CORP. {{ t('rights') }}
+      © 1998 EMBARQUE TENARES CORP. {{ t('rights') }}
     </div>
   </div>
 </template>

@@ -42,10 +42,10 @@
 
         
         <h1 class="text-h4 text-weight-bold text-center q-mb-md">
-          {{ t('home.seo.title') }}
+          {{ t('homePage.seo.title') }}
         </h1>
         <p class="text-body1 text-center q-mb-lg">
-          {{ t('home.seo.description') }}
+          {{ t('homePage.seo.description') }}
         </p>
         <div class="row q-col-gutter-md q-mb-xl">
           <div class="col-12 col-md-4" v-for="(service, index) in shippingServices" :key="index">
@@ -61,10 +61,10 @@
         <!-- Shipping Locations Section -->
         <div class="q-mt-xl section-divider">
           <h2 class="text-h5 text-weight-bold text-center q-mb-md">
-            {{ t('home.seo.locations.title') }}
+            {{ t('homePage.seo.locations.title') }}
           </h2>
           <p class="text-body1 text-center q-mb-lg">
-            {{ t('home.seo.locations.description') }}
+            {{ t('homePage.seo.locations.description') }}
           </p>
           <div class="row justify-center q-mt-md">
             <div class="col-12 col-md-10">
@@ -236,16 +236,16 @@ export default defineComponent({
     // Shipping services for SEO content
     const shippingServices = [
       {
-        title: 'home.services.boxes.title',
-        description: 'home.services.boxes.description'
+        title: 'homePage.services.boxes.title',
+        description: 'homePage.services.boxes.description'
       },
       {
-        title: 'home.services.barrels.title',
-        description: 'home.services.barrels.description'
+        title: 'homePage.services.barrels.title',
+        description: 'homePage.services.barrels.description'
       },
       {
-        title: 'home.services.doorToDoor.title',
-        description: 'home.services.doorToDoor.description'
+        title: 'homePage.services.doorToDoor.title',
+        description: 'homePage.services.doorToDoor.description'
       }
     ];
 

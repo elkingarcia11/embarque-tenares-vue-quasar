@@ -4,12 +4,18 @@ export default {
   findInv: 'Where can I find my',
   findInvTwo: ' invoice number?',
   rates: 'Rates',
+  ratesSubtitle: 'Check our shipping rates for different categories',
   branch: 'Branches',
   branchLabel: 'Branch',
   nyb: 'New York',
   drb: 'Dominican Republic',
   hours: 'Hours',
-  faqs: {
+  menu: 'Menu',
+  home: 'Home',
+  faqs: 'FAQs',
+  stillHaveQuestions: 'Still Have Questions?',
+  contactUs: 'Contact our customer support team for further assistance with your shipping needs.',
+  faqsPage: {
     title: 'FAQS',
     subtitle: 'Find answers to commonly asked questions about our shipping services',
     stillHaveQuestions: 'Still Have Questions?',
@@ -17,7 +23,7 @@ export default {
   },
   aboutUs: 'About us',
   businessH: 'Business hours',
-  dr_province: 'Puerto Plata, DR',
+  dr_province: 'San Marcos #10 Puerto Plata, DR 57000',
   monToSat: 'MONDAY - SATURDAY',
   monToFri: 'MONDAY - FRIDAY',
   sat: 'SATURDAY',
@@ -27,7 +33,8 @@ export default {
   dr: 'Dominican Republic',
   website: 'Website',
   services: 'Services',
-  home: {
+  companyBacking: 'Our company is backed by F.M.C. 01917n',
+  homePage: {
     title: 'Home',
     subtitle: 'Fast and reliable shipping services',
     cta: 'View Rates',
@@ -90,7 +97,7 @@ export default {
   rights: 'ALL RIGHTS RESERVED.',
   contact: {
     title: 'Contact Us',
-    branchInfo: 'Branch Contact Information',
+    branchInfo: 'Branch Contacts',
     whatsapp: 'Chat with us on WhatsApp',
     facebook: 'Visit our Facebook page',
     instagram: 'Follow us on Instagram',

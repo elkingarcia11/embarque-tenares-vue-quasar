@@ -31,8 +31,12 @@
     overflow-auto
     bordered
     class="bg-white menuDrawer menu-drawer"
-    style="font-family: 'BodoniSvtyTwoSCITCTT-Book'"
   >
+    <!-- Drawer Header -->
+    <div class="drawer-header q-py-md q-px-md text-center">
+      <div class="text-h6 text-weight-bold">{{ t('menu') }}</div>
+    </div>
+    
     <q-list>
       <!-- Loop through menu items -->
       <template v-for="(menuItem, index) in menuList" :key="index">
@@ -45,12 +49,7 @@
           v-ripple
         >
           <q-item-section avatar>
-            <q-avatar
-              :icon="menuItem.icon"
-              color="primary"
-              size="md"
-              text-color="white"
-            />
+            <q-icon :name="menuItem.icon" color="primary" size="md" />
           </q-item-section>
           <q-item-section class="text-black menu-item-text">
             {{ t(menuItem.label) }}
@@ -67,12 +66,7 @@
         >
           <template v-slot:header>
             <q-item-section avatar>
-              <q-avatar
-                :icon="menuItem.icon"
-                color="primary"
-                size="md"
-                text-color="white"
-              />
+              <q-icon :name="menuItem.icon" color="primary" size="md" />
             </q-item-section>
 
             <q-item-section class="text-black menu-item-text">
@@ -89,12 +83,7 @@
             @click="navigateToRoute(subMenuItem.route)"
             v-ripple
           >
-            <q-avatar
-              :icon="subMenuItem.icon"
-              color="primary"
-              size="md"
-              text-color="white"
-            />
+            <q-icon :name="subMenuItem.icon" color="primary" size="md" class="q-ml-md" />
             <q-item-section class="q-pl-md text-black menu-item-text">
               {{ t(subMenuItem.label) }}
             </q-item-section>
@@ -201,36 +190,41 @@ export default {
 <style lang="scss" scoped>
 .menu-drawer {
   .menu-item, .q-expansion-item__content {
-    font-size: 22px;
+    font-size: 18px;
   }
   
   .submenu-item {
-    font-size: 20px;
+    font-size: 16px;
   }
   
   .q-item__section--avatar {
-    min-width: 56px;
-  }
-  
-  .q-avatar {
-    font-size: 32px;
+    min-width: 48px;
   }
 }
 
+.drawer-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .menu-item-text {
-  font-size: 20px !important;
+  font-size: 16px !important;
   font-weight: 500 !important;
 }
 
 /* Force consistent font size for all menu items */
 .q-item__label, .q-expansion-item__content {
-  font-size: 20px !important;
+  font-size: 16px !important;
   font-weight: 500 !important;
 }
 
 /* Add more padding to menu items for better touch targets */
 .q-item {
-  padding-top: 14px !important;
-  padding-bottom: 14px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+/* Remove the pseudo-element header */
+.menu-drawer::before {
+  content: none;
 }
 </style>

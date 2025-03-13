@@ -16,10 +16,10 @@
           <q-btn-dropdown
             :ripple="false"
             flat
-            round
             dense
             icon="language"
             :label="label"
+            class="q-pl-lg"
             style="
               font-family: 'BodoniSvtyTwoSCITCTT-Book';
               font-weight: bolder;
@@ -28,7 +28,7 @@
             <!-- Language options in the dropdown -->
             <q-list class="text-h6 text-black">
               <!-- Option for switching to Español -->
-              <q-item clickable v-close-popup @click="changeLanguage(1)">
+              <q-item clickable v-close-popup @click="changeLanguage(1)" class="language-item">
                 <q-item-section>
                   <q-item-label
                     :class="esClass"
@@ -39,7 +39,7 @@
               </q-item>
 
               <!-- Option for switching to English -->
-              <q-item clickable v-close-popup @click="changeLanguage(0)">
+              <q-item clickable v-close-popup @click="changeLanguage(0)" class="language-item">
                 <q-item-section>
                   <q-item-label
                     :class="engClass"
@@ -119,3 +119,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.language-selector {
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+  }
+}
+
+.language-item {
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+</style>
