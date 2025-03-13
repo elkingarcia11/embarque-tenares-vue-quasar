@@ -9,7 +9,12 @@ export default {
   nyb: 'Nueva York',
   drb: 'República Dominicana',
   hours: 'Horario',
-  faqs: 'Preguntas',
+  faqs: {
+    title: 'Preguntas',
+    subtitle: 'Encuentre respuestas a preguntas frecuentes sobre nuestros servicios de envío',
+    stillHaveQuestions: '¿Todavía tiene preguntas?',
+    contactUs: 'Contacte a nuestro equipo de atención al cliente para obtener más ayuda con sus necesidades de envío.'
+  },
   aboutUs: 'Acerca de nosotros',
   businessH: 'Horario de negocio',
   dr_province: 'Puerto Plata, RD',
@@ -84,7 +89,15 @@ export default {
     'Inténtelo de nuevo o comuníquese con nuestra oficina para obtener más ayuda',
   invNf: 'Factura no encontrada',
   rights: 'RESERVADOS TODOS LOS DERECHOS.',
-  contact: 'Contáctenos',
+  contact: {
+    title: 'Contáctenos',
+    branchInfo: 'Información de Contacto de la Sucursal',
+    whatsapp: 'Chatea con nosotros en WhatsApp',
+    facebook: 'Visita nuestra página de Facebook',
+    instagram: 'Síguenos en Instagram',
+    phone: 'Llama a nuestras oficinas',
+    email: 'Envíanos un correo electrónico'
+  },
   about: 'Sobre nosotros',
   nyo: 'Oficina de Nueva York',
   dro: 'Oficina de República Dominicana',

@@ -69,8 +69,15 @@
           </q-list>
         </q-expansion-item>
       </div>
+      
+      <!-- Contact Section -->
+      <section class="q-py-lg bg-grey-1">
+        <div class="container q-px-md q-mx-auto">
+          <ContactSection />
+        </div>
+      </section>
     </div>
-    
+
     <!-- Tab bar component -->
     <TabBar
       @focus-input="focusInput"
@@ -86,12 +93,14 @@ import { useStore } from 'src/store';
 import { useI18n } from 'vue-i18n';
 import { useQuasar } from 'quasar';
 import TabBar from 'src/components/TabBar.vue';
+import ContactSection from 'src/components/ContactSection.vue';
 
 import '../css/rates.scss';
 
 export default {
   components: {
-    TabBar
+    TabBar,
+    ContactSection
   },
   setup() {
     const { t, locale } = useI18n();
@@ -136,3 +145,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.img {
+  width: 50px;
+  height: 50px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+</style>

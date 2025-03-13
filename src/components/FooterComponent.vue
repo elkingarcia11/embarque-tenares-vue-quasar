@@ -4,75 +4,8 @@
     <div class="text-primary q-pt-lg footer-title">Embarque Tenares Corp.</div>
 
     <!-- Social Media Icons -->
-    <div class="q-pt-sm row">
-      <q-btn
-        flat
-        square
-        @click="openUrl('https://api.whatsapp.com/send?phone=7185621300')"
-        icon="ion-logo-whatsapp"
-        style="color: #25d366"
-        size="30px"
-      />
-      <q-btn
-        flat
-        square
-        @click="openUrl('https://www.facebook.com/EmbarqueTenaress/')"
-        icon="facebook"
-        style="color: #1778f2"
-        size="30px"
-      />
-      <q-btn
-        class="instagram"
-        flat
-        square
-        @click="openUrl('https://instagram.com/embarquetenares')"
-        icon="ion-logo-instagram"
-        size="30px"
-      />
-
-      <!-- Phone Contacts Dropdown Menu -->
-      <q-btn flat square icon="phone" size="30px" color="accent">
-        <q-menu anchor="top middle" self="bottom middle">
-          <q-item
-            clickable
-            @click="openUrl('tel:7185621300')"
-            class="text-accent"
-          >
-            <q-avatar icon="phone" />
-            <q-item-section>{{ t('nyb') }}</q-item-section>
-          </q-item>
-          <q-item
-            clickable
-            @click="openUrl('tel:8099700007')"
-            class="text-secondary"
-          >
-            <q-avatar icon="phone" />
-            <q-item-section>{{ t('drb') }}</q-item-section>
-          </q-item>
-        </q-menu>
-      </q-btn>
-
-      <!-- Email Contacts Dropdown Menu -->
-      <q-btn flat square icon="mail" color="red" size="30px">
-        <q-menu anchor="top middle" self="bottom middle">
-          <q-item
-            clickable
-            @click="openUrl('mailto:ny@embarquetenares.com')"
-            class="text-accent"
-          >
-            <q-avatar icon="mail" />
-            <q-item-section>{{ t('nyb') }}</q-item-section>
-          </q-item>
-          <q-item
-            clickable
-            @click="openUrl('mailto:rd@embarquetenares.com')"
-            class="text-secondary"
-          >
-            <q-avatar icon="mail" />
-            <q-item-section>{{ t('drb') }}</q-item-section>
-          </q-item>
-        </q-menu>
-      </q-btn>
+    <div class="q-pt-sm row justify-center">
+      <SocialMediaBar :isRound="true" fontSize="30px" />
     </div>
 
     <!-- Navigation Links -->
@@ -119,9 +52,13 @@ import { openURL } from 'quasar';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import '../css/footer.scss';
+import SocialMediaBar from './SocialMediaBar.vue';
 
 export default {
   name: 'FooterComponent',
+  components: {
+    SocialMediaBar
+  },
   setup() {
     const router = useRouter();
     const { t } = useI18n();

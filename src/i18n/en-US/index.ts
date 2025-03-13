@@ -9,7 +9,12 @@ export default {
   nyb: 'New York',
   drb: 'Dominican Republic',
   hours: 'Hours',
-  faqs: 'FAQS',
+  faqs: {
+    title: 'FAQS',
+    subtitle: 'Find answers to commonly asked questions about our shipping services',
+    stillHaveQuestions: 'Still Have Questions?',
+    contactUs: 'Contact our customer support team for further assistance with your shipping needs.'
+  },
   aboutUs: 'About us',
   businessH: 'Business hours',
   dr_province: 'Puerto Plata, DR',
@@ -83,7 +88,15 @@ export default {
   tryAgain: 'Please try again or contact our office for futher assistance',
   invNf: 'Invoice not found',
   rights: 'ALL RIGHTS RESERVED.',
-  contact: 'Contact Us',
+  contact: {
+    title: 'Contact Us',
+    branchInfo: 'Branch Contact Information',
+    whatsapp: 'Chat with us on WhatsApp',
+    facebook: 'Visit our Facebook page',
+    instagram: 'Follow us on Instagram',
+    phone: 'Call our offices',
+    email: 'Send us an email'
+  },
   about: 'About Us',
   nyo: 'New York Office',
   dro: 'Dominican Republic Office',
