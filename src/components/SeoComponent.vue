@@ -10,14 +10,8 @@ import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'SeoComponent',
-  props: {
-    pageType: {
-      type: String,
-      default: 'home'
-    }
-  },
-  setup(props) {
-    const { t, locale } = useI18n();
+  setup() {
+    const { t } = useI18n();
 
     onMounted(() => {
       // Add structured data for LocalBusiness

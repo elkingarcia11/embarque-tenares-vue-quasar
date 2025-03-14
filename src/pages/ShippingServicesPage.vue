@@ -140,9 +140,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta, useQuasar } from 'quasar';
+import { useMeta } from 'quasar';
 import SeoComponent from 'src/components/SeoComponent.vue';
 
 export default defineComponent({
@@ -152,7 +152,6 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n();
-    const $q = useQuasar();
 
     // SEO metadata
     useMeta(() => {

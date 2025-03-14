@@ -22,8 +22,8 @@
       <div class="row q-col-gutter-md">
         <!-- Map Column -->
         <div class="col-12 col-md-7">
-          <q-card class="map-card full-height-map">
-            <q-card-section class="q-pa-none position-relative">
+          <q-card class="map-card full-height">
+            <q-card-section class="q-pa-none position-relative full-height">
               <iframe loading="eager" class="branch-map" :src="iframeSource" />
             </q-card-section>
           </q-card>
@@ -211,7 +211,11 @@ export default {
   background-size: cover;
 }
 
-.full-height-map {
+.full-height {
+  height: 100%;
+}
+
+.map-card {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -222,6 +226,11 @@ export default {
   height: 100%;
   min-height: 450px;
   border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .map-card, .contact-card, .hours-card {

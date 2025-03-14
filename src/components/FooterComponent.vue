@@ -12,7 +12,7 @@
 
       <!-- Contact Dropdown Menu -->
       <q-btn flat
-        >{{ t('contact') }}
+        >{{ t('contact.title') }}
         <q-menu anchor="top middle" self="bottom middle">
           <q-item
             clickable
