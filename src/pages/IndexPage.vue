@@ -225,7 +225,7 @@ export default defineComponent({
     // SEO metadata
     useMeta(() => {
       return {
-        title: 'Embarque Tenares - Door-to-Door Shipping to Dominican Republic',
+        title: 'Embarque Tenares - Envío puerta a puerta a República Dominicana',
         meta: {
           description: { name: 'description', content: 'Embarque Tenares specializes in shipping boxes, barrels, and all kinds of cargo door-to-door from the United States to the Dominican Republic. Fast, secure, and reliable service.' },
           keywords: { name: 'keywords', content: 'shipping to Dominican Republic, boxes to Dominican Republic, barrels to Dominican Republic, door-to-door shipping, envios a Republica Dominicana, cajas a Republica Dominicana' }
